@@ -1,0 +1,171 @@
+
+     ######################################################################
+   ##########################################################################
+  ###                                                                      ###
+ ###            TINKER  ---  Software Tools for Molecular Design            ###
+ ##                                                                          ##
+ ##                        Version 7.1  February 2015                        ##
+ ##                                                                          ##
+ ##               Copyright (c)  Jay William Ponder  1990-2015               ##
+ ###                           All Rights Reserved                          ###
+  ###                                                                      ###
+   ##########################################################################
+     ######################################################################
+
+
+ Atoms with an Unusual Number of Attached Atoms :
+
+ Type           Atom Name      Atom Type       Expected    Found
+
+ Valence           2-Lp            20              1         3
+ Valence           3-N+            74              3         1
+ Valence           4-C              1              4         1
+ Valence           5-C              1              4         1
+ Valence           6-C              1              4         1
+ Valence           7-Ni            63              0         3
+ Valence           8-H             23              1         4
+ Valence           9-Lp            20              1         3
+ Valence          10-N+            74              3         1
+ Valence          11-C              3              3         1
+ Valence          12-C              4              2         1
+ Valence          14-C              1              4         1
+ Valence          15-C              1              4         1
+ Valence          16-C              1              4         1
+ Valence          17-Ni            63              0         3
+ Valence          18-Fe            61              0         4
+ Valence          19-C              3              3         1
+ Valence          20-C              1              4         1
+ Valence          21-C              1              4         1
+ Valence          22-C              1              4         1
+ Valence          24-Lp            20              1         3
+ Valence          25-N+            74              3         1
+ Valence          26-C              1              4         1
+ Valence          27-C              1              4         1
+ Valence          28-C              1              4         1
+ Valence          29-Ni            63              0         3
+ Valence          30-H             23              1         4
+ Valence          31-Lp            20              1         3
+ Valence          32-N+            74              3         1
+ Valence          33-C              3              3         1
+ Valence          34-C              4              2         1
+ Valence          36-C              1              4         1
+ Valence          37-C              1              4         1
+ Valence          38-C              1              4         1
+ Valence          39-Ni            63              0         3
+ Valence          40-Fe            61              0         4
+ Valence          41-C              3              3         1
+ Valence          42-C              1              4         1
+ Valence          43-C              1              4         1
+ Valence          44-C              1              4         1
+
+ Undefined Bond Stretching Parameters :
+
+ Type             Atom Names           Atom Classes
+
+ Bond            1-B       4-C            27    1
+ Bond            1-B       5-C            27    1
+ Bond            1-B       6-C            27    1
+ Bond            7-Ni      8-H            63   23
+ Bond            7-Ni     11-C            63    3
+ Bond            8-H      12-C            23    4
+ Bond            8-H      13-B            23   27
+ Bond           13-B      14-C            27    1
+ Bond           13-B      15-C            27    1
+ Bond           13-B      16-C            27    1
+ Bond           17-Ni     18-Fe           63   61
+ Bond           17-Ni     19-C            63    3
+ Bond           18-Fe     20-C            61    1
+ Bond           18-Fe     21-C            61    1
+ Bond           18-Fe     22-C            61    1
+ Bond           23-B      26-C            27    1
+ Bond           23-B      27-C            27    1
+ Bond           23-B      28-C            27    1
+ Bond           29-Ni     30-H            63   23
+ Bond           29-Ni     33-C            63    3
+ Bond           30-H      34-C            23    4
+ Bond           30-H      35-B            23   27
+ Bond           35-B      36-C            27    1
+ Bond           35-B      37-C            27    1
+ Bond           35-B      38-C            27    1
+ Bond           39-Ni     40-Fe           63   61
+ Bond           39-Ni     41-C            63    3
+ Bond           40-Fe     42-C            61    1
+ Bond           40-Fe     43-C            61    1
+ Bond           40-Fe     44-C            61    1
+
+ Undefined Angle Bending Parameters :
+
+ Type                  Atom Names                   Atom Classes
+
+ Angle           4-C       1-B       5-C             1   27    1
+ Angle           4-C       1-B       6-C             1   27    1
+ Angle           5-C       1-B       6-C             1   27    1
+ Angle           8-H       7-Ni     11-C            23   63    3
+ Angle           7-Ni      8-H      12-C            63   23    4
+ Angle           7-Ni      8-H      13-B            63   23   27
+ Angle          12-C       8-H      13-B             4   23   27
+ Angle           8-H      13-B      14-C            23   27    1
+ Angle           8-H      13-B      15-C            23   27    1
+ Angle           8-H      13-B      16-C            23   27    1
+ Angle          14-C      13-B      15-C             1   27    1
+ Angle          14-C      13-B      16-C             1   27    1
+ Angle          15-C      13-B      16-C             1   27    1
+ Angle          18-Fe     17-Ni     19-C            61   63    3
+ Angle          17-Ni     18-Fe     20-C            63   61    1
+ Angle          17-Ni     18-Fe     21-C            63   61    1
+ Angle          17-Ni     18-Fe     22-C            63   61    1
+ Angle          20-C      18-Fe     21-C             1   61    1
+ Angle          20-C      18-Fe     22-C             1   61    1
+ Angle          21-C      18-Fe     22-C             1   61    1
+ Angle          26-C      23-B      27-C             1   27    1
+ Angle          26-C      23-B      28-C             1   27    1
+ Angle          27-C      23-B      28-C             1   27    1
+ Angle          30-H      29-Ni     33-C            23   63    3
+ Angle          29-Ni     30-H      34-C            63   23    4
+ Angle          29-Ni     30-H      35-B            63   23   27
+ Angle          34-C      30-H      35-B             4   23   27
+ Angle          30-H      35-B      36-C            23   27    1
+ Angle          30-H      35-B      37-C            23   27    1
+ Angle          30-H      35-B      38-C            23   27    1
+ Angle          36-C      35-B      37-C             1   27    1
+ Angle          36-C      35-B      38-C             1   27    1
+ Angle          37-C      35-B      38-C             1   27    1
+ Angle          40-Fe     39-Ni     41-C            61   63    3
+ Angle          39-Ni     40-Fe     42-C            63   61    1
+ Angle          39-Ni     40-Fe     43-C            63   61    1
+ Angle          39-Ni     40-Fe     44-C            63   61    1
+ Angle          42-C      40-Fe     43-C             1   61    1
+ Angle          42-C      40-Fe     44-C             1   61    1
+ Angle          43-C      40-Fe     44-C             1   61    1
+
+ Undefined Torsional Parameters :
+
+ Type                        Atom Names                        Atom Classes
+
+ Torsion        11-C       7-Ni      8-H      12-C           3   63   23    4
+ Torsion        11-C       7-Ni      8-H      13-B           3   63   23   27
+ Torsion         7-Ni      8-H      13-B      14-C          63   23   27    1
+ Torsion         7-Ni      8-H      13-B      15-C          63   23   27    1
+ Torsion         7-Ni      8-H      13-B      16-C          63   23   27    1
+ Torsion        12-C       8-H      13-B      14-C           4   23   27    1
+ Torsion        12-C       8-H      13-B      15-C           4   23   27    1
+ Torsion        12-C       8-H      13-B      16-C           4   23   27    1
+ Torsion        19-C      17-Ni     18-Fe     20-C           3   63   61    1
+ Torsion        19-C      17-Ni     18-Fe     21-C           3   63   61    1
+ Torsion        19-C      17-Ni     18-Fe     22-C           3   63   61    1
+ Torsion        33-C      29-Ni     30-H      34-C           3   63   23    4
+ Torsion        33-C      29-Ni     30-H      35-B           3   63   23   27
+ Torsion        29-Ni     30-H      35-B      36-C          63   23   27    1
+ Torsion        29-Ni     30-H      35-B      37-C          63   23   27    1
+ Torsion        29-Ni     30-H      35-B      38-C          63   23   27    1
+ Torsion        34-C      30-H      35-B      36-C           4   23   27    1
+ Torsion        34-C      30-H      35-B      37-C           4   23   27    1
+ Torsion        34-C      30-H      35-B      38-C           4   23   27    1
+ Torsion        41-C      39-Ni     40-Fe     42-C           3   63   61    1
+ Torsion        41-C      39-Ni     40-Fe     43-C           3   63   61    1
+ Torsion        41-C      39-Ni     40-Fe     44-C           3   63   61    1
+
+ MECHANIC  --  Some Required Potential Energy Parameters are Undefined
+
+ TINKER is Unable to Continue; Terminating the Current Calculation
+
