@@ -322,6 +322,7 @@ void GenerateFunction()
 			{
 				B.PerformRandomRotEuler(MC_B1, RotPrecision);
 				//Here need to adjust B to a suitable position that the closest distance between atoms of A and B is 3.0
+				MakeAtomsShortestDistanceMoveB(A, B, B1_default_value);
 				double  potential = G09energy(A, B) - RestEnergies;
 				TempConfigs[k].Set(A, B, potential);
 			}

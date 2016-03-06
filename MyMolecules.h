@@ -583,6 +583,26 @@ public:
 			corr[i][2] += mc(2);
 		}
 	}
+	friend void MakeAtomsShortestDistanceMoveB(Molecule &ia, Molecule &ib, const double SmallestDistance)
+	{
+		int label1=0, label2=0;
+		double distance = sqrt((ia.corr[0][0]-ib.corr[0][0])*(ia.corr[0][0] - ib.corr[0][0])+ (ia.corr[0][1] - ib.corr[0][1])*(ia.corr[0][1] - ib.corr[0][1])+ (ia.corr[0][2] - ib.corr[0][2])*(ia.corr[0][2] - ib.corr[0][2]));
+		for (int i = 0; i != ia.number; i++)
+			for (int j = 0; j != ib.number; j++)
+			{
+				double temp = sqrt((ia.corr[i][0] - ib.corr[j][0])*(ia.corr[i][0] - ib.corr[j][0]) + (ia.corr[i][1] - ib.corr[j][1])*(ia.corr[i][1] - ib.corr[j][1]) + (ia.corr[i][2] - ib.corr[j][2])*(ia.corr[i][2] - ib.corr[j][2]));
+				if (temp < distance)
+				{
+					distance = temp;
+					label1 = i;
+					label2 = j;
+				}
+			}
+		Eigen::Vector3d MoveVector;
+		MoveVector << ia.corr[label1][0] - ib.corr[label2][0], ia.corr[label1][1] - ib.corr[label2][1], ia.corr[label1][2] - ib.corr[label2][2];
+		if(abs(distance-SmallestDistance)>1e-6)
+			ib.PerformTrans((1 - SmallestDistance / distance)*MoveVector);
+	}
 	//´ýÍêÉÆ
 
 };
