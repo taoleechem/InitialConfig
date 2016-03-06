@@ -27,7 +27,7 @@ protected:
 	vector<string> name;
 	double corr[MaxAtom][3];
 public:
-	//构造函数
+	//Formulation function
 	Molecule()
 	{
 		number = 0;
@@ -43,7 +43,7 @@ public:
 			for (int j = 0; j != 3; j++)
 				corr[i][j] = ia.corr[i][j];
 	}
-    //操作符重载
+    //Reload operators
 	Molecule& operator=(const Molecule &ia)
 	{
 		number = ia.number;
@@ -143,12 +143,19 @@ public:
 		os << "standard .xyz file  "<<ia.MoleculeName()<<endl;
 		for (int i = 0; i != ia.number; i++)
 		{
-			os <<ia.name[i]<<"\t"<<fixed<<setprecision(6)<<ia.corr[i][0] << "\t" << ia.corr[i][1] << "\t" << ia.corr[i][2] << endl;
+			os << ia.name[i];
+			for (int j = 0; j != 3; j++)
+			{
+				if (abs(ia.corr[i][j]) < 1e-7)
+					ia.corr[i][j] = 0;
+				os <<"\t"<< fixed << setprecision(7)<< ia.corr[i][j];
+			}
+			os << endl;
 		}
 		return os;
 	}
 
-	//文件读写操作
+	//Read&write files
 	void ReadFromXYZfile(const string filename)
 	{
 		ifstream infile(filename.c_str());
@@ -194,14 +201,16 @@ public:
 				tofile << name[i];
 				for (int j = 0; j != 3; j++)
 				{
-					tofile << "\t" << fixed << setprecision(6) << corr[i][j];
+					if (abs(corr[i][j]) < 1e-7)
+						corr[i][j] = 0;
+					tofile << "\t" << fixed << setprecision(7) << corr[i][j];
 				}
 				tofile << endl;
 			}
 		}
 		tofile.close();
 	}
-	friend void ToXYZfile(const Molecule &a, const Molecule &b, const string &filename, const string other_info="  Have a good day!")
+	friend void ToXYZfile(const Molecule &a, const Molecule &b, string &filename, string other_info="  Have a good day!")
 	{
 		ofstream tofile(filename.c_str(), ios::out);
 		if (!tofile)
@@ -217,9 +226,23 @@ public:
 			tofile << atomNum << endl;
 			tofile << other_info << endl;
 			for (unsigned int i = 0; i != a.number; i++)
-				tofile << a.name[i] << "\t" << fixed << setprecision(6) << a.corr[i][0] << "\t" << a.corr[i][1] << "\t" << a.corr[i][2] << endl;
+			{
+				tofile << a.name[i];
+				for (int j = 0; j != 3; j++)
+				{
+					tofile << "\t" << fixed << setprecision(7) << a.corr[i][j];
+				}
+				tofile << endl;
+			}
 			for (unsigned int i = 0; i != b.number; i++)
-				tofile << b.name[i] << "\t" << fixed << setprecision(6) << b.corr[i][0] << "\t" << b.corr[i][1] << "\t" << b.corr[i][2] << endl;
+			{
+				tofile << b.name[i];
+				for (int j = 0; j != 3; j++)
+				{
+					tofile << "\t" << fixed << setprecision(7) << b.corr[i][j];
+				}
+				tofile << endl;
+			}
 		}
 		tofile.close();
 	}
@@ -234,7 +257,16 @@ public:
 		vector<string>::iterator iter;
 		int i = 0;
 		for (iter = name.begin(), i = 0; iter != name.end(); i++, iter++)
-			out << " " << *iter << " " << fixed << setprecision(6) << corr[i][0] << " " << corr[i][1] << " " << corr[i][2] << endl;
+		{
+			out << " " << *iter;
+			for (int j = 0; j != 3; j++)
+			{
+				if (abs(corr[i][j]) < 1e-7)
+					corr[i][j] = 0;
+				out << " " << fixed << setprecision(7) << corr[i][j];
+			}
+			out << endl;
+		}
 		out << "end" << endl << endl;
 		out << "basis  \"ao basis\" spherical" << endl;
 		out << " * library " << basis << endl;
@@ -250,10 +282,24 @@ public:
 		out << "# ================================================================" << endl << endl;
 		out << "charge 0" << endl << endl;
 		out << "geometry" << endl;
-		for (unsigned int i = 0; i!= a.number; i++)
-			out << " " << a.name[i] << " " << fixed << setprecision(6) << a.corr[i][0] << " " << a.corr[i][1] << " " << a.corr[i][2] << endl;
-		for (unsigned int i = 0; i!=b.number; i++)
-			out << " " << b.name[i] << " " << fixed << setprecision(6) << b.corr[i][0] << " " << b.corr[i][1] << " " << b.corr[i][2] << endl;
+		for (unsigned int i = 0; i != a.number; i++)
+		{
+			out << " " << a.name[i];
+			for (int j = 0; j != 3; j++)
+			{
+				out << " " << fixed << setprecision(7) << a.corr[i][j];
+			}
+			out << endl;
+		}
+		for (unsigned int i = 0; i != b.number; i++)
+		{
+			out << " " << b.name[i];
+			for (int j = 0; j != 3; j++)
+			{
+				out<< " " << fixed << setprecision(7) << b.corr[i][j];
+			}
+			out << endl;
+		}
 		out << "end" << endl << endl;
 		out << "basis  \"ao basis\" spherical" << endl;
 		out << " * library " << basis << endl;
@@ -275,7 +321,13 @@ public:
 		int i = 0;
 		for (iter = name.begin(), i = 0; iter != name.end(); i++, iter++)
 		{
-			out << " " << *iter<< " " << fixed <<setprecision(6) << corr[i][0]<< " "<< corr[i][1] << " " << corr[i][2];
+			out << " " << *iter;
+			for (int j = 0; j != 3; j++)
+			{
+				if (abs(corr[i][j]) < 1e-7)
+					corr[i][j] = 0;
+				out << " " << fixed << setprecision(7) << corr[i][j];
+			}
 			out << endl;
 		}
 		out << endl;
@@ -296,19 +348,31 @@ public:
 		int i = 0;
 		for (iter = a.name.begin(), i = 0; iter != a.name.end(); i++, iter++)
 		{
-			out << " " << *iter << " " << fixed << setprecision(6) << a.corr[i][0] << " " << a.corr[i][1] << " " << a.corr[i][2];
+			out << " " << a.name[i];
+			for (int j = 0; j != 3; j++)
+			{
+				if (abs(a.corr[i][j]) < 1e-7)
+					a.corr[i][j] = 0;
+				out << " " << fixed << setprecision(7) << a.corr[i][j];
+			}
 			out << endl;
 		}
 		for (iter = b.name.begin(), i = 0; iter != b.name.end(); i++, iter++)
 		{
-			out << " " << *iter << " " << fixed << setprecision(6) << b.corr[i][0] << " " << b.corr[i][1] << " " << b.corr[i][2];
+			out << " " << b.name[i];
+			for (int j = 0; j != 3; j++)
+			{
+				if (abs(b.corr[i][j]) < 1e-7)
+					b.corr[i][j] = 0;
+				out << " " << fixed << setprecision(7) << b.corr[i][j];
+			}
 			out << endl;
 		}
 		out << endl;
 		out << endl << endl << endl << endl;
 		out.close();
 	}
-	void ReadFromG09DFT(string &filename, int atomNum)
+	void ReadFromGJF(string &filename, int atomNum)
 	{
 		ifstream infile(filename.c_str());
 		if (!cout)
@@ -344,7 +408,7 @@ public:
 		infile.close();
 	}
 
-	void AddAtom(const string &atomname, double &x, double &y, double &z)
+	void AddAtom(const string atomname, double &x, double &y, double &z)
 	{
 		corr[number][0] = x;
 		corr[number][1] = y;
@@ -352,7 +416,7 @@ public:
 		number += 1;
 		name.push_back(atomname);
 	}
-	//小函数
+	//small functions
 	int Number() { return number; }
 	double MoleculeMass()
 	{
@@ -403,7 +467,7 @@ public:
 				corr[i][j] = -10242048;
 	}
 	//Simple Operate
-	void PerformRot(const Eigen::Matrix3d rot)
+	void PerformRot(Eigen::Matrix3d rot)
 	{
 		Eigen::Vector3d singleAtom;
 		for (int i = 0; i != number; i++)
@@ -415,7 +479,7 @@ public:
 			corr[i][2] = singleAtom(2);
 		}
 	}
-	void PerformTrans(const Eigen::Vector3d trans)
+	void PerformTrans(const Eigen::Vector3d trans)//This is to add a vector to molecular coordiantes
 	{
 		Eigen::Vector3d singleAtom;
 		for (int i = 0; i != number; i++)
@@ -427,7 +491,7 @@ public:
 			corr[i][2] = singleAtom(2);
 		}
 	}
-	void PerformXTrans(const double &deltaX)
+	void PerformXTrans(const double &deltaX)//This is to make all atoms translate a deltaX in x coordinate.
 	{
 		for (int i = 0; i != number; i++)
 			corr[i][0] += deltaX;
@@ -435,9 +499,9 @@ public:
 	void PerformZTrans(const double &deltaZ)
 	{
 		for (int i = 0; i != number; i++)
-			corr[i][0] += deltaZ;
+			corr[i][2] += deltaZ;
 	}
-	void PerformAxisRot(Eigen::Vector3d axis, double angle_radian)
+	void PerformAxisRot(Eigen::Vector3d axis, double angle_radian)//Rot with one axis
 	{
 		Eigen::AngleAxis<double> rot(angle_radian,axis);
 		Eigen::Vector3d singleAtom;
@@ -450,11 +514,11 @@ public:
 			corr[i][2] = singleAtom(2);
 		}
 	}
-	void PerformPointRotToXMinus(Eigen::Vector3d point1)
+	void PerformOnePointRotToXMinus(Eigen::Vector3d point)
 	{
-		double a = point1(0), b = point1(1), c = point1(2);
+		double a = point(0), b = point(1), c = point(2);
 		double alpha =acos( b / (sqrt(b*b + c*c)) );
-		double beta = -1*acos( sqrt(b*b+c*c)/sqrt(a*a+b*b+c*c))-PI/2;
+		double beta = 1*acos( sqrt(b*b+c*c)/sqrt(a*a+b*b+c*c))+PI/2;
 		Eigen::Vector3d e_x(1, 0, 0);
 		Eigen::Vector3d e_z(0, 0, 1);
 		Eigen::AngleAxis<double> rot1(alpha,e_x);
@@ -582,6 +646,20 @@ public:
 		energy = id.energy;
 		return *this;
 	}
+	bool friend operator>(DoubleMolecule &ia, DoubleMolecule &ib)
+	{
+		if (ia.Energy() > ib.Energy())
+			return true;
+		else
+			return false;
+	}
+	bool friend operator<(DoubleMolecule &ia, DoubleMolecule &ib)
+	{
+		if (ia.Energy() < ib.Energy())
+			return true;
+		else
+			return false;
+	}
 	void Set(Molecule ia, Molecule ib, double ienergy)
 	{
 		a = ia;
@@ -594,17 +672,13 @@ public:
 		ib = b;
 		ienergy = energy;
 	}
-	void ToXYZ(string filename, int calltimes=0)
+	void ToXYZ(string filename, int count=0)
 	{
-		string energyS;
-		stringstream is;
-		is << energy;
-		is >> energyS;
-		string CallTimes;
-		stringstream is2;
-		is2 << calltimes;
-		is2 >> CallTimes;
-		ToXYZfile(a, b, filename, "Energy: "+energyS+"Calltimes: "+CallTimes);
+		if(count==0)
+			ToXYZfile(a, b, filename, X_ToStr<double>(energy)+" (energy)");
+		else
+			ToXYZfile(a, b, filename, X_ToStr<double>(energy) + " (energy),  " + X_ToStr<int>(count));
+
 	}
 	void output()
 	{
@@ -612,12 +686,10 @@ public:
 		cout << a << endl;
 		cout << b << endl;
 	}
-	double EnergyValue()
+	double Energy()
 	{
 		return energy;
 	}
-
-
 };
 
 class Fragments
@@ -688,11 +760,6 @@ public:
 	{
 		return OtherFragments().MassCenter() - ThisFragment().MassCenter();
 	}
-	void ThisOriginOtherXMinus()
-	{
-		Eigen::Vector3d a = ThisFragment().MassCenter();
-		//没写完
-	}
 	int FragNumbers()
 	{
 		return frag_number;
@@ -728,8 +795,8 @@ public:
 		infile.close();
 	}
 };
-void MonteCarlo(Molecule &a, Molecule &b, vector<DoubleMolecule> &SaveMinConfig, Eigen::Vector3d bposition, string forcefieldORbasis, string MinConfigName, string RelativeMinConfigName);
-void GenerateFunction( string x_filename, const int x_number, int x_matrix[][2],  string y_filename, const int y_number, int y_matrix[][2], int OutputNumbers, string Basis);
+void GenerateFunction();
+
 /*
 
 const int MAX_ATOM_NUMBER = 37;
