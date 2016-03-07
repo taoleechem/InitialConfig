@@ -85,8 +85,8 @@ void GenerateFunction()
 	const int EachPairSaveNumber = 4;
 	const int OutPutNumber = 50;
 	Fragments FA, FB;
-	FA.ReadFromXYZfile("ch2choh_1.xyz", index, matrix);
-	FB.ReadFromXYZfile("ch2o.xyz", index2, matrix2);
+	FA.ReadFromXYZfile("InitiConfig/ch2choh_1.xyz", index, matrix);
+	FB.ReadFromXYZfile("InitiConfig/ch2o.xyz", index2, matrix2);
 
 	double RestEnergies = 0;
 	RestEnergies = G09energy(FA.TotalFragments()) + G09energy(FB.TotalFragments());
