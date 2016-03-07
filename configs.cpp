@@ -1,4 +1,6 @@
 #include "configs.h"
+#define _NWCHEM_
+// #define _G09_
 
 double ReadFile(string Tempfilename)
 {
@@ -21,6 +23,16 @@ double G09energy(Molecule a, string basis = "6-31g", string functional = "b3lyp"
 	double x=(rand() % 1000 + 1);
 	return x;
 #else
+#ifdef _NWCHEM_
+	string filename("DATA/NW.nw");
+	a.ToNWchemFileHF(filename,basis);
+	//Use shell script to solve the scf energy
+	double total_energy = 0;
+	system("./NW_perform.sh");
+	total_energy = ReadFile("DATA/temp.txt");
+	return total_energy;
+#endif
+#ifdef _G09_
 	string filename("DATA/system");
 	a.ToG09FileDFT(filename, basis, functional);
 	//Use shell script to solve the scf energy
@@ -28,6 +40,7 @@ double G09energy(Molecule a, string basis = "6-31g", string functional = "b3lyp"
 	system("./g09_perform.sh");
 	total_energy = ReadFile("DATA/temp.txt");
 	return total_energy;
+#endif
 #endif
 
 }
@@ -39,6 +52,16 @@ double G09energy(Molecule a, Molecule b, string basis = "6-31g", string function
 	double x= (rand() % 1000 + 1);
 	return x;
 #else
+#ifdef _NWCHEM_
+	string filename("DATA/NW.nw");
+	ToNWchemFileHF(a, b, filename, basis);
+	//Use shell script to solve the scf energy
+	double total_energy = 0;
+	system("./NW_perform.sh");
+	total_energy = ReadFile("DATA/temp.txt");
+	return total_energy;
+#endif
+#ifdef _G09_
 	string filename("DATA/system");
 	ToG09FileDFT(a, b, filename, basis, functional);
 	//Use shell script to solve the scf energy
@@ -46,6 +69,7 @@ double G09energy(Molecule a, Molecule b, string basis = "6-31g", string function
 	system("./g09_perform.sh");
 	total_energy = ReadFile("DATA/temp.txt");
 	return total_energy;
+#endif
 #endif
 }
 

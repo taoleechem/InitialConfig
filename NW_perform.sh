@@ -1,9 +1,6 @@
 #!/bin/bash
 
-cd '/home/litao/molecule-recognition/DATA/'
-if
-do
+cd '/home/litao/InitialConfig/DATA/'
 nwchem NW.nw >& NW.out
-then
+wait
 grep -i 'scf energy' <NW.out |awk '{print $5}' >temp.txt
-fi`
