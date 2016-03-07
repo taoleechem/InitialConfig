@@ -79,11 +79,12 @@ void GenerateFunction()
 	int index = 3;
 	int matrix2[2][2] = { { 0,2 },{ 3,3 } };
 	int index2 = 2;
-	const int MaxRotTimes = 50;
-	const double RotPrecision = 60.0;
+	const int MaxRotTimes = 120;
+	const double RotPrecision = 10;
 	const double B1_default_value = 3.00;
-	const int EachPairSaveNumber = 4;
+	const int EachPairSaveNumber = 5;
 	const int OutPutNumber = 50;
+	const double RMSD_Precision = 0.2;
 	Fragments FA, FB;
 	FA.ReadFromXYZfile("InitiConfig/ch2choh_1.xyz", index, matrix);
 	FB.ReadFromXYZfile("InitiConfig/ch2o.xyz", index2, matrix2);
@@ -98,33 +99,36 @@ void GenerateFunction()
 		for (int j = 0; j != FB.FragNumbers(); j++, ++FB)
 		{
 			cout << "Do calculate of " << FA.ThisFragment().MoleculeName() << " No." << i << ", and " << FB.ThisFragment().MoleculeName() << " No." << j << endl;
-			Molecule A1 = FA.ThisFragment();
-			Molecule A2 = FA.OtherFragments();
-			Molecule B1 = FB.ThisFragment();
-			Molecule B2 = FB.OtherFragments();
+			//Molecule A1 = FA.ThisFragment(); Molecule A2 = FA.OtherFragments(); Molecule B1 = FB.ThisFragment(); Molecule B2 = FB.OtherFragments();
 			//translate A1-MC to origin
-			Eigen::Vector3d MC_A1 = A1.MassCenter();
-			A1.PerformTrans(-1 * MC_A1);  A2.PerformTrans(-1 * MC_A1);
+			Eigen::Vector3d MC_A1 = FA.ThisFragment().MassCenter();
+			FA.PerformTrans(-1 * MC_A1);
 			//keep A1-MC to origin, put A2-MC to x- axis
-			Eigen::Vector3d MC_A2 = A2.MassCenter();
-			A1.PerformOnePointRotToXMinus(MC_A2);  A2.PerformOnePointRotToXMinus(MC_A2);
+			Eigen::Vector3d MC_A2 = FA.OtherFragments().MassCenter();
+			FA.PerformOnePointRotToXMinus(MC_A2);
 			//translate B1-MC to x+ axis(default distance is 3.00), B2 at random position
 			Eigen::Vector3d Default_B1;
 			Default_B1 << B1_default_value, 0, 0;//3.0, 0, 0
-			Eigen::Vector3d MC_B1 = B1.MassCenter();
-			B1.PerformTrans(-1 * MC_B1 + Default_B1); B2.PerformTrans(-1 * MC_B1 + Default_B1);
+			Eigen::Vector3d MC_B1 = FB.ThisFragment().MassCenter();
+			FB.PerformTrans(-1 * MC_B1 + Default_B1);
 			//rot B at point B1_MC randomly
-			Molecule A = A1 + A2;
-			Molecule B = B1 + B2;
-			MC_B1 = B1.MassCenter();
-			DoubleMolecule TempConfigs[MaxRotTimes];
+			Molecule A = FA.TotalFragments();
+			Molecule B = FB.TotalFragments();
+			MC_A1 = FA.ThisFragment().MassCenter();
+			MC_B1 = FB.ThisFragment().MassCenter();
+			vector<DoubleMolecule> TempConfigs;
+			TempConfigs.clear();
 			for (int k = 0; k != MaxRotTimes; k++)
 			{
+				//We should  rot A at the same time to make sure all suitable configurations happen!
+				A.PerformRandomRotEuler(MC_A1, RotPrecision/1.77);
 				B.PerformRandomRotEuler(MC_B1, RotPrecision);
 				//Here need to adjust B to a suitable position that the closest distance between atoms of A and B is 3.0
-				MakeAtomsShortestDistanceMoveB(A, B, B1_default_value);
+				MakeAtomsSuitableDistanceMoveB(A, B, B1_default_value);
 				double  potential = G09energy(A, B) - RestEnergies;
-				TempConfigs[k].Set(A, B, potential);
+				DoubleMolecule temp_save;
+				temp_save.Set(A, B, potential);
+				TempConfigs.push_back(temp_save);
 			}
 			//Sort configurations 
 			DoubleMolecule temp(TempConfigs[0]);
@@ -138,9 +142,30 @@ void GenerateFunction()
 						TempConfigs[jj] = temp;
 					}
 				}
-			//Save Least Energy 4 configs
-			for (int ii = 0; ii != EachPairSaveNumber; ii++)
-				SaveSuitableCofigs.push_back(TempConfigs[ii]);
+			//Save Least Energy 5 configs and avoid rmsd similar one.
+			int output_count = 0;
+			for (int ii = 0; output_count < EachPairSaveNumber&&ii<MaxRotTimes; ii++)
+			{
+					int total_size = SaveSuitableCofigs.size();
+					//initilize SaveSuitableConfigs
+					if (total_size == 0)
+					{
+						SaveSuitableCofigs.push_back(TempConfigs[ii]);
+						output_count += 1;
+					}
+					int jj = 0;
+					for (jj = 0; jj < total_size; jj++)
+					{
+						double temp_x = RMSD(SaveSuitableCofigs[jj], TempConfigs[ii]);
+						if (abs(temp_x)<= RMSD_Precision)
+							break;
+					}
+					if (jj == total_size)
+					{
+						SaveSuitableCofigs.push_back(TempConfigs[ii]);
+						output_count += 1;
+					}
+			}
 		}
 	}
 

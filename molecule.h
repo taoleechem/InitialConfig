@@ -71,7 +71,8 @@ public:
 	void PerformRandomRotEuler(Eigen::Vector3d Point, const double &Precision_degree);
 	void MCtoOrigin();
 	void MCtoVector(const Eigen::Vector3d x);
-	friend void MakeAtomsShortestDistanceMoveB(Molecule &ia, Molecule &ib, const double SmallestDistance);
+	friend void MakeAtomsSuitableDistanceMoveB(Molecule &ia, Molecule &ib, const double SmallestDistance);
+	friend double RMSD(Molecule &ia, Molecule &ib);
 };
 
 class DoubleMolecule
@@ -91,6 +92,7 @@ public:
 	void ToXYZ(string filename);
 	void output();
 	double Energy();
+	friend double RMSD(DoubleMolecule &ia, DoubleMolecule &ib);
 };
 
 class Fragments
@@ -112,6 +114,13 @@ public:
 	Eigen::Vector3d VectorFromThisToOther();
 	int FragNumbers();
 	void ReadFromXYZfile(const string filename, const int inumber, int matrix[][2]);
+	//Geometry operation
+	void PerformRot(Eigen::Matrix3d rot);
+	void PerformTrans(const Eigen::Vector3d trans);
+	void PerformXTrans(const double &deltaX);
+	void PerformZTrans(const double &deltaZ);
+	void PerformAxisRot(Eigen::Vector3d axis, double angle_radian);
+	void PerformOnePointRotToXMinus(Eigen::Vector3d point);
 };
 
 #endif

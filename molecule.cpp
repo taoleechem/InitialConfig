@@ -1,4 +1,5 @@
 #include "molecule.h"
+#include "rmsd.h" 
 
 Molecule::Molecule()
 {
@@ -369,7 +370,6 @@ void Molecule::ReadFromGJF(string &filename, int atomNum)
 	number = name.size();
 	infile.close();
 }
-
 void Molecule::AddAtom(const string atomname, double &x, double &y, double &z)
 {
 	corr[number][0] = x;
@@ -505,18 +505,21 @@ void Molecule::PerformRandomRotEuler(Eigen::Vector3d Point, const double &Precis
 {
 	double x[3];
 	const int nums = (int)(360 / Precision_degree);
+	
 	clock_t now = clock();
+	/*
 	srand(now);
 	for (int i = 0; i != 3; i++)
-		x[i] = (rand() % nums + 1)*Precision_degree;
-	//std::default_random_engine generator(now);
-	/*	std::default_random_engine generator(now);
+	x[i] = (rand() % nums + 1)*Precision_degree;
+	*/
+
+	std::default_random_engine generator(now);
 	std::uniform_int_distribution<int> dis(0, nums);
 	for(int i=0;i!=3;i++)
 	{
-	x[i] = dis(generator)*precision;
+	x[i] = dis(generator)*Precision_degree;
 	}
-	*/
+	
 	Eigen::Matrix3d randomRotation;
 	randomRotation = EulerRot(x[0], x[1], x[2]);
 	PerformTrans(-1 * Point);
@@ -545,7 +548,7 @@ void Molecule::MCtoVector(const Eigen::Vector3d x)
 		corr[i][2] += mc(2);
 	}
 }
-void MakeAtomsShortestDistanceMoveB(Molecule &ia, Molecule &ib, const double SmallestDistance)
+void MakeAtomsSuitableDistanceMoveB(Molecule &ia, Molecule &ib, const double SmallestDistance)
 {
 	int label1 = 0, label2 = 0;
 	double distance = sqrt((ia.corr[0][0] - ib.corr[0][0])*(ia.corr[0][0] - ib.corr[0][0]) + (ia.corr[0][1] - ib.corr[0][1])*(ia.corr[0][1] - ib.corr[0][1]) + (ia.corr[0][2] - ib.corr[0][2])*(ia.corr[0][2] - ib.corr[0][2]));
@@ -565,6 +568,30 @@ void MakeAtomsShortestDistanceMoveB(Molecule &ia, Molecule &ib, const double Sma
 	if (abs(distance - SmallestDistance)>1e-6)
 		ib.PerformTrans((1 - SmallestDistance / distance)*MoveVector);
 }
+double RMSD(Molecule &ia, Molecule &ib)
+{
+	if (ia.number != ib.number)
+		return 1;
+	else
+	{
+		double ref_xlist[MaxAtom][3];
+		double mov_xlist[MaxAtom][3];
+		int n_list=ia.number;
+		double rmsd=0;
+	//Initilization of 2 list
+
+	for (int i = 0; i != ia.number; i++)
+	for (int j = 0; j != 3; j++)
+	{
+	ref_xlist[i][j] = ia.corr[i][j];
+	mov_xlist[i][j] = ib.corr[i][j];
+	}
+
+	fast_rmsd(ref_xlist, mov_xlist, n_list, rmsd);
+	return rmsd;
+	}
+}
+
 
 
 
@@ -634,6 +661,14 @@ double DoubleMolecule::Energy()
 {
 	return energy;
 }
+double RMSD(DoubleMolecule &ia, DoubleMolecule &ib)
+{
+	Molecule t1, t2;
+	t1 = ia.a + ia.b;
+	t2 = ib.a + ib.b;
+	return RMSD(t1, t2);
+}
+
 
 Fragments::Fragments() { frag_number = 0; index = 0; };
 Fragments::Fragments(Fragments &ia)
@@ -729,4 +764,35 @@ void Fragments::ReadFromXYZfile(const string filename, const int inumber, int ma
 		frags.push_back(temp_m);
 	}
 	infile.close();
+}
+//Geometry operation
+void Fragments::PerformRot(Eigen::Matrix3d rot)
+{
+	for (int i = 0; i != frag_number; i++)
+		frags[i].PerformRot(rot);
+}
+void Fragments::PerformTrans(const Eigen::Vector3d trans)
+{
+	for (int i = 0; i != frag_number; i++)
+		frags[i].PerformTrans(trans);
+}
+void Fragments::PerformXTrans(const double &deltaX)
+{
+	for (int i = 0; i != frag_number; i++)
+		frags[i].PerformXTrans(deltaX);
+}
+void Fragments::PerformZTrans(const double &deltaZ)
+{
+	for (int i = 0; i != frag_number; i++)
+		frags[i].PerformZTrans(deltaZ);
+}
+void Fragments::PerformAxisRot(Eigen::Vector3d axis, double angle_radian)
+{
+	for (int i = 0; i != frag_number; i++)
+		frags[i].PerformAxisRot(axis, angle_radian);
+}
+void Fragments::PerformOnePointRotToXMinus(Eigen::Vector3d point)
+{
+	for (int i = 0; i != frag_number; i++)
+		frags[i].PerformOnePointRotToXMinus(point);
 }
