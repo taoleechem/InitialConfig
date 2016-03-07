@@ -578,6 +578,15 @@ void MakeAtomsSuitableDistanceMoveB(Molecule &ia, Molecule &ib, const double Sma
 		MoveVector = 0.005 / length*MC;
 		ib.PerformTrans(MoveVector);
 	}
+        while (ClosestDistance(ia,ib)>SmallestDistance)
+        {
+		//move B towards A
+		MC_B=ib.MassCenter();
+		MC=MC_A-MC_B;
+ 		double length = sqrt(MC(0)*MC(0) + MC(1)*MC(1) + MC(2)*MC(2));
+                MoveVector = 0.005 / length*MC;
+                ib.PerformTrans(MoveVector);
+        }
 }
 double RMSD(Molecule &ia, Molecule &ib)
 {

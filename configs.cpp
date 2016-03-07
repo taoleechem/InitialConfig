@@ -80,12 +80,12 @@ void GenerateFunction()
 	int index = 3;
 	int matrix2[2][2] = { { 0,2 },{ 3,3 } };
 	int index2 = 2;
-	const int MaxRotTimes = 60;
 	const double RotPrecision = 50;
 	const double B1_default_value = 3.00;
-	const int EachPairSaveNumber = 5;
+	const int EachPairSaveNumber = 6;
+        const int MaxRotTimes=EachPairSaveNumber*10;
 	const int OutPutNumber = 50;
-	const double RMSD_Precision = 0.2;
+	const double RMSD_Precision = 0.35;
 	Fragments FA, FB;
 	FA.ReadFromXYZfile("InitiConfig/ch2choh_1.xyz", index, matrix);
 	FB.ReadFromXYZfile("InitiConfig/ch2o.xyz", index2, matrix2);
@@ -121,7 +121,7 @@ void GenerateFunction()
 			for (int k = 0; k != MaxRotTimes; k++)
 			{
 				//We should  rot A at the same time to make sure all suitable configurations happen!
-				A.PerformRandomRotEuler(MC_A1, 90.0);
+				A.PerformRandomRotEuler(MC_A1, RotPrecision*1.3);
 				B.PerformRandomRotEuler(MC_B1, RotPrecision);
 				//Here need to adjust B to a suitable position that the closest distance between atoms of A and B is 3.0
 				MakeAtomsSuitableDistanceMoveB(A, B, B1_default_value);
