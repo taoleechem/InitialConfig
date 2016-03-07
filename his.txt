@@ -1,0 +1,7 @@
+Do calculate of CH No.0, and CH2 No.0
+Do calculate of CH No.0, and O No.1
+Do calculate of CH2 No.1, and CH2 No.0
+Do calculate of CH2 No.1, and O No.1
+Do calculate of HO No.2, and CH2 No.0
+Do calculate of HO No.2, and O No.1
+Here output 24 .xyz files to ./SaveConfigs/ as the final result

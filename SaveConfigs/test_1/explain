@@ -1,0 +1,7 @@
+2016-03-07 13:26
+
+Result shows that this program works pretty good with one interesting problem.
+
+In this test, I find the problem that in some configs, distance of  most closest atoms between 2 molecules is too short. This problem arises from my function frined Molecule::AdjustAtomDistanceMoveB(), where I just move the most closest atoms to distance 3.00, without considering the distance between other molecules while this adjustion.
+
+I should change the MassCenter between these 2 molecules rather than some specific atoms.
