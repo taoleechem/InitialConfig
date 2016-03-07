@@ -1,4 +1,5 @@
 #include "configs.h"
+#include <time.h>
 #define _NWCHEM_
 // #define _G09_
 
@@ -21,7 +22,7 @@ double G09energy(Molecule a, string basis = "6-31g", string functional = "b3lyp"
 	clock_t now = clock();
 	srand(now);
 	double x=(rand() % 1000 + 1);
-	return x;
+	return -1*abs(x);
 #else
 #ifdef _NWCHEM_
 	string filename("DATA/NW.nw");
@@ -50,7 +51,7 @@ double G09energy(Molecule a, Molecule b, string basis = "6-31g", string function
 	clock_t now = clock();
 	srand(now);
 	double x= (rand() % 1000 + 1);
-	return x;
+	return -1 * abs(x);
 #else
 #ifdef _NWCHEM_
 	string filename("DATA/NW.nw");
@@ -79,8 +80,8 @@ void GenerateFunction()
 	int index = 3;
 	int matrix2[2][2] = { { 0,2 },{ 3,3 } };
 	int index2 = 2;
-	const int MaxRotTimes = 120;
-	const double RotPrecision = 10;
+	const int MaxRotTimes = 60;
+	const double RotPrecision = 50;
 	const double B1_default_value = 3.00;
 	const int EachPairSaveNumber = 5;
 	const int OutPutNumber = 50;
@@ -89,8 +90,7 @@ void GenerateFunction()
 	FA.ReadFromXYZfile("InitiConfig/ch2choh_1.xyz", index, matrix);
 	FB.ReadFromXYZfile("InitiConfig/ch2o.xyz", index2, matrix2);
 
-	double RestEnergies = 0;
-	RestEnergies = G09energy(FA.TotalFragments()) + G09energy(FB.TotalFragments());
+	const double RestEnergies = G09energy(FA.TotalFragments()) + G09energy(FB.TotalFragments());
 	vector<DoubleMolecule> SaveSuitableCofigs;
 
 	for (int i = 0; i != FA.FragNumbers(); i++, ++FA)
@@ -121,11 +121,12 @@ void GenerateFunction()
 			for (int k = 0; k != MaxRotTimes; k++)
 			{
 				//We should  rot A at the same time to make sure all suitable configurations happen!
-				A.PerformRandomRotEuler(MC_A1, RotPrecision/1.77);
+				A.PerformRandomRotEuler(MC_A1, 90.0);
 				B.PerformRandomRotEuler(MC_B1, RotPrecision);
 				//Here need to adjust B to a suitable position that the closest distance between atoms of A and B is 3.0
 				MakeAtomsSuitableDistanceMoveB(A, B, B1_default_value);
 				double  potential = G09energy(A, B) - RestEnergies;
+				//cout << potential << "\t";
 				DoubleMolecule temp_save;
 				temp_save.Set(A, B, potential);
 				TempConfigs.push_back(temp_save);
@@ -157,7 +158,7 @@ void GenerateFunction()
 					for (jj = 0; jj < total_size; jj++)
 					{
 						double temp_x = RMSD(SaveSuitableCofigs[jj], TempConfigs[ii]);
-						if (abs(temp_x)<= RMSD_Precision)
+						if (abs(temp_x)< RMSD_Precision)
 							break;
 					}
 					if (jj == total_size)
@@ -170,13 +171,13 @@ void GenerateFunction()
 	}
 
 	//sort SaveSuitableConfigs
-	DoubleMolecule temp;
 	int total = SaveSuitableCofigs.size();
 	for (int i = 0; i < total-1; i++)
 		for (int j = i + 1; j < total; j++)
 		{
 			if (SaveSuitableCofigs[i] > SaveSuitableCofigs[j])
 			{
+				DoubleMolecule temp;
 				temp = SaveSuitableCofigs[i];
 				SaveSuitableCofigs[i] = SaveSuitableCofigs[j];
 				SaveSuitableCofigs[j] = temp;

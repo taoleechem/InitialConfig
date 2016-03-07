@@ -71,6 +71,7 @@ public:
 	void PerformRandomRotEuler(Eigen::Vector3d Point, const double &Precision_degree);
 	void MCtoOrigin();
 	void MCtoVector(const Eigen::Vector3d x);
+	friend double ClosestDistance(Molecule &ia, Molecule &ib);
 	friend void MakeAtomsSuitableDistanceMoveB(Molecule &ia, Molecule &ib, const double SmallestDistance);
 	friend double RMSD(Molecule &ia, Molecule &ib);
 };

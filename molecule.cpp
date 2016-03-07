@@ -519,7 +519,7 @@ void Molecule::PerformRandomRotEuler(Eigen::Vector3d Point, const double &Precis
 	{
 	x[i] = dis(generator)*Precision_degree;
 	}
-	
+	//cout << x[0] << "\t" << x[1] << "\t" << x[2] << endl;
 	Eigen::Matrix3d randomRotation;
 	randomRotation = EulerRot(x[0], x[1], x[2]);
 	PerformTrans(-1 * Point);
@@ -548,7 +548,7 @@ void Molecule::MCtoVector(const Eigen::Vector3d x)
 		corr[i][2] += mc(2);
 	}
 }
-void MakeAtomsSuitableDistanceMoveB(Molecule &ia, Molecule &ib, const double SmallestDistance)
+double ClosestDistance(Molecule &ia, Molecule &ib)
 {
 	int label1 = 0, label2 = 0;
 	double distance = sqrt((ia.corr[0][0] - ib.corr[0][0])*(ia.corr[0][0] - ib.corr[0][0]) + (ia.corr[0][1] - ib.corr[0][1])*(ia.corr[0][1] - ib.corr[0][1]) + (ia.corr[0][2] - ib.corr[0][2])*(ia.corr[0][2] - ib.corr[0][2]));
@@ -563,10 +563,21 @@ void MakeAtomsSuitableDistanceMoveB(Molecule &ia, Molecule &ib, const double Sma
 				label2 = j;
 			}
 		}
-	Eigen::Vector3d MoveVector;
-	MoveVector << ia.corr[label1][0] - ib.corr[label2][0], ia.corr[label1][1] - ib.corr[label2][1], ia.corr[label1][2] - ib.corr[label2][2];
-	if (abs(distance - SmallestDistance)>1e-6)
-		ib.PerformTrans((1 - SmallestDistance / distance)*MoveVector);
+	return distance;
+}
+void MakeAtomsSuitableDistanceMoveB(Molecule &ia, Molecule &ib, const double SmallestDistance)
+{
+	Eigen::Vector3d MC_A, MC_B,MC, MoveVector;
+	MC_A = ia.MassCenter();
+	while (ClosestDistance(ia, ib) < SmallestDistance)
+	{
+		//move B out of A
+		MC_B = ib.MassCenter();
+		MC = MC_B - MC_A;
+		double length = sqrt(MC(0)*MC(0) + MC(1)*MC(1) + MC(2)*MC(2));
+		MoveVector = 0.005 / length*MC;
+		ib.PerformTrans(MoveVector);
+	}
 }
 double RMSD(Molecule &ia, Molecule &ib)
 {
