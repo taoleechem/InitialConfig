@@ -62,22 +62,29 @@ bool operator>=(const Molecule &ia, const Molecule &ib)
 	else
 		return false;
 }
-double Molecule::AtomMass(const string &iname)
+double Molecule::AtomMass(const string &name)
 {
-	if (iname == "H")
+	if (name == "H")
 		return 1.007825;
-	else if (iname == "C")
+	else if (name == "C")
 		return 12.00;
-	else if (iname == "N")
+	else if (name == "N")
 		return 14.003070;
-	else if (iname == "O")
+	else if (name == "O")
 		return 15.994910;
-	else if (iname == "S")
+	else if (name == "S")
 		return 31.972070;
-	else if (iname == "Cl")
+	else if (name == "Cl")
 		return 34.968850;
+	//This part is to deal with the non-standard atom name
+	else if ((name.size() == 2) && (name[1] <= 'Z'&&name[1] >= 'A'))
+	{
+		string iname = X_ToStr<char>(name[0]);
+		return AtomMass(iname);
+	}
 	else
-		return 0.00;
+		return 0;
+	
 }
 string Molecule::MoleculeName()
 {
@@ -146,6 +153,7 @@ void Molecule::ReadFromXYZfile(const string filename)
 	}
 	infile.close();
 }
+//change tinker xyz to xyz atomatically
 void Molecule::ToXYZfile(const string filename)
 {
 	ofstream tofile(filename.c_str(), ios::out);
@@ -161,7 +169,15 @@ void Molecule::ToXYZfile(const string filename)
 		tofile << number << endl << endl;
 		for (int i = 0; i != number; i++)
 		{
-			tofile << name[i];
+			if (name[i].size() > 1)
+			{
+				if (name[i][1] <= 'Z'&&name[i][1] >= 'A')
+					tofile << name[i][0];
+				else
+					tofile << name[i];
+			}
+			else
+				tofile << name[i];
 			for (int j = 0; j != 3; j++)
 			{
 				if (abs(corr[i][j]) < 1e-7)
@@ -172,6 +188,29 @@ void Molecule::ToXYZfile(const string filename)
 		}
 	}
 	tofile.close();
+}
+void Molecule::ToXYZfileOnlyGeo(ofstream &tofile)
+{
+		for (int i = 0; i != number; i++)
+		{
+			if (name[i].size() > 1)
+			{
+				if (name[i][1] <= 'Z'&&name[i][1] >= 'A')
+					tofile << name[i][0];
+				else
+					tofile << name[i];
+			}
+			else
+				tofile << name[i];
+			for (int j = 0; j != 3; j++)
+			{
+				if (abs(corr[i][j]) < 1e-7)
+					corr[i][j] = 0;
+				tofile << "\t" << fixed << setprecision(7) << corr[i][j];
+			}
+			tofile << endl;
+		}
+
 }
 void ToXYZfile(const Molecule &a, const Molecule &b, string &filename, string other_info)
 {
@@ -370,6 +409,58 @@ void Molecule::ReadFromGJF(string &filename, int atomNum)
 	number = name.size();
 	infile.close();
 }
+void Molecule::ReadFromTinkerXYZfile(const string filename)
+{
+	ifstream infile(filename.c_str());
+	if (!cout)
+	{
+		cerr << "Error to open " << filename << " to get the geometry info" << endl;
+		exit(1);
+	}
+	infile >> number;
+	//Clear and initialize the info
+	if (number != 0)
+		name.clear();
+	string temp;
+	getline(infile, temp);
+	getline(infile, temp);
+	int inumber;
+	string iname, iconnection;
+	for (int i = 0; i != number; i++)
+	{
+		infile >> inumber >> iname;
+		name.push_back(iname);
+		for (int j = 0; j != 3; j++)
+		{
+			double icorr;
+			infile >> icorr;
+			corr[i][j] = icorr;
+		}
+		getline(infile, iconnection);
+	}
+	infile.close();
+}
+void Molecule::ReadFromTinkerXYZGeoPart(ifstream &infile, int atom_number)
+{
+		number = atom_number;
+		//Clear and initialize the info
+		if (number != 0)
+			name.clear();
+		int inumber;
+		string iname, iconnection;
+		for (int i = 0; i != number; i++)
+		{
+			infile >> inumber >> iname;
+			name.push_back(iname);
+			for (int j = 0; j != 3; j++)
+			{
+				double icorr;
+				infile >> icorr;
+				corr[i][j] = icorr;
+			}
+			getline(infile, iconnection);
+	      }
+}
 void Molecule::AddAtom(const string atomname, double &x, double &y, double &z)
 {
 	corr[number][0] = x;
@@ -457,6 +548,11 @@ void Molecule::PerformXTrans(const double &deltaX)//This is to make all atoms tr
 {
 	for (int i = 0; i != number; i++)
 		corr[i][0] += deltaX;
+}
+void Molecule::PerformYTrans(const double &deltaY)//This is to make all atoms translate a deltaY in y coordinate.
+{
+	for (int i = 0; i != number; i++)
+		corr[i][1] += deltaY;
 }
 void Molecule::PerformZTrans(const double &deltaZ)
 {
@@ -815,4 +911,41 @@ void Fragments::PerformOnePointRotToXMinus(Eigen::Vector3d point)
 {
 	for (int i = 0; i != frag_number; i++)
 		frags[i].PerformOnePointRotToXMinus(point);
+}
+
+
+
+//Other functions
+void ReadFromWholeTinkerArc(const string arc_filename, const string save_filename, int solute_atoms, int each_solvent_atoms, int x_singal,int y_singal,int z_singal, double radius, double SoluteCenterToMarginLength)
+{
+	ofstream tofile(save_filename.c_str(), ios::out);
+	if (!tofile)
+	{
+		cerr << "Error to write " << save_filename << endl;
+		exit(1);
+	}
+	//read from Arc File
+	ifstream infile(arc_filename.c_str());
+	if (!cout)
+	{
+		cerr << "Error to open " << arc_filename << " to get the geometry info" << endl;
+		exit(1);
+	}
+	tofile << "//This file is to read Tinker XYZ information from a huge .arc file and save some results" << endl;
+	tofile << "//In each line, the first number represents the number of solvent molecules within the radius(" << radius << ") of solute mass center, the second number reperests the number of solvent molecules within the framework(" << SoluteCenterToMarginLength << ") of solute molecules" << endl;
+	//Build a New class and read information from arc once and get many results
+	SolventCube A;
+	int x, y;
+	while (!infile.eof())
+	{
+		A.ReadFromTinkerArcGetXYZonce(infile, solute_atoms, each_solvent_atoms);
+		//Expand A to a larger one
+		A.ExpandCubeTo8(x_singal,y_singal,z_singal);
+		x = A.CountSolventNumberNearSolute(radius);
+		y = A.CountSolventNumberInSolute(SoluteCenterToMarginLength);
+		cout << x<< "\t" << y<< endl;
+		tofile << x << "\t" <<y << endl;
+	}
+	infile.close();
+	tofile.close();
 }

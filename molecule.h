@@ -12,7 +12,7 @@
 #include <cmath>
 #include <time.h>
 using namespace std;
-const int MaxAtom = 200;
+const int MaxAtom = 1600;
 const double PI = 3.1415926;
 
 template <class T> string X_ToStr(T tmp)
@@ -45,12 +45,15 @@ public:
 	//Read&write files
 	void ReadFromXYZfile(const string filename);
 	void ToXYZfile(const string filename);
+	void ToXYZfileOnlyGeo(ofstream &tofile);
 	friend void ToXYZfile(const Molecule &a, const Molecule &b, string &filename, string other_info = "  Have a good day!");
 	void ToNWchemFileHF(const string filename, const string basis = "6-31G");
 	friend void ToNWchemFileHF(const Molecule &a, const Molecule &b, string &filename, const string basis = "6-31G");
 	void ToG09FileDFT(string &filename, string basis = "6-31g", string functional = "b3lyp");
 	friend void ToG09FileDFT(Molecule &a, Molecule &b, string &filename, string basis = "6-31g", string functional = "b3lyp");
 	void ReadFromGJF(string &filename, int atomNum);
+	void ReadFromTinkerXYZfile(string filename);
+	void ReadFromTinkerXYZGeoPart(ifstream &infile,int atom_number);
 
 	void AddAtom(const string atomname, double &x, double &y, double &z);
 	//small functions
@@ -64,6 +67,7 @@ public:
 	void PerformRot(Eigen::Matrix3d rot);
 	void PerformTrans(const Eigen::Vector3d trans);
 	void PerformXTrans(const double &deltaX);
+	void PerformYTrans(const double &deltaY);
 	void PerformZTrans(const double &deltaZ);
 	void PerformAxisRot(Eigen::Vector3d axis, double angle_radian);
 	void PerformOnePointRotToXMinus(Eigen::Vector3d point);
@@ -123,6 +127,223 @@ public:
 	void PerformAxisRot(Eigen::Vector3d axis, double angle_radian);
 	void PerformOnePointRotToXMinus(Eigen::Vector3d point);
 };
+class SolventCube
+{
+protected:
+	Molecule solute;
+	vector<Molecule> solvent;
+	int solvent_num;
+	int a;
+public:
+	SolventCube()
+	{
+		a = 0;
+		solvent_num = 0;
+	}
+	Molecule Solute()
+	{
+		return solute;
+	}
+	void ReadFromTinkerXYZfile(const string filename,int solute_atoms, int single_solvent_atoms)
+	{
+		ifstream infile(filename.c_str());
+		if (!cout)
+		{
+			cerr << "Error to open " << filename << " to get the geometry info" << endl;
+			exit(1);
+		}
+		int total_num;
+		infile >> total_num;
+		string temp;
+		getline(infile, temp);
+		infile >> a;
+		getline(infile, temp);
+		
+		solvent_num = (total_num - solute_atoms) / single_solvent_atoms;
+		int inumber;
+		string iname, iconnection;
+		//input solute
+		solute.clear();
+		solute.ReadFromTinkerXYZGeoPart(infile,solute_atoms);
+		//input solvents
+		solvent.clear();
+		for (int i = 0; i < solvent_num; i++)
+		{
+			Molecule temp_mole;
+			temp_mole.ReadFromTinkerXYZGeoPart(infile, single_solvent_atoms);
+			solvent.push_back(temp_mole);
+		}
+		infile.close();
+	}
+	void ToXYZfile(const string filename)
+	{
+		ofstream tofile1(filename.c_str(), ios::out);
+		if (!tofile1)
+		{
+			cerr << "Error to write " << filename << endl;
+			exit(1);
+		}
+		tofile1.close();
+		ofstream tofile(filename.c_str(), ios::app);
+		tofile << solvent_num*solvent[0].Number()+solute.Number() << endl << endl;
+		solute.ToXYZfileOnlyGeo(tofile);
+		for (int i = 0; i < solvent.size(); i++)
+			solvent[i].ToXYZfileOnlyGeo(tofile);
+		tofile.close();
+	}
+	//*_singal represents the direction you want to expand this cube to a larger 8 cubes. *_singal=+1 or -1
+	void ExpandCubeTo8(int x_singal=1,int y_singal=-1,int z_singal=-1)
+	{
 
+		for (int i = 0; i != solvent_num; i++)
+		{
+			Molecule one_solvent[8];
+			one_solvent[0] = solvent[i];
+			for (int j = 1; j != 8; j++)
+				one_solvent[j] = one_solvent[0];
+			one_solvent[1].PerformXTrans(x_singal*a);
+			one_solvent[2].PerformYTrans(y_singal*a);
+			one_solvent[3].PerformXTrans(x_singal*a);
+			one_solvent[3].PerformYTrans(y_singal*a);
+			one_solvent[4].PerformZTrans(z_singal*a);
+			one_solvent[5].PerformXTrans(x_singal*a);
+			one_solvent[5].PerformZTrans(z_singal*a);
+			one_solvent[6].PerformYTrans(y_singal*a);
+			one_solvent[6].PerformZTrans(z_singal*a);
+			one_solvent[7].PerformXTrans(x_singal*a);
+			one_solvent[7].PerformYTrans(y_singal*a);
+			one_solvent[7].PerformZTrans(z_singal*a);
+			for (int j = 1; j != 8; j++)
+				solvent.push_back(one_solvent[j]);
+		}
+		solvent_num = solvent_num * 8;
+		a = a * 2;
+	}
+	int CountSolventNumberNearSolute(double radius)
+	{
+		Eigen::Vector3d MC,mc;
+		MC = solute.MassCenter();
+		int count = 0;
+		for (int i = 0; i != solvent_num; i++)
+		{
+			mc = solvent[i].MassCenter();
+
+			double length = sqrt((MC(0)-mc(0))*(MC(0) - mc(0))+ (MC(1) - mc(1))*(MC(1) - mc(1))+ (MC(2) - mc(2))*(MC(2) - mc(2)));
+			if (length <= radius)
+				count += 1;
+		}
+		return count;
+	}
+	void ToXYZSolventNearSolute(const string filename,double radius=10.0)
+	{
+		//count how many solvent molecules within
+		int count = 0;
+		Eigen::Vector3d MC, mc;
+		MC = solute.MassCenter();
+		for (int i = 0; i != solvent_num; i++)
+		{
+			mc = solvent[i].MassCenter();
+			double length = sqrt((MC(0) - mc(0))*(MC(0) - mc(0)) + (MC(1) - mc(1))*(MC(1) - mc(1)) + (MC(2) - mc(2))*(MC(2) - mc(2)));
+			if (length <= radius)
+				count += 1;
+		}
+
+		ofstream tofile1(filename.c_str(), ios::out);
+		if (!tofile1)
+		{
+			cerr << "Error to write " << filename << endl;
+			exit(1);
+		}
+		tofile1.close();
+		ofstream tofile(filename.c_str(), ios::app);
+		tofile << count*solvent[0].Number() + solute.Number() << endl << endl;
+		solute.ToXYZfileOnlyGeo(tofile);
+		for (int i = 0; i < solvent_num; i++)
+		{
+			mc = solvent[i].MassCenter();
+			double length = sqrt((MC(0) - mc(0))*(MC(0) - mc(0)) + (MC(1) - mc(1))*(MC(1) - mc(1)) + (MC(2) - mc(2))*(MC(2) - mc(2)));
+			if (length <= radius)
+				solvent[i].ToXYZfileOnlyGeo(tofile);
+		}
+		tofile.close();
+	}
+	int CountSolventNumberInSolute(double MCtoMarginLength=2.9)
+	{
+		int count = 0;
+		Eigen::Vector3d MC, mc;
+		MC = solute.MassCenter();
+		for (int i = 0; i != solvent_num; i++)
+		{
+			mc = solvent[i].MassCenter();
+			if (abs(mc(0) - MC(0)) < MCtoMarginLength && abs(mc(1) - MC(1)) < MCtoMarginLength && abs(mc(2) - MC(2)) < MCtoMarginLength)
+			{
+				count += 1;
+			}
+		}
+		return count;
+	}
+	void ToXYZSolventInSolute(const string filename, double MCtoMarginLength = 2.9)
+	{
+		//count how many solvent molecules within
+		int count = 0;
+		Eigen::Vector3d MC, mc;
+		MC = solute.MassCenter();
+		for (int i = 0; i != solvent_num; i++)
+		{
+			mc = solvent[i].MassCenter();
+			if (abs(mc(0) - MC(0)) < MCtoMarginLength && abs(mc(1) - MC(1)) < MCtoMarginLength && abs(mc(2) - MC(2)) < MCtoMarginLength)
+			{
+				count += 1;
+			}
+		}
+
+		ofstream tofile1(filename.c_str(), ios::out);
+		if (!tofile1)
+		{
+			cerr << "Error to write " << filename << endl;
+			exit(1);
+		}
+		tofile1.close();
+		ofstream tofile(filename.c_str(), ios::app);
+		tofile << count*solvent[0].Number() + solute.Number() << endl << endl;
+		solute.ToXYZfileOnlyGeo(tofile);
+		for (int i = 0; i < solvent_num; i++)
+		{
+			mc = solvent[i].MassCenter();
+			if (abs(mc(0) - MC(0)) < MCtoMarginLength && abs(mc(1) - MC(1)) < MCtoMarginLength && abs(mc(2) - MC(2)) < MCtoMarginLength)
+			{
+				solvent[i].ToXYZfileOnlyGeo(tofile);
+			}
+		}
+		tofile.close();
+	}
+	void ReadFromTinkerArcGetXYZonce(ifstream &infile, int &solute_atoms, int &single_solvent_atoms)
+	{
+			int total_num;
+			infile >> total_num;
+			string temp;
+			getline(infile, temp);
+			infile >> a;//input a
+			getline(infile, temp);
+
+			solvent_num = (total_num - solute_atoms) / single_solvent_atoms;//input solvent numbers
+			int inumber;
+			string iname, iconnection;
+			//input solute
+			solute.clear();
+			solute.ReadFromTinkerXYZGeoPart(infile, solute_atoms);
+			//input solvents
+			solvent.clear();
+			for (int i = 0; i < solvent_num; i++)
+			{
+				Molecule temp_mole;
+				temp_mole.ReadFromTinkerXYZGeoPart(infile, single_solvent_atoms);
+				solvent.push_back(temp_mole);
+			}
+	}
+};
+
+//Other functions
+void ReadFromWholeTinkerArc(const string arc_filename, const string save_filename, int solute_atoms, int each_solvent_atoms, int x_singal, int y_singal, int z_singal, double radius, double SoluteCenterToMarginLength);
 #endif
 
