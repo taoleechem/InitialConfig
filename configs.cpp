@@ -1,4 +1,5 @@
 #include "configs.h"
+#include "molecule.h"
 #include <time.h>
 #define _NWCHEM_
 // #define _G09_

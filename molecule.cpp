@@ -189,11 +189,13 @@ void Molecule::ToXYZfile(const string filename)
 	}
 	tofile.close();
 }
-void Molecule::ToXYZfileOnlyGeo(ofstream &tofile)
+//bool judge=true means output the standard atom name(C), false means output the original name(CT)
+void Molecule::ToXYZfileOnlyGeo(ofstream &tofile, bool IfStandardAtomName)
 {
 		for (int i = 0; i != number; i++)
 		{
-			if (name[i].size() > 1)
+
+			if (IfStandardAtomName == true && name[i].size() > 1)
 			{
 				if (name[i][1] <= 'Z'&&name[i][1] >= 'A')
 					tofile << name[i][0];
@@ -202,6 +204,7 @@ void Molecule::ToXYZfileOnlyGeo(ofstream &tofile)
 			}
 			else
 				tofile << name[i];
+
 			for (int j = 0; j != 3; j++)
 			{
 				if (abs(corr[i][j]) < 1e-7)
@@ -210,7 +213,6 @@ void Molecule::ToXYZfileOnlyGeo(ofstream &tofile)
 			}
 			tofile << endl;
 		}
-
 }
 void ToXYZfile(const Molecule &a, const Molecule &b, string &filename, string other_info)
 {
@@ -916,10 +918,24 @@ void Fragments::PerformOnePointRotToXMinus(Eigen::Vector3d point)
 
 
 //Other functions
-void ReadFromWholeTinkerArc(const string arc_filename, const string save_filename, int solute_atoms, int each_solvent_atoms, int x_singal,int y_singal,int z_singal, double radius, double SoluteCenterToMarginLength)
+void ReadFromWholeTinkerArc(const string arc_filename, const string save_filename, int solute_atoms, int each_solvent_atoms, int x_singal,int y_singal,int z_singal, double radius, double SoluteCenterToMarginLength, bool IfOutputStandardAtomName)
 {
+	//result save file name
 	ofstream tofile(save_filename.c_str(), ios::out);
 	if (!tofile)
+	{
+		cerr << "Error to write " << save_filename << endl;
+		exit(1);
+	}
+	//Save xyz info
+	ofstream toxyz1((save_filename+"_near.arc").c_str(), ios::out);
+	if (!toxyz1)
+	{
+		cerr << "Error to write " << save_filename << endl;
+		exit(1);
+	}
+	ofstream toxyz2((save_filename+"_in.arc").c_str(), ios::out);
+	if (!toxyz2)
 	{
 		cerr << "Error to write " << save_filename << endl;
 		exit(1);
@@ -943,9 +959,70 @@ void ReadFromWholeTinkerArc(const string arc_filename, const string save_filenam
 		A.ExpandCubeTo8(x_singal,y_singal,z_singal);
 		x = A.CountSolventNumberNearSolute(radius);
 		y = A.CountSolventNumberInSolute(SoluteCenterToMarginLength);
+		A.AppendToXYZSolventNearSolute(toxyz1, radius, IfOutputStandardAtomName);
+		A.AppendToXYZSolventInSolute(toxyz2, SoluteCenterToMarginLength, IfOutputStandardAtomName);
 		cout << x<< "\t" << y<< endl;
 		tofile << x << "\t" <<y << endl;
 	}
 	infile.close();
+	toxyz1.close();
+	toxyz2.close();
 	tofile.close();
+}
+void Do_ReadFromWholeTinkerArc_FromTxt()
+{
+	cout << "############################################" << endl;
+	cout << "# Arc.Analysis program developed by Tao Li #" << endl;
+	cout << "############################################" << endl << endl;;
+	cout << "1. You should input a filename of task file, for example: /home/usr/task.txt" << endl;
+	cout << "In the task file, you should write as below:" << endl << endl;
+	cout << "//This is task file (this line is necessory in task file as a function of explanation)" << endl;
+	cout << "water.arc  //arc filename where the program read from" << endl;
+	cout << "result.txt //save filename, this program will output three files, *, *_near.arc, *_in.arc." << endl;
+	cout << "108	3	//number of whole solute atoms, number of each solvent atoms(eg. H2O --> 3)" << endl;
+	cout << "1	-1	-1	//this represents the direction you want to expand your box to 8 boxes.(eg. 1, -1, -1) If doesn't need expand, input 0 0 0" << endl;
+	cout << "8.0		//this is the radius of the ball from the mass center of solute molecule" << endl;
+	cout << "3.5		//this is the length of mass center to margin of the solute molecue." << endl;
+	cout << "0		//0 means output atom name like CT HW, 1 means output standard atom name like C H" << endl << endl << endl;
+	cout << "Please enter the task filename(eg. task.txt)" << endl;
+	string task_filename;
+	cin >> task_filename;
+	ifstream infile(task_filename.c_str());
+	if (!cout)
+	{
+		cerr << "Error to open " << task_filename << " to get the geometry info" << endl;
+		exit(1);
+	}
+	
+	string temp;
+	string arc_filename, save_filename;
+	int solute_atoms, each_solvent_atoms, x_singal, y_singal, z_singal;
+	double radius, SoluteCenterToMarginLength;
+	getline(infile, temp);
+	infile >> arc_filename;
+	getline(infile, temp);
+	infile >> save_filename;
+	getline(infile, temp);
+	infile >> solute_atoms >> each_solvent_atoms;
+	getline(infile, temp);
+	infile >> x_singal >> y_singal >> z_singal;
+	getline(infile, temp);
+	infile >> radius;
+	getline(infile, temp);
+	infile >> SoluteCenterToMarginLength;
+	getline(infile, temp);
+	bool IfOutputStandardAtomName;
+	infile >> IfOutputStandardAtomName;
+	cout << endl << endl;
+	cout << "This is your input file:"<< endl;
+	cout << "arc_filename: " << arc_filename << endl;
+	cout << "save_filename: " << save_filename << endl;
+	cout << "solute_atoms: " << solute_atoms << ", each_solvent_atoms" << endl;
+	cout << "x, y, z singal: " << x_singal << "\t" << y_singal << "\t" << z_singal << endl;
+	cout << "radius: " << radius << endl;
+	cout << "length from solute center to margin: " << SoluteCenterToMarginLength << endl;
+	cout << "If output standard atom names: " << IfOutputStandardAtomName << endl<<endl;
+	cout << "Program is busy now, please wait for good news" << endl;
+	ReadFromWholeTinkerArc(arc_filename, save_filename, solute_atoms, each_solvent_atoms, x_singal, y_singal, z_singal, radius, SoluteCenterToMarginLength, IfOutputStandardAtomName);
+	infile.close();
 }

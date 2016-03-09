@@ -45,7 +45,7 @@ public:
 	//Read&write files
 	void ReadFromXYZfile(const string filename);
 	void ToXYZfile(const string filename);
-	void ToXYZfileOnlyGeo(ofstream &tofile);
+	void ToXYZfileOnlyGeo(ofstream &tofile, bool judge);
 	friend void ToXYZfile(const Molecule &a, const Molecule &b, string &filename, string other_info = "  Have a good day!");
 	void ToNWchemFileHF(const string filename, const string basis = "6-31G");
 	friend void ToNWchemFileHF(const Molecule &a, const Molecule &b, string &filename, const string basis = "6-31G");
@@ -133,11 +133,12 @@ protected:
 	Molecule solute;
 	vector<Molecule> solvent;
 	int solvent_num;
-	int a;
+	double a,b,c,alpha,beta,gama;
 public:
 	SolventCube()
 	{
-		a = 0;
+		a =b=c= 0.0;
+		alpha = beta = gama = 90.0;
 		solvent_num = 0;
 	}
 	Molecule Solute()
@@ -156,7 +157,7 @@ public:
 		infile >> total_num;
 		string temp;
 		getline(infile, temp);
-		infile >> a;
+		infile >> a>>b>>c>>alpha>>beta>>gama;
 		getline(infile, temp);
 		
 		solvent_num = (total_num - solute_atoms) / single_solvent_atoms;
@@ -175,7 +176,7 @@ public:
 		}
 		infile.close();
 	}
-	void ToXYZfile(const string filename)
+	void ToXYZfile(const string filename, bool IfOutputStandardAtomName)
 	{
 		ofstream tofile1(filename.c_str(), ios::out);
 		if (!tofile1)
@@ -185,39 +186,44 @@ public:
 		}
 		tofile1.close();
 		ofstream tofile(filename.c_str(), ios::app);
-		tofile << solvent_num*solvent[0].Number()+solute.Number() << endl << endl;
-		solute.ToXYZfileOnlyGeo(tofile);
+		tofile << solvent_num*solvent[0].Number() + solute.Number() << endl;
+		tofile<<a<<"\t"<<b<<"\t"<<c<<"\t"<<alpha<<"\t"<<beta<<"\t"<<gama<< endl;
+		solute.ToXYZfileOnlyGeo(tofile, IfOutputStandardAtomName);
 		for (int i = 0; i < solvent.size(); i++)
-			solvent[i].ToXYZfileOnlyGeo(tofile);
+			solvent[i].ToXYZfileOnlyGeo(tofile, IfOutputStandardAtomName);
 		tofile.close();
 	}
-	//*_singal represents the direction you want to expand this cube to a larger 8 cubes. *_singal=+1 or -1
-	void ExpandCubeTo8(int x_singal=1,int y_singal=-1,int z_singal=-1)
+	//*_singal represents the direction you want to expand this cube to a larger 8 cubes. *_singal=+1 or -1, *_singal=0 means do nothing
+	void ExpandCubeTo8(int x_singal,int y_singal,int z_singal)
 	{
-
-		for (int i = 0; i != solvent_num; i++)
+		if (abs(x_singal) == 1 && abs(y_singal) == 1 && abs(z_singal) == 1)
 		{
-			Molecule one_solvent[8];
-			one_solvent[0] = solvent[i];
-			for (int j = 1; j != 8; j++)
-				one_solvent[j] = one_solvent[0];
-			one_solvent[1].PerformXTrans(x_singal*a);
-			one_solvent[2].PerformYTrans(y_singal*a);
-			one_solvent[3].PerformXTrans(x_singal*a);
-			one_solvent[3].PerformYTrans(y_singal*a);
-			one_solvent[4].PerformZTrans(z_singal*a);
-			one_solvent[5].PerformXTrans(x_singal*a);
-			one_solvent[5].PerformZTrans(z_singal*a);
-			one_solvent[6].PerformYTrans(y_singal*a);
-			one_solvent[6].PerformZTrans(z_singal*a);
-			one_solvent[7].PerformXTrans(x_singal*a);
-			one_solvent[7].PerformYTrans(y_singal*a);
-			one_solvent[7].PerformZTrans(z_singal*a);
-			for (int j = 1; j != 8; j++)
-				solvent.push_back(one_solvent[j]);
+			for (int i = 0; i != solvent_num; i++)
+			{
+				Molecule one_solvent[8];
+				one_solvent[0] = solvent[i];
+				for (int j = 1; j != 8; j++)
+					one_solvent[j] = one_solvent[0];
+				one_solvent[1].PerformXTrans(x_singal*a);
+				one_solvent[2].PerformYTrans(y_singal*b);
+				one_solvent[3].PerformXTrans(x_singal*a);
+				one_solvent[3].PerformYTrans(y_singal*b);
+				one_solvent[4].PerformZTrans(z_singal*c);
+				one_solvent[5].PerformXTrans(x_singal*a);
+				one_solvent[5].PerformZTrans(z_singal*c);
+				one_solvent[6].PerformYTrans(y_singal*b);
+				one_solvent[6].PerformZTrans(z_singal*c);
+				one_solvent[7].PerformXTrans(x_singal*a);
+				one_solvent[7].PerformYTrans(y_singal*b);
+				one_solvent[7].PerformZTrans(z_singal*c);
+				for (int j = 1; j != 8; j++)
+					solvent.push_back(one_solvent[j]);
+			}
+			solvent_num = solvent_num * 8;
+			a = a * 2;
+			b = b * 2;
+			c = c * 2;
 		}
-		solvent_num = solvent_num * 8;
-		a = a * 2;
 	}
 	int CountSolventNumberNearSolute(double radius)
 	{
@@ -234,7 +240,7 @@ public:
 		}
 		return count;
 	}
-	void ToXYZSolventNearSolute(const string filename,double radius=10.0)
+	void ToXYZSolventNearSolute(const string filename,double radius,bool IfOutputStandardAtomName)
 	{
 		//count how many solvent molecules within
 		int count = 0;
@@ -256,18 +262,44 @@ public:
 		}
 		tofile1.close();
 		ofstream tofile(filename.c_str(), ios::app);
-		tofile << count*solvent[0].Number() + solute.Number() << endl << endl;
-		solute.ToXYZfileOnlyGeo(tofile);
+		tofile << count*solvent[0].Number() + solute.Number() << endl;
+		tofile << a << "\t" << b << "\t" << c << "\t" << alpha << "\t" << beta << "\t" << gama << endl;
+		solute.ToXYZfileOnlyGeo(tofile, IfOutputStandardAtomName);
 		for (int i = 0; i < solvent_num; i++)
 		{
 			mc = solvent[i].MassCenter();
 			double length = sqrt((MC(0) - mc(0))*(MC(0) - mc(0)) + (MC(1) - mc(1))*(MC(1) - mc(1)) + (MC(2) - mc(2))*(MC(2) - mc(2)));
 			if (length <= radius)
-				solvent[i].ToXYZfileOnlyGeo(tofile);
+				solvent[i].ToXYZfileOnlyGeo(tofile, IfOutputStandardAtomName);
 		}
 		tofile.close();
 	}
-	int CountSolventNumberInSolute(double MCtoMarginLength=2.9)
+	void AppendToXYZSolventNearSolute(ofstream &tofile, double radius,bool IfOutputStandardAtomName)
+	{
+		//count how many solvent molecules within
+		int count = 0;
+		Eigen::Vector3d MC, mc;
+		MC = solute.MassCenter();
+		for (int i = 0; i != solvent_num; i++)
+		{
+			mc = solvent[i].MassCenter();
+			double length = sqrt((MC(0) - mc(0))*(MC(0) - mc(0)) + (MC(1) - mc(1))*(MC(1) - mc(1)) + (MC(2) - mc(2))*(MC(2) - mc(2)));
+			if (length <= radius)
+				count += 1;
+		}
+
+		tofile << count*solvent[0].Number() + solute.Number() << endl;
+		tofile << a << "\t" << b << "\t" << c << "\t" << alpha << "\t" << beta << "\t" << gama << endl;
+		solute.ToXYZfileOnlyGeo(tofile, IfOutputStandardAtomName);
+		for (int i = 0; i < solvent_num; i++)
+		{
+			mc = solvent[i].MassCenter();
+			double length = sqrt((MC(0) - mc(0))*(MC(0) - mc(0)) + (MC(1) - mc(1))*(MC(1) - mc(1)) + (MC(2) - mc(2))*(MC(2) - mc(2)));
+			if (length <= radius)
+				solvent[i].ToXYZfileOnlyGeo(tofile, IfOutputStandardAtomName);
+		}
+	}
+	int CountSolventNumberInSolute(double MCtoMarginLength)
 	{
 		int count = 0;
 		Eigen::Vector3d MC, mc;
@@ -282,7 +314,7 @@ public:
 		}
 		return count;
 	}
-	void ToXYZSolventInSolute(const string filename, double MCtoMarginLength = 2.9)
+	void ToXYZSolventInSolute(const string filename, double MCtoMarginLength,bool IfOutputStandardAtomName)
 	{
 		//count how many solvent molecules within
 		int count = 0;
@@ -306,16 +338,42 @@ public:
 		tofile1.close();
 		ofstream tofile(filename.c_str(), ios::app);
 		tofile << count*solvent[0].Number() + solute.Number() << endl << endl;
-		solute.ToXYZfileOnlyGeo(tofile);
+		solute.ToXYZfileOnlyGeo(tofile, IfOutputStandardAtomName);
 		for (int i = 0; i < solvent_num; i++)
 		{
 			mc = solvent[i].MassCenter();
 			if (abs(mc(0) - MC(0)) < MCtoMarginLength && abs(mc(1) - MC(1)) < MCtoMarginLength && abs(mc(2) - MC(2)) < MCtoMarginLength)
 			{
-				solvent[i].ToXYZfileOnlyGeo(tofile);
+				solvent[i].ToXYZfileOnlyGeo(tofile, IfOutputStandardAtomName);
 			}
 		}
 		tofile.close();
+	}
+	void AppendToXYZSolventInSolute(ofstream &tofile, double MCtoMarginLength,bool IfOutputStandardAtomName)
+	{
+		//count how many solvent molecules within
+		int count = 0;
+		Eigen::Vector3d MC, mc;
+		MC = solute.MassCenter();
+		for (int i = 0; i != solvent_num; i++)
+		{
+			mc = solvent[i].MassCenter();
+			if (abs(mc(0) - MC(0)) < MCtoMarginLength && abs(mc(1) - MC(1)) < MCtoMarginLength && abs(mc(2) - MC(2)) < MCtoMarginLength)
+			{
+				count += 1;
+			}
+		}
+		tofile << count*solvent[0].Number() + solute.Number() << endl;
+		tofile << a << "\t" << b << "\t" << c << "\t" << alpha << "\t" << beta << "\t" << gama << endl;
+		solute.ToXYZfileOnlyGeo(tofile, IfOutputStandardAtomName);
+		for (int i = 0; i < solvent_num; i++)
+		{
+			mc = solvent[i].MassCenter();
+			if (abs(mc(0) - MC(0)) < MCtoMarginLength && abs(mc(1) - MC(1)) < MCtoMarginLength && abs(mc(2) - MC(2)) < MCtoMarginLength)
+			{
+				solvent[i].ToXYZfileOnlyGeo(tofile, IfOutputStandardAtomName);
+			}
+		}
 	}
 	void ReadFromTinkerArcGetXYZonce(ifstream &infile, int &solute_atoms, int &single_solvent_atoms)
 	{
@@ -323,7 +381,7 @@ public:
 			infile >> total_num;
 			string temp;
 			getline(infile, temp);
-			infile >> a;//input a
+			infile >> a>>b>>c>>alpha>>beta>>gama;//input a
 			getline(infile, temp);
 
 			solvent_num = (total_num - solute_atoms) / single_solvent_atoms;//input solvent numbers
@@ -344,6 +402,7 @@ public:
 };
 
 //Other functions
-void ReadFromWholeTinkerArc(const string arc_filename, const string save_filename, int solute_atoms, int each_solvent_atoms, int x_singal, int y_singal, int z_singal, double radius, double SoluteCenterToMarginLength);
+void ReadFromWholeTinkerArc(const string arc_filename, const string save_filename, int solute_atoms, int each_solvent_atoms, int x_singal, int y_singal, int z_singal, double radius, double SoluteCenterToMarginLength,bool IfOutputStandardAtomName);
+void Do_ReadFromWholeTinkerArc_FromTxt();
 #endif
 
