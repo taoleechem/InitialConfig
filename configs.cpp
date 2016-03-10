@@ -190,4 +190,9 @@ void GenerateFunction()
 		SaveSuitableCofigs[i].ToXYZ("SaveConfigs/" + X_ToStr<int>(i) + ".xyz");
 }
 
+void Do_GenerateFunction_Program()
+{
+	;
+}
+
 

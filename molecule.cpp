@@ -512,6 +512,25 @@ double DistanceOfMassCenter(Molecule &ia, Molecule &ib)
 	x1 = x1 - x2;
 	return sqrt(x1(0)*x1(0) + x1(1)*x1(1) + x1(2)*x1(2));
 }
+//This is to form a new Molecule by abstract information of molecule ia atom[begin_label]-->atom[end_label], begin_label begins from 0
+Molecule AbstractSomeFormNewMolecule(Molecule &ia, int begin_label, int end_label)
+{
+	Molecule temp;
+	if (begin_label < 0 || end_label >= ia.Number())
+		return temp;
+	else
+	{
+		temp.number = end_label - begin_label + 1;
+		temp.name.clear();
+		for (int i = 0; i != temp.number; i++)
+		{
+			temp.name.push_back(ia.name[i + begin_label]);
+			for (int j = 0; j != 3; j++)
+				temp.corr[i][j] = ia.corr[i + begin_label][j];
+		}
+		return temp;
+	}
+}
 
 void Molecule::clear()
 {
@@ -577,9 +596,10 @@ void Molecule::PerformAxisRot(Eigen::Vector3d axis, double angle_radian)//Rot wi
 void Molecule::PerformOnePointRotToXMinus(Eigen::Vector3d point)
 {
 	double a = point(0), b = point(1), c = point(2);
-	double alpha = acos(b / (sqrt(b*b + c*c)));
-	double beta = 1 * acos(sqrt(b*b + c*c) / sqrt(a*a + b*b + c*c)) + PI / 2;
-	Eigen::Vector3d e_x(1, 0, 0);
+	double alpha = atan2(c, b);
+	//double beta = 1 * acos(sqrt(b*b + c*c) / sqrt(a*a + b*b + c*c)) + PI / 2;
+	double beta = PI - atan2(sqrt(b*b + c*c), a);
+	Eigen::Vector3d e_x(-1, 0, 0);
 	Eigen::Vector3d e_z(0, 0, 1);
 	Eigen::AngleAxis<double> rot1(alpha, e_x);
 	Eigen::AngleAxis<double> rot2(beta, e_z);
@@ -708,6 +728,24 @@ double RMSD(Molecule &ia, Molecule &ib)
 	fast_rmsd(ref_xlist, mov_xlist, n_list, rmsd);
 	return rmsd;
 	}
+}
+//This is to transform Molecule 2 coords to align well with Molecule 1, align first 3 atoms well
+void SpaceTransform(Molecule ref, Molecule &change)
+{
+	;
+}
+void Molecule::AligenToStandardConfig()
+{
+	Eigen::Vector3d atom1, atom2, atom3;
+	atom1 << corr[0][0],corr[0][1],corr[0][2];
+	PerformTrans(-1 * atom1);//Make atom1 to origin
+	atom2 << corr[1][0], corr[1][1], corr[1][2];
+	PerformOnePointRotToXMinus(atom2); //make atom2 to x- axis
+	atom3 << corr[2][0], corr[2][1], corr[2][2];
+	double alpha = atan2(corr[2][2],corr[2][1]);
+	Eigen::Vector3d axis;
+	axis << -1, 0, 0;
+	PerformAxisRot(axis, alpha);
 }
 
 
@@ -917,7 +955,7 @@ void Fragments::PerformOnePointRotToXMinus(Eigen::Vector3d point)
 
 
 
-//Other functions
+//tinker .arc file analysis
 void ReadFromWholeTinkerArc(const string arc_filename, const string save_filename, int solute_atoms, int each_solvent_atoms, int x_singal,int y_singal,int z_singal, double radius, double SoluteCenterToMarginLength, bool IfOutputStandardAtomName)
 {
 	//result save file name
@@ -1025,4 +1063,92 @@ void Do_ReadFromWholeTinkerArc_FromTxt()
 	cout << "Program is busy now, please wait for good news" << endl;
 	ReadFromWholeTinkerArc(arc_filename, save_filename, solute_atoms, each_solvent_atoms, x_singal, y_singal, z_singal, radius, SoluteCenterToMarginLength, IfOutputStandardAtomName);
 	infile.close();
+}
+//This is to analysis the result(many *.xyz) of GenerateFunction(). Read from many *.xyz files, keep molecule A at one position, output different position of molecule B into one *.xyz file
+void AligenMultiXYZfileToOneKeepMoleculeAStill(const string dir_name, int total_file_num, int molecule_A_atoms)
+{
+	Molecule ref,change;
+	ref.ReadFromXYZfile((dir_name + "/0.xyz"));
+	string savefile_name = dir_name + "/final.xyz";
+
+	ofstream tofile(savefile_name.c_str(), ios::out);
+	if (!tofile)
+	{
+		cerr << "Error to write " << savefile_name << endl;
+		exit(1);
+	}
+	tofile << molecule_A_atoms + total_file_num*(ref.Number() - molecule_A_atoms) << endl;
+	tofile << "Analysis from " << total_file_num << " .xyz files" << endl;
+	ref.ToXYZfileOnlyGeo(tofile, true);
+	for (int i = 1; i != total_file_num; i++)
+	{
+		change.ReadFromXYZfile((dir_name + "/" + X_ToStr<int>(i) + ".xyz"));
+		SpaceTransform(ref, change);
+		Molecule temp;
+		temp = AbstractSomeFormNewMolecule(change, molecule_A_atoms, ref.Number() - 1);
+		temp.ToXYZfileOnlyGeo(tofile, true);
+	}
+	tofile.close();
+}
+void Do_AligenMultiXYZ_Program()
+{
+	cout << "####################################################################" << endl;
+	cout << "# Result.analysis for GenerateFunction program developed by Tao Li #" << endl;
+	cout << "####################################################################" << endl << endl;;
+	cout << "Input a dir name where you save many .xyz file(0.xyz, 1.xyz, ...), eg: SaveConfigs" << endl;
+	string dir_name;
+	cin >> dir_name;
+	cout << "Input total .xyz file numbers(from 0 to MaxValue):" << endl;
+	int num;
+	cin >> num;
+	cout << "Input the number of atoms of first molecule: " << endl;
+	int atoms;
+	cin >> atoms;
+	cout << "Program dealing..." << endl;
+	AligenMultiXYZfileToOneKeepMoleculeAStill(dir_name, num, atoms);
+	cout << "Done!" << endl;
+}
+void AlignEachXYZToStandardForm(const string dir_name, int total_file_num, int molecule_A_atoms)
+{
+	Molecule ref, change;
+	ref.ReadFromXYZfile((dir_name + "/0.xyz"));
+	string savefile_name = dir_name + "/final.xyz";
+
+	ofstream tofile(savefile_name.c_str(), ios::out);
+	if (!tofile)
+	{
+		cerr << "Error to write " << savefile_name << endl;
+		exit(1);
+	}
+	tofile << molecule_A_atoms + total_file_num*(ref.Number() - molecule_A_atoms) << endl;
+	tofile << "Analysis from " << total_file_num << " .xyz files" << endl;
+	ref.AligenToStandardConfig();
+	ref.ToXYZfileOnlyGeo(tofile, true);
+	for (int i = 1; i != total_file_num; i++)
+	{
+		change.ReadFromXYZfile((dir_name + "/" + X_ToStr<int>(i) + ".xyz"));
+		change.AligenToStandardConfig();
+		Molecule temp;
+		temp = AbstractSomeFormNewMolecule(change, molecule_A_atoms, ref.Number() - 1);
+		temp.ToXYZfileOnlyGeo(tofile, true);
+	}
+	tofile.close();
+}
+void Do_AligenXYZStandard_Program()
+{
+	cout << "####################################################################" << endl;
+	cout << "# Result.analysis for GenerateFunction program developed by Tao Li #" << endl;
+	cout << "####################################################################" << endl << endl;;
+	cout << "Input a dir name where you save many .xyz file(0.xyz, 1.xyz, ...), eg: SaveConfigs" << endl;
+	string dir_name;
+	cin >> dir_name;
+	cout << "Input total .xyz file numbers(from 0 to MaxValue):" << endl;
+	int num;
+	cin >> num;
+	cout << "Input the number of atoms of first molecule: " << endl;
+	int atoms;
+	cin >> atoms;
+	cout << "Program dealing..." << endl;
+	AlignEachXYZToStandardForm(dir_name, num, atoms);
+	cout << "Done!" << endl;
 }

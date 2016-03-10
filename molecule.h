@@ -12,7 +12,7 @@
 #include <cmath>
 #include <time.h>
 using namespace std;
-const int MaxAtom = 1600;
+const int MaxAtom = 200;
 const double PI = 3.1415926;
 
 template <class T> string X_ToStr(T tmp)
@@ -61,6 +61,7 @@ public:
 	double MoleculeMass();
 	Eigen::Vector3d MassCenter();
 	friend double DistanceOfMassCenter(Molecule &ia, Molecule &ib);
+	friend Molecule AbstractSomeFormNewMolecule(Molecule &ia, int begin_label,int end_label);
 
 	void clear();
 	//Simple Operate
@@ -78,6 +79,8 @@ public:
 	friend double ClosestDistance(Molecule &ia, Molecule &ib);
 	friend void MakeAtomsSuitableDistanceMoveB(Molecule &ia, Molecule &ib, const double SmallestDistance);
 	friend double RMSD(Molecule &ia, Molecule &ib);
+	friend void SpaceTransform(Molecule ref, Molecule &change);
+	void AligenToStandardConfig();
 };
 
 class DoubleMolecule
@@ -401,8 +404,13 @@ public:
 	}
 };
 
-//Other functions
+//Arc.analysis
 void ReadFromWholeTinkerArc(const string arc_filename, const string save_filename, int solute_atoms, int each_solvent_atoms, int x_singal, int y_singal, int z_singal, double radius, double SoluteCenterToMarginLength,bool IfOutputStandardAtomName);
 void Do_ReadFromWholeTinkerArc_FromTxt();
+//GenerateFunction() result analysis multi-xyz file
+void AligenMultiXYZfileToOneKeepMoleculeAStill(const string dir_name, int total_file_num, int molecule_A_atoms);
+void Do_AligenMultiXYZ_Program();
+void AlignEachXYZToStandardForm(const string dir_name, int total_file_num, int molecule_A_atoms);
+void Do_AligenXYZStandard_Program();
 #endif
 
