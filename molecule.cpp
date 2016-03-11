@@ -514,8 +514,8 @@ void Molecule::ToPDBfileOnlyGeo(ofstream &tofile, int initial_label)
 {
 	for (int i = 0; i != number; i++)
 	{
-		tofile << "HETATM    " << initial_label+i+1 << "\t" << name[i] << "   LIG     1      "  <<fixed<<setprecision(3)<< corr[i][0] << "  " << corr[i][1] << "  "  << corr[i][2] << "\t1.00  0.00          " << name[i] << endl;
-		cout << "HETATM    " << initial_label + i + 1<<"\t" << name[i] << "   LIG     1      "  << fixed<< setprecision(3) <<corr[i][0] << "  "  << corr[i][1] << "  "  << corr[i][2] << "\t1.00  0.00          " << name[i] << endl;
+		tofile << "HETATM    " << initial_label+i+1 << "  " << name[i] << "   LIG     1      "  <<fixed<<setprecision(3)<< corr[i][0] << "  " << corr[i][1] << "  "  << corr[i][2] << "  1.00  0.00          " << name[i] << endl;
+		cout << "HETATM    " << initial_label + i + 1<<"  " << name[i] << "   LIG     1      "  << fixed<< setprecision(3) <<corr[i][0] << "  "  << corr[i][1] << "  "  << corr[i][2] << "  1.00  0.00          " << name[i] << endl;
 	}
 }
 void ToPDBfileAmBnType(const string filename, vector<Molecule> &A, vector<Molecule> &B, int connect_m[][8], int connect_n[][8])

@@ -6,7 +6,6 @@ void FunctionAdvisor()
 	cout << "1. Generate many (50 as default) 2 molecules reaction complex .xyz files" << endl;
 	cout << "2. Analysis the result from 1, to get one .xyz file with one molecule A and multi-B, to find the space distribution of B near A" << endl;
 	cout << "3. Do a tinker .arc file analysis" << endl;
-	cout << "4. Do xyz-->pdb program" << endl;
 	cout << "Please enter one numer to enter this sub program: " << endl;
 	int num;
 	cin >> num;
@@ -16,8 +15,6 @@ void FunctionAdvisor()
 		Do_AligenXYZStandard_Program();
 	else if (num == 3)
 		Do_ReadFromWholeTinkerArc_FromTxt();
-	else if (num == 4)
-		Do_XYZToPDB_MoleculeAmBnType();
 }
 
 int main()
