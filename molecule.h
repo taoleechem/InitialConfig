@@ -419,6 +419,7 @@ void Do_AligenXYZStandard_Program();
 
 //xyz-->pdb
 void XYZToPDB_MoleculeAmBnType(const string xyz_filename, const string save_filename, int a_atoms, int a_num, int b_atoms, int b_num, int connect_m[][8], int connect_n[][8]);
+void ReadConnectionInfo(const string filename, int connect[][8], int atoms);
 void Do_XYZToPDB_MoleculeAmBnType();
 #endif
 
