@@ -44,6 +44,7 @@ public:
 
 	//Read&write files
 	void ReadFromXYZfile(const string filename);
+	void ReadFromXYZOnlyGeo(ifstream &infile, int atom_num);
 	void ToXYZfile(const string filename);
 	void ToXYZfileOnlyGeo(ofstream &tofile, bool judge);
 	friend void ToXYZfile(const Molecule &a, const Molecule &b, string &filename, string other_info = "  Have a good day!");
@@ -54,6 +55,9 @@ public:
 	void ReadFromGJF(string &filename, int atomNum);
 	void ReadFromTinkerXYZfile(string filename);
 	void ReadFromTinkerXYZGeoPart(ifstream &infile,int atom_number);
+	void ToPDBfile(const string filename, int connection_matrix[][8]);
+	void ToPDBfileOnlyGeo(ofstream &tofile, int initial_label);
+	friend void ToPDBfileAmBnType(const string filename, vector<Molecule> &A, vector<Molecule> &B, int connect_m[][8], int connect_n[][8]);
 
 	void AddAtom(const string atomname, double &x, double &y, double &z);
 	//small functions
@@ -412,5 +416,9 @@ void AligenMultiXYZfileToOneKeepMoleculeAStill(const string dir_name, int total_
 void Do_AligenMultiXYZ_Program();
 void AlignEachXYZToStandardForm(const string dir_name, int total_file_num, int molecule_A_atoms);
 void Do_AligenXYZStandard_Program();
+
+//xyz-->pdb
+void XYZToPDB_MoleculeAmBnType(const string xyz_filename, const string save_filename, int a_atoms, int a_num, int b_atoms, int b_num, int connect_m[][8], int connect_n[][8]);
+void Do_XYZToPDB_MoleculeAmBnType();
 #endif
 
