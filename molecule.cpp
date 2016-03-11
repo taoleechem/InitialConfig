@@ -330,7 +330,7 @@ void ToNWchemFileHF(const Molecule &a, const Molecule &b, string &filename, cons
 	out << "task SCF" << endl;
 	out.close();
 }
-void Molecule::ToNWchemFileDFT(const string filename, const string basis = "6-31G", const string functional = "b3lyp")
+void Molecule::ToNWchemFileDFT(const string filename, const string basis, const string functional)
 {
 	ofstream out(filename.c_str(), ios::out);
 	out << "# ================================================================" << endl;
@@ -362,7 +362,7 @@ void Molecule::ToNWchemFileDFT(const string filename, const string basis = "6-31
 	out << "task dft energy" << endl;
 	out.close();
 }
-void ToNWchemFileDFT(const Molecule &a, const Molecule &b, string &filename, const string basis = "6-31G", const string functional = "b3lyp")
+void ToNWchemFileDFT(const Molecule &a, const Molecule &b, string &filename, const string basis, const string functional)
 {
 	ofstream out(filename.c_str(), ios::out);
 	out << "# ================================================================" << endl;
