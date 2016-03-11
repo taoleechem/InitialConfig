@@ -11,16 +11,21 @@ void FunctionAdvisor()
 	int num;
 	cin >> num;
 	if (num == 1)
-		GenerateFunction();
+		Do_GenerateFunction_Program_FromFile("task.txt");
 	else if (num == 2)
 		Do_AligenXYZStandard_Program();
 	else if (num == 3)
 		Do_ReadFromWholeTinkerArc_FromTxt();
 }
 
-int main()
+int main(int argc, char* argv[])
 {
-	FunctionAdvisor();
+	if(argc==1)
+		FunctionAdvisor();
+	else if (argc == 2)
+	{
+		Do_GenerateFunction_Program_FromFile(X_ToStr<char*>(argv[1]));
+	}
 	system("PAUSE");
 	return 0;
 }
