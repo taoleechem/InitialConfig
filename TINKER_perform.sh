@@ -1,5 +1,5 @@
 #!/bin/bash
-cd '/home/litao/molecule-recognition/DATA/'
+cd './DATA/'
 if
  ./analyze TinkerMolecules.xyz E >& TinkerMolecules.txt
 then 

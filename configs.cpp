@@ -2,8 +2,7 @@
 #include "molecule.h"
 #include <time.h>
 #define _NWCHEM_
-// #define _G09_
-
+//#define _GAUSSIAN_
 double ReadFile(string Tempfilename)
 {
 	ifstream readfile(Tempfilename.c_str());
@@ -34,7 +33,7 @@ double G09energy(Molecule a, string basis = "6-31g", string functional = "b3lyp"
 	total_energy = ReadFile("DATA/temp.txt");
 	return total_energy;
 #endif
-#ifdef _G09_
+#ifdef _GAUSSIAN__
 	string filename("DATA/system");
 	a.ToG09FileDFT(filename, basis, functional);
 	//Use shell script to solve the scf energy
@@ -63,7 +62,7 @@ double G09energy(Molecule a, Molecule b, string basis = "6-31g", string function
 	total_energy = ReadFile("DATA/temp.txt");
 	return total_energy;
 #endif
-#ifdef _G09_
+#ifdef _GAUSSIAN_
 	string filename("DATA/system");
 	ToG09FileDFT(a, b, filename, basis, functional);
 	//Use shell script to solve the scf energy

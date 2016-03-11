@@ -1,5 +1,6 @@
 #include "molecule.h"
 #include "configs.h"
+
 void FunctionAdvisor()
 {
 	cout << "This program provides some functions: " << endl;
