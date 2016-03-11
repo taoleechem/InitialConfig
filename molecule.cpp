@@ -330,6 +330,75 @@ void ToNWchemFileHF(const Molecule &a, const Molecule &b, string &filename, cons
 	out << "task SCF" << endl;
 	out.close();
 }
+void Molecule::ToNWchemFileDFT(const string filename, const string basis = "6-31G", const string functional = "b3lyp")
+{
+	ofstream out(filename.c_str(), ios::out);
+	out << "# ================================================================" << endl;
+	out << "# # NWChem input file made by LiTao for Molecule Recognization" << endl;
+	out << "# ================================================================" << endl << endl;
+	out << "charge 0" << endl << endl;
+	out << "geometry" << endl;
+	vector<string>::iterator iter;
+	int i = 0;
+	for (iter = name.begin(), i = 0; iter != name.end(); i++, iter++)
+	{
+		out << " " << *iter;
+		for (int j = 0; j != 3; j++)
+		{
+			if (abs(corr[i][j]) < 1e-7)
+				corr[i][j] = 0;
+			out << " " << fixed << setprecision(7) << corr[i][j];
+		}
+		out << endl;
+	}
+	out << "end" << endl << endl;
+	out << "basis" << endl;
+	out << " * library " << basis << endl;
+	out << "end" << endl << endl;
+	out << "dft" << endl;
+	out << "  xc " << functional << endl;
+	out << "  mult 1" << endl;
+	out << "end" << endl << endl;
+	out << "task dft energy" << endl;
+	out.close();
+}
+void ToNWchemFileDFT(const Molecule &a, const Molecule &b, string &filename, const string basis = "6-31G", const string functional = "b3lyp")
+{
+	ofstream out(filename.c_str(), ios::out);
+	out << "# ================================================================" << endl;
+	out << "# # NWChem input file made by LiTao for Molecule Recognization" << endl;
+	out << "# ================================================================" << endl << endl;
+	out << "charge 0" << endl << endl;
+	out << "geometry" << endl;
+	for (unsigned int i = 0; i != a.number; i++)
+	{
+		out << " " << a.name[i];
+		for (int j = 0; j != 3; j++)
+		{
+			out << " " << fixed << setprecision(7) << a.corr[i][j];
+		}
+		out << endl;
+	}
+	for (unsigned int i = 0; i != b.number; i++)
+	{
+		out << " " << b.name[i];
+		for (int j = 0; j != 3; j++)
+		{
+			out << " " << fixed << setprecision(7) << b.corr[i][j];
+		}
+		out << endl;
+	}
+	out << "end" << endl << endl;
+	out << "basis" << endl;
+	out << " * library " << basis << endl;
+	out << "end" << endl << endl;
+	out << "dft" << endl;
+	out << "  xc " << functional << endl;
+	out << "  mult 1" << endl;
+	out << "end" << endl << endl;
+	out << "task dft energy" << endl;
+	out.close();
+}
 void Molecule::ToG09FileDFT(string &filename, string basis , string functional)
 {
 	ofstream out((filename + ".gjf").c_str(), ios::out);

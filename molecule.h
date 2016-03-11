@@ -50,6 +50,8 @@ public:
 	friend void ToXYZfile(const Molecule &a, const Molecule &b, string &filename, string other_info = "  Have a good day!");
 	void ToNWchemFileHF(const string filename, const string basis = "6-31G");
 	friend void ToNWchemFileHF(const Molecule &a, const Molecule &b, string &filename, const string basis = "6-31G");
+	void ToNWchemFileDFT(const string filename, const string basis = "6-31G", const string functional="b3lyp");
+	friend void ToNWchemFileDFT(const Molecule &a, const Molecule &b, string &filename, const string basis = "6-31G", const string functional = "b3lyp");
 	void ToG09FileDFT(string &filename, string basis = "6-31g", string functional = "b3lyp");
 	friend void ToG09FileDFT(Molecule &a, Molecule &b, string &filename, string basis = "6-31g", string functional = "b3lyp");
 	void ReadFromGJF(string &filename, int atomNum);

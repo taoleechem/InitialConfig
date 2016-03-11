@@ -27,8 +27,8 @@ double G09energy(Molecule a, string basis = "6-31g", string functional = "b3lyp"
 #else
 #ifdef _NWCHEM_
 	string filename("DATA/NW.nw");
-	a.ToNWchemFileHF(filename,basis);
-	//Use shell script to solve the scf energy
+	a.ToNWchemFileDFT(filename,basis,functional);
+	//Use shell script to solve the dft energy
 	double total_energy = 0;
 	system("./NW_perform.sh");
 	total_energy = ReadFile("DATA/temp.txt");
@@ -56,8 +56,8 @@ double G09energy(Molecule a, Molecule b, string basis = "6-31g", string function
 #else
 #ifdef _NWCHEM_
 	string filename("DATA/NW.nw");
-	ToNWchemFileHF(a, b, filename, basis);
-	//Use shell script to solve the scf energy
+	ToNWchemFileDFT(a, b, filename, basis,functional);
+	//Use shell script to solve the dft energy
 	double total_energy = 0;
 	system("./NW_perform.sh");
 	total_energy = ReadFile("DATA/temp.txt");
