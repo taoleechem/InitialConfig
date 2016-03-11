@@ -3,7 +3,7 @@
 #include <time.h>
 #define _NWCHEM_
 //#define _GAUSSIAN_
-double ReadFile(string Tempfilename)
+static double ReadFile(string Tempfilename)
 {
 	ifstream readfile(Tempfilename.c_str());
 	if (!readfile)
@@ -16,7 +16,7 @@ double ReadFile(string Tempfilename)
 	readfile.close();
 	return num;
 }
-double G09energy(Molecule a, string basis = "6-31g", string functional = "b3lyp")
+static double G09energy(Molecule a, string basis = "6-31g", string functional = "b3lyp")
 {
 #ifdef _WIN32
 	clock_t now = clock();
@@ -45,7 +45,7 @@ double G09energy(Molecule a, string basis = "6-31g", string functional = "b3lyp"
 #endif
 
 }
-double G09energy(Molecule a, Molecule b, string basis = "6-31g", string functional = "b3lyp")
+static double G09energy(Molecule a, Molecule b, string basis = "6-31g", string functional = "b3lyp")
 {
 #ifdef _WIN32
 	clock_t now = clock();
@@ -74,22 +74,20 @@ double G09energy(Molecule a, Molecule b, string basis = "6-31g", string function
 #endif
 }
 
-void GenerateFunction()
+static void GenerateFunction(int matrix[][2],int index, int matrix2[][2],int index2, const int OutPutNumber,const string xyz_filename1,const string xyz_filename2)
 {
-	int matrix[3][2] = { { 0,1 },{ 2,4 },{ 5,6 } };
-	int index = 3;
-	int matrix2[2][2] = { { 0,2 },{ 3,3 } };
-	int index2 = 2;
 	const double RotPrecision = 50;
 	const double B1_default_value = 3.00;
 	const int EachPairSaveNumber = 6;
         const int MaxRotTimes=EachPairSaveNumber*10;
-	const int OutPutNumber = 50;
 	const double RMSD_Precision = 0.35;
 	Fragments FA, FB;
-	FA.ReadFromXYZfile("InitiConfig/ch2choh_1.xyz", index, matrix);
-	FB.ReadFromXYZfile("InitiConfig/ch2o.xyz", index2, matrix2);
-
+	FA.ReadFromXYZfile(xyz_filename1, index, matrix);
+	FB.ReadFromXYZfile(xyz_filename2, index2, matrix2);
+	cout << "Configuration of Molecule A:" << endl;
+	cout << FA<<endl;
+	cout << "Configuration of Molecule B:" << endl;
+	cout << FB<<endl;
 	const double RestEnergies = G09energy(FA.TotalFragments()) + G09energy(FB.TotalFragments());
 	vector<DoubleMolecule> SaveSuitableCofigs;
 
@@ -189,9 +187,68 @@ void GenerateFunction()
 		SaveSuitableCofigs[i].ToXYZ("SaveConfigs/" + X_ToStr<int>(i) + ".xyz");
 }
 
-void Do_GenerateFunction_Program()
+static void GetGroupDevideInfoFromFile(const string filename,int con[][2], int label)
 {
-	;
+	ifstream infile(filename.c_str());
+	if (!cout)
+	{
+		cerr << "Error to open " << filename << " to get the geometry info" << endl;
+		exit(1);
+	}
+	string temp;
+	for (int i = 0; i != label; i++)
+	{
+		infile >> con[i][0] >> con[i][1];
+		getline(infile, temp);
+	}
+	infile.close();
+}
+
+void Do_GenerateFunction_Program_FromFile(string filename)
+{
+	
+	ifstream infile(filename.c_str());
+	if (!cout)
+	{
+		cerr << "Error to open " << filename << " to get the geometry info" << endl;
+		exit(1);
+	}
+	string temp;
+	getline(infile, temp);
+	string xyzfile1, xyzfile2;
+	infile >> xyzfile1;
+	getline(infile, temp);
+	infile >> xyzfile2;
+	getline(infile, temp);
+	cout << "Read molecule A from " << xyzfile1 << ", read molecule B from " << xyzfile2 << endl;
+	int index1, index2;
+	infile >> index1;
+	getline(infile, temp);
+	infile >> index2;
+	getline(infile, temp);
+	string groupdevide1, groupdevide2;
+	infile >> groupdevide1;
+	getline(infile, temp);
+	infile >> groupdevide2;
+	getline(infile, temp);
+	int con1[MaxAtom][2], con2[MaxAtom][2];
+	GetGroupDevideInfoFromFile(groupdevide1, con1, index1);
+	GetGroupDevideInfoFromFile(groupdevide2, con2, index2);
+	cout << "Molecule A Devide Group Method:" << endl;
+	for (int i = 0; i != index1; i++)
+	{
+		cout << con1[i][0] << "\t" << con1[i][1] << endl;
+	}
+	cout << "Molecule B Devide Group Method:" << endl;
+	for (int i = 0; i != index2; i++)
+	{
+		cout << con2[i][0] << "\t" << con2[i][1] << endl;
+	}
+	int OutputNum;
+	infile >> OutputNum;
+	cout << "Generate Max = " << OutputNum << " configurations to ./SaveConfigs" << endl;
+	GenerateFunction(con1, index1, con2, index2, OutputNum, xyzfile1, xyzfile2);
+	infile.close();
 }
 
 

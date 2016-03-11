@@ -1,9 +1,8 @@
 //This is task file (this line is necessory in task file as a function of explanation)
-water.arc  		//arc filename where the program read from
-result.txt 		//save filename, this program will output three files, *, *_near.arc, *_in.arc.
-108	3		//number of whole solute atoms, number of each solvent atoms(eg. H2O --> 3)
-1	-1	-1	//this represents the direction you want to expand your box to 8 boxes.(eg. 1, -1, -1) If doesn't need expand, input 0 0 0
-8.0			//this is the radius of the ball from the mass center of solute molecule
-3.5			//this is the length of mass center to margin of the solute molecue.
-0			//0 means output atom name like CT HW, 1 means output standard atom name like C H
-
+InitiConfig/ch2choh_1.xyz
+InitiConfig/ch2o.xyz
+3
+2
+moleculegroup1.txt
+moleculegroup2.txt
+50
