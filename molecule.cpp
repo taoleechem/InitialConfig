@@ -799,6 +799,25 @@ void Molecule::PerformOnePointRotToXMinus(Eigen::Vector3d point)
 		corr[i][2] = singleAtom(2);
 	}
 }
+void Molecule::PerformOnePointRotToXPlus(Eigen::Vector3d point)
+{
+	double a = point(0), b = point(1), c = point(2);
+	double alpha = atan2(c, b);
+	double beta = atan2(sqrt(b*b + c*c), a);
+	Eigen::Vector3d e_x(-1, 0, 0);
+	Eigen::Vector3d e_z(0, 0, -1);
+	Eigen::AngleAxis<double> rot1(alpha, e_x);
+	Eigen::AngleAxis<double> rot2(beta, e_z);
+	Eigen::Vector3d singleAtom;
+	for (int i = 0; i != number; i++)
+	{
+		singleAtom << corr[i][0], corr[i][1], corr[i][2];
+		singleAtom = rot2*(rot1*singleAtom);
+		corr[i][0] = singleAtom(0);
+		corr[i][1] = singleAtom(1);
+		corr[i][2] = singleAtom(2);
+	}
+}
 Eigen::Matrix3d Molecule::EulerRot(double &a1, double &a2, double &a3)
 {
 	Eigen::Matrix3d m;
@@ -1137,6 +1156,11 @@ void Fragments::PerformOnePointRotToXMinus(Eigen::Vector3d point)
 {
 	for (int i = 0; i != frag_number; i++)
 		frags[i].PerformOnePointRotToXMinus(point);
+}
+void Fragments::PerformOnePointRotToXPlus(Eigen::Vector3d point)
+{
+	for (int i = 0; i != frag_number; i++)
+		frags[i].PerformOnePointRotToXPlus(point);
 }
 
 

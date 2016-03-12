@@ -18,14 +18,19 @@ void FunctionAdvisor()
 		Do_ReadFromWholeTinkerArc_FromTxt();
 }
 
+
 int main(int argc, char* argv[])
 {
-	if(argc==1)
-		FunctionAdvisor();
-	else if (argc == 2)
-	{
-		Do_GenerateFunction_Program_FromFile(X_ToStr<char*>(argv[1]));
-	}
-	system("PAUSE");
-	return 0;
+if(argc==1)
+FunctionAdvisor();
+else if (argc == 2)
+{
+Do_GenerateFunction_Program_FromFile(X_ToStr<char*>(argv[1]));
 }
+system("PAUSE");
+return 0;
+}
+
+
+
+

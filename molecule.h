@@ -12,8 +12,14 @@
 #include <cmath>
 #include <time.h>
 using namespace std;
-const int MaxAtom = 200;
+const int MaxAtom = 50;
+const int MAXFRAGMENT = 8;
 const double PI = 3.1415926;
+const double HARTREE = 4.359744e-18;
+const double R_BOLTZMAN = 8.314;
+const double AVOGADRO_CONST = 6.023e23;
+const double K_B_BOLTZMAN = 1.38037e+23;
+const double ROOM_TEMPERATURE = 300;
 
 template <class T> string X_ToStr(T tmp)
 {
@@ -78,6 +84,7 @@ public:
 	void PerformZTrans(const double &deltaZ);
 	void PerformAxisRot(Eigen::Vector3d axis, double angle_radian);
 	void PerformOnePointRotToXMinus(Eigen::Vector3d point);
+	void PerformOnePointRotToXPlus(Eigen::Vector3d point);
 	Eigen::Matrix3d EulerRot(double &a1, double &a2, double &a3);
 	void PerformRandomRotEuler(Eigen::Vector3d Point, const double &Precision_degree);
 	void MCtoOrigin();
@@ -135,6 +142,7 @@ public:
 	void PerformZTrans(const double &deltaZ);
 	void PerformAxisRot(Eigen::Vector3d axis, double angle_radian);
 	void PerformOnePointRotToXMinus(Eigen::Vector3d point);
+	void PerformOnePointRotToXPlus(Eigen::Vector3d point);
 };
 class SolventCube
 {

@@ -21,7 +21,7 @@ static double G09energy(Molecule a, string basis = "6-31g", string functional = 
 #ifdef _WIN32
 	clock_t now = clock();
 	srand(now);
-	double x=(rand() % 1000 + 1);
+	double x=(rand() % 1000 + 1)/50000;
 	return -1*abs(x);
 #else
 #ifdef _NWCHEM_
@@ -50,7 +50,7 @@ static double G09energy(Molecule a, Molecule b, string basis = "6-31g", string f
 #ifdef _WIN32
 	clock_t now = clock();
 	srand(now);
-	double x= (rand() % 1000 + 1);
+	double x= (rand() % 1000 + 1)/50000;
 	return -1 * abs(x);
 #else
 #ifdef _NWCHEM_
@@ -74,20 +74,20 @@ static double G09energy(Molecule a, Molecule b, string basis = "6-31g", string f
 #endif
 }
 
-static void GenerateFunction(int matrix[][2],int index, int matrix2[][2],int index2, const int OutPutNumber,const string xyz_filename1,const string xyz_filename2)
+static void GenerateFunction(int matrix[][2], int index, int matrix2[][2], int index2, const int OutPutNumber, const string xyz_filename1, const string xyz_filename2)
 {
 	const double RotPrecision = 50;
 	const double B1_default_value = 3.00;
 	const int EachPairSaveNumber = 6;
-        const int MaxRotTimes=EachPairSaveNumber*10;
+	const int MaxRotTimes = EachPairSaveNumber * 10;
 	const double RMSD_Precision = 0.35;
 	Fragments FA, FB;
 	FA.ReadFromXYZfile(xyz_filename1, index, matrix);
 	FB.ReadFromXYZfile(xyz_filename2, index2, matrix2);
 	cout << "Configuration of Molecule A:" << endl;
-	cout << FA<<endl;
+	cout << FA << endl;
 	cout << "Configuration of Molecule B:" << endl;
-	cout << FB<<endl;
+	cout << FB << endl;
 	const double RestEnergies = G09energy(FA.TotalFragments()) + G09energy(FB.TotalFragments());
 	vector<DoubleMolecule> SaveSuitableCofigs;
 
@@ -145,12 +145,187 @@ static void GenerateFunction(int matrix[][2],int index, int matrix2[][2],int ind
 			int output_count = 0;
 			for (int ii = 0; output_count < EachPairSaveNumber&&ii<MaxRotTimes; ii++)
 			{
+				int total_size = SaveSuitableCofigs.size();
+				//initilize SaveSuitableConfigs
+				if (total_size == 0)
+				{
+					SaveSuitableCofigs.push_back(TempConfigs[ii]);
+					output_count += 1;
+				}
+				int jj = 0;
+				for (jj = 0; jj < total_size; jj++)
+				{
+					double temp_x = RMSD(SaveSuitableCofigs[jj], TempConfigs[ii]);
+					if (abs(temp_x)< RMSD_Precision)
+						break;
+				}
+				if (jj == total_size)
+				{
+					SaveSuitableCofigs.push_back(TempConfigs[ii]);
+					output_count += 1;
+				}
+			}
+		}
+	}
+
+	//sort SaveSuitableConfigs
+	int total = SaveSuitableCofigs.size();
+	for (int i = 0; i < total - 1; i++)
+		for (int j = i + 1; j < total; j++)
+		{
+			if (SaveSuitableCofigs[i] > SaveSuitableCofigs[j])
+			{
+				DoubleMolecule temp;
+				temp = SaveSuitableCofigs[i];
+				SaveSuitableCofigs[i] = SaveSuitableCofigs[j];
+				SaveSuitableCofigs[j] = temp;
+			}
+		}
+	//output some configs
+	cout << "Here output " << ((total > OutPutNumber) ? OutPutNumber : total) << " .xyz files to ./SaveConfigs/ as the final result" << endl;
+	for (int i = 0; i < SaveSuitableCofigs.size() && i < OutPutNumber; i++)
+		SaveSuitableCofigs[i].ToXYZ("SaveConfigs/" + X_ToStr<int>(i) + ".xyz");
+}
+
+static void GenerateFunction2(int matrix[][2],int index, int matrix2[][2],int index2, const int OutPutNumber,const string xyz_filename1,const string xyz_filename2)
+{
+	cout << "Enter Calculating..." << endl;
+	const double RotPrecision = 50;
+	const double B1_default_value = 3.00;
+	const double RMSD_Precision = 0.35;
+	//for each pair config(ij[k]), rot * times
+	const int EachSaveConfigRotTimes = 8;
+	Fragments FA, FB;
+	FA.ReadFromXYZfile(xyz_filename1, index, matrix);
+	FB.ReadFromXYZfile(xyz_filename2, index2, matrix2);
+	cout << "Configuration of Molecule A:" << endl;
+	cout << FA << endl;
+	cout << "Configuration of Molecule B:" << endl;
+	cout << FB << endl;
+	const double RestEnergies = G09energy(FA.TotalFragments()) + G09energy(FB.TotalFragments());
+	/*
+	//We need to find the sepcific EachPairSaveNumber(i,j) and MaxRotTimes(i,j) for each specific group combination according to partition function
+	int MaxRotTimes[3][3];
+	int EachPairSaveNumber[3][3];
+	int PartitionFunctionNumber[3][3];
+	//try and to find partition function
+	double potential[3][3];//have no unit
+	double total_partition = 0;
+	for (int i = 0; i != FA.FragNumbers(); i++, ++FA)
+	{
+	FB.IndexToZero();
+	for (int j = 0; j != FB.FragNumbers(); j++, ++FB)
+	{
+	Eigen::Vector3d MC_A1 = FA.ThisFragment().MassCenter();
+	FA.PerformTrans(-1 * MC_A1);
+	Eigen::Vector3d MC_A2 = FA.OtherFragments().MassCenter();
+	FA.PerformOnePointRotToXMinus(MC_A2);//A this part at O, other part at x-
+	Eigen::Vector3d MC_B1 = FB.ThisFragment().MassCenter();
+	FB.PerformTrans(-1 * MC_B1);
+	Eigen::Vector3d MC_B2 = FB.OtherFragments().MassCenter();
+	FB.PerformOnePointRotToXPlus(MC_B2);//B this part at O, other part at x+
+	Eigen::Vector3d Default_B1;
+	Default_B1 << B1_default_value, 0, 0;
+	FB.PerformTrans(Default_B1);//B move at direction(1,0,0) to 3.00
+	Molecule A = FA.TotalFragments();
+	Molecule B = FB.TotalFragments();
+	MakeAtomsSuitableDistanceMoveB(A, B, B1_default_value);
+	double  potential_1 = G09energy(A, B) - RestEnergies;//calculate E1
+	Eigen::Vector3d e_x;
+	e_x << 1, 0, 0;
+	B.PerformAxisRot(e_x,PI / 2);
+	double  potential_2 = G09energy(A, B) - RestEnergies;//calculate E2
+	potential[i][j] = (potential_1 + potential_2) / 2*HARTREE/K_B_BOLTZMAN/ROOM_TEMPERATURE;
+	total_partition += exp(-1 * potential[i][j]);
+	}
+	}
+	//transfer potential matrix --> partition function matrix
+
+	for (int i = 0; i != FA.FragNumbers(); i++)
+	for (int j = 0; j != FB.FragNumbers(); j++)
+	{
+	PartitionFunctionNumber[i][j] = OutPutNumber*exp(-1 * potential[i][j]) / total_partition;
+	if (PartitionFunctionNumber[i][j] > 2)
+	EachPairSaveNumber[i][j] = PartitionFunctionNumber[i][j];
+	else
+	EachPairSaveNumber[i][j] = 2;
+	MaxRotTimes[i][j] = EachPairSaveNumber[i][j] * EachSaveConfigRotTimes;
+	}
+	*/
+	
+	
+	const int EachPairSaveNumber= 3;
+	const int MaxRotTimes = 10* EachPairSaveNumber;
+
+	//Begin operation 
+	vector<DoubleMolecule> SaveSuitableCofigs;
+	FA.IndexToZero();
+	for (int i = 0; i != FA.FragNumbers(); i++, ++FA)
+	{
+		FB.IndexToZero();
+		for (int j = 0; j != FB.FragNumbers(); j++, ++FB)
+		{
+			cout << "Do calculate of " << FA.ThisFragment().MoleculeName() << " No." << i << ", and " << FB.ThisFragment().MoleculeName() << " No." << j << endl;
+			//Molecule A1 = FA.ThisFragment(); Molecule A2 = FA.OtherFragments(); Molecule B1 = FB.ThisFragment(); Molecule B2 = FB.OtherFragments();
+			//translate A1-MC to origin
+			Eigen::Vector3d MC_A1 = FA.ThisFragment().MassCenter();
+			FA.PerformTrans(-1 * MC_A1);
+			//keep A1-MC to origin, put A2-MC to x- axis
+			Eigen::Vector3d MC_A2 = FA.OtherFragments().MassCenter();
+			FA.PerformOnePointRotToXMinus(MC_A2);
+			//translate B1-MC to x+ axis(default distance is 3.00), B2 at random position
+			Eigen::Vector3d Default_B1;
+			Default_B1 << B1_default_value, 0, 0;//3.0, 0, 0
+			Eigen::Vector3d MC_B1 = FB.ThisFragment().MassCenter();
+			FB.PerformTrans(-1 * MC_B1 + Default_B1);
+			//rot B at point B1_MC randomly
+			Molecule A = FA.TotalFragments();
+			Molecule B = FB.TotalFragments();
+			MC_A1 = FA.ThisFragment().MassCenter();
+			MC_B1 = FB.ThisFragment().MassCenter();
+			vector<DoubleMolecule> TempConfigs;
+			TempConfigs.clear();
+			for (int k = 0; k != MaxRotTimes; k++)
+			{
+				//We should  rot A at the same time to make sure all suitable configurations happen!
+				A.PerformRandomRotEuler(MC_A1, RotPrecision*1.3);
+				B.PerformRandomRotEuler(MC_B1, RotPrecision);
+				//Here need to adjust B to a suitable position that the closest distance between atoms of A and B is 3.0
+				MakeAtomsSuitableDistanceMoveB(A, B, B1_default_value);
+				double  potential = G09energy(A, B) - RestEnergies;
+				//cout << potential << "\t";
+				DoubleMolecule temp_save;
+				temp_save.Set(A, B, potential);
+				cout << "Generate No."<<k<<" configuration: " << endl;
+				temp_save.output();
+				TempConfigs.push_back(temp_save);
+			}
+			//Sort configurations 
+			DoubleMolecule temp(TempConfigs[0]);
+			for (int ii = 0; ii != MaxRotTimes - 1; ii++)
+				for (int jj = i + 1; jj != MaxRotTimes; jj++)
+				{
+					if (TempConfigs[ii].Energy() > TempConfigs[jj].Energy())
+					{
+						temp = TempConfigs[ii];
+						TempConfigs[ii] = TempConfigs[jj];
+						TempConfigs[jj] = temp;
+					}
+				}
+			cout << "Save " << EachPairSaveNumber << " least energy configuration:" << endl;
+			//Save Least Energy 5 configs and avoid rmsd similar one.
+			int output_count = 0;
+			for (int ii = 0; output_count < EachPairSaveNumber&&ii<MaxRotTimes; ii++)
+			{
 					int total_size = SaveSuitableCofigs.size();
 					//initilize SaveSuitableConfigs
 					if (total_size == 0)
 					{
 						SaveSuitableCofigs.push_back(TempConfigs[ii]);
 						output_count += 1;
+						//output this one to ./SaveConfigs/temp/ dir
+						TempConfigs[ii].ToXYZ("SaveConfigs/temp/" + X_ToStr<int>(i) + "_" + X_ToStr<int>(j) + "_" + X_ToStr<int>(output_count) + ".xyz");
+						TempConfigs[ii].output();
 					}
 					int jj = 0;
 					for (jj = 0; jj < total_size; jj++)
@@ -159,10 +334,14 @@ static void GenerateFunction(int matrix[][2],int index, int matrix2[][2],int ind
 						if (abs(temp_x)< RMSD_Precision)
 							break;
 					}
+					//if this config is different from other, saves
 					if (jj == total_size)
 					{
 						SaveSuitableCofigs.push_back(TempConfigs[ii]);
 						output_count += 1;
+						//output this one to ./SaveConfigs/temp/ dir
+						TempConfigs[ii].ToXYZ("SaveConfigs/temp/" + X_ToStr<int>(i) + "_" + X_ToStr<int>(j) + "_" + X_ToStr<int>(output_count) + ".xyz");
+						TempConfigs[ii].output();
 					}
 			}
 		}
@@ -231,7 +410,7 @@ void Do_GenerateFunction_Program_FromFile(string filename)
 	getline(infile, temp);
 	infile >> groupdevide2;
 	getline(infile, temp);
-	int con1[MaxAtom][2], con2[MaxAtom][2];
+	int con1[MAXFRAGMENT][2], con2[MAXFRAGMENT][2];
 	GetGroupDevideInfoFromFile(groupdevide1, con1, index1);
 	GetGroupDevideInfoFromFile(groupdevide2, con2, index2);
 	cout << "Molecule A Devide Group Method:" << endl;
