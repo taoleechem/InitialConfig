@@ -13,12 +13,12 @@
 #include <time.h>
 using namespace std;
 const int MaxAtom = 50;
-const int MAXFRAGMENT = 8;
+const int MAXFRAGMENT = 10;
 const double PI = 3.1415926;
 const double HARTREE = 4.359744e-18;
 const double R_BOLTZMAN = 8.314;
 const double AVOGADRO_CONST = 6.023e23;
-const double K_B_BOLTZMAN = 1.38037e+23;
+const double K_B_BOLTZMAN = 1.38037e-23;
 const double ROOM_TEMPERATURE = 300;
 
 template <class T> string X_ToStr(T tmp)

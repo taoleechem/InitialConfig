@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd './DATA/'
+cd /home/learner/InitialConfig/DATA/
 nwchem NW.nw >& NW.out
 wait
-grep -i 'DTF energy' <NW.out |awk '{print $5}' >temp.txt
+grep -i 'Total DFT energy' <NW.out |awk '{print $5}' >temp.txt
