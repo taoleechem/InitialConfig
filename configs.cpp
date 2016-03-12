@@ -1,8 +1,8 @@
 #include "configs.h"
 #include "molecule.h"
 #include <time.h>
-#define _NWCHEM_
-//#define _GAUSSIAN_
+//#define _NWCHEM_
+#define _GAUSSIAN_
 static double ReadFile(string Tempfilename)
 {
 	ifstream readfile(Tempfilename.c_str());
