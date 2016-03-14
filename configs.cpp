@@ -1,8 +1,8 @@
 #include "configs.h"
 #include "molecule.h"
 #include <time.h>
-#define _NWCHEM_
-//#define _GAUSSIAN_
+//#define _NWCHEM_
+#define _GAUSSIAN_
 static double RandomNumber(double MaxValue)
 {
 	clock_t now = clock();
@@ -383,6 +383,15 @@ static void GenerateFunction2(int matrix[][2],int index, int matrix2[][2],int in
 	cout << "#Here output " << ((total > OutPutNumber) ? OutPutNumber : total) << " .xyz files to ./SaveConfigs/ as the final result" << endl;
 	for (int i = 0; i < SaveSuitableCofigs.size() && i < OutPutNumber; i++)
 		SaveSuitableCofigs[i].ToXYZ("SaveConfigs/" + X_ToStr<int>(i) + ".xyz");
+        
+        //combine these .xyz files to one .xyz file 
+        int total_file_num;
+        if(total>OutPutNumber)
+            total_file_num=OutPutNumber;
+        else 
+            total_file_num=total;
+        AlignEachXYZToStandardForm("SaveConfigs", total_file_num, FA.TotalFragments().Number());
+        cout<<"#Have generate an analysis .xyz file"<<endl;
 }
 
 static void GetGroupDevideInfoFromFile(const string filename,int con[][2], int label)
