@@ -3,6 +3,13 @@
 #include <time.h>
 #define _NWCHEM_
 //#define _GAUSSIAN_
+static double RandomNumber(double MaxValue)
+{
+	clock_t now = clock();
+	srand(now);
+	double x = (rand() % (int)((MaxValue*1000)) + 1);
+	return abs(x)/1000;
+}
 static double ReadFile(string Tempfilename)
 {
 	ifstream readfile(Tempfilename.c_str());
@@ -190,7 +197,7 @@ static void GenerateFunction(int matrix[][2], int index, int matrix2[][2], int i
 static void GenerateFunction2(int matrix[][2],int index, int matrix2[][2],int index2, const int OutPutNumber,const string xyz_filename1,const string xyz_filename2)
 {
 	cout << "Enter Calculating..." << endl;
-	const double RotPrecision = 50;
+	const double RotPrecision = 45;
 	const double B1_default_value = 3.00;
 	const double RMSD_Precision = 0.35;
 	//for each pair config(ij[k]), rot * times
@@ -200,7 +207,7 @@ static void GenerateFunction2(int matrix[][2],int index, int matrix2[][2],int in
 	FB.ReadFromXYZfile(xyz_filename2, index2, matrix2);
 	cout << "Configuration of Molecule A:" << endl;
 	cout << FA << endl;
-	cout << "Configuration of Molecule B:" << endl;
+	cout << "Configuration of Molecule B:" << endl<<endl;
 	cout << FB << endl;
 	const double RestEnergies = G09energy(FA.TotalFragments()) + G09energy(FB.TotalFragments());
         cout<<"At rest, energy of 2 molecules is: "<<RestEnergies<<endl;
@@ -231,13 +238,21 @@ static void GenerateFunction2(int matrix[][2],int index, int matrix2[][2],int in
 			Molecule A = FA.TotalFragments();
 			Molecule B = FB.TotalFragments();
 			MakeAtomsSuitableDistanceMoveB(A, B, B1_default_value);
-			double  potential_1 = G09energy(A, B) - RestEnergies;//calculate E1
 			Eigen::Vector3d e_x;
 			e_x << 1, 0, 0;
-			B.PerformAxisRot(e_x,PI / 2);
-			double  potential_2 = G09energy(A, B) - RestEnergies;//calculate E2
-			potential[i][j] = (potential_1 + potential_2) / 2*HARTREE/K_B_BOLTZMAN/ROOM_TEMPERATURE;
-            cout<<X_ToStr<int>(i)<<","<<X_ToStr<int>(j)<<" group-combination has potential: "<< (potential_1 + potential_2) / 2<<endl;
+			double temp_potential[EachSaveConfigRotTimes];
+			potential[i][j] = 0;
+			for (int k = 0; k < EachSaveConfigRotTimes; k++)
+			{
+				Molecule tA = A;
+				Molecule tB = B;
+				tA.PerformAxisRot(e_x, RandomNumber(2 * PI));
+				tB.PerformAxisRot(e_x, RandomNumber(2 * PI));
+				temp_potential[k] = (G09energy(tA, tB) - RestEnergies)*HARTREE / K_B_BOLTZMAN / ROOM_TEMPERATURE;
+				potential[i][j] += temp_potential[k];
+			}
+			potential[i][j] = potential[i][j] / EachSaveConfigRotTimes;
+			cout << X_ToStr<int>(i) << "," << X_ToStr<int>(j) << " group-combination has potential: " << potential[i][j] <<"(unitless, V*Hartree/K_b/T)"<< endl << endl;
 			total_partition += exp(-1 * potential[i][j]);
 		}
 	}
@@ -259,6 +274,7 @@ static void GenerateFunction2(int matrix[][2],int index, int matrix2[][2],int in
         }
         cout<<endl;
     }
+	cout << endl << endl;
 
 	//Begin operation 
 	vector<DoubleMolecule> SaveSuitableCofigs;
@@ -291,7 +307,7 @@ static void GenerateFunction2(int matrix[][2],int index, int matrix2[][2],int in
 			for (int k = 0; k != MaxRotTimes[i][j]; k++)
 			{
 				//We should  rot A at the same time to make sure all suitable configurations happen!
-				A.PerformRandomRotEuler(MC_A1, RotPrecision*0.8);
+				A.PerformRandomRotEuler(MC_A1, RotPrecision*1.15);
 				B.PerformRandomRotEuler(MC_B1, RotPrecision);
 				//Here need to adjust B to a suitable position that the closest distance between atoms of A and B is 3.0
 				MakeAtomsSuitableDistanceMoveB(A, B, B1_default_value);
@@ -299,8 +315,7 @@ static void GenerateFunction2(int matrix[][2],int index, int matrix2[][2],int in
 				//cout << potential << "\t";
 				DoubleMolecule temp_save;
 				temp_save.Set(A, B, potential);
-				cout << "Generate No."<<k<<" configuration: " << endl;
-				temp_save.output();
+				cout << "Generate No."<<k<<" configuration with energy "<< temp_save.Energy() << endl;
 				TempConfigs.push_back(temp_save);
 			}
 			//Sort configurations 
@@ -315,7 +330,7 @@ static void GenerateFunction2(int matrix[][2],int index, int matrix2[][2],int in
 						TempConfigs[jj] = temp;
 					}
 				}
-			cout << "Save " << EachPairSaveNumber << " least energy configuration:" << endl;
+			cout << "Save " << EachPairSaveNumber[i][j] << " least energy configuration:" << endl;
 			//Save Least Energy 5 configs and avoid rmsd similar one.
 			int output_count = 0;
 			for (int ii = 0; output_count < EachPairSaveNumber[i][j]&&ii<MaxRotTimes[i][j]; ii++)
@@ -347,6 +362,7 @@ static void GenerateFunction2(int matrix[][2],int index, int matrix2[][2],int in
 						TempConfigs[ii].output();
 					}
 			}
+			cout << endl << endl;
 		}
 	}
 
@@ -364,7 +380,7 @@ static void GenerateFunction2(int matrix[][2],int index, int matrix2[][2],int in
 			}
 		}
 	//output some configs
-	cout << "Here output " << ((total > OutPutNumber) ? OutPutNumber : total) << " .xyz files to ./SaveConfigs/ as the final result" << endl;
+	cout << "#Here output " << ((total > OutPutNumber) ? OutPutNumber : total) << " .xyz files to ./SaveConfigs/ as the final result" << endl;
 	for (int i = 0; i < SaveSuitableCofigs.size() && i < OutPutNumber; i++)
 		SaveSuitableCofigs[i].ToXYZ("SaveConfigs/" + X_ToStr<int>(i) + ".xyz");
 }
