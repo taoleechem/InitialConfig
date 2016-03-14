@@ -5,4 +5,4 @@ InitiConfig/ch3oh.xyz
 2
 InitiConfig/chochclch2nh2
 InitiConfig/ch3oh
-30
+60

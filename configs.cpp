@@ -206,11 +206,11 @@ static void GenerateFunction2(int matrix[][2],int index, int matrix2[][2],int in
         cout<<"At rest, energy of 2 molecules is: "<<RestEnergies<<endl;
 
 	//We need to find the sepcific EachPairSaveNumber(i,j) and MaxRotTimes(i,j) for each specific group combination according to partition function
-	int MaxRotTimes[MAXFRAGMENT][MAXFRAGMENT];
-	int EachPairSaveNumber[MAXFRAGMENT][MAXFRAGMENT];
-	double PartitionFunction[MAXFRAGMENT][MAXFRAGMENT];
+	int MaxRotTimes[MAXFRAGMENT*2][MAXFRAGMENT];
+	int EachPairSaveNumber[MAXFRAGMENT*2][MAXFRAGMENT];
+	double PartitionFunction[MAXFRAGMENT*2][MAXFRAGMENT];
 	//try and to find partition function
-	double potential[MAXFRAGMENT][MAXFRAGMENT];//have no unit
+	double potential[MAXFRAGMENT*2][MAXFRAGMENT];//have no unit
 	double total_partition = 0;
 	for (int i = 0; i != FA.FragNumbers(); i++, ++FA)
 	{

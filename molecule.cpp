@@ -67,16 +67,30 @@ double Molecule::AtomMass(const string &name)
 {
 	if (name == "H")
 		return 1.007825;
+	else if (name=="B")
+		return 10.811;
 	else if (name == "C")
 		return 12.00;
 	else if (name == "N")
 		return 14.003070;
 	else if (name == "O")
 		return 15.994910;
+	else if (name=="F")
+		return 18.998403;
+	else if (name=="P")
+		return 30.973761;
 	else if (name == "S")
 		return 31.972070;
 	else if (name == "Cl")
 		return 34.968850;
+	else if (name=="Br")
+		return 79.904;
+	else if (name=="I")
+		return 126.90447;
+	else if (name =="Fe")
+		return 55.845;
+	else if (name=="Al")
+		return 26.981538;
 	//This part is to deal with the non-standard atom name
 	else if ((name.size() == 2) && (name[1] <= 'Z'&&name[1] >= 'A'))
 	{
