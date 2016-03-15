@@ -1,0 +1,8 @@
+//This is task file (this line is necessory in task file as a function of explanation)
+InitiConfig/ch2chco2Et.xyz
+InitiConfig/c4h5oMe.xyz
+4
+4
+InitiConfig/ch2chco2Et
+InitiConfig/c4h5oMe
+30

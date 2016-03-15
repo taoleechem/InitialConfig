@@ -2,8 +2,8 @@
 #include "molecule.h"
 #include <time.h>
 
-#define _NWCHEM_
-//#define _GAUSSIAN_
+//#define _NWCHEM_
+#define _GAUSSIAN_
 static double RandomNumber(double MaxValue)
 {
 	clock_t now = clock();

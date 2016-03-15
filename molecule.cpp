@@ -91,6 +91,8 @@ double Molecule::AtomMass(const string &name)
 		return 55.845;
 	else if (name=="Al")
 		return 26.981538;
+	else if (name=="Mg")
+		return 24;
 	//This part is to deal with the non-standard atom name
 	else if ((name.size() == 2) && (name[1] <= 'Z'&&name[1] >= 'A'))
 	{
