@@ -1,6 +1,7 @@
 #include "configs.h"
 #include "molecule.h"
 #include <time.h>
+
 //#define _NWCHEM_
 #define _GAUSSIAN_
 static double RandomNumber(double MaxValue)
@@ -254,10 +255,11 @@ static void GenerateFunction2(int matrix[][2],int index, int matrix2[][2],int in
 				potential[i][j] += temp_potential[k];
 			}
 			potential[i][j] = potential[i][j] / EachSaveConfigRotTimes;
-			cout << X_ToStr<int>(i) << "," << X_ToStr<int>(j) << " group-combination has potential: " << potential[i][j] <<"(unitless, V*Hartree/K_b/T)"<< endl << endl;
+			cout << X_ToStr<int>(i) << "," << X_ToStr<int>(j) << " group-combination has potential: " << potential[i][j] <<"(unitless, V*Hartree/K_b/T)"<< endl;
 			total_partition += exp(-1 * potential[i][j]);
 		}
 	}
+    cout<<endl;
 	//transfer potential matrix --> partition function matrix
     cout<<"Here is the partition function of each group-combination pair:"<<endl;
 	for (int i = 0; i != FA.FragNumbers(); i++)
@@ -309,8 +311,8 @@ static void GenerateFunction2(int matrix[][2],int index, int matrix2[][2],int in
 			for (int k = 0; k != MaxRotTimes[i][j]; k++)
 			{
 				//We should  rot A at the same time to make sure all suitable configurations happen!
-                		Molecule tA=A;
-               		 	Molecule tB=B;
+                Molecule tA=A;
+                Molecule tB=B;
 				tA.PerformRandomRotEuler(MC_A1, RotPrecision*1.15);
 				tB.PerformRandomRotEuler(MC_B1, RotPrecision);
 				//Here need to adjust B to a suitable position that the closest distance between atoms of A and B is 3.0
@@ -322,33 +324,35 @@ static void GenerateFunction2(int matrix[][2],int index, int matrix2[][2],int in
 				cout << "Generate No."<<k<<" configuration with energy "<< temp_save.Energy() << endl;
 				TempConfigs.push_back(temp_save);
 			}
+            cout<<"#Before sorting,"<<endl;
+            for(int ii = 0; ii < MaxRotTimes[i][j]; ii++)
+            {
+                cout<<"No."<<ii<<" config has energy "<<TempConfigs[ii].Energy()<<endl;
+            }
 			//Sort configurations 
-			DoubleMolecule temp(TempConfigs[0]);
-			for (int ii = 0; ii < MaxRotTimes[i][j] - 1; ii++)
-				for (int jj = i + 1; jj < MaxRotTimes[i][j]; jj++)
+			for (int i1 = 0; i1 < MaxRotTimes[i][j]; i1++)
+				for (int jj = i1+1; jj < MaxRotTimes[i][j]; jj++)
 				{
-					if (TempConfigs[ii].Energy() > TempConfigs[jj].Energy())
+					if (TempConfigs[jj] < TempConfigs[i1])
 					{
-						temp = TempConfigs[ii];
-						TempConfigs[ii] = TempConfigs[jj];
-						TempConfigs[jj] = temp;
+                        			DoubleMolecule temp_config;
+						temp_config = TempConfigs[jj];
+						TempConfigs[jj] = TempConfigs[i1];
+						TempConfigs[i1] = temp_config;
 					}
 				}
-			cout << "Save " << EachPairSaveNumber[i][j] << " least energy configuration:" << endl;
+
+            cout<<"#After sorting,"<<endl;
+            for(int ii = 0; ii < MaxRotTimes[i][j]; ii++)
+            {
+                cout<<"No."<<ii<<" config has energy "<<TempConfigs[ii].Energy()<<endl;
+            }
 			//Save Least Energy 5 configs and avoid rmsd similar one.
+            cout << "Save " << EachPairSaveNumber[i][j] << " least energy configuration:" << endl;
 			int output_count = 0;
 			for (int ii = 0; output_count < EachPairSaveNumber[i][j]&&ii<MaxRotTimes[i][j]; ii++)
 			{
 					int total_size = SaveSuitableCofigs.size();
-					//initilize SaveSuitableConfigs
-					if (total_size == 0)
-					{
-						SaveSuitableCofigs.push_back(TempConfigs[ii]);
-						output_count += 1;
-						//output this one to ./SaveConfigs/temp/ dir
-						TempConfigs[ii].ToXYZ("SaveConfigs/temp/" + X_ToStr<int>(i) + "_" + X_ToStr<int>(j) + "_" + X_ToStr<int>(output_count) + ".xyz");
-						TempConfigs[ii].output();
-					}
 					int jj = 0;
 					for (jj = 0; jj < total_size; jj++)
 					{
@@ -366,7 +370,7 @@ static void GenerateFunction2(int matrix[][2],int index, int matrix2[][2],int in
 						TempConfigs[ii].output();
 					}
 			}
-			cout << endl << endl;
+			cout <<"-------------------------------------------------" <<endl << endl;
 		}
 	}
 
@@ -386,7 +390,10 @@ static void GenerateFunction2(int matrix[][2],int index, int matrix2[][2],int in
 	//output some configs
 	cout << "#Here output " << ((total > OutPutNumber) ? OutPutNumber : total) << " .xyz files to ./SaveConfigs/ as the final result" << endl;
 	for (int i = 0; i < SaveSuitableCofigs.size() && i < OutPutNumber; i++)
-		SaveSuitableCofigs[i].ToXYZ("SaveConfigs/" + X_ToStr<int>(i) + ".xyz");
+		{
+            SaveSuitableCofigs[i].ToXYZ("SaveConfigs/" + X_ToStr<int>(i) + ".xyz");
+            cout<<"No."<<i<<" least energy energy is: "<<SaveSuitableCofigs[i].Energy()<<endl;
+        }
         
         //combine these .xyz files to one .xyz file 
         int total_file_num;

@@ -1,0 +1,2274 @@
+nohup: ignoring input
+Read molecule A from InitiConfig/ch2choh_1.xyz, read molecule B from InitiConfig/ch2o.xyz
+Molecule A Devide Group Method:
+0	1
+2	4
+5	6
+Molecule B Devide Group Method:
+0	2
+3	3
+Generate Max = 50 configurations to ./SaveConfigs
+Enter Calculating...
+Configuration of Molecule A:
+3 fragments
+2
+standard .xyz file  CH
+C	-2.7678700	2.4048800	0.0099100
+H	-3.1437600	1.3913400	0.0842300
+3
+standard .xyz file  CH2
+C	-1.4758300	2.7277600	0.0753900
+H	-0.7265000	1.9540000	0.2109400
+H	-1.1286900	3.7515100	-0.0021500
+2
+standard .xyz file  HO
+O	-3.7806400	3.3038600	-0.1583900
+H	-3.3984300	4.1963400	-0.2199200
+
+Configuration of Molecule B:
+
+2 fragments
+3
+standard .xyz file  CH2
+C	-3.4014800	2.3109600	0.0000000
+H	-4.4924900	2.3791200	-0.1370500
+H	-3.0028400	1.2930900	0.1370500
+1
+standard .xyz file  O
+O	-2.6800300	3.3005300	0.0000000
+
+At rest, energy of 2 molecules is: -268.2225871
+0,0 group-combination has potential: 0.4297430(unitless, V*Hartree/K_b/T)
+0,1 group-combination has potential: -1.9402654(unitless, V*Hartree/K_b/T)
+1,0 group-combination has potential: 0.2531132(unitless, V*Hartree/K_b/T)
+1,1 group-combination has potential: -1.2779630(unitless, V*Hartree/K_b/T)
+2,0 group-combination has potential: -2.2558787(unitless, V*Hartree/K_b/T)
+2,1 group-combination has potential: 1.9501012(unitless, V*Hartree/K_b/T)
+
+Here is the partition function of each group-combination pair:
+0.0300364	0.3213141	
+0.0358391	0.1656897	
+0.4405537	0.0065670	
+
+
+#Do calculate of CH No.0, and CH2 No.0
+Generate No.0 configuration with energy -0.0011949
+Generate No.1 configuration with energy 0.0001669
+Generate No.2 configuration with energy -0.0017966
+Generate No.3 configuration with energy -0.0007675
+Generate No.4 configuration with energy -0.0011586
+Generate No.5 configuration with energy -0.0022392
+Generate No.6 configuration with energy 0.0010576
+Generate No.7 configuration with energy 0.0002830
+Generate No.8 configuration with energy -0.0033013
+Generate No.9 configuration with energy -0.0023441
+Generate No.10 configuration with energy 0.0007668
+Generate No.11 configuration with energy -0.0006952
+Generate No.12 configuration with energy 0.0002903
+Generate No.13 configuration with energy -0.0006098
+Generate No.14 configuration with energy -0.0011227
+Generate No.15 configuration with energy 0.0001399
+#Before sorting,
+No.0 config has energy -0.0011949
+No.1 config has energy 0.0001669
+No.2 config has energy -0.0017966
+No.3 config has energy -0.0007675
+No.4 config has energy -0.0011586
+No.5 config has energy -0.0022392
+No.6 config has energy 0.0010576
+No.7 config has energy 0.0002830
+No.8 config has energy -0.0033013
+No.9 config has energy -0.0023441
+No.10 config has energy 0.0007668
+No.11 config has energy -0.0006952
+No.12 config has energy 0.0002903
+No.13 config has energy -0.0006098
+No.14 config has energy -0.0011227
+No.15 config has energy 0.0001399
+#After sorting,
+No.0 config has energy -0.0033013
+No.1 config has energy -0.0023441
+No.2 config has energy -0.0022392
+No.3 config has energy -0.0017966
+No.4 config has energy -0.0011949
+No.5 config has energy -0.0011586
+No.6 config has energy -0.0011227
+No.7 config has energy -0.0007675
+No.8 config has energy -0.0006952
+No.9 config has energy -0.0006098
+No.10 config has energy 0.0001399
+No.11 config has energy 0.0001669
+No.12 config has energy 0.0002830
+No.13 config has energy 0.0002903
+No.14 config has energy 0.0007668
+No.15 config has energy 0.0010576
+Save 2 least energy configuration:
+Energy: -0.0033013
+7
+standard .xyz file  C2H4O
+C	-0.0223890	0.0130419	-0.0798531
+H	0.2665821	-0.1552873	0.9507977
+C	-1.1170960	-0.5014245	-0.6409659
+H	-1.7828193	-1.1321155	-0.0599192
+H	-1.3811484	-0.3156353	-1.6755389
+O	0.8726695	0.8146972	-0.7267009
+H	0.5744163	0.9380854	-1.6444216
+4
+standard .xyz file  CH2O
+C	3.9811290	-0.1432589	0.2807925
+H	3.6456682	0.8984316	0.4075924
+H	3.4583942	-0.7187250	-0.4998117
+O	4.8753527	-0.6290697	0.9620346
+
+Energy: -0.0023441
+7
+standard .xyz file  C2H4O
+C	-0.0139821	0.0049877	-0.0826287
+H	0.1664829	-0.0593877	0.9838460
+C	-0.6976356	-0.9032858	-0.7794527
+H	-1.1133850	-1.7734624	-0.2809360
+H	-0.8625371	-0.8124859	-1.8467603
+O	0.5449886	1.1286290	-0.6185158
+H	0.3587360	1.1447263	-1.5732104
+4
+standard .xyz file  CH2O
+C	3.4463402	-0.1150198	0.2055826
+H	3.4110484	0.9852009	0.2503066
+H	3.1482104	-0.5608972	-0.7567416
+O	3.7937592	-0.7968469	1.1616950
+
+-------------------------------------------------
+
+#Do calculate of CH No.0, and O No.1
+Generate No.0 configuration with energy 0.0020040
+Generate No.1 configuration with energy -0.0007272
+Generate No.2 configuration with energy 0.0013926
+Generate No.3 configuration with energy -0.0000584
+Generate No.4 configuration with energy -0.0020260
+Generate No.5 configuration with energy -0.0022318
+Generate No.6 configuration with energy -0.0012758
+Generate No.7 configuration with energy -0.0012195
+Generate No.8 configuration with energy 0.0029481
+Generate No.9 configuration with energy -0.0011015
+Generate No.10 configuration with energy -0.0012363
+Generate No.11 configuration with energy 0.0014094
+Generate No.12 configuration with energy 0.0000450
+Generate No.13 configuration with energy 0.0023887
+Generate No.14 configuration with energy -0.0020943
+Generate No.15 configuration with energy 0.0004922
+Generate No.16 configuration with energy 0.0025892
+Generate No.17 configuration with energy 0.0012085
+Generate No.18 configuration with energy -0.0012294
+Generate No.19 configuration with energy 0.0016455
+Generate No.20 configuration with energy 0.0010712
+Generate No.21 configuration with energy 0.0000798
+Generate No.22 configuration with energy -0.0002419
+Generate No.23 configuration with energy -0.0004638
+Generate No.24 configuration with energy -0.0008492
+Generate No.25 configuration with energy -0.0013609
+Generate No.26 configuration with energy -0.0001910
+Generate No.27 configuration with energy -0.0016783
+Generate No.28 configuration with energy 0.0001460
+Generate No.29 configuration with energy -0.0003074
+Generate No.30 configuration with energy -0.0007167
+Generate No.31 configuration with energy 0.0006376
+Generate No.32 configuration with energy -0.0016649
+Generate No.33 configuration with energy 0.0000567
+Generate No.34 configuration with energy 0.0004002
+Generate No.35 configuration with energy 0.0001427
+Generate No.36 configuration with energy -0.0011101
+Generate No.37 configuration with energy -0.0007573
+Generate No.38 configuration with energy -0.0001379
+Generate No.39 configuration with energy -0.0029116
+Generate No.40 configuration with energy -0.0020204
+Generate No.41 configuration with energy -0.0010676
+Generate No.42 configuration with energy 0.0020003
+Generate No.43 configuration with energy -0.0006854
+Generate No.44 configuration with energy -0.0012177
+Generate No.45 configuration with energy 0.0019546
+Generate No.46 configuration with energy -0.0000081
+Generate No.47 configuration with energy 0.0013180
+Generate No.48 configuration with energy 0.0024299
+Generate No.49 configuration with energy 0.0016203
+Generate No.50 configuration with energy -0.0011174
+Generate No.51 configuration with energy 0.0004306
+Generate No.52 configuration with energy -0.0004475
+Generate No.53 configuration with energy -0.0020303
+Generate No.54 configuration with energy -0.0008406
+Generate No.55 configuration with energy 0.0020127
+Generate No.56 configuration with energy -0.0008001
+Generate No.57 configuration with energy -0.0005176
+Generate No.58 configuration with energy -0.0032053
+Generate No.59 configuration with energy -0.0027055
+Generate No.60 configuration with energy 0.0000676
+Generate No.61 configuration with energy -0.0024439
+Generate No.62 configuration with energy 0.0006255
+Generate No.63 configuration with energy 0.0020537
+Generate No.64 configuration with energy -0.0012283
+Generate No.65 configuration with energy 0.0016639
+Generate No.66 configuration with energy 0.0028840
+Generate No.67 configuration with energy -0.0002163
+Generate No.68 configuration with energy -0.0000210
+Generate No.69 configuration with energy -0.0003982
+Generate No.70 configuration with energy 0.0037725
+Generate No.71 configuration with energy -0.0013222
+Generate No.72 configuration with energy -0.0012109
+Generate No.73 configuration with energy -0.0010748
+Generate No.74 configuration with energy 0.0034055
+Generate No.75 configuration with energy 0.0003483
+Generate No.76 configuration with energy 0.0015047
+Generate No.77 configuration with energy -0.0013646
+Generate No.78 configuration with energy -0.0018272
+Generate No.79 configuration with energy 0.0006206
+Generate No.80 configuration with energy 0.0006019
+Generate No.81 configuration with energy 0.0021539
+Generate No.82 configuration with energy -0.0008843
+Generate No.83 configuration with energy -0.0007961
+Generate No.84 configuration with energy -0.0023916
+Generate No.85 configuration with energy -0.0006108
+Generate No.86 configuration with energy -0.0012801
+Generate No.87 configuration with energy -0.0016209
+Generate No.88 configuration with energy 0.0015107
+Generate No.89 configuration with energy -0.0007157
+Generate No.90 configuration with energy 0.0021778
+Generate No.91 configuration with energy 0.0007218
+Generate No.92 configuration with energy 0.0001462
+Generate No.93 configuration with energy 0.0002808
+Generate No.94 configuration with energy 0.0010830
+Generate No.95 configuration with energy 0.0026997
+Generate No.96 configuration with energy -0.0008831
+Generate No.97 configuration with energy -0.0005333
+Generate No.98 configuration with energy -0.0019132
+Generate No.99 configuration with energy -0.0009860
+Generate No.100 configuration with energy 0.0001828
+Generate No.101 configuration with energy -0.0033065
+Generate No.102 configuration with energy 0.0006097
+Generate No.103 configuration with energy 0.0018915
+Generate No.104 configuration with energy 0.0027151
+Generate No.105 configuration with energy -0.0006411
+Generate No.106 configuration with energy -0.0007958
+Generate No.107 configuration with energy 0.0015987
+Generate No.108 configuration with energy 0.0021552
+Generate No.109 configuration with energy -0.0020943
+Generate No.110 configuration with energy -0.0001086
+Generate No.111 configuration with energy -0.0004681
+Generate No.112 configuration with energy -0.0014759
+Generate No.113 configuration with energy -0.0000570
+Generate No.114 configuration with energy -0.0006198
+Generate No.115 configuration with energy -0.0000269
+Generate No.116 configuration with energy -0.0007744
+Generate No.117 configuration with energy 0.0004818
+Generate No.118 configuration with energy 0.0022407
+Generate No.119 configuration with energy 0.0008542
+Generate No.120 configuration with energy 0.0004952
+Generate No.121 configuration with energy 0.0021083
+Generate No.122 configuration with energy -0.0003034
+Generate No.123 configuration with energy -0.0005543
+Generate No.124 configuration with energy 0.0007931
+Generate No.125 configuration with energy -0.0004795
+Generate No.126 configuration with energy 0.0001829
+Generate No.127 configuration with energy -0.0002291
+#Before sorting,
+No.0 config has energy 0.0020040
+No.1 config has energy -0.0007272
+No.2 config has energy 0.0013926
+No.3 config has energy -0.0000584
+No.4 config has energy -0.0020260
+No.5 config has energy -0.0022318
+No.6 config has energy -0.0012758
+No.7 config has energy -0.0012195
+No.8 config has energy 0.0029481
+No.9 config has energy -0.0011015
+No.10 config has energy -0.0012363
+No.11 config has energy 0.0014094
+No.12 config has energy 0.0000450
+No.13 config has energy 0.0023887
+No.14 config has energy -0.0020943
+No.15 config has energy 0.0004922
+No.16 config has energy 0.0025892
+No.17 config has energy 0.0012085
+No.18 config has energy -0.0012294
+No.19 config has energy 0.0016455
+No.20 config has energy 0.0010712
+No.21 config has energy 0.0000798
+No.22 config has energy -0.0002419
+No.23 config has energy -0.0004638
+No.24 config has energy -0.0008492
+No.25 config has energy -0.0013609
+No.26 config has energy -0.0001910
+No.27 config has energy -0.0016783
+No.28 config has energy 0.0001460
+No.29 config has energy -0.0003074
+No.30 config has energy -0.0007167
+No.31 config has energy 0.0006376
+No.32 config has energy -0.0016649
+No.33 config has energy 0.0000567
+No.34 config has energy 0.0004002
+No.35 config has energy 0.0001427
+No.36 config has energy -0.0011101
+No.37 config has energy -0.0007573
+No.38 config has energy -0.0001379
+No.39 config has energy -0.0029116
+No.40 config has energy -0.0020204
+No.41 config has energy -0.0010676
+No.42 config has energy 0.0020003
+No.43 config has energy -0.0006854
+No.44 config has energy -0.0012177
+No.45 config has energy 0.0019546
+No.46 config has energy -0.0000081
+No.47 config has energy 0.0013180
+No.48 config has energy 0.0024299
+No.49 config has energy 0.0016203
+No.50 config has energy -0.0011174
+No.51 config has energy 0.0004306
+No.52 config has energy -0.0004475
+No.53 config has energy -0.0020303
+No.54 config has energy -0.0008406
+No.55 config has energy 0.0020127
+No.56 config has energy -0.0008001
+No.57 config has energy -0.0005176
+No.58 config has energy -0.0032053
+No.59 config has energy -0.0027055
+No.60 config has energy 0.0000676
+No.61 config has energy -0.0024439
+No.62 config has energy 0.0006255
+No.63 config has energy 0.0020537
+No.64 config has energy -0.0012283
+No.65 config has energy 0.0016639
+No.66 config has energy 0.0028840
+No.67 config has energy -0.0002163
+No.68 config has energy -0.0000210
+No.69 config has energy -0.0003982
+No.70 config has energy 0.0037725
+No.71 config has energy -0.0013222
+No.72 config has energy -0.0012109
+No.73 config has energy -0.0010748
+No.74 config has energy 0.0034055
+No.75 config has energy 0.0003483
+No.76 config has energy 0.0015047
+No.77 config has energy -0.0013646
+No.78 config has energy -0.0018272
+No.79 config has energy 0.0006206
+No.80 config has energy 0.0006019
+No.81 config has energy 0.0021539
+No.82 config has energy -0.0008843
+No.83 config has energy -0.0007961
+No.84 config has energy -0.0023916
+No.85 config has energy -0.0006108
+No.86 config has energy -0.0012801
+No.87 config has energy -0.0016209
+No.88 config has energy 0.0015107
+No.89 config has energy -0.0007157
+No.90 config has energy 0.0021778
+No.91 config has energy 0.0007218
+No.92 config has energy 0.0001462
+No.93 config has energy 0.0002808
+No.94 config has energy 0.0010830
+No.95 config has energy 0.0026997
+No.96 config has energy -0.0008831
+No.97 config has energy -0.0005333
+No.98 config has energy -0.0019132
+No.99 config has energy -0.0009860
+No.100 config has energy 0.0001828
+No.101 config has energy -0.0033065
+No.102 config has energy 0.0006097
+No.103 config has energy 0.0018915
+No.104 config has energy 0.0027151
+No.105 config has energy -0.0006411
+No.106 config has energy -0.0007958
+No.107 config has energy 0.0015987
+No.108 config has energy 0.0021552
+No.109 config has energy -0.0020943
+No.110 config has energy -0.0001086
+No.111 config has energy -0.0004681
+No.112 config has energy -0.0014759
+No.113 config has energy -0.0000570
+No.114 config has energy -0.0006198
+No.115 config has energy -0.0000269
+No.116 config has energy -0.0007744
+No.117 config has energy 0.0004818
+No.118 config has energy 0.0022407
+No.119 config has energy 0.0008542
+No.120 config has energy 0.0004952
+No.121 config has energy 0.0021083
+No.122 config has energy -0.0003034
+No.123 config has energy -0.0005543
+No.124 config has energy 0.0007931
+No.125 config has energy -0.0004795
+No.126 config has energy 0.0001829
+No.127 config has energy -0.0002291
+#After sorting,
+No.0 config has energy -0.0033065
+No.1 config has energy -0.0032053
+No.2 config has energy -0.0029116
+No.3 config has energy -0.0027055
+No.4 config has energy -0.0024439
+No.5 config has energy -0.0023916
+No.6 config has energy -0.0022318
+No.7 config has energy -0.0020943
+No.8 config has energy -0.0020943
+No.9 config has energy -0.0020303
+No.10 config has energy -0.0020260
+No.11 config has energy -0.0020204
+No.12 config has energy -0.0019132
+No.13 config has energy -0.0018272
+No.14 config has energy -0.0016783
+No.15 config has energy -0.0016649
+No.16 config has energy -0.0016209
+No.17 config has energy -0.0014759
+No.18 config has energy -0.0013646
+No.19 config has energy -0.0013609
+No.20 config has energy -0.0013222
+No.21 config has energy -0.0012801
+No.22 config has energy -0.0012758
+No.23 config has energy -0.0012363
+No.24 config has energy -0.0012294
+No.25 config has energy -0.0012283
+No.26 config has energy -0.0012195
+No.27 config has energy -0.0012177
+No.28 config has energy -0.0012109
+No.29 config has energy -0.0011174
+No.30 config has energy -0.0011101
+No.31 config has energy -0.0011015
+No.32 config has energy -0.0010748
+No.33 config has energy -0.0010676
+No.34 config has energy -0.0009860
+No.35 config has energy -0.0008843
+No.36 config has energy -0.0008831
+No.37 config has energy -0.0008492
+No.38 config has energy -0.0008406
+No.39 config has energy -0.0008001
+No.40 config has energy -0.0007961
+No.41 config has energy -0.0007958
+No.42 config has energy -0.0007744
+No.43 config has energy -0.0007573
+No.44 config has energy -0.0007272
+No.45 config has energy -0.0007167
+No.46 config has energy -0.0007157
+No.47 config has energy -0.0006854
+No.48 config has energy -0.0006411
+No.49 config has energy -0.0006198
+No.50 config has energy -0.0006108
+No.51 config has energy -0.0005543
+No.52 config has energy -0.0005333
+No.53 config has energy -0.0005176
+No.54 config has energy -0.0004795
+No.55 config has energy -0.0004681
+No.56 config has energy -0.0004638
+No.57 config has energy -0.0004475
+No.58 config has energy -0.0003982
+No.59 config has energy -0.0003074
+No.60 config has energy -0.0003034
+No.61 config has energy -0.0002419
+No.62 config has energy -0.0002291
+No.63 config has energy -0.0002163
+No.64 config has energy -0.0001910
+No.65 config has energy -0.0001379
+No.66 config has energy -0.0001086
+No.67 config has energy -0.0000584
+No.68 config has energy -0.0000570
+No.69 config has energy -0.0000269
+No.70 config has energy -0.0000210
+No.71 config has energy -0.0000081
+No.72 config has energy 0.0000450
+No.73 config has energy 0.0000567
+No.74 config has energy 0.0000676
+No.75 config has energy 0.0000798
+No.76 config has energy 0.0001427
+No.77 config has energy 0.0001460
+No.78 config has energy 0.0001462
+No.79 config has energy 0.0001828
+No.80 config has energy 0.0001829
+No.81 config has energy 0.0002808
+No.82 config has energy 0.0003483
+No.83 config has energy 0.0004002
+No.84 config has energy 0.0004306
+No.85 config has energy 0.0004818
+No.86 config has energy 0.0004922
+No.87 config has energy 0.0004952
+No.88 config has energy 0.0006019
+No.89 config has energy 0.0006097
+No.90 config has energy 0.0006206
+No.91 config has energy 0.0006255
+No.92 config has energy 0.0006376
+No.93 config has energy 0.0007218
+No.94 config has energy 0.0007931
+No.95 config has energy 0.0008542
+No.96 config has energy 0.0010712
+No.97 config has energy 0.0010830
+No.98 config has energy 0.0012085
+No.99 config has energy 0.0013180
+No.100 config has energy 0.0013926
+No.101 config has energy 0.0014094
+No.102 config has energy 0.0015047
+No.103 config has energy 0.0015107
+No.104 config has energy 0.0015987
+No.105 config has energy 0.0016203
+No.106 config has energy 0.0016455
+No.107 config has energy 0.0016639
+No.108 config has energy 0.0018915
+No.109 config has energy 0.0019546
+No.110 config has energy 0.0020003
+No.111 config has energy 0.0020040
+No.112 config has energy 0.0020127
+No.113 config has energy 0.0020537
+No.114 config has energy 0.0021083
+No.115 config has energy 0.0021539
+No.116 config has energy 0.0021552
+No.117 config has energy 0.0021778
+No.118 config has energy 0.0022407
+No.119 config has energy 0.0023887
+No.120 config has energy 0.0024299
+No.121 config has energy 0.0025892
+No.122 config has energy 0.0026997
+No.123 config has energy 0.0027151
+No.124 config has energy 0.0028840
+No.125 config has energy 0.0029481
+No.126 config has energy 0.0034055
+No.127 config has energy 0.0037725
+Save 16 least energy configuration:
+Energy: -0.0033065
+7
+standard .xyz file  C2H4O
+C	0.0534999	0.0642690	-0.0074261
+H	-0.6370138	-0.7652394	0.0884218
+C	-0.3230790	1.3349138	-0.1542472
+H	-1.3775789	1.5912851	-0.1838706
+H	0.3909474	2.1448460	-0.2478363
+O	1.3510017	-0.3556448	0.0410953
+H	1.9329730	0.4187521	-0.0484025
+4
+standard .xyz file  CH2O
+C	5.2696663	-1.6229424	-0.3683731
+H	4.6824428	-2.4343298	-0.8272308
+H	6.3346439	-1.8463954	-0.1961890
+O	4.7718708	-0.5446522	-0.0696614
+
+Energy: -0.0032053
+7
+standard .xyz file  C2H4O
+C	0.0661219	-0.0106520	-0.0506193
+H	-0.7873023	0.1268316	0.6027149
+C	0.6656441	-1.1835493	-0.2574804
+H	0.3037583	-2.0767011	0.2424120
+H	1.5185733	-1.2910799	-0.9174286
+O	0.4468356	1.1639763	-0.6315654
+H	1.2126494	0.9935855	-1.2067934
+4
+standard .xyz file  CH2O
+C	3.6653939	0.1686407	1.5348261
+H	3.7000637	-0.6634772	2.2560120
+H	3.3991441	1.1512152	1.9560320
+O	3.9066956	0.0118845	0.3444733
+
+Energy: -0.0029116
+7
+standard .xyz file  C2H4O
+C	-0.0832541	-0.0046676	0.0097395
+H	0.9912918	0.0555769	-0.1159664
+C	-0.9650003	0.4276031	-0.8922428
+H	-0.6215180	0.8726822	-1.8209507
+H	-2.0353987	0.3542245	-0.7391239
+O	-0.4169019	-0.5765287	1.2029901
+H	-1.3866678	-0.6098363	1.2725302
+4
+standard .xyz file  CH2O
+C	4.3780993	-0.8532373	0.9330738
+H	3.6980845	-1.5261732	1.4793964
+H	5.4410184	-0.9213862	1.2147021
+O	3.9791360	-0.0810373	0.0703604
+
+Energy: -0.0027055
+7
+standard .xyz file  C2H4O
+C	0.0605724	-0.0413740	-0.0408296
+H	-0.7212257	0.4926331	0.4861507
+C	-0.1666962	-0.9765537	-0.9637025
+H	-1.1846029	-1.2451860	-1.2287994
+H	0.6361972	-1.4947084	-1.4750346
+O	1.3009779	0.3635179	0.3587325
+H	1.9685832	-0.1401442	-0.1382771
+4
+standard .xyz file  CH2O
+C	4.9662120	1.7327574	-0.3544603
+H	4.5006028	2.5610836	0.2030477
+H	5.5183582	2.0228629	-1.2626063
+O	4.8760530	0.5673681	0.0108862
+
+Energy: -0.0024439
+7
+standard .xyz file  C2H4O
+C	0.0531463	-0.0417359	-0.0498144
+H	-0.6328033	0.4969421	0.5931314
+C	-0.3209436	-0.9825283	-0.9174969
+H	-1.3684736	-1.2512409	-1.0126186
+H	0.3883636	-1.5052864	-1.5485198
+O	1.3420720	0.3637496	0.1410910
+H	1.9201987	-0.1442056	-0.4540074
+4
+standard .xyz file  CH2O
+C	4.5208964	-0.6083193	1.6342161
+H	4.4721196	-1.7049546	1.7277208
+H	4.3595721	-0.0446275	2.5669443
+O	4.7398191	-0.0529875	0.5649087
+
+Energy: -0.0023916
+7
+standard .xyz file  C2H4O
+C	0.0457201	-0.0600740	-0.0367242
+H	-0.5443811	0.7152912	0.4372689
+C	-0.4751909	-1.1073135	-0.6769177
+H	-1.5523443	-1.2227783	-0.7475029
+H	0.1405295	-1.8682809	-1.1421055
+O	1.3831664	0.1711281	0.1046120
+H	1.8718104	-0.5465967	-0.3341238
+4
+standard .xyz file  CH2O
+C	4.7840380	1.7329540	-0.6649560
+H	5.4011406	2.5569913	-1.0572290
+H	3.6989925	1.8335105	-0.8271926
+O	5.2716106	0.7695370	-0.0871675
+
+Energy: -0.0022318
+7
+standard .xyz file  C2H4O
+C	-0.0073099	-0.0825417	0.0134653
+H	0.0870372	0.9828100	-0.1603290
+C	-0.5401506	-0.9364957	-0.8610345
+H	-0.9125792	-0.5780535	-1.8157020
+H	-0.6214965	-1.9982970	-0.6596805
+O	0.4863676	-0.4365859	1.2354016
+H	0.3813063	-1.3971670	1.3478170
+4
+standard .xyz file  CH2O
+C	4.0141115	0.5631541	0.3811571
+H	3.4924462	1.5274033	0.4898774
+H	3.4207887	-0.3291662	0.6370639
+O	5.1759067	0.4881889	0.0012215
+
+Energy: -0.0020943
+7
+standard .xyz file  C2H4O
+C	-0.0273980	-0.0490667	0.0623674
+H	0.3262230	0.5842284	-0.7425981
+C	-0.8618213	0.3576071	1.0195825
+H	-1.2298959	1.3789153	1.0245335
+H	-1.1989697	-0.2989528	1.8132088
+O	0.4877777	-1.3094447	-0.0283746
+H	0.1448732	-1.8405085	0.7110703
+4
+standard .xyz file  CH2O
+C	3.4442465	-0.8400098	-1.0107345
+H	3.3205253	-1.9156868	-0.8074040
+H	3.5573694	-0.5673774	-2.0721632
+O	3.4552893	-0.0032402	-0.1166240
+
+Energy: -0.0020943
+7
+standard .xyz file  C2H4O
+C	-0.0142495	0.0126603	0.0817591
+H	0.1696659	-0.1507445	-0.9734916
+C	-0.4482275	-0.9309031	0.9179753
+H	-0.6396610	-1.9357646	0.5544091
+H	-0.6235799	-0.7382187	1.9699768
+O	0.2536915	1.3008884	0.4435176
+H	0.0753258	1.4012797	1.3945687
+4
+standard .xyz file  CH2O
+C	4.0147277	1.2251009	-0.8420258
+H	4.6206084	1.7920890	-1.5667081
+H	3.0441640	1.6753995	-0.5793602
+O	4.3947055	0.1651052	-0.3606062
+
+Energy: -0.0020303
+7
+standard .xyz file  C2H4O
+C	-0.0085496	0.0494373	-0.0673108
+H	0.1017981	-0.5886412	0.8014580
+C	-0.4265808	1.3145212	-0.0151664
+H	-0.6807981	1.7660270	0.9388199
+H	-0.5274165	1.9295564	-0.9018155
+O	0.3332440	-0.6039116	-1.2155727
+H	0.2193315	0.0043388	-1.9662034
+4
+standard .xyz file  CH2O
+C	3.7413024	-0.2247607	-0.6599119
+H	3.5130669	-1.1165081	-1.2652436
+H	3.0353668	0.6144001	-0.7658355
+O	4.7146855	-0.1699521	0.0812091
+
+Energy: -0.0020260
+7
+standard .xyz file  C2H4O
+C	-0.0829712	-0.0112146	-0.0061562
+H	0.9879236	0.1335301	0.0733008
+C	-0.7092144	-1.1413585	0.3232381
+H	-0.1436861	-1.9891286	0.6974539
+H	-1.7829837	-1.2574758	0.2331331
+O	-0.7054454	1.1052226	-0.4839499
+H	-1.6608818	0.9303978	-0.5384351
+4
+standard .xyz file  CH2O
+C	4.4705396	1.0825336	-0.6247884
+H	5.0063193	0.9899916	-1.5829676
+H	4.4038566	2.1028994	-0.2147118
+O	3.9817421	0.1157689	-0.0536650
+
+Energy: -0.0020204
+7
+standard .xyz file  C2H4O
+C	-0.0814641	-0.0087668	0.0182929
+H	0.9699788	0.1043850	-0.2178101
+C	-1.0721918	0.3769056	-0.7864567
+H	-0.8491911	0.8360822	-1.7445806
+H	-2.1160256	0.2509122	-0.5235512
+O	-0.2610228	-0.5933995	1.2381930
+H	-1.2155284	-0.6745945	1.4076555
+4
+standard .xyz file  CH2O
+C	4.1920614	-1.2490183	-0.5290012
+H	5.2170582	-1.5965377	-0.7347759
+H	3.3938742	-1.9832030	-0.7229752
+O	3.9557141	-0.1219073	-0.1124682
+
+Energy: -0.0019132
+7
+standard .xyz file  C2H4O
+C	0.0525859	-0.0559939	0.0338716
+H	-0.6261312	0.6667099	-0.4033039
+C	0.5293781	0.0253322	1.2764342
+H	0.2415750	0.8524720	1.9179815
+H	1.2077025	-0.7132969	1.6873913
+O	0.3553623	-1.0547777	-0.8453044
+H	0.9644091	-1.6775367	-0.4121484
+4
+standard .xyz file  CH2O
+C	3.6183277	1.3728211	-0.2807431
+H	3.5677298	1.7760098	-1.3047598
+H	3.7955014	2.1153116	0.5136580
+O	3.4864378	0.1790485	-0.0414717
+
+Energy: -0.0018272
+7
+standard .xyz file  C2H4O
+C	0.0503453	-0.0245798	0.0625225
+H	-0.5994531	0.2926676	-0.7444448
+C	-0.3040292	-0.0278174	1.3479465
+H	-1.2963520	0.3008540	1.6409383
+H	0.3678966	-0.3509728	2.1345017
+O	1.2713416	-0.4183063	-0.4026017
+H	1.8190037	-0.6933695	0.3529097
+4
+standard .xyz file  CH2O
+C	5.6652386	0.6599535	-0.6949044
+H	6.6387210	0.2032097	-0.4552209
+H	5.7052301	1.5512677	-1.3412137
+O	4.6092093	0.2071501	-0.2712181
+
+Energy: -0.0016783
+7
+standard .xyz file  C2H4O
+C	0.0445039	-0.0455568	-0.0546980
+H	-0.5299003	0.5424365	0.6512793
+C	0.3804070	-1.3216400	0.1368411
+H	0.0770700	-1.8352098	1.0439279
+H	0.9563559	-1.8853373	-0.5878043
+O	0.3783847	0.6831692	-1.1590870
+H	0.8908756	0.1178437	-1.7625363
+4
+standard .xyz file  CH2O
+C	3.6679590	1.1431196	0.4893954
+H	3.9616832	1.2819096	1.5421037
+H	3.7556263	2.0362175	-0.1497028
+O	3.2705566	0.0679181	0.0584059
+
+Energy: -0.0016649
+7
+standard .xyz file  C2H4O
+C	-0.0745943	-0.0370411	0.0105605
+H	0.8881821	0.4410418	-0.1257419
+C	-0.8646252	0.1645514	1.0656046
+H	-0.5568704	0.8423688	1.8558099
+H	-1.8236843	-0.3281719	1.1752046
+O	-0.3735381	-0.8674708	-1.0302143
+H	-1.2424254	-1.2730005	-0.8659847
+4
+standard .xyz file  CH2O
+C	3.8738714	-0.3489933	-1.3019634
+H	3.6436925	-1.3874373	-1.5889879
+H	4.1183734	0.3304978	-2.1339890
+O	3.8589489	0.0250447	-0.1359395
+
+-------------------------------------------------
+
+#Do calculate of CH2 No.1, and CH2 No.0
+Generate No.0 configuration with energy 0.0000545
+Generate No.1 configuration with energy 0.0025549
+Generate No.2 configuration with energy -0.0000379
+Generate No.3 configuration with energy 0.0000209
+Generate No.4 configuration with energy -0.0002597
+Generate No.5 configuration with energy 0.0002638
+Generate No.6 configuration with energy 0.0004451
+Generate No.7 configuration with energy 0.0004663
+Generate No.8 configuration with energy -0.0007164
+Generate No.9 configuration with energy -0.0003378
+Generate No.10 configuration with energy 0.0015979
+Generate No.11 configuration with energy -0.0003779
+Generate No.12 configuration with energy -0.0015135
+Generate No.13 configuration with energy -0.0001311
+Generate No.14 configuration with energy -0.0001688
+Generate No.15 configuration with energy -0.0013803
+#Before sorting,
+No.0 config has energy 0.0000545
+No.1 config has energy 0.0025549
+No.2 config has energy -0.0000379
+No.3 config has energy 0.0000209
+No.4 config has energy -0.0002597
+No.5 config has energy 0.0002638
+No.6 config has energy 0.0004451
+No.7 config has energy 0.0004663
+No.8 config has energy -0.0007164
+No.9 config has energy -0.0003378
+No.10 config has energy 0.0015979
+No.11 config has energy -0.0003779
+No.12 config has energy -0.0015135
+No.13 config has energy -0.0001311
+No.14 config has energy -0.0001688
+No.15 config has energy -0.0013803
+#After sorting,
+No.0 config has energy -0.0015135
+No.1 config has energy -0.0013803
+No.2 config has energy -0.0007164
+No.3 config has energy -0.0003779
+No.4 config has energy -0.0003378
+No.5 config has energy -0.0002597
+No.6 config has energy -0.0001688
+No.7 config has energy -0.0001311
+No.8 config has energy -0.0000379
+No.9 config has energy 0.0000209
+No.10 config has energy 0.0000545
+No.11 config has energy 0.0002638
+No.12 config has energy 0.0004451
+No.13 config has energy 0.0004663
+No.14 config has energy 0.0015979
+No.15 config has energy 0.0025549
+Save 2 least energy configuration:
+Energy: -0.0015135
+7
+standard .xyz file  C2H4O
+C	0.6887247	0.6397812	-1.0567381
+H	0.4267261	1.6165502	-1.4457870
+C	0.0404083	0.0353782	-0.0606009
+H	-0.8064923	0.5218485	0.4134031
+H	0.3253580	-0.9430903	0.3081617
+O	1.7614304	0.1101467	-1.7132310
+H	1.9601729	-0.7627571	-1.3325325
+4
+standard .xyz file  CH2O
+C	5.5598045	-0.3988517	0.6977864
+H	6.5265139	0.1128448	0.5659878
+H	5.4104420	-0.8875211	1.6738238
+O	4.7081335	-0.4228523	-0.1818836
+
+Energy: -0.0013803
+7
+standard .xyz file  C2H4O
+C	0.4051471	-1.3322429	-0.2476726
+H	1.3009103	-1.6002547	-0.7952656
+C	0.0219131	-0.0767937	-0.0133960
+H	0.6192402	0.7529267	-0.3785510
+H	-0.8801554	0.1614433	0.5380551
+O	-0.2769779	-2.4381435	0.1693196
+H	-1.0700142	-2.1510222	0.6541348
+4
+standard .xyz file  CH2O
+C	4.3196988	0.3462163	-0.2848379
+H	4.7515108	0.0746688	0.6916515
+H	4.1313463	1.4207851	-0.4383999
+O	4.0660153	-0.4905044	-1.1423238
+
+-------------------------------------------------
+
+#Do calculate of CH2 No.1, and O No.1
+Generate No.0 configuration with energy 0.0007844
+Generate No.1 configuration with energy 0.0014038
+Generate No.2 configuration with energy -0.0000870
+Generate No.3 configuration with energy -0.0005076
+Generate No.4 configuration with energy 0.0035688
+Generate No.5 configuration with energy 0.0001972
+Generate No.6 configuration with energy -0.0000382
+Generate No.7 configuration with energy -0.0001819
+Generate No.8 configuration with energy -0.0004762
+Generate No.9 configuration with energy -0.0012870
+Generate No.10 configuration with energy -0.0003474
+Generate No.11 configuration with energy -0.0015225
+Generate No.12 configuration with energy 0.0028656
+Generate No.13 configuration with energy -0.0011538
+Generate No.14 configuration with energy -0.0011960
+Generate No.15 configuration with energy 0.0003673
+Generate No.16 configuration with energy 0.0001367
+Generate No.17 configuration with energy -0.0002463
+Generate No.18 configuration with energy -0.0006703
+Generate No.19 configuration with energy -0.0015219
+Generate No.20 configuration with energy -0.0002910
+Generate No.21 configuration with energy 0.0001620
+Generate No.22 configuration with energy -0.0010339
+Generate No.23 configuration with energy -0.0003218
+Generate No.24 configuration with energy 0.0003795
+Generate No.25 configuration with energy -0.0001445
+Generate No.26 configuration with energy 0.0033848
+Generate No.27 configuration with energy 0.0004946
+Generate No.28 configuration with energy 0.0011256
+Generate No.29 configuration with energy -0.0022226
+Generate No.30 configuration with energy -0.0015197
+Generate No.31 configuration with energy 0.0037644
+Generate No.32 configuration with energy -0.0016772
+Generate No.33 configuration with energy -0.0004985
+Generate No.34 configuration with energy 0.0002585
+Generate No.35 configuration with energy -0.0006320
+Generate No.36 configuration with energy -0.0000066
+Generate No.37 configuration with energy -0.0008503
+Generate No.38 configuration with energy 0.0016767
+Generate No.39 configuration with energy 0.0020849
+Generate No.40 configuration with energy 0.0022937
+Generate No.41 configuration with energy 0.0001513
+Generate No.42 configuration with energy -0.0001498
+Generate No.43 configuration with energy 0.0005668
+Generate No.44 configuration with energy -0.0000767
+Generate No.45 configuration with energy -0.0007407
+Generate No.46 configuration with energy -0.0016727
+Generate No.47 configuration with energy 0.0005277
+Generate No.48 configuration with energy -0.0011677
+Generate No.49 configuration with energy -0.0001055
+Generate No.50 configuration with energy -0.0014738
+Generate No.51 configuration with energy -0.0001352
+Generate No.52 configuration with energy -0.0006690
+Generate No.53 configuration with energy -0.0007861
+Generate No.54 configuration with energy 0.0010067
+Generate No.55 configuration with energy -0.0019217
+Generate No.56 configuration with energy 0.0019211
+Generate No.57 configuration with energy 0.0023123
+Generate No.58 configuration with energy -0.0001538
+Generate No.59 configuration with energy -0.0006287
+Generate No.60 configuration with energy -0.0003315
+Generate No.61 configuration with energy 0.0027072
+Generate No.62 configuration with energy -0.0009700
+Generate No.63 configuration with energy 0.0019769
+#Before sorting,
+No.0 config has energy 0.0007844
+No.1 config has energy 0.0014038
+No.2 config has energy -0.0000870
+No.3 config has energy -0.0005076
+No.4 config has energy 0.0035688
+No.5 config has energy 0.0001972
+No.6 config has energy -0.0000382
+No.7 config has energy -0.0001819
+No.8 config has energy -0.0004762
+No.9 config has energy -0.0012870
+No.10 config has energy -0.0003474
+No.11 config has energy -0.0015225
+No.12 config has energy 0.0028656
+No.13 config has energy -0.0011538
+No.14 config has energy -0.0011960
+No.15 config has energy 0.0003673
+No.16 config has energy 0.0001367
+No.17 config has energy -0.0002463
+No.18 config has energy -0.0006703
+No.19 config has energy -0.0015219
+No.20 config has energy -0.0002910
+No.21 config has energy 0.0001620
+No.22 config has energy -0.0010339
+No.23 config has energy -0.0003218
+No.24 config has energy 0.0003795
+No.25 config has energy -0.0001445
+No.26 config has energy 0.0033848
+No.27 config has energy 0.0004946
+No.28 config has energy 0.0011256
+No.29 config has energy -0.0022226
+No.30 config has energy -0.0015197
+No.31 config has energy 0.0037644
+No.32 config has energy -0.0016772
+No.33 config has energy -0.0004985
+No.34 config has energy 0.0002585
+No.35 config has energy -0.0006320
+No.36 config has energy -0.0000066
+No.37 config has energy -0.0008503
+No.38 config has energy 0.0016767
+No.39 config has energy 0.0020849
+No.40 config has energy 0.0022937
+No.41 config has energy 0.0001513
+No.42 config has energy -0.0001498
+No.43 config has energy 0.0005668
+No.44 config has energy -0.0000767
+No.45 config has energy -0.0007407
+No.46 config has energy -0.0016727
+No.47 config has energy 0.0005277
+No.48 config has energy -0.0011677
+No.49 config has energy -0.0001055
+No.50 config has energy -0.0014738
+No.51 config has energy -0.0001352
+No.52 config has energy -0.0006690
+No.53 config has energy -0.0007861
+No.54 config has energy 0.0010067
+No.55 config has energy -0.0019217
+No.56 config has energy 0.0019211
+No.57 config has energy 0.0023123
+No.58 config has energy -0.0001538
+No.59 config has energy -0.0006287
+No.60 config has energy -0.0003315
+No.61 config has energy 0.0027072
+No.62 config has energy -0.0009700
+No.63 config has energy 0.0019769
+#After sorting,
+No.0 config has energy -0.0022226
+No.1 config has energy -0.0019217
+No.2 config has energy -0.0016772
+No.3 config has energy -0.0016727
+No.4 config has energy -0.0015225
+No.5 config has energy -0.0015219
+No.6 config has energy -0.0015197
+No.7 config has energy -0.0014738
+No.8 config has energy -0.0012870
+No.9 config has energy -0.0011960
+No.10 config has energy -0.0011677
+No.11 config has energy -0.0011538
+No.12 config has energy -0.0010339
+No.13 config has energy -0.0009700
+No.14 config has energy -0.0008503
+No.15 config has energy -0.0007861
+No.16 config has energy -0.0007407
+No.17 config has energy -0.0006703
+No.18 config has energy -0.0006690
+No.19 config has energy -0.0006320
+No.20 config has energy -0.0006287
+No.21 config has energy -0.0005076
+No.22 config has energy -0.0004985
+No.23 config has energy -0.0004762
+No.24 config has energy -0.0003474
+No.25 config has energy -0.0003315
+No.26 config has energy -0.0003218
+No.27 config has energy -0.0002910
+No.28 config has energy -0.0002463
+No.29 config has energy -0.0001819
+No.30 config has energy -0.0001538
+No.31 config has energy -0.0001498
+No.32 config has energy -0.0001445
+No.33 config has energy -0.0001352
+No.34 config has energy -0.0001055
+No.35 config has energy -0.0000870
+No.36 config has energy -0.0000767
+No.37 config has energy -0.0000382
+No.38 config has energy -0.0000066
+No.39 config has energy 0.0001367
+No.40 config has energy 0.0001513
+No.41 config has energy 0.0001620
+No.42 config has energy 0.0001972
+No.43 config has energy 0.0002585
+No.44 config has energy 0.0003673
+No.45 config has energy 0.0003795
+No.46 config has energy 0.0004946
+No.47 config has energy 0.0005277
+No.48 config has energy 0.0005668
+No.49 config has energy 0.0007844
+No.50 config has energy 0.0010067
+No.51 config has energy 0.0011256
+No.52 config has energy 0.0014038
+No.53 config has energy 0.0016767
+No.54 config has energy 0.0019211
+No.55 config has energy 0.0019769
+No.56 config has energy 0.0020849
+No.57 config has energy 0.0022937
+No.58 config has energy 0.0023123
+No.59 config has energy 0.0027072
+No.60 config has energy 0.0028656
+No.61 config has energy 0.0033848
+No.62 config has energy 0.0035688
+No.63 config has energy 0.0037644
+Save 8 least energy configuration:
+Energy: -0.0022226
+7
+standard .xyz file  C2H4O
+C	-0.4468545	0.8354184	1.0501211
+H	-1.4348306	0.7767008	1.4911831
+C	-0.0241691	0.0485569	0.0601249
+H	-0.6829872	-0.7083803	-0.3540956
+H	0.9707641	0.1302218	-0.3618010
+O	0.3054901	1.8125513	1.6343999
+H	1.1801803	1.8290472	1.2089167
+4
+standard .xyz file  CH2O
+C	4.5929806	-0.2788435	-1.4462961
+H	5.4598010	0.3830978	-1.6018194
+H	4.3528022	-0.9516080	-2.2850202
+O	3.9400231	-0.2675795	-0.4103142
+
+Energy: -0.0019217
+7
+standard .xyz file  C2H4O
+C	1.0927433	-0.1144776	0.8905975
+H	2.1214504	-0.2375569	0.5732755
+C	0.0615574	-0.0064220	0.0522146
+H	0.2250339	-0.0395243	-1.0205172
+H	-0.9579873	0.1159895	0.3988075
+O	0.9881268	-0.0843687	2.2508703
+H	0.0515593	0.0270351	2.4892428
+4
+standard .xyz file  CH2O
+C	5.7103075	-0.4604477	0.3492930
+H	6.3296912	-1.3620203	0.2179081
+H	5.8556695	0.0814309	1.2974455
+O	4.9134544	-0.0856392	-0.5017550
+
+Energy: -0.0016772
+7
+standard .xyz file  C2H4O
+C	0.1297729	-1.3714875	0.3202158
+H	0.1460248	-1.7574297	1.3325718
+C	0.0074981	-0.0788612	0.0167810
+H	-0.0836073	0.6604822	0.8064930
+H	-0.0056707	0.2785048	-1.0063020
+O	0.2498243	-2.3723374	-0.5996102
+H	0.2303798	-1.9813906	-1.4902131
+4
+standard .xyz file  CH2O
+C	3.5896792	-0.4626435	0.3156901
+H	2.9724859	-0.8886210	-0.4913706
+H	3.4668396	-0.9313236	1.3051371
+O	4.3607855	0.4695707	0.1256626
+
+Energy: -0.0016727
+7
+standard .xyz file  C2H4O
+C	-0.7979440	-1.0501833	0.5106442
+H	-1.3840026	-1.7200733	-0.1073063
+C	-0.0452428	-0.0597237	0.0307097
+H	0.0076854	0.1157738	-1.0393244
+H	0.5310127	0.5953457	0.6736688
+O	-0.9280821	-1.3483213	1.8359256
+H	-0.3872817	-0.7245063	2.3504941
+4
+standard .xyz file  CH2O
+C	3.6521736	-1.0252174	-0.7680795
+H	2.6485037	-1.3002092	-1.1296836
+H	4.4242785	-1.8041706	-0.8722037
+O	3.8934764	0.0729697	-0.2827992
+
+Energy: -0.0015225
+7
+standard .xyz file  C2H4O
+C	-0.0115822	1.2046996	0.7408926
+H	-0.0071767	2.1909439	0.2921356
+C	-0.0006793	0.0681258	0.0437644
+H	0.0135628	0.0940659	-1.0414535
+H	-0.0054739	-0.9052284	0.5203579
+O	-0.0296208	1.2742994	2.1036191
+H	-0.0329801	0.3699251	2.4620696
+4
+standard .xyz file  CH2O
+C	3.9095037	0.0194097	0.0170840
+H	2.9590571	0.2141832	-0.5048794
+H	3.9257912	0.2809652	1.0871678
+O	4.8828877	-0.4560782	-0.5540323
+
+Energy: -0.0015219
+7
+standard .xyz file  C2H4O
+C	-1.1048376	0.8597331	-0.2013704
+H	-1.0161639	1.9111913	-0.4476480
+C	-0.0642356	0.0480030	-0.0112433
+H	0.9483103	0.4292515	-0.1005411
+H	-0.1834678	-1.0008151	0.2344128
+O	-2.4108753	0.4746079	-0.1111637
+H	-2.4422577	-0.4720943	0.1105593
+4
+standard .xyz file  CH2O
+C	4.7263817	-0.6830887	0.7877421
+H	4.5294343	-0.9543888	1.8371892
+H	5.7301989	-0.9377002	0.4118700
+O	3.8856484	-0.1351009	0.0858762
+
+Energy: -0.0015197
+7
+standard .xyz file  C2H4O
+C	0.2974693	0.6480771	-1.2214193
+H	0.9551617	1.5049198	-1.3071007
+C	0.0160891	0.0360717	-0.0706887
+H	0.4546619	0.3904950	0.8570030
+H	-0.6462316	-0.8199943	-0.0153248
+O	-0.2033646	0.2774154	-2.4354903
+H	-0.7856253	-0.4919063	-2.3109608
+4
+standard .xyz file  CH2O
+C	3.4861483	-0.9730950	-0.6911968
+H	2.5058917	-1.4592881	-0.8194335
+H	4.2563159	-1.2561169	-1.4263814
+O	3.7050719	-0.1715839	0.2084649
+
+Energy: -0.0014738
+7
+standard .xyz file  C2H4O
+C	0.9855953	-0.5037107	-0.8804740
+H	1.9134336	0.0082563	-1.1064961
+C	0.0555214	-0.0301200	-0.0506663
+H	0.2029684	0.9235503	0.4466726
+H	-0.8640519	-0.5649165	0.1566027
+O	0.8912365	-1.6889324	-1.5502046
+H	0.0465092	-2.1119382	-1.3180565
+4
+standard .xyz file  CH2O
+C	5.2340612	-0.4848067	1.1051310
+H	6.0264213	-0.9954203	0.5348938
+H	5.2485573	-0.6536105	2.1937315
+O	4.3933270	0.2231385	0.5650214
+
+-------------------------------------------------
+
+#Do calculate of HO No.2, and CH2 No.0
+Generate No.0 configuration with energy 0.0000759
+Generate No.1 configuration with energy 0.0020823
+Generate No.2 configuration with energy 0.0004098
+Generate No.3 configuration with energy 0.0005271
+Generate No.4 configuration with energy -0.0006406
+Generate No.5 configuration with energy -0.0024469
+Generate No.6 configuration with energy -0.0010645
+Generate No.7 configuration with energy -0.0009156
+Generate No.8 configuration with energy -0.0003674
+Generate No.9 configuration with energy -0.0019838
+Generate No.10 configuration with energy -0.0017733
+Generate No.11 configuration with energy -0.0024230
+Generate No.12 configuration with energy -0.0016240
+Generate No.13 configuration with energy -0.0013428
+Generate No.14 configuration with energy -0.0020180
+Generate No.15 configuration with energy 0.0004960
+Generate No.16 configuration with energy 0.0005425
+Generate No.17 configuration with energy 0.0002958
+Generate No.18 configuration with energy 0.0018500
+Generate No.19 configuration with energy 0.0004633
+Generate No.20 configuration with energy -0.0014264
+Generate No.21 configuration with energy -0.0019353
+Generate No.22 configuration with energy -0.0000015
+Generate No.23 configuration with energy -0.0007240
+Generate No.24 configuration with energy -0.0002809
+Generate No.25 configuration with energy -0.0008218
+Generate No.26 configuration with energy 0.0035673
+Generate No.27 configuration with energy 0.0005989
+Generate No.28 configuration with energy -0.0022153
+Generate No.29 configuration with energy -0.0026023
+Generate No.30 configuration with energy -0.0016848
+Generate No.31 configuration with energy -0.0010864
+Generate No.32 configuration with energy 0.0027646
+Generate No.33 configuration with energy -0.0014738
+Generate No.34 configuration with energy 0.0016206
+Generate No.35 configuration with energy -0.0021536
+Generate No.36 configuration with energy -0.0030694
+Generate No.37 configuration with energy -0.0011910
+Generate No.38 configuration with energy -0.0011127
+Generate No.39 configuration with energy 0.0018145
+Generate No.40 configuration with energy 0.0011553
+Generate No.41 configuration with energy -0.0001044
+Generate No.42 configuration with energy -0.0025676
+Generate No.43 configuration with energy 0.0023627
+Generate No.44 configuration with energy 0.0014258
+Generate No.45 configuration with energy -0.0004988
+Generate No.46 configuration with energy -0.0029554
+Generate No.47 configuration with energy -0.0014489
+Generate No.48 configuration with energy -0.0008868
+Generate No.49 configuration with energy -0.0007199
+Generate No.50 configuration with energy 0.0003475
+Generate No.51 configuration with energy -0.0029944
+Generate No.52 configuration with energy -0.0022714
+Generate No.53 configuration with energy 0.0002996
+Generate No.54 configuration with energy -0.0016649
+Generate No.55 configuration with energy 0.0008308
+Generate No.56 configuration with energy -0.0009503
+Generate No.57 configuration with energy 0.0006169
+Generate No.58 configuration with energy -0.0027235
+Generate No.59 configuration with energy 0.0022009
+Generate No.60 configuration with energy -0.0026185
+Generate No.61 configuration with energy -0.0013736
+Generate No.62 configuration with energy -0.0039233
+Generate No.63 configuration with energy -0.0018360
+Generate No.64 configuration with energy 0.0006906
+Generate No.65 configuration with energy 0.0033516
+Generate No.66 configuration with energy 0.0019589
+Generate No.67 configuration with energy -0.0011595
+Generate No.68 configuration with energy -0.0009500
+Generate No.69 configuration with energy -0.0005645
+Generate No.70 configuration with energy -0.0021288
+Generate No.71 configuration with energy 0.0012423
+Generate No.72 configuration with energy -0.0000169
+Generate No.73 configuration with energy 0.0000641
+Generate No.74 configuration with energy -0.0020560
+Generate No.75 configuration with energy 0.0018816
+Generate No.76 configuration with energy -0.0025663
+Generate No.77 configuration with energy 0.0005811
+Generate No.78 configuration with energy 0.0021417
+Generate No.79 configuration with energy 0.0000791
+Generate No.80 configuration with energy -0.0024871
+Generate No.81 configuration with energy -0.0023804
+Generate No.82 configuration with energy -0.0002297
+Generate No.83 configuration with energy -0.0017413
+Generate No.84 configuration with energy -0.0023228
+Generate No.85 configuration with energy -0.0029518
+Generate No.86 configuration with energy -0.0030222
+Generate No.87 configuration with energy -0.0015868
+Generate No.88 configuration with energy 0.0000574
+Generate No.89 configuration with energy -0.0008368
+Generate No.90 configuration with energy 0.0005520
+Generate No.91 configuration with energy -0.0033040
+Generate No.92 configuration with energy 0.0007320
+Generate No.93 configuration with energy -0.0001365
+Generate No.94 configuration with energy 0.0008347
+Generate No.95 configuration with energy -0.0018167
+Generate No.96 configuration with energy -0.0023033
+Generate No.97 configuration with energy -0.0018787
+Generate No.98 configuration with energy -0.0012606
+Generate No.99 configuration with energy -0.0045602
+Generate No.100 configuration with energy 0.0006474
+Generate No.101 configuration with energy 0.0003894
+Generate No.102 configuration with energy 0.0002980
+Generate No.103 configuration with energy 0.0002527
+Generate No.104 configuration with energy -0.0016139
+Generate No.105 configuration with energy -0.0010691
+Generate No.106 configuration with energy 0.0013013
+Generate No.107 configuration with energy 0.0005397
+Generate No.108 configuration with energy -0.0007614
+Generate No.109 configuration with energy -0.0005333
+Generate No.110 configuration with energy 0.0002425
+Generate No.111 configuration with energy 0.0003266
+Generate No.112 configuration with energy 0.0001966
+Generate No.113 configuration with energy -0.0017779
+Generate No.114 configuration with energy 0.0003211
+Generate No.115 configuration with energy 0.0005543
+Generate No.116 configuration with energy 0.0016286
+Generate No.117 configuration with energy -0.0005816
+Generate No.118 configuration with energy 0.0008086
+Generate No.119 configuration with energy 0.0012643
+Generate No.120 configuration with energy -0.0013366
+Generate No.121 configuration with energy -0.0007538
+Generate No.122 configuration with energy -0.0025015
+Generate No.123 configuration with energy -0.0012103
+Generate No.124 configuration with energy 0.0013043
+Generate No.125 configuration with energy 0.0004448
+Generate No.126 configuration with energy -0.0042161
+Generate No.127 configuration with energy -0.0019489
+Generate No.128 configuration with energy -0.0009668
+Generate No.129 configuration with energy -0.0005306
+Generate No.130 configuration with energy -0.0009451
+Generate No.131 configuration with energy -0.0027807
+Generate No.132 configuration with energy -0.0004394
+Generate No.133 configuration with energy 0.0018522
+Generate No.134 configuration with energy -0.0023740
+Generate No.135 configuration with energy 0.0010252
+Generate No.136 configuration with energy -0.0032068
+Generate No.137 configuration with energy 0.0007310
+Generate No.138 configuration with energy -0.0015479
+Generate No.139 configuration with energy -0.0002026
+Generate No.140 configuration with energy -0.0011665
+Generate No.141 configuration with energy -0.0006070
+Generate No.142 configuration with energy -0.0011682
+Generate No.143 configuration with energy -0.0017623
+Generate No.144 configuration with energy -0.0006458
+Generate No.145 configuration with energy -0.0000702
+Generate No.146 configuration with energy 0.0003287
+Generate No.147 configuration with energy -0.0038990
+Generate No.148 configuration with energy -0.0002973
+Generate No.149 configuration with energy -0.0001757
+Generate No.150 configuration with energy 0.0019137
+Generate No.151 configuration with energy -0.0008738
+Generate No.152 configuration with energy 0.0004392
+Generate No.153 configuration with energy -0.0011648
+Generate No.154 configuration with energy 0.0005095
+Generate No.155 configuration with energy -0.0018599
+Generate No.156 configuration with energy 0.0026161
+Generate No.157 configuration with energy -0.0004200
+Generate No.158 configuration with energy -0.0019474
+Generate No.159 configuration with energy -0.0009016
+Generate No.160 configuration with energy -0.0017216
+Generate No.161 configuration with energy 0.0014971
+Generate No.162 configuration with energy -0.0018676
+Generate No.163 configuration with energy 0.0016035
+Generate No.164 configuration with energy 0.0004210
+Generate No.165 configuration with energy -0.0008502
+Generate No.166 configuration with energy -0.0007643
+Generate No.167 configuration with energy 0.0021622
+Generate No.168 configuration with energy -0.0010957
+Generate No.169 configuration with energy -0.0006525
+Generate No.170 configuration with energy 0.0029284
+Generate No.171 configuration with energy -0.0016389
+Generate No.172 configuration with energy -0.0004647
+Generate No.173 configuration with energy -0.0017655
+Generate No.174 configuration with energy -0.0003237
+Generate No.175 configuration with energy 0.0016276
+#Before sorting,
+No.0 config has energy 0.0000759
+No.1 config has energy 0.0020823
+No.2 config has energy 0.0004098
+No.3 config has energy 0.0005271
+No.4 config has energy -0.0006406
+No.5 config has energy -0.0024469
+No.6 config has energy -0.0010645
+No.7 config has energy -0.0009156
+No.8 config has energy -0.0003674
+No.9 config has energy -0.0019838
+No.10 config has energy -0.0017733
+No.11 config has energy -0.0024230
+No.12 config has energy -0.0016240
+No.13 config has energy -0.0013428
+No.14 config has energy -0.0020180
+No.15 config has energy 0.0004960
+No.16 config has energy 0.0005425
+No.17 config has energy 0.0002958
+No.18 config has energy 0.0018500
+No.19 config has energy 0.0004633
+No.20 config has energy -0.0014264
+No.21 config has energy -0.0019353
+No.22 config has energy -0.0000015
+No.23 config has energy -0.0007240
+No.24 config has energy -0.0002809
+No.25 config has energy -0.0008218
+No.26 config has energy 0.0035673
+No.27 config has energy 0.0005989
+No.28 config has energy -0.0022153
+No.29 config has energy -0.0026023
+No.30 config has energy -0.0016848
+No.31 config has energy -0.0010864
+No.32 config has energy 0.0027646
+No.33 config has energy -0.0014738
+No.34 config has energy 0.0016206
+No.35 config has energy -0.0021536
+No.36 config has energy -0.0030694
+No.37 config has energy -0.0011910
+No.38 config has energy -0.0011127
+No.39 config has energy 0.0018145
+No.40 config has energy 0.0011553
+No.41 config has energy -0.0001044
+No.42 config has energy -0.0025676
+No.43 config has energy 0.0023627
+No.44 config has energy 0.0014258
+No.45 config has energy -0.0004988
+No.46 config has energy -0.0029554
+No.47 config has energy -0.0014489
+No.48 config has energy -0.0008868
+No.49 config has energy -0.0007199
+No.50 config has energy 0.0003475
+No.51 config has energy -0.0029944
+No.52 config has energy -0.0022714
+No.53 config has energy 0.0002996
+No.54 config has energy -0.0016649
+No.55 config has energy 0.0008308
+No.56 config has energy -0.0009503
+No.57 config has energy 0.0006169
+No.58 config has energy -0.0027235
+No.59 config has energy 0.0022009
+No.60 config has energy -0.0026185
+No.61 config has energy -0.0013736
+No.62 config has energy -0.0039233
+No.63 config has energy -0.0018360
+No.64 config has energy 0.0006906
+No.65 config has energy 0.0033516
+No.66 config has energy 0.0019589
+No.67 config has energy -0.0011595
+No.68 config has energy -0.0009500
+No.69 config has energy -0.0005645
+No.70 config has energy -0.0021288
+No.71 config has energy 0.0012423
+No.72 config has energy -0.0000169
+No.73 config has energy 0.0000641
+No.74 config has energy -0.0020560
+No.75 config has energy 0.0018816
+No.76 config has energy -0.0025663
+No.77 config has energy 0.0005811
+No.78 config has energy 0.0021417
+No.79 config has energy 0.0000791
+No.80 config has energy -0.0024871
+No.81 config has energy -0.0023804
+No.82 config has energy -0.0002297
+No.83 config has energy -0.0017413
+No.84 config has energy -0.0023228
+No.85 config has energy -0.0029518
+No.86 config has energy -0.0030222
+No.87 config has energy -0.0015868
+No.88 config has energy 0.0000574
+No.89 config has energy -0.0008368
+No.90 config has energy 0.0005520
+No.91 config has energy -0.0033040
+No.92 config has energy 0.0007320
+No.93 config has energy -0.0001365
+No.94 config has energy 0.0008347
+No.95 config has energy -0.0018167
+No.96 config has energy -0.0023033
+No.97 config has energy -0.0018787
+No.98 config has energy -0.0012606
+No.99 config has energy -0.0045602
+No.100 config has energy 0.0006474
+No.101 config has energy 0.0003894
+No.102 config has energy 0.0002980
+No.103 config has energy 0.0002527
+No.104 config has energy -0.0016139
+No.105 config has energy -0.0010691
+No.106 config has energy 0.0013013
+No.107 config has energy 0.0005397
+No.108 config has energy -0.0007614
+No.109 config has energy -0.0005333
+No.110 config has energy 0.0002425
+No.111 config has energy 0.0003266
+No.112 config has energy 0.0001966
+No.113 config has energy -0.0017779
+No.114 config has energy 0.0003211
+No.115 config has energy 0.0005543
+No.116 config has energy 0.0016286
+No.117 config has energy -0.0005816
+No.118 config has energy 0.0008086
+No.119 config has energy 0.0012643
+No.120 config has energy -0.0013366
+No.121 config has energy -0.0007538
+No.122 config has energy -0.0025015
+No.123 config has energy -0.0012103
+No.124 config has energy 0.0013043
+No.125 config has energy 0.0004448
+No.126 config has energy -0.0042161
+No.127 config has energy -0.0019489
+No.128 config has energy -0.0009668
+No.129 config has energy -0.0005306
+No.130 config has energy -0.0009451
+No.131 config has energy -0.0027807
+No.132 config has energy -0.0004394
+No.133 config has energy 0.0018522
+No.134 config has energy -0.0023740
+No.135 config has energy 0.0010252
+No.136 config has energy -0.0032068
+No.137 config has energy 0.0007310
+No.138 config has energy -0.0015479
+No.139 config has energy -0.0002026
+No.140 config has energy -0.0011665
+No.141 config has energy -0.0006070
+No.142 config has energy -0.0011682
+No.143 config has energy -0.0017623
+No.144 config has energy -0.0006458
+No.145 config has energy -0.0000702
+No.146 config has energy 0.0003287
+No.147 config has energy -0.0038990
+No.148 config has energy -0.0002973
+No.149 config has energy -0.0001757
+No.150 config has energy 0.0019137
+No.151 config has energy -0.0008738
+No.152 config has energy 0.0004392
+No.153 config has energy -0.0011648
+No.154 config has energy 0.0005095
+No.155 config has energy -0.0018599
+No.156 config has energy 0.0026161
+No.157 config has energy -0.0004200
+No.158 config has energy -0.0019474
+No.159 config has energy -0.0009016
+No.160 config has energy -0.0017216
+No.161 config has energy 0.0014971
+No.162 config has energy -0.0018676
+No.163 config has energy 0.0016035
+No.164 config has energy 0.0004210
+No.165 config has energy -0.0008502
+No.166 config has energy -0.0007643
+No.167 config has energy 0.0021622
+No.168 config has energy -0.0010957
+No.169 config has energy -0.0006525
+No.170 config has energy 0.0029284
+No.171 config has energy -0.0016389
+No.172 config has energy -0.0004647
+No.173 config has energy -0.0017655
+No.174 config has energy -0.0003237
+No.175 config has energy 0.0016276
+#After sorting,
+No.0 config has energy -0.0045602
+No.1 config has energy -0.0042161
+No.2 config has energy -0.0039233
+No.3 config has energy -0.0038990
+No.4 config has energy -0.0033040
+No.5 config has energy -0.0032068
+No.6 config has energy -0.0030694
+No.7 config has energy -0.0030222
+No.8 config has energy -0.0029944
+No.9 config has energy -0.0029554
+No.10 config has energy -0.0029518
+No.11 config has energy -0.0027807
+No.12 config has energy -0.0027235
+No.13 config has energy -0.0026185
+No.14 config has energy -0.0026023
+No.15 config has energy -0.0025676
+No.16 config has energy -0.0025663
+No.17 config has energy -0.0025015
+No.18 config has energy -0.0024871
+No.19 config has energy -0.0024469
+No.20 config has energy -0.0024230
+No.21 config has energy -0.0023804
+No.22 config has energy -0.0023740
+No.23 config has energy -0.0023228
+No.24 config has energy -0.0023033
+No.25 config has energy -0.0022714
+No.26 config has energy -0.0022153
+No.27 config has energy -0.0021536
+No.28 config has energy -0.0021288
+No.29 config has energy -0.0020560
+No.30 config has energy -0.0020180
+No.31 config has energy -0.0019838
+No.32 config has energy -0.0019489
+No.33 config has energy -0.0019474
+No.34 config has energy -0.0019353
+No.35 config has energy -0.0018787
+No.36 config has energy -0.0018676
+No.37 config has energy -0.0018599
+No.38 config has energy -0.0018360
+No.39 config has energy -0.0018167
+No.40 config has energy -0.0017779
+No.41 config has energy -0.0017733
+No.42 config has energy -0.0017655
+No.43 config has energy -0.0017623
+No.44 config has energy -0.0017413
+No.45 config has energy -0.0017216
+No.46 config has energy -0.0016848
+No.47 config has energy -0.0016649
+No.48 config has energy -0.0016389
+No.49 config has energy -0.0016240
+No.50 config has energy -0.0016139
+No.51 config has energy -0.0015868
+No.52 config has energy -0.0015479
+No.53 config has energy -0.0014738
+No.54 config has energy -0.0014489
+No.55 config has energy -0.0014264
+No.56 config has energy -0.0013736
+No.57 config has energy -0.0013428
+No.58 config has energy -0.0013366
+No.59 config has energy -0.0012606
+No.60 config has energy -0.0012103
+No.61 config has energy -0.0011910
+No.62 config has energy -0.0011682
+No.63 config has energy -0.0011665
+No.64 config has energy -0.0011648
+No.65 config has energy -0.0011595
+No.66 config has energy -0.0011127
+No.67 config has energy -0.0010957
+No.68 config has energy -0.0010864
+No.69 config has energy -0.0010691
+No.70 config has energy -0.0010645
+No.71 config has energy -0.0009668
+No.72 config has energy -0.0009503
+No.73 config has energy -0.0009500
+No.74 config has energy -0.0009451
+No.75 config has energy -0.0009156
+No.76 config has energy -0.0009016
+No.77 config has energy -0.0008868
+No.78 config has energy -0.0008738
+No.79 config has energy -0.0008502
+No.80 config has energy -0.0008368
+No.81 config has energy -0.0008218
+No.82 config has energy -0.0007643
+No.83 config has energy -0.0007614
+No.84 config has energy -0.0007538
+No.85 config has energy -0.0007240
+No.86 config has energy -0.0007199
+No.87 config has energy -0.0006525
+No.88 config has energy -0.0006458
+No.89 config has energy -0.0006406
+No.90 config has energy -0.0006070
+No.91 config has energy -0.0005816
+No.92 config has energy -0.0005645
+No.93 config has energy -0.0005333
+No.94 config has energy -0.0005306
+No.95 config has energy -0.0004988
+No.96 config has energy -0.0004647
+No.97 config has energy -0.0004394
+No.98 config has energy -0.0004200
+No.99 config has energy -0.0003674
+No.100 config has energy -0.0003237
+No.101 config has energy -0.0002973
+No.102 config has energy -0.0002809
+No.103 config has energy -0.0002297
+No.104 config has energy -0.0002026
+No.105 config has energy -0.0001757
+No.106 config has energy -0.0001365
+No.107 config has energy -0.0001044
+No.108 config has energy -0.0000702
+No.109 config has energy -0.0000169
+No.110 config has energy -0.0000015
+No.111 config has energy 0.0000574
+No.112 config has energy 0.0000641
+No.113 config has energy 0.0000759
+No.114 config has energy 0.0000791
+No.115 config has energy 0.0001966
+No.116 config has energy 0.0002425
+No.117 config has energy 0.0002527
+No.118 config has energy 0.0002958
+No.119 config has energy 0.0002980
+No.120 config has energy 0.0002996
+No.121 config has energy 0.0003211
+No.122 config has energy 0.0003266
+No.123 config has energy 0.0003287
+No.124 config has energy 0.0003475
+No.125 config has energy 0.0003894
+No.126 config has energy 0.0004098
+No.127 config has energy 0.0004210
+No.128 config has energy 0.0004392
+No.129 config has energy 0.0004448
+No.130 config has energy 0.0004633
+No.131 config has energy 0.0004960
+No.132 config has energy 0.0005095
+No.133 config has energy 0.0005271
+No.134 config has energy 0.0005397
+No.135 config has energy 0.0005425
+No.136 config has energy 0.0005520
+No.137 config has energy 0.0005543
+No.138 config has energy 0.0005811
+No.139 config has energy 0.0005989
+No.140 config has energy 0.0006169
+No.141 config has energy 0.0006474
+No.142 config has energy 0.0006906
+No.143 config has energy 0.0007310
+No.144 config has energy 0.0007320
+No.145 config has energy 0.0008086
+No.146 config has energy 0.0008308
+No.147 config has energy 0.0008347
+No.148 config has energy 0.0010252
+No.149 config has energy 0.0011553
+No.150 config has energy 0.0012423
+No.151 config has energy 0.0012643
+No.152 config has energy 0.0013013
+No.153 config has energy 0.0013043
+No.154 config has energy 0.0014258
+No.155 config has energy 0.0014971
+No.156 config has energy 0.0016035
+No.157 config has energy 0.0016206
+No.158 config has energy 0.0016276
+No.159 config has energy 0.0016286
+No.160 config has energy 0.0018145
+No.161 config has energy 0.0018500
+No.162 config has energy 0.0018522
+No.163 config has energy 0.0018816
+No.164 config has energy 0.0019137
+No.165 config has energy 0.0019589
+No.166 config has energy 0.0020823
+No.167 config has energy 0.0021417
+No.168 config has energy 0.0021622
+No.169 config has energy 0.0022009
+No.170 config has energy 0.0023627
+No.171 config has energy 0.0026161
+No.172 config has energy 0.0027646
+No.173 config has energy 0.0029284
+No.174 config has energy 0.0033516
+No.175 config has energy 0.0035673
+Save 22 least energy configuration:
+Energy: -0.0045602
+7
+standard .xyz file  C2H4O
+C	-1.1044079	-0.1036019	0.8279617
+H	-1.1958644	0.7090481	1.5388173
+C	-1.9642355	-1.1190431	0.7414620
+H	-2.8198874	-1.1674348	1.4078642
+H	-1.8471835	-1.9188830	0.0195634
+O	-0.0024719	0.0443756	0.0367395
+H	0.0392302	-0.7042722	-0.5830818
+4
+standard .xyz file  CH2O
+C	3.3689844	-0.0458058	-0.1748581
+H	3.0010216	-0.2168587	0.8493858
+H	4.1013083	0.7696963	-0.2862758
+O	2.9893387	-0.7173025	-1.1260154
+
+Energy: -0.0042161
+7
+standard .xyz file  C2H4O
+C	-0.2055015	-0.2556314	1.3447648
+H	-0.4247849	-1.2938517	1.5640669
+C	-0.1352601	0.7030303	2.2688538
+H	-0.3023254	0.4655015	3.3149145
+H	0.0862185	1.7342820	2.0197559
+O	-0.0114453	-0.0558156	0.0088723
+H	0.1816454	0.8858331	-0.1408101
+4
+standard .xyz file  CH2O
+C	3.1008907	0.0928057	-0.0797430
+H	2.9508891	-0.0646431	1.0002759
+H	3.2249223	-0.8224723	-0.6802746
+O	3.1279511	1.2105600	-0.5793748
+
+Energy: -0.0039233
+7
+standard .xyz file  C2H4O
+C	-0.0182701	1.2293817	-0.6358126
+H	-0.0229331	2.0732463	0.0438571
+C	-0.0289090	1.3418417	-1.9644005
+H	-0.0431863	2.3231206	-2.4285790
+H	-0.0238656	0.4788942	-2.6200520
+O	-0.0002109	0.0430575	0.0383549
+H	0.0033477	-0.6833533	-0.6087198
+4
+standard .xyz file  CH2O
+C	3.3817654	-0.2299144	-0.0167313
+H	2.9714503	-0.2782894	1.0045584
+H	4.1825876	0.5105598	-0.1720947
+O	2.9748769	-0.9510632	-0.9190201
+
+Energy: -0.0038990
+7
+standard .xyz file  C2H4O
+C	-1.2357692	0.6172014	0.0889248
+H	-1.5511339	1.0988668	-0.8290205
+C	-1.9553809	0.6076305	1.2114104
+H	-2.9210749	1.1025255	1.2443912
+H	-1.6140774	0.1171227	2.1155657
+O	-0.0143369	0.0247667	-0.0500615
+H	0.2275367	-0.3930655	0.7945120
+4
+standard .xyz file  CH2O
+C	3.6050722	-0.0743229	0.1194985
+H	4.1274521	0.8140853	-0.2698361
+H	3.4962729	-0.9100773	-0.5900318
+O	3.1741256	-0.1292034	1.2644928
+
+Energy: -0.0033040
+7
+standard .xyz file  C2H4O
+C	-0.7674638	-0.6845138	0.9265046
+H	-0.3670613	-0.6555850	1.9329444
+C	-1.8930753	-1.3148886	0.5895579
+H	-2.4696682	-1.8419002	1.3434632
+H	-2.2698092	-1.3268715	-0.4265674
+O	0.0234829	0.0031195	0.0525729
+H	-0.3726911	-0.0495081	-0.8343698
+4
+standard .xyz file  CH2O
+C	3.1648280	-0.0775361	0.0130237
+H	2.8578403	0.6832207	0.7483733
+H	3.1216056	0.2371369	-1.0419022
+O	3.5297449	-1.1981168	0.3460003
+
+Energy: -0.0032068
+7
+standard .xyz file  C2H4O
+C	-0.6593566	-0.8597876	0.8613855
+H	-0.1659524	-0.9838021	1.8180740
+C	-1.7964728	-1.4690506	0.5242331
+H	-2.2860462	-2.1372303	1.2259649
+H	-2.2676481	-1.3257831	-0.4411947
+O	0.0282902	-0.0047919	0.0500179
+H	-0.4489852	0.0760504	-0.7938208
+4
+standard .xyz file  CH2O
+C	3.4590722	0.1118737	-0.1332975
+H	3.1847883	-0.9474863	-0.0057983
+H	2.8785191	0.8284890	0.4693437
+O	4.3497951	0.4690227	-0.8940841
+
+Energy: -0.0030694
+7
+standard .xyz file  C2H4O
+C	-0.7085385	1.1775120	0.1655581
+H	-0.3388785	1.9987664	-0.4369141
+C	-1.7477263	1.2704367	0.9958353
+H	-2.2800488	2.2108181	1.1001869
+H	-2.0955345	0.4310701	1.5866617
+O	0.0216798	0.0419463	-0.0330996
+H	-0.3440740	-0.6657183	0.5253142
+4
+standard .xyz file  CH2O
+C	3.4135093	-0.0662224	-0.0819912
+H	2.8959243	0.8939583	0.0725732
+H	2.8520153	-0.9630636	0.2248576
+O	4.5378877	-0.1322376	-0.5627760
+
+Energy: -0.0030222
+7
+standard .xyz file  C2H4O
+C	-0.3491597	-0.6792584	-1.1544117
+H	0.2003498	-1.6013198	-1.3024724
+C	-1.2793984	-0.2225597	-1.9934521
+H	-1.5274628	-0.7824279	-2.8898814
+H	-1.8134815	0.7042687	-1.8193054
+O	0.0306363	-0.0485489	-0.0054323
+H	-0.4862200	0.7705062	0.0862147
+4
+standard .xyz file  CH2O
+C	3.3704847	-0.0667834	-0.0198146
+H	2.8666653	-0.3185732	0.9270218
+H	3.8916346	0.9037153	-0.0368755
+O	3.3524379	-0.8156545	-0.9886310
+
+Energy: -0.0029554
+7
+standard .xyz file  C2H4O
+C	-0.0344207	0.1988583	1.3693945
+H	0.0523784	-0.7142591	1.9462503
+C	-0.1632646	1.4117986	1.9079869
+H	-0.1864529	1.5297855	2.9869286
+H	-0.2481326	2.3085229	1.3052716
+O	0.0047935	-0.0500473	0.0282378
+H	-0.0760767	0.7942873	-0.4481549
+4
+standard .xyz file  CH2O
+C	3.0373145	0.0833914	-0.0104233
+H	2.8154572	-0.5147798	-0.9085891
+H	3.0038115	-0.4642313	0.9449525
+O	3.3033992	1.2772868	-0.0700187
+
+Energy: -0.0029518
+7
+standard .xyz file  C2H4O
+C	-0.5500597	-0.4360982	-1.1929893
+H	-0.1384435	-1.3736336	-1.5475025
+C	-1.4986843	0.2504448	-1.8307013
+H	-1.9071046	-0.1224146	-2.7649082
+H	-1.8917556	1.1866606	-1.4517848
+O	0.0236004	-0.0499390	-0.0165590
+H	-0.3745558	0.7925686	0.2628036
+4
+standard .xyz file  CH2O
+C	3.3390102	0.0080455	-0.0486039
+H	2.8414702	0.8935781	0.3780309
+H	3.2779156	-0.9093811	0.5583160
+O	3.9210988	0.0412618	-1.1255480
+
+Energy: -0.0027235
+7
+standard .xyz file  C2H4O
+C	-0.4841164	1.1483686	0.6023715
+H	-0.1218463	2.0646955	0.1516105
+C	-1.3190163	1.1076386	1.6412121
+H	-1.6784735	2.0292247	2.0884742
+H	-1.6649642	0.1751099	2.0716690
+O	0.0207710	0.0471765	-0.0258463
+H	-0.3296500	-0.7487256	0.4101995
+4
+standard .xyz file  CH2O
+C	3.0166565	-0.0850981	-0.0309103
+H	2.9555090	0.7707806	-0.7218979
+H	3.0355362	0.1701980	1.0406415
+O	3.0606969	-1.2429268	-0.4274354
+
+Energy: -0.0026185
+7
+standard .xyz file  C2H4O
+C	-0.5008778	1.2294841	0.3917411
+H	0.0344826	2.0733749	-0.0269685
+C	-1.5474308	1.3420038	1.2102596
+H	-1.9131020	2.3233627	1.4962544
+H	-2.0638692	0.4790280	1.6141740
+O	0.0302108	0.0430587	-0.0236294
+H	-0.4794668	-0.6833720	0.3750160
+4
+standard .xyz file  CH2O
+C	4.1187900	0.0010678	-0.1475081
+H	4.5161648	-1.0213580	-0.0451850
+H	3.0207878	0.0819095	-0.1876533
+O	4.8488170	0.9821906	-0.2122952
+
+Energy: -0.0026023
+7
+standard .xyz file  C2H4O
+C	-1.2155665	0.6474430	-0.1385149
+H	-1.4234519	0.9757695	-1.1499818
+C	-2.0398859	0.8388084	0.8919138
+H	-2.9858210	1.3510846	0.7457843
+H	-1.8051886	0.4989632	1.8939143
+O	-0.0085446	0.0163694	-0.0546271
+H	0.1356086	-0.2597939	0.8669718
+4
+standard .xyz file  CH2O
+C	3.9689147	-0.1929687	0.1626871
+H	2.9608144	-0.3304921	-0.2598674
+H	4.6757134	0.3689597	-0.4685245
+O	4.2828800	-0.6351824	1.2606906
+
+Energy: -0.0025663
+7
+standard .xyz file  C2H4O
+C	-0.1794056	0.0572911	1.3713140
+H	-0.4063177	-0.9010723	1.8231221
+C	-0.0777040	1.1981734	2.0539199
+H	-0.2249313	1.2051784	3.1294890
+H	0.1506744	2.1430002	1.5746202
+O	-0.0119187	-0.0521853	0.0214414
+H	0.1891580	0.8282176	-0.3402904
+4
+standard .xyz file  CH2O
+C	3.9719692	0.1018476	-0.3427627
+H	4.8006180	0.2628116	-1.0506913
+H	3.9132244	-0.9060518	0.0981950
+O	3.1697372	0.9843286	-0.0645720
+
+Energy: -0.0025015
+7
+standard .xyz file  C2H4O
+C	-0.3073011	1.2943467	0.3823655
+H	0.1763312	2.0546458	-0.2194028
+C	-1.1260192	1.5586287	1.4010717
+H	-1.3443447	2.5867876	1.6727277
+H	-1.5960739	0.7766136	1.9859509
+O	0.0269633	0.0383716	-0.0335513
+H	-0.4279275	-0.6089848	0.5324832
+4
+standard .xyz file  CH2O
+C	3.7532628	-0.3042252	0.0065917
+H	3.9586220	0.7781514	0.0110556
+H	2.8959524	-0.6223043	-0.6079004
+O	4.4325757	-1.1006214	0.6422220
+
+Energy: -0.0024871
+7
+standard .xyz file  C2H4O
+C	-0.4841164	1.2554800	0.3246103
+H	-0.1218463	2.0448636	-0.3232431
+C	-1.3190163	1.4527332	1.3453649
+H	-1.6784735	2.4520336	1.5706713
+H	-1.6649642	0.6429444	1.9771440
+O	0.0207710	0.0400391	-0.0359239
+H	-0.3296500	-0.6354490	0.5701388
+4
+standard .xyz file  CH2O
+C	3.9310173	-0.2741995	0.1229289
+H	4.8395532	-0.2882956	-0.5000440
+H	2.9964963	-0.0276704	-0.4058903
+O	3.9580766	-0.5163904	1.3230748
+
+Energy: -0.0024230
+7
+standard .xyz file  C2H4O
+C	-0.2668197	-0.6780899	-1.1768484
+H	0.4060264	-1.5058984	-1.3668257
+C	-1.2655823	-0.3276569	-1.9877592
+H	-1.4453304	-0.8829652	-2.9031264
+H	-1.9234333	0.5060854	-1.7716838
+O	0.0371496	-0.0434321	-0.0076584
+H	-0.5895902	0.6892990	0.1215443
+4
+standard .xyz file  CH2O
+C	3.8269205	-0.0944131	0.2098570
+H	3.9147992	0.7449288	-0.4983195
+H	2.9160699	-0.0993556	0.8296010
+O	4.6844316	-0.9638503	0.3020120
+
+Energy: -0.0023740
+7
+standard .xyz file  C2H4O
+C	0.1378603	-1.0984495	-0.8308874
+H	0.1614366	-0.8491742	-1.8851104
+C	0.2313485	-2.3409225	-0.3560955
+H	0.3386291	-3.1787523	-1.0380823
+H	0.2047284	-2.5604292	0.7048903
+O	0.0009700	0.0160229	-0.0553842
+H	-0.0153950	-0.2542954	0.8789878
+4
+standard .xyz file  CH2O
+C	3.2081382	0.1614144	0.1486962
+H	3.6455841	0.6333276	-0.7455467
+H	2.9930607	-0.9154582	0.0601361
+O	2.9764311	0.7917564	1.1727663
+
+Energy: -0.0023228
+7
+standard .xyz file  C2H4O
+C	-1.2979066	-0.2444538	0.4143087
+H	-1.6291286	0.4013256	1.2188837
+C	-2.0537020	-1.1928868	-0.1399067
+H	-3.0679534	-1.3564292	0.2109804
+H	-1.6952372	-1.8245600	-0.9443162
+O	-0.0150576	0.0356302	0.0427650
+H	0.2389757	-0.5654762	-0.6787120
+4
+standard .xyz file  CH2O
+C	3.3347638	0.0341124	-0.1212445
+H	2.8372238	0.9196450	0.3053904
+H	3.2736692	-0.8833142	0.4856754
+O	3.9168524	0.0673287	-1.1981885
+
+Energy: -0.0022714
+7
+standard .xyz file  C2H4O
+C	-0.3388163	-0.7683449	-1.1003728
+H	0.0233258	-1.7883338	-1.0498180
+C	-1.0467520	-0.2779333	-2.1183267
+H	-1.2941084	-0.9103368	-2.9653534
+H	-1.3960930	0.7477385	-2.1415866
+O	0.0204355	-0.0536664	0.0052337
+H	-0.3243260	0.8517253	-0.0830630
+4
+standard .xyz file  CH2O
+C	3.9517022	0.0073455	0.1048521
+H	2.9827705	0.1625164	-0.3959720
+H	3.9553880	0.1741674	1.1938483
+O	4.9574781	-0.3281673	-0.5079976
+
+Energy: -0.0022153
+7
+standard .xyz file  C2H4O
+C	-1.3019677	0.4480499	0.1417816
+H	-1.7416949	0.8127506	-0.7789320
+C	-1.9377994	0.4239808	1.3135517
+H	-2.9593957	0.7838278	1.3872065
+H	-1.4721068	0.0530528	2.2191595
+O	-0.0209422	0.0187958	-0.0503312
+H	0.3323671	-0.2983027	0.7987931
+4
+standard .xyz file  CH2O
+C	3.7721863	0.0520874	0.1017920
+H	4.6104596	0.2945022	-0.5707139
+H	3.1036649	-0.7525472	-0.2437486
+O	3.5952959	0.6378988	1.1625811
+
+Energy: -0.0021536
+7
+standard .xyz file  C2H4O
+C	-0.1804889	1.3599372	-0.1842965
+H	0.2746547	1.7427464	-1.0900456
+C	-0.8560970	2.1111533	0.6858384
+H	-0.9776866	3.1752666	0.5084895
+H	-1.3010959	1.7002544	1.5845712
+O	0.0251292	0.0177190	-0.0487817
+H	-0.3988184	-0.2812126	0.7742003
+4
+standard .xyz file  CH2O
+C	3.8610888	-0.3734063	-0.0996256
+H	3.9650356	0.7203941	-0.1804162
+H	2.9067835	-0.7299589	0.3198115
+O	4.7471359	-1.1416174	-0.4524867
+
+-------------------------------------------------
+
+#Do calculate of HO No.2, and O No.1
+Generate No.0 configuration with energy -0.0002406
+Generate No.1 configuration with energy 0.0002704
+Generate No.2 configuration with energy 0.0022173
+Generate No.3 configuration with energy -0.0005720
+Generate No.4 configuration with energy 0.0021242
+Generate No.5 configuration with energy 0.0020116
+Generate No.6 configuration with energy -0.0023902
+Generate No.7 configuration with energy -0.0002934
+Generate No.8 configuration with energy 0.0006718
+Generate No.9 configuration with energy 0.0007971
+Generate No.10 configuration with energy -0.0022165
+Generate No.11 configuration with energy 0.0006987
+Generate No.12 configuration with energy 0.0019245
+Generate No.13 configuration with energy 0.0012102
+Generate No.14 configuration with energy 0.0018069
+Generate No.15 configuration with energy -0.0008346
+#Before sorting,
+No.0 config has energy -0.0002406
+No.1 config has energy 0.0002704
+No.2 config has energy 0.0022173
+No.3 config has energy -0.0005720
+No.4 config has energy 0.0021242
+No.5 config has energy 0.0020116
+No.6 config has energy -0.0023902
+No.7 config has energy -0.0002934
+No.8 config has energy 0.0006718
+No.9 config has energy 0.0007971
+No.10 config has energy -0.0022165
+No.11 config has energy 0.0006987
+No.12 config has energy 0.0019245
+No.13 config has energy 0.0012102
+No.14 config has energy 0.0018069
+No.15 config has energy -0.0008346
+#After sorting,
+No.0 config has energy -0.0023902
+No.1 config has energy -0.0022165
+No.2 config has energy -0.0008346
+No.3 config has energy -0.0005720
+No.4 config has energy -0.0002934
+No.5 config has energy -0.0002406
+No.6 config has energy 0.0002704
+No.7 config has energy 0.0006718
+No.8 config has energy 0.0006987
+No.9 config has energy 0.0007971
+No.10 config has energy 0.0012102
+No.11 config has energy 0.0018069
+No.12 config has energy 0.0019245
+No.13 config has energy 0.0020116
+No.14 config has energy 0.0021242
+No.15 config has energy 0.0022173
+Save 2 least energy configuration:
+Energy: -0.0023902
+7
+standard .xyz file  C2H4O
+C	0.3298083	-0.6497449	-1.1768725
+H	-0.5018773	-1.1698067	-1.6372145
+C	1.5643507	-0.6248724	-1.6800553
+H	1.7865323	-1.1463665	-2.6059349
+H	2.3775044	-0.0956665	-1.1970389
+O	-0.0459205	-0.0267788	-0.0223448
+H	0.7287920	0.4249981	0.3546288
+4
+standard .xyz file  CH2O
+C	4.8636264	-1.0089389	1.5202459
+H	5.7243976	-1.6706438	1.3332942
+H	4.2463072	-1.2686184	2.3950256
+O	4.6099423	-0.0488688	0.8035530
+
+Energy: -0.0022165
+7
+standard .xyz file  C2H4O
+C	0.7471814	0.1435006	-1.1563297
+H	1.6922139	-0.3861561	-1.1349429
+C	0.3236193	0.8716422	-2.1899212
+H	0.9367849	0.9618017	-3.0812533
+H	-0.6275313	1.3911107	-2.1830247
+O	0.0496421	-0.0290947	0.0037750
+H	-0.7878561	0.4617533	-0.0599120
+4
+standard .xyz file  CH2O
+C	3.7059872	-0.7360476	1.7465381
+H	4.2389787	-1.5764735	2.2191220
+H	2.8227714	-0.3670544	2.2920009
+O	4.0709031	-0.2448112	0.6857543
+
+-------------------------------------------------
+
+#Here output 50 .xyz files to ./SaveConfigs/ as the final result
+No.0 least energy energy is: -0.0045602
+No.1 least energy energy is: -0.0042161
+No.2 least energy energy is: -0.0039233
+No.3 least energy energy is: -0.0038990
+No.4 least energy energy is: -0.0033065
+No.5 least energy energy is: -0.0033040
+No.6 least energy energy is: -0.0033013
+No.7 least energy energy is: -0.0032068
+No.8 least energy energy is: -0.0032053
+No.9 least energy energy is: -0.0030694
+No.10 least energy energy is: -0.0030222
+No.11 least energy energy is: -0.0029554
+No.12 least energy energy is: -0.0029518
+No.13 least energy energy is: -0.0029116
+No.14 least energy energy is: -0.0027235
+No.15 least energy energy is: -0.0027055
+No.16 least energy energy is: -0.0026185
+No.17 least energy energy is: -0.0026023
+No.18 least energy energy is: -0.0025663
+No.19 least energy energy is: -0.0025015
+No.20 least energy energy is: -0.0024871
+No.21 least energy energy is: -0.0024439
+No.22 least energy energy is: -0.0024230
+No.23 least energy energy is: -0.0023916
+No.24 least energy energy is: -0.0023902
+No.25 least energy energy is: -0.0023740
+No.26 least energy energy is: -0.0023441
+No.27 least energy energy is: -0.0023228
+No.28 least energy energy is: -0.0022714
+No.29 least energy energy is: -0.0022318
+No.30 least energy energy is: -0.0022226
+No.31 least energy energy is: -0.0022165
+No.32 least energy energy is: -0.0022153
+No.33 least energy energy is: -0.0021536
+No.34 least energy energy is: -0.0020943
+No.35 least energy energy is: -0.0020943
+No.36 least energy energy is: -0.0020303
+No.37 least energy energy is: -0.0020260
+No.38 least energy energy is: -0.0020204
+No.39 least energy energy is: -0.0019217
+No.40 least energy energy is: -0.0019132
+No.41 least energy energy is: -0.0018272
+No.42 least energy energy is: -0.0016783
+No.43 least energy energy is: -0.0016772
+No.44 least energy energy is: -0.0016727
+No.45 least energy energy is: -0.0016649
+No.46 least energy energy is: -0.0015225
+No.47 least energy energy is: -0.0015219
+No.48 least energy energy is: -0.0015197
+No.49 least energy energy is: -0.0015135
+#Have generate an analysis .xyz file
+sh: PAUSE: command not found

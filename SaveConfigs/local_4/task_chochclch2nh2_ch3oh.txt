@@ -1,8 +1,0 @@
-//This is task file (this line is necessory in task file as a function of explanation)
-InitiConfig/chochclch2nh2.xyz
-InitiConfig/ch3oh.xyz
-4
-2
-InitiConfig/chochclch2nh2
-InitiConfig/ch3oh
-60

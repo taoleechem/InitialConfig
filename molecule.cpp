@@ -989,12 +989,13 @@ DoubleMolecule::DoubleMolecule()
 	b = ib;
 	energy = 0;
 }
+
 DoubleMolecule& DoubleMolecule::operator=(DoubleMolecule &id)
 {
 	a = id.a;
 	b = id.b;
 	energy = id.energy;
-	return *this;
+    	return *this;
 }
 bool operator>(DoubleMolecule &ia, DoubleMolecule &ib)
 {
@@ -1029,8 +1030,7 @@ void DoubleMolecule::ToXYZ(string filename)
 void DoubleMolecule::output()
 {
 	cout << "Energy: " << energy << endl;
-	cout << a << endl;
-	cout << b << endl;
+	cout << a<< b << endl;
 }
 double DoubleMolecule::Energy()
 {
