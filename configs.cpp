@@ -197,7 +197,7 @@ static void GenerateFunction(int matrix[][2], int index, int matrix2[][2], int i
 static void GenerateFunction2(int matrix[][2],int index, int matrix2[][2],int index2, const int OutPutNumber,const string xyz_filename1,const string xyz_filename2)
 {
 	cout << "Enter Calculating..." << endl;
-	const double RotPrecision = 45;
+	const double RotPrecision = 20;
 	const double B1_default_value = 3.00;
 	const double RMSD_Precision = 0.35;
 	//for each pair config(ij[k]), rot * times
@@ -238,6 +238,8 @@ static void GenerateFunction2(int matrix[][2],int index, int matrix2[][2],int in
 			Molecule A = FA.TotalFragments();
 			Molecule B = FB.TotalFragments();
 			MakeAtomsSuitableDistanceMoveB(A, B, B1_default_value);
+			MC_A1 = A.MassCenter();
+			MC_B1 = B.MassCenter();
 			Eigen::Vector3d e_x;
 			e_x << 1, 0, 0;
 			double temp_potential[EachSaveConfigRotTimes];
@@ -307,14 +309,16 @@ static void GenerateFunction2(int matrix[][2],int index, int matrix2[][2],int in
 			for (int k = 0; k != MaxRotTimes[i][j]; k++)
 			{
 				//We should  rot A at the same time to make sure all suitable configurations happen!
-				A.PerformRandomRotEuler(MC_A1, RotPrecision*1.15);
-				B.PerformRandomRotEuler(MC_B1, RotPrecision);
+                		Molecule tA=A;
+               		 	Molecule tB=B;
+				tA.PerformRandomRotEuler(MC_A1, RotPrecision*1.15);
+				tB.PerformRandomRotEuler(MC_B1, RotPrecision);
 				//Here need to adjust B to a suitable position that the closest distance between atoms of A and B is 3.0
-				MakeAtomsSuitableDistanceMoveB(A, B, B1_default_value);
-				double  potential = G09energy(A, B) - RestEnergies;
+				MakeAtomsSuitableDistanceMoveB(tA, tB, B1_default_value);
+				double  potential = G09energy(tA, tB) - RestEnergies;
 				//cout << potential << "\t";
 				DoubleMolecule temp_save;
-				temp_save.Set(A, B, potential);
+				temp_save.Set(tA, tB, potential);
 				cout << "Generate No."<<k<<" configuration with energy "<< temp_save.Energy() << endl;
 				TempConfigs.push_back(temp_save);
 			}
