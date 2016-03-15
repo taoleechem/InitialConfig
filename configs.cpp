@@ -2,8 +2,8 @@
 #include "molecule.h"
 #include <time.h>
 
-//#define _NWCHEM_
-#define _GAUSSIAN_
+#define _NWCHEM_
+//#define _GAUSSIAN_
 static double RandomNumber(double MaxValue)
 {
 	clock_t now = clock();
@@ -324,11 +324,7 @@ static void GenerateFunction2(int matrix[][2],int index, int matrix2[][2],int in
 				cout << "Generate No."<<k<<" configuration with energy "<< temp_save.Energy() << endl;
 				TempConfigs.push_back(temp_save);
 			}
-            cout<<"#Before sorting,"<<endl;
-            for(int ii = 0; ii < MaxRotTimes[i][j]; ii++)
-            {
-                cout<<"No."<<ii<<" config has energy "<<TempConfigs[ii].Energy()<<endl;
-            }
+         
 			//Sort configurations 
 			for (int i1 = 0; i1 < MaxRotTimes[i][j]; i1++)
 				for (int jj = i1+1; jj < MaxRotTimes[i][j]; jj++)
@@ -470,3 +466,80 @@ void Do_GenerateFunction_Program_FromFile(string filename)
 }
 
 
+void RandomGenerate(const int OutPutNumber, const string xyz_filename1, const string xyz_filename2)
+{
+    cout << "Enter Formation..." << endl;
+	const double RotPrecision = 20;
+	const double B1_default_value = 3.00;
+	const double RMSD_Precision = 0.35;
+    Molecule A,B;
+    A.ReadFromXYZfile(xyz_filename1);
+    B.ReadFromXYZfile(xyz_filename2);
+    cout<<A<<B<<endl;
+    vector<DoubleMolecule> SaveConfigs;
+    Eigen::Vector3d MC_A, MC_B;
+    DoubleMolecule temp_config;
+    for(int i=0;i<OutPutNumber;i++)
+    {
+        MC_A = A.MassCenter();
+		MC_B = B.MassCenter();
+        A.PerformRandomRotEuler(MC_A, RotPrecision);
+        B.PerformRandomRotEuler(MC_B, RotPrecision);
+        MakeAtomsSuitableDistanceMoveB(A, B, B1_default_value);
+        temp_config.Set(A,B,0.0);
+        if(i==0)
+            SaveConfigs.push_back(temp_config);
+        else
+            {
+                int j=0;
+                for(j=0;j<i;j++)
+                 {
+                    double temp_x = RMSD(temp_config, SaveConfigs[j]);
+					if (abs(temp_x)< RMSD_Precision)
+						break;
+                 }
+                 if(j==i)
+                    SaveConfigs.push_back(temp_config);
+                 else 
+                    i--;
+            }
+        
+    }
+    for(int i=0;i<OutPutNumber;i++)
+    {
+        SaveConfigs[i].ToXYZ("SaveConfigs/" + X_ToStr<int>(i) + ".xyz");
+    } 
+    //combine these .xyz files to one .xyz file 
+
+      AlignEachXYZToStandardForm("SaveConfigs", OutPutNumber, A.Number());
+        cout<<"#Have generate an analysis .xyz file"<<endl;
+}
+void Do_RandomGenerate_FromFile(string filename)
+{
+    cout<<"################################################"<<endl;
+    cout<<"# You should prepare a file: random_task.txt   #"<<endl;
+    cout<<"# ##This is the first line of random_task.txt  #"<<endl;
+    cout<<"# InitiConfig/A.xyz                            #"<<endl;
+    cout<<"# InitiConfig/B.xyz                            #"<<endl;
+    cout<<"# 50   //This is output number in ./SaveConfigs#"<<endl;
+    cout<<"################################################"<<endl;
+    ifstream infile(filename.c_str());
+	if (!cout)
+	{
+		cerr << "Error to open " << filename << " to get the geometry info" << endl;
+		exit(1);
+	}
+	string temp;
+	getline(infile, temp);
+	string xyzfile1, xyzfile2;
+	infile >> xyzfile1;
+	getline(infile, temp);
+	infile >> xyzfile2;
+	getline(infile, temp);
+	cout << "Read molecule A from " << xyzfile1 << ", read molecule B from " << xyzfile2 << endl;
+	int OutputNum;
+	infile >> OutputNum;
+	cout << "Generate Max = " << OutputNum << " configurations to ./SaveConfigs" << endl;
+	RandomGenerate(OutputNum, xyzfile1, xyzfile2);
+	infile.close();
+}
