@@ -1,4 +1,4 @@
 //
-InitiConfig/ch2chco2Et.xyz
-InitiConfig/c4h5oMe.xyz
+InitiConfig/ch2choh_1.xyz
+InitiConfig/ch2o.xyz
 100
