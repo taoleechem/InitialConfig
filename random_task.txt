@@ -1,4 +1,4 @@
 //
-InitiConfig/phnh2ch3.xyz
-InitiConfig/HBr.xyz
+InitiConfig/ch2chco2Et.xyz
+InitiConfig/c4h5oMe.xyz
 100
