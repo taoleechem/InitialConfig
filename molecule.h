@@ -20,6 +20,22 @@ const double R_BOLTZMAN = 8.314;
 const double AVOGADRO_CONST = 6.023e23;
 const double K_B_BOLTZMAN = 1.38037e-23;
 const double ROOM_TEMPERATURE = 300;
+const int MaxElementOrder=109;
+const string ELEMENT[MaxElementOrder]={"H","He","Li","Be","B","C","N","O","F","Ne","Na","Mg","Al","Si","P","S","Cl","Ar","K",
+                  "Ca","Sc","Ti","V","Cr","Mn","Fe","Co","Ni","Cu","Zn","Ga","Ge","As","Se","Br","Kr","Rb",
+                  "Sr","Y","Zr","Nb","Mo","Tc","Ru","Rh","Pd","Ag","Cd","In","Sn","Sb","Te","I","Xe","Cs",
+                  "Ba","La","Ce","Pr","Nd","Pm","Sm","Eu","Gd","Tb","Dy","Ho","Er","Tm","Yb","Lu","Hf","Ta",
+                  "W ","Re","Os","Ir","Pt","Au","Hg","Tl","Pb","Bi","Po","At","Rn","Fr","Ra","Ac","Th","Pa",
+                  "U","Np","Pu","Am","Cm","Bk","Cf","Es","Fm","Md","No","Lr","Rf","Db","Sg","Bh","Hs","Mt"};
+                  //109 ge yuan su
+const double ELEMENT_RADIUS[MaxElementOrder]={0.30, 1.16, 1.23, 0.89, 0.88,0.77, 0.70, 0.66, 0.58, 0.55,1.40, 1.36, 1.25, 1.17, 1.10,
+                    1.11, 0.99, 1.58, 2.03, 1.74,1.44, 1.32, 1.20, 1.13, 1.17,1.16, 1.16, 1.15, 1.17, 1.25,
+                    1.25, 1.22, 1.21, 1.17, 1.14,1.89, 2.25, 1.92, 1.62, 1.45,1.34, 1.29, 1.23, 1.24, 1.25,
+                    1.28, 1.34, 1.41, 1.50, 1.40,1.41, 1.37, 1.33, 2.09, 2.35,1.98, 1.69, 1.65, 1.65, 1.64,
+                    1.64, 1.66, 1.85, 1.61, 1.59,1.59, 1.58, 1.57, 1.56, 1.70,1.56, 1.44, 1.34, 1.30, 1.28,
+                    1.26, 1.26, 1.29, 1.34, 1.44,1.55, 1.54, 1.52, 1.53, 1.52,1.53, 2.45, 2.02, 1.70, 1.63,
+                    1.46, 1.40, 1.36, 1.25, 1.57,1.58, 1.54, 1.53, 1.84, 1.61,1.50, 1.49, 1.38, 1.36, 1.26,
+                    1.20, 1.16, 1.14, 1.06 };
 
 template <class T> string X_ToStr(T tmp)
 {
@@ -90,7 +106,10 @@ public:
 	void MCtoOrigin();
 	void MCtoVector(const Eigen::Vector3d x);
 	friend double ClosestDistance(Molecule &ia, Molecule &ib);
+    friend double ClosestDistanceWithLabel(Molecule &ia, Molecule &ib, int &ia_label, int &ib_label);
+    friend double AtomRadiusSum(Molecule &ia, Molecule &ib, int ia_label, int ib_label);
 	friend void MakeAtomsSuitableDistanceMoveB(Molecule &ia, Molecule &ib, const double SmallestDistance);
+    friend void MakeAtomsUniformDistanceMoveB(Molecule &ia, Molecule &ib, const double times);
 	friend double RMSD(Molecule &ia, Molecule &ib);
 	friend void SpaceTransform(Molecule ref, Molecule &change);
 	void AligenToStandardConfig();

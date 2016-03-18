@@ -2,8 +2,8 @@
 #include "molecule.h"
 #include <time.h>
 
-//#define _NWCHEM_
-#define _GAUSSIAN_
+#define _NWCHEM_
+//#define _GAUSSIAN_
 static double RandomNumber(double MaxValue)
 {
 	clock_t now = clock();
@@ -200,6 +200,7 @@ static void GenerateFunction2(int matrix[][2],int index, int matrix2[][2],int in
 	cout << "Enter Calculating..." << endl;
 	const double RotPrecision = 20;
 	const double B1_default_value = 3.00;
+    const double Radius_Times=1.50;
 	const double RMSD_Precision = 0.35;
 	//for each pair config(ij[k]), rot * times
 	const int EachSaveConfigRotTimes = 8;
@@ -238,7 +239,7 @@ static void GenerateFunction2(int matrix[][2],int index, int matrix2[][2],int in
 			FB.PerformTrans(Default_B1);//B move at direction(1,0,0) to 3.00
 			Molecule A = FA.TotalFragments();
 			Molecule B = FB.TotalFragments();
-			MakeAtomsSuitableDistanceMoveB(A, B, B1_default_value);
+			MakeAtomsUniformDistanceMoveB(A, B, Radius_Times);
 			MC_A1 = A.MassCenter();
 			MC_B1 = B.MassCenter();
 			Eigen::Vector3d e_x;
@@ -316,7 +317,7 @@ static void GenerateFunction2(int matrix[][2],int index, int matrix2[][2],int in
 				tA.PerformRandomRotEuler(MC_A1, RotPrecision*1.15);
 				tB.PerformRandomRotEuler(MC_B1, RotPrecision);
 				//Here need to adjust B to a suitable position that the closest distance between atoms of A and B is 3.0
-				MakeAtomsSuitableDistanceMoveB(tA, tB, B1_default_value);
+				MakeAtomsUniformDistanceMoveB(tA, tB, Radius_Times);
 				double  potential = G09energy(tA, tB) - RestEnergies;
 				//cout << potential << "\t";
 				DoubleMolecule temp_save;
@@ -471,6 +472,7 @@ void RandomGenerate(const int OutPutNumber, const string xyz_filename1, const st
     cout << "Enter Formation..." << endl;
 	const double RotPrecision = 20;
 	const double B1_default_value = 3.00;
+	const double Radius_Times=1.50;
 	const double RMSD_Precision = 0.35;
     Molecule A,B;
     A.ReadFromXYZfile(xyz_filename1);
@@ -485,7 +487,7 @@ void RandomGenerate(const int OutPutNumber, const string xyz_filename1, const st
 		MC_B = B.MassCenter();
         A.PerformRandomRotEuler(MC_A, RotPrecision);
         B.PerformRandomRotEuler(MC_B, RotPrecision);
-        MakeAtomsSuitableDistanceMoveB(A, B, B1_default_value);
+        MakeAtomsUniformDistanceMoveB(A, B, Radius_Times);
         temp_config.Set(A,B,0.0);
         if(i==0)
             SaveConfigs.push_back(temp_config);

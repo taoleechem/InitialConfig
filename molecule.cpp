@@ -904,6 +904,43 @@ double ClosestDistance(Molecule &ia, Molecule &ib)
 		}
 	return distance;
 }
+double ClosestDistanceWithLabel(Molecule &ia, Molecule &ib, int &ia_label, int &ib_label)
+{
+    int label1 = 0, label2 = 0;
+	double distance = sqrt((ia.corr[0][0] - ib.corr[0][0])*(ia.corr[0][0] - ib.corr[0][0]) + (ia.corr[0][1] - ib.corr[0][1])*(ia.corr[0][1] - ib.corr[0][1]) + (ia.corr[0][2] - ib.corr[0][2])*(ia.corr[0][2] - ib.corr[0][2]));
+	for (int i = 0; i != ia.number; i++)
+		for (int j = 0; j != ib.number; j++)
+		{
+			double temp = sqrt((ia.corr[i][0] - ib.corr[j][0])*(ia.corr[i][0] - ib.corr[j][0]) + (ia.corr[i][1] - ib.corr[j][1])*(ia.corr[i][1] - ib.corr[j][1]) + (ia.corr[i][2] - ib.corr[j][2])*(ia.corr[i][2] - ib.corr[j][2]));
+			if (temp < distance)
+			{
+				distance = temp;
+				label1 = i;
+				label2 = j;
+			}
+		}
+      ia_label=label1;
+      ib_label=label2;
+	  return distance;
+}
+double AtomRadiusSum(Molecule &ia, Molecule &ib, int ia_label, int ib_label)
+{
+    int i,j;
+    double radius_a,radius_b;
+    for(i=0;i!=MaxElementOrder;i++)
+    {
+        if(ia.name[ia_label]==ELEMENT[i])
+        break;
+    }
+    radius_a=ELEMENT_RADIUS[i];
+     for(j=0;j!=MaxElementOrder;j++)
+    {
+        if(ib.name[ib_label]==ELEMENT[j])
+        break;
+    }
+    radius_b=ELEMENT_RADIUS[j];
+    return radius_a+radius_b;
+}
 void MakeAtomsSuitableDistanceMoveB(Molecule &ia, Molecule &ib, const double SmallestDistance)
 {
 	Eigen::Vector3d MC_A, MC_B,MC, MoveVector;
@@ -918,6 +955,31 @@ void MakeAtomsSuitableDistanceMoveB(Molecule &ia, Molecule &ib, const double Sma
 		ib.PerformTrans(MoveVector);
 	}
         while (ClosestDistance(ia,ib)>SmallestDistance)
+        {
+		//move B towards A
+		MC_B=ib.MassCenter();
+		MC=MC_A-MC_B;
+ 		double length = sqrt(MC(0)*MC(0) + MC(1)*MC(1) + MC(2)*MC(2));
+                MoveVector = 0.005 / length*MC;
+                ib.PerformTrans(MoveVector);
+        }
+}
+void MakeAtomsUniformDistanceMoveB(Molecule &ia, Molecule &ib, const double times)
+{
+      Eigen::Vector3d MC_A, MC_B,MC, MoveVector;
+	  MC_A = ia.MassCenter();
+      int label1=0, label2=0;
+      double closestdis=ClosestDistanceWithLabel(ia, ib,label1, label2);
+	while (ClosestDistanceWithLabel(ia, ib,label1, label2) < times*AtomRadiusSum(ia,ib,label1,label2))
+	{
+		//move B out of A
+		MC_B = ib.MassCenter();
+		MC = MC_B - MC_A;
+		double length = sqrt(MC(0)*MC(0) + MC(1)*MC(1) + MC(2)*MC(2));
+		MoveVector = 0.005 / length*MC;
+		ib.PerformTrans(MoveVector);
+	}
+        while (ClosestDistanceWithLabel(ia, ib,label1, label2)>times*AtomRadiusSum(ia,ib,label1,label2))
         {
 		//move B towards A
 		MC_B=ib.MassCenter();
