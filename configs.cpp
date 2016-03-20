@@ -200,7 +200,7 @@ static void GenerateFunction2(int matrix[][2],int index, int matrix2[][2],int in
 	cout << "Enter Calculating..." << endl;
 	const double RotPrecision = 20;
 	const double B1_default_value = 3.00;
-    const double Radius_Times=1.50;
+    const double Radius_Times=2.00;
 	const double RMSD_Precision = 0.35;
 	//for each pair config(ij[k]), rot * times
 	const int EachSaveConfigRotTimes = 8;
