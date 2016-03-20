@@ -285,6 +285,194 @@ void ToXYZfile(const Molecule &a, const Molecule &b, string &filename, string ot
 	}
 	tofile.close();
 }
+void Molecule::ToMol2File(const string filename)
+{
+	ofstream tofile(filename.c_str(), ios::out);
+	if (!tofile)
+	{
+		cerr << "Error to write " << filename << endl;
+		exit(1);
+	}
+	if (number == 0)
+		cout << "Empty molecule and no info is written to " << filename << endl;
+	//scan and save bond connection info
+	vector<Bond> bonds;
+	for (int i = 0; i < number; i++)
+		for (int j = i + 1; j < number; j++)
+		{
+			int order = BondOrder(i, j);
+			Bond bond_a;
+			if (order != 0)
+			{
+				bond_a.SetValue(i+1, j+1, order);
+				bonds.push_back(bond_a);
+			}
+		}
+	int bond_number = bonds.size();
+	//output *.mol2 file;
+	tofile << "@<TRIPOS>MOLECULE" << endl;
+	tofile << "Molecule Name" << endl;
+	tofile << number<<" " <<bond_number<< endl;
+	tofile << "SMALL" << endl; 
+	tofile << "NO_CHARGES" << endl<<endl;
+	tofile << "@<TRIPOS>ATOM" << endl;
+	for (int i = 0; i < number; i++)
+	{
+		tofile << i + 1 << " " <<StandardAtomName(name[i]) << i + 1 << "\t" <<fixed<<setprecision(4)<< corr[i][0] << "\t" << corr[i][1] << "\t" << corr[i][2] << " " << StandardAtomName(name[i]) << endl;
+	}
+	tofile << "@<TRIPOS>BOND" << endl;
+	for (int i = 0; i < bond_number; i++)
+	{
+		tofile << i + 1 << " " << bonds[i] << endl;
+	}
+	tofile.close();
+}
+void Molecule::ToMol2File_AmBn(const string filename, int a_atoms, int a_numbers,  int b_atoms)
+{
+	ofstream tofile(filename.c_str(), ios::out);
+	if (!tofile)
+	{
+		cerr << "Error to write " << filename << endl;
+		exit(1);
+	}
+	if (number == 0)
+		cout << "Empty molecule and no info is written to " << filename << endl;
+	int b_numbers = (number - a_numbers*a_atoms) / b_atoms;
+	//find bond info of A
+	vector<Bond> Abonds;
+	for (int i = 0; i < a_atoms; i++)
+		for (int j = i + 1; j < a_atoms; j++)
+		{
+			int order = BondOrder(i, j);
+			Bond bond_a;
+			if (order != 0)
+			{
+				bond_a.SetValue(i + 1, j + 1, order);
+				//cout << bond_a << endl;
+				Abonds.push_back(bond_a);
+			}
+		}
+	vector<Bond> Bbonds;
+	for (int i = a_numbers*a_atoms; i < a_numbers*a_atoms+b_atoms; i++)
+		for (int j = i + 1; j < a_numbers*a_atoms + b_atoms; j++)
+		{
+			int order = BondOrder(i, j);
+			Bond bond_b;
+			if (order != 0)
+			{
+				bond_b.SetValue(i + 1, j + 1, order);
+				//cout << bond_b << endl;
+				Bbonds.push_back(bond_b);
+			}
+		}
+	int bond_number = Abonds.size()*a_numbers+Bbonds.size()*b_numbers;
+	//output *.mol2 file;
+	tofile << "@<TRIPOS>MOLECULE" << endl;
+	tofile << "Molecule Name" << endl;
+	tofile << number << " " << bond_number << endl;
+	tofile << "SMALL" << endl;
+	tofile << "NO_CHARGES" << endl << endl;
+	tofile << "@<TRIPOS>ATOM" << endl;
+	for (int i = 0; i < number; i++)
+	{
+		tofile << i + 1 << " " << StandardAtomName(name[i]) << i + 1 << "\t" << fixed << setprecision(4) << corr[i][0] << "\t" << corr[i][1] << "\t" << corr[i][2] << " " << StandardAtomName(name[i]) << endl;
+	}
+	tofile << "@<TRIPOS>BOND" << endl;
+	int i_bond = 0;
+	for (int i = 0; i < a_numbers; i++)
+	{
+		for (int j = 0; j < Abonds.size(); j++)
+		{
+			tofile << i_bond + 1<<" ";
+			i_bond += 1;
+			tofile << Abonds[j] << endl;
+			Abonds[j].IncreaseLabel(a_atoms);
+		}
+	}
+	for (int i = 0; i < b_numbers; i++)
+	{
+		for (int j = 0; j < Bbonds.size(); j++)
+		{
+			tofile << i_bond + 1<<" ";
+			i_bond += 1;
+			tofile << Bbonds[j] << endl;
+			Bbonds[j].IncreaseLabel(b_atoms);
+		}
+	}
+	tofile.close();
+}
+void Molecule::ToMol2fileOnlyGeo(ofstream &tofile, int initial_label)
+{
+	for (int i = 0; i < number; i++)
+	{
+		tofile << i + initial_label << " " << StandardAtomName(name[i]) << i + initial_label << "\t" << fixed << setprecision(4) << corr[i][0] << "\t" << corr[i][1] << "\t" << corr[i][2] << " " << StandardAtomName(name[i]) << endl;
+	}
+}
+void ToMol2fileAmBnType(const string filename, vector<Molecule> &As, vector<Molecule>& Bs)
+{
+	ofstream tofile(filename.c_str(), ios::out);
+	if (!tofile)
+	{
+		cerr << "Error to write " << filename << endl;
+		exit(1);
+	}
+	vector<Bond> all_bonds;
+	int a_number = As.size();
+	int b_number = Bs.size();
+	int a_atoms = As[0].number;
+	int b_atoms = Bs[0].number;
+	for (int i_molecule = 0; i_molecule < a_number; i_molecule++)
+	{
+		for (int i = 0; i < a_atoms; i++)
+			for (int j = i + 1; j < a_atoms; j++)
+			{
+				int order = As[i_molecule].BondOrder(i, j);
+				Bond temp;
+				if (order != 0)
+				{
+					temp.SetValue(i +a_atoms*i_molecule + 1, j+a_atoms*i_molecule + 1, order);
+					all_bonds.push_back(temp);
+				}
+			}
+	}
+	for (int i_molecule = 0; i_molecule < b_number; i_molecule++)
+	{
+		for (int i = 0; i < b_atoms; i++)
+			for (int j = i + 1; j < b_atoms; j++)
+			{
+				int order = Bs[i_molecule].BondOrder(i, j);
+				Bond temp;
+				if (order != 0)
+				{
+					temp.SetValue(i+1+ b_atoms*i_molecule+a_atoms*a_number, j+1+ b_atoms*i_molecule + a_atoms*a_number, order);
+					all_bonds.push_back(temp);
+				}
+			}
+	}
+	int bond_number = all_bonds.size();
+	//output *.mol2 file;
+	tofile << "@<TRIPOS>MOLECULE" << endl;
+	tofile << "Molecule Name" << endl;
+	tofile << a_number*a_atoms+b_atoms*b_number << " " << bond_number << endl;
+	tofile << "SMALL" << endl;
+	tofile << "NO_CHARGES" << endl << endl;
+	tofile << "@<TRIPOS>ATOM" << endl;
+	int i_count = 1;
+	for (int i_molecule = 0; i_molecule < a_number; i_molecule++)
+	{
+		As[i_molecule].ToMol2fileOnlyGeo(tofile, i_count);
+		i_count += a_atoms;
+	}
+	for (int i_molecule = 0; i_molecule < b_number; i_molecule++)
+	{
+		Bs[i_molecule].ToMol2fileOnlyGeo(tofile, i_count);
+		i_count += b_atoms;
+	}
+	tofile << "@<TRIPOS>BOND" << endl;
+	for (int i = 0; i != bond_number; i++)
+		tofile << i + 1 << " " << all_bonds[i] << endl;
+	tofile.close();
+}
 void Molecule::ToNWchemFileHF(const string filename, const string basis)
 {
 	ofstream out(filename.c_str(), ios::out);
@@ -682,6 +870,46 @@ double Molecule::MoleculeMass()
 	for (iter = name.begin(); iter != name.end(); iter++)
 		totalMass += AtomMass(*iter);
 	return totalMass;
+}
+//This is to return radius of No.i atom
+double Molecule::AtomRadius(int i)
+{
+	int j;
+	for (j = 0; j != MaxElementOrder; j++)
+	{
+		if (name[i] == ELEMENT[j])
+			break;
+	}
+	if (j < MaxElementOrder)
+		return ELEMENT_RADIUS[j];
+	else
+		return 0.70;
+}
+//This is to return bond order of No.i atom & No.j atom
+int Molecule::BondOrder(int i, int j)
+{
+	double distance = sqrt((corr[i][0] - corr[j][0])*(corr[i][0] - corr[j][0]) + (corr[i][1] - corr[j][1])*(corr[i][1] - corr[j][1])+ (corr[i][2] - corr[j][2])*(corr[i][2] - corr[j][2]));
+	double sum = AtomRadius(i) + AtomRadius(j);
+	double order = distance / sum;
+	if (order > 0.62&&order < 0.72)
+		return 4;
+	else if (order > 0.72&&order < 0.82)
+		return 3;
+	else if (order > 0.82&&order < 0.92)
+		return 2;
+	else if (order > 0.92&&order < 1.25)
+		return 1;
+	else
+		return 0;
+}
+string Molecule::StandardAtomName(string x)
+{
+	string temp;
+	if (x.size() == 2 && x[1] >= 'A'&&x[1] <= 'Z')
+		temp += x[0];
+	else
+		temp = x;
+	return temp;
 }
 Eigen::Vector3d Molecule::MassCenter()
 {
@@ -1549,5 +1777,56 @@ void Do_XYZToPDB_MoleculeAmBnType()
 	ReadConnectionInfo(filename2, connect_n, b_atoms);
 	cout << "Program dealing..." << endl;
 	XYZToPDB_MoleculeAmBnType(xyz_filename, save_filename, a_atoms, a_num, b_atoms, b_num, connect_m, connect_n);
+	cout << "Done!" << endl;
+}
+
+void XYZToMol2_MoleculeAmBnType(const string xyz_filename, const string save_filename, int a_atoms, int a_num, int b_atoms)
+{
+	ifstream infile(xyz_filename.c_str());
+	if (!cout)
+	{
+		cerr << "Error to open " << xyz_filename << " to get the geometry info" << endl;
+		exit(1);
+	}
+	int total_num;
+	infile >> total_num;
+	string temps;
+	getline(infile, temps);
+	getline(infile, temps);
+	//judge if input ok
+	int b_num = (total_num - a_atoms*a_num) / b_atoms;
+	vector<Molecule> As;
+	vector<Molecule> Bs;
+	Molecule temp;
+	for (int i = 0; i != a_num; i++)
+	{
+		temp.ReadFromXYZOnlyGeo(infile, a_atoms);
+		As.push_back(temp);
+	}
+	for (int i = 0; i != b_num; i++)
+	{
+		temp.ReadFromXYZOnlyGeo(infile, b_atoms);
+		Bs.push_back(temp);
+	}
+	//write
+	ToMol2fileAmBnType(save_filename, As, Bs);
+	infile.close();
+
+}
+void Do_XYZToMol2_MoleculeAmBnType()
+{
+	cout << "#################################" << endl;
+	cout << "# xyz-->mol2 developed by Tao Li #" << endl;
+	cout << "#################################" << endl << endl;
+	cout << "Please input xyz filename:" << endl;
+	string xyz_filename, save_filename;
+	cin >> xyz_filename;
+	save_filename = xyz_filename + ".mol2";
+	cout << "Please input atom numbers of molecule A and B (eg: 7 4):" << endl;
+	int a_atoms, b_atoms, a_num, b_num;
+	cin >> a_atoms >> b_atoms;
+	cout << "Please input numbers of molecule A(eg: 1):" << endl;
+	cin >> a_num;
+	XYZToMol2_MoleculeAmBnType(xyz_filename, save_filename, a_atoms, a_num, b_atoms);
 	cout << "Done!" << endl;
 }

@@ -8,6 +8,7 @@ void FunctionAdvisor()
     cout << "2. Purely Random Generate many 2 molecules reaction complex .xyz files"<<endl;
 	cout << "3. Analysis the result from 1, to get one .xyz file with one molecule A and multi-B, to find the space distribution of B near A" << endl;
 	cout << "4. Do a tinker .arc file analysis" << endl;
+	cout << "5. xyz --> mol2 with AmBn type" << endl;
 	cout << "Please enter one numer to enter this sub program: " << endl;
 	int num;
 	cin >> num;
@@ -19,6 +20,8 @@ void FunctionAdvisor()
 		Do_AligenXYZStandard_Program();
 	else if (num == 4)
 		Do_ReadFromWholeTinkerArc_FromTxt();
+	else if (num == 5)
+		Do_XYZToMol2_MoleculeAmBnType();
 }
 
 
@@ -33,7 +36,6 @@ Do_GenerateFunction_Program_FromFile(X_ToStr<char*>(argv[1]));
 system("PAUSE");
 return 0;
 }
-
 
 
 

@@ -400,6 +400,8 @@ static void GenerateFunction2(int matrix[][2],int index, int matrix2[][2],int in
             total_file_num=total;
         AlignEachXYZToStandardForm("SaveConfigs", total_file_num, FA.TotalFragments().Number());
         cout<<"#Have generate an analysis .xyz file"<<endl;
+		//translate .xyz --> .mol2
+		XYZToMol2_MoleculeAmBnType("SaveConfigs/final.xyz","SaveConfigs/final.mol2", FA.TotalFragments().Number(),1, FB.TotalFragments().Number());
 }
 
 static void GetGroupDevideInfoFromFile(const string filename,int con[][2], int label)

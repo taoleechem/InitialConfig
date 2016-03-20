@@ -1,16 +1,8 @@
-# Title
-# Created by GaussView 5.0.8
-#
-
-#
-#
-
 @<TRIPOS>MOLECULE
 Molecule Name
 127 96
 SMALL
 NO_CHARGES
-
 
 @<TRIPOS>ATOM
 1 C1     0.0000     0.0000     0.0000 C

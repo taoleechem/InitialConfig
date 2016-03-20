@@ -12,7 +12,7 @@
 #include <cmath>
 #include <time.h>
 using namespace std;
-const int MaxAtom = 50;
+const int MaxAtom = 100;
 const int MAXFRAGMENT = 8;
 const double PI = 3.1415926;
 const double HARTREE = 4.359744e-18;
@@ -43,6 +43,36 @@ template <class T> string X_ToStr(T tmp)
 	ss << tmp;
 	return ss.str();
 }
+class Bond
+{
+protected:
+	int i, j;
+	int order;
+public:
+	Bond():i(0),j(0),order(0){}
+	Bond(const Bond &ia)
+	{
+		i = ia.i;
+		j = ia.j;
+		order = ia.order;
+	}
+	void SetValue(int ii, int jj, int oor)
+	{
+		i = ii;
+		j = jj;
+		order = oor;
+	}
+	void IncreaseLabel(int num)
+	{
+		i += num;
+		j += num;
+	}
+	friend ostream& operator<<(ostream &os, Bond &ia)
+	{
+		os << ia.i << " " << ia.j << " " << ia.order;
+		return os;
+	}
+};
 class Molecule
 {
 protected:
@@ -70,6 +100,10 @@ public:
 	void ToXYZfile(const string filename);
 	void ToXYZfileOnlyGeo(ofstream &tofile, bool judge);
 	friend void ToXYZfile(const Molecule &a, const Molecule &b, string &filename, string other_info = "  Have a good day!");
+	void ToMol2File(const string filename);
+	void ToMol2File_AmBn(const string filename, int a_atoms, int a_numbers, int b_atoms);
+	void ToMol2fileOnlyGeo(ofstream &tofile, int initial_label);
+	friend void ToMol2fileAmBnType(const string filename,vector<Molecule> &As, vector<Molecule>& Bs);
 	void ToNWchemFileHF(const string filename, const string basis);
 	friend void ToNWchemFileHF(const Molecule &a, const Molecule &b, string &filename, const string basis = "6-31G");
 	void ToNWchemFileDFT(const string filename, const string basis, const string functional);
@@ -87,6 +121,9 @@ public:
 	//small functions
 	int Number();
 	double MoleculeMass();
+	double AtomRadius(int i);
+	int BondOrder(int i, int j);
+	string StandardAtomName(string x);
 	Eigen::Vector3d MassCenter();
 	friend double DistanceOfMassCenter(Molecule &ia, Molecule &ib);
 	friend Molecule AbstractSomeFormNewMolecule(Molecule &ia, int begin_label,int end_label);
@@ -450,5 +487,9 @@ void Do_AligenXYZStandard_Program();
 void XYZToPDB_MoleculeAmBnType(const string xyz_filename, const string save_filename, int a_atoms, int a_num, int b_atoms, int b_num, int connect_m[][8], int connect_n[][8]);
 void ReadConnectionInfo(const string filename, int connect[][8], int atoms);
 void Do_XYZToPDB_MoleculeAmBnType();
+
+//xyz-->mol2
+void XYZToMol2_MoleculeAmBnType(const string xyz_filename, const string save_filename, int a_atoms, int a_num, int b_atoms);
+void Do_XYZToMol2_MoleculeAmBnType();
 #endif
 
