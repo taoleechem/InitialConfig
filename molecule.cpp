@@ -235,7 +235,7 @@ void Molecule::ToXYZfile(const string filename)
 			{
 				if (abs(corr[i][j]) < 1e-7)
 					corr[i][j] = 0;
-				tofile << "\t" << fixed << setprecision(7) << corr[i][j];
+				tofile << " " << fixed << setprecision(7) << corr[i][j];
 			}
 			tofile << endl;
 		}
@@ -920,6 +920,22 @@ int Molecule::BondOrder(int i, int j)
 	else
 		return 0;
 }
+int Molecule::ConnectAtoms(int i)
+{
+	int temp = 0;
+	for (int j = 0; j != number; j++)
+	{
+		if (j == i)
+			continue;
+		else
+		{
+			if (BondOrder(i, j) > 0)
+				temp += 1;
+		}
+	}
+	return temp;
+}
+
 string Molecule::StandardAtomName(string x)
 {
 	string temp;
@@ -1235,10 +1251,10 @@ void MakeAtomsUniformDistanceMoveB(Molecule &ia, Molecule &ib, const double time
                 ib.PerformTrans(MoveVector);
         }
 }
-double RMSD(Molecule &ia, Molecule &ib)
+double RMSD( Molecule &ia,  Molecule &ib)
 {
 	if (ia.number != ib.number)
-		return 1;
+		return 100;
 	else
 	{
 		double ref_xlist[MaxAtom][3];
@@ -1277,6 +1293,29 @@ void Molecule::AligenToStandardConfig()
 	PerformAxisRot(axis, alpha);
 }
 
+void RandomRotPossibleBond(Molecule &ia, double Resolusion_radian)
+{
+	//Firstly, judge which bond has potential to rot
+	vector<Bond> rotable;
+	for (int i = 0; i < ia.number; i++)
+		for (int j=i + 1; j < ia.number; j++)
+		{
+			int order = ia.BondOrder(i, j);
+			if (order == 1&&ia.ConnectAtoms(i)>1&&ia.ConnectAtoms(j)>1)
+				rotable.push_back(Bond(i, j, order));
+		}
+	//Secondly, rot with this bond.
+	int num = rotable.size();
+	clock_t now = clock();
+	srand(now);
+	int Max = int(2 * PI / Resolusion_radian);
+	double x = (rand() % (int)((Max)) + 1)*Resolusion_radian;
+	for (int i = 0; i < num; i++)
+	{
+		ia.PerformBondRot(rotable[i].i, rotable[i].j, x);
+	}
+}
+
 
 
 
@@ -1307,16 +1346,16 @@ DoubleMolecule& DoubleMolecule::operator=(DoubleMolecule &id)
 	energy = id.energy;
     	return *this;
 }
-bool operator>(DoubleMolecule &ia, DoubleMolecule &ib)
+bool operator>(const DoubleMolecule &ia, const DoubleMolecule &ib)
 {
-	if (ia.Energy() > ib.Energy())
+	if (ia.energy > ib.energy)
 		return true;
 	else
 		return false;
 }
-bool operator<(DoubleMolecule &ia, DoubleMolecule &ib)
+bool operator<(const DoubleMolecule &ia, const DoubleMolecule &ib)
 {
-	if (ia.Energy() < ib.Energy())
+	if (ia.energy < ib.energy)
 		return true;
 	else
 		return false;
@@ -1346,7 +1385,7 @@ double DoubleMolecule::Energy()
 {
 	return energy;
 }
-double RMSD(DoubleMolecule &ia, DoubleMolecule &ib)
+double RMSD(const DoubleMolecule ia, const DoubleMolecule ib)
 {
 	Molecule t1, t2;
 	t1 = ia.a + ia.b;

@@ -63,11 +63,11 @@ template <class T> string X_ToStr(T tmp)
 }
 class Bond
 {
-protected:
+public:
 	int i, j;
 	int order;
-public:
-	Bond():i(0),j(0),order(0){}
+	Bond() :i(0), j(0), order(0) {}
+	Bond(int ii, int ij, int io) :i(ii), j(ij), order(io) {}
 	Bond(const Bond &ia)
 	{
 		i = ia.i;
@@ -91,6 +91,7 @@ public:
 		return os;
 	}
 };
+
 class Molecule
 {
 protected:
@@ -141,6 +142,20 @@ public:
 	double MoleculeMass();
 	double AtomRadius(int i);
 	int BondOrder(int i, int j);
+	int ConnectAtoms(int i);
+	vector<int> WhoConnectMe(int i, int except_label)
+	{
+		vector<int> temp;
+		for (int j = 0; j < number; j++)
+			{
+				if (j!=except_label&&BondOrder(i, j) > 0)
+				{
+					temp.push_back(j);
+					//cout << j << " connect " << i << " besides " << except_label << endl;
+				}
+			}
+		return temp;
+	}
 	string StandardAtomName(string x);
 	Eigen::Vector3d MassCenter();
 	friend double DistanceOfMassCenter(Molecule &ia, Molecule &ib);
@@ -149,6 +164,26 @@ public:
 	void clear();
 	//Simple Operate
 	void PerformRot(Eigen::Matrix3d rot);
+//Unfinished
+	void PerformBondRot(int i, int j, double angle_radian)
+	{
+		cout << "Enter Bond Rot " << i << " " << j << " with angle " << int(angle_radian*180/PI) << endl;
+		vector<int> RotAtoms(WhoConnectMe(j, i));
+		//cout << RotAtoms[0] << endl;
+		Eigen::Vector3d axis;
+		axis << corr[j][0] - corr[i][0], corr[j][1] - corr[i][1], corr[j][2] - corr[i][2];
+		axis.normalize();
+		Eigen::AngleAxis<double> rot(angle_radian, axis);
+		for (int i = 0; i < RotAtoms.size(); i++)
+		{
+			Eigen::Vector3d singleAtom;
+			singleAtom << corr[RotAtoms[i]][0], corr[RotAtoms[i]][1], corr[RotAtoms[i]][2];
+			singleAtom = rot*singleAtom;
+			corr[RotAtoms[i]][0] = singleAtom(0);
+			corr[RotAtoms[i]][1] = singleAtom(1);
+			corr[RotAtoms[i]][2] = singleAtom(2);
+		}
+	}
 	void PerformTrans(const Eigen::Vector3d trans);
 	void PerformXTrans(const double &deltaX);
 	void PerformYTrans(const double &deltaY);
@@ -168,6 +203,8 @@ public:
 	friend double RMSD(Molecule &ia, Molecule &ib);
 	friend void SpaceTransform(Molecule ref, Molecule &change);
 	void AligenToStandardConfig();
+
+	friend void RandomRotPossibleBond(Molecule &ia, double Resolution_radian);
 };
 
 class DoubleMolecule
@@ -180,14 +217,14 @@ public:
 	DoubleMolecule(const DoubleMolecule &i);
 	DoubleMolecule();
 	DoubleMolecule& operator=(DoubleMolecule &id);
-	friend bool operator>(DoubleMolecule &ia, DoubleMolecule &ib);
-	friend bool operator<(DoubleMolecule &ia, DoubleMolecule &ib);
+	friend bool operator>(const DoubleMolecule &ia, const DoubleMolecule &ib);
+	friend bool operator<(const DoubleMolecule &ia, const DoubleMolecule &ib);
 	void Set(Molecule ia, Molecule ib, double ienergy);
 	void GetInfo(Molecule &ia, Molecule &ib, double &ienergy);
 	void ToXYZ(string filename);
 	void output();
 	double Energy();
-	friend double RMSD(DoubleMolecule &ia, DoubleMolecule &ib);
+	friend double RMSD(const DoubleMolecule ia, const DoubleMolecule ib);
 };
 
 class Fragments
