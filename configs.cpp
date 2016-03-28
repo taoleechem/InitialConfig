@@ -430,12 +430,12 @@ static void GenerateFunction2(int matrix[][2],int index, int matrix2[][2],int in
 static void GenerateFunction3(int matrix[][2],int index, int matrix2[][2],int index2, const int OutPutNumber,const string xyz_filename1,const string xyz_filename2,bool Rotable1, bool Rotable2)
 {
 	cout << "Enter Calculating..." << endl;
-	const double RotPrecision = 60;
+	const double RotPrecision = 20;
 	const double B1_default_value = 2.80;
         const double Radius_Times=1.50;
 	const double RMSD_Precision = 0.40;
 	//for each pair config(ij[k]), rot * times
-	const int EachSaveConfigRotTimes = 10;
+	const int EachSaveConfigRotTimes = 16;
 	Fragments FA, FB;
 	FA.ReadFromXYZfile(xyz_filename1, index, matrix);
 	FB.ReadFromXYZfile(xyz_filename2, index2, matrix2);

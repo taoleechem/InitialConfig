@@ -1,0 +1,2580 @@
+nohup: ignoring input
+Read molecule A from InitiConfig/ch2choh_1.xyz, read molecule B from InitiConfig/ch2o.xyz
+Molecule A Devide Group Method:
+0	1
+2	4
+5	6
+Molecule B Devide Group Method:
+0	2
+3	3
+Generate Max = 50 configurations to ./SaveConfigs
+Enter Calculating...
+Configuration of Molecule A:
+3 fragments
+2
+standard .xyz file  CH
+C	-2.7678700	2.4048800	0.0099100
+H	-3.1437600	1.3913400	0.0842300
+3
+standard .xyz file  CH2
+C	-1.4758300	2.7277600	0.0753900
+H	-0.7265000	1.9540000	0.2109400
+H	-1.1286900	3.7515100	-0.0021500
+2
+standard .xyz file  HO
+O	-3.7806400	3.3038600	-0.1583900
+H	-3.3984300	4.1963400	-0.2199200
+
+Configuration of Molecule B:
+
+2 fragments
+3
+standard .xyz file  CH2
+C	-3.4014800	2.3109600	0.0000000
+H	-4.4924900	2.3791200	-0.1370500
+H	-3.0028400	1.2930900	0.1370500
+1
+standard .xyz file  O
+O	-2.6800300	3.3005300	0.0000000
+
+At rest, energy of 2 molecules is: -268.2225871
+0,0 group-combination has potential: 0.4579667(unitless, V*Hartree/K_b/T)
+0,1 group-combination has potential: -2.3946592(unitless, V*Hartree/K_b/T)
+1,0 group-combination has potential: 0.2228026(unitless, V*Hartree/K_b/T)
+1,1 group-combination has potential: -1.4742551(unitless, V*Hartree/K_b/T)
+2,0 group-combination has potential: -2.7871721(unitless, V*Hartree/K_b/T)
+2,1 group-combination has potential: 2.7780332(unitless, V*Hartree/K_b/T)
+
+Here is the partition function of each group-combination pair:
+0.0191326	0.3316304	
+0.0242050	0.1321076	
+0.4910442	0.0018801	
+
+
+#Do calculate of CH No.0, and CH2 No.0
+Enter Bond Rot 0 5 with angle 180
+Generate No.0 configuration with energy 0.0141374
+Enter Bond Rot 0 5 with angle 180
+Generate No.1 configuration with energy 0.0194602
+Enter Bond Rot 0 5 with angle 360
+Generate No.2 configuration with energy 0.0001889
+Enter Bond Rot 0 5 with angle 360
+Generate No.3 configuration with energy 0.0004274
+Enter Bond Rot 0 5 with angle 180
+Generate No.4 configuration with energy 0.0165420
+Enter Bond Rot 0 5 with angle 180
+Generate No.5 configuration with energy 0.0197526
+Enter Bond Rot 0 5 with angle 180
+Generate No.6 configuration with energy 0.0202690
+Enter Bond Rot 0 5 with angle 360
+Generate No.7 configuration with energy -0.0016764
+Enter Bond Rot 0 5 with angle 180
+Generate No.8 configuration with energy 0.0152808
+Enter Bond Rot 0 5 with angle 180
+Generate No.9 configuration with energy 0.0180240
+Enter Bond Rot 0 5 with angle 180
+Generate No.10 configuration with energy 0.0194917
+Enter Bond Rot 0 5 with angle 180
+Generate No.11 configuration with energy 0.0197791
+Enter Bond Rot 0 5 with angle 180
+Generate No.12 configuration with energy 0.0165542
+Enter Bond Rot 0 5 with angle 180
+Generate No.13 configuration with energy 0.0194673
+Enter Bond Rot 0 5 with angle 360
+Generate No.14 configuration with energy -0.0001720
+Enter Bond Rot 0 5 with angle 360
+Generate No.15 configuration with energy 0.0001237
+Enter Bond Rot 0 5 with angle 180
+Generate No.16 configuration with energy 0.0175626
+Enter Bond Rot 0 5 with angle 180
+Generate No.17 configuration with energy 0.0198021
+Enter Bond Rot 0 5 with angle 360
+Generate No.18 configuration with energy -0.0006641
+Enter Bond Rot 0 5 with angle 180
+Generate No.19 configuration with energy 0.0181977
+#After sorting,
+No.0 config has energy -0.0016764
+No.1 config has energy -0.0006641
+No.2 config has energy -0.0001720
+No.3 config has energy 0.0001237
+No.4 config has energy 0.0001889
+No.5 config has energy 0.0004274
+No.6 config has energy 0.0141374
+No.7 config has energy 0.0152808
+No.8 config has energy 0.0165420
+No.9 config has energy 0.0165542
+No.10 config has energy 0.0175626
+No.11 config has energy 0.0180240
+No.12 config has energy 0.0181977
+No.13 config has energy 0.0194602
+No.14 config has energy 0.0194673
+No.15 config has energy 0.0194917
+No.16 config has energy 0.0197526
+No.17 config has energy 0.0197791
+No.18 config has energy 0.0198021
+No.19 config has energy 0.0202690
+Save 2 least energy configuration:
+Energy: -0.0016764
+7
+standard .xyz file  C2H4O
+C	-0.0765261	0.0272495	-0.0211921
+H	0.9111830	-0.3244547	0.2523310
+C	-1.1345052	-0.7688610	-0.1786558
+H	-1.0375578	-1.8401547	-0.0320109
+H	-2.1115326	-0.3884092	-0.4529854
+O	-0.0990137	1.3820531	-0.1830389
+H	-1.0012195	1.6520676	-0.4269812
+4
+standard .xyz file  CH2O
+C	4.9290182	-0.2432036	0.1184672
+H	5.5166685	0.4276917	0.7652268
+H	5.5166658	-0.9141111	-0.5283011
+O	3.7043799	-0.2432044	0.1184666
+
+Energy: -0.0006641
+7
+standard .xyz file  C2H4O
+C	-0.0785972	0.0277624	-0.0099806
+H	0.9358434	-0.3305618	0.1188373
+C	-1.1652097	-0.6994461	0.2514529
+H	-1.0656385	-1.7167495	0.6171759
+H	-2.1686802	-0.3141622	0.1129395
+O	-0.1016932	1.3117378	-0.4715720
+H	-1.0283206	1.5904959	-0.5718047
+4
+standard .xyz file  CH2O
+C	3.7308504	-0.3050017	0.1974466
+H	3.5808487	-0.3883734	-0.8907997
+H	3.8548819	0.7197421	0.5825078
+O	3.7579107	-1.2858837	0.9301656
+
+-------------------------------------------------
+
+#Do calculate of CH No.0, and O No.1
+Enter Bond Rot 0 5 with angle 180
+Generate No.0 configuration with energy 0.0156513
+Enter Bond Rot 0 5 with angle 180
+Generate No.1 configuration with energy 0.0145490
+Enter Bond Rot 0 5 with angle 180
+Generate No.2 configuration with energy 0.0176563
+Enter Bond Rot 0 5 with angle 180
+Generate No.3 configuration with energy 0.0144398
+Enter Bond Rot 0 5 with angle 180
+Generate No.4 configuration with energy 0.0155121
+Enter Bond Rot 0 5 with angle 180
+Generate No.5 configuration with energy 0.0183295
+Enter Bond Rot 0 5 with angle 180
+Generate No.6 configuration with energy 0.0147036
+Enter Bond Rot 0 5 with angle 360
+Generate No.7 configuration with energy -0.0013532
+Enter Bond Rot 0 5 with angle 360
+Generate No.8 configuration with energy 0.0006945
+Enter Bond Rot 0 5 with angle 180
+Generate No.9 configuration with energy 0.0191837
+Enter Bond Rot 0 5 with angle 360
+Generate No.10 configuration with energy -0.0002254
+Enter Bond Rot 0 5 with angle 360
+Generate No.11 configuration with energy 0.0005826
+Enter Bond Rot 0 5 with angle 360
+Generate No.12 configuration with energy -0.0017177
+Enter Bond Rot 0 5 with angle 180
+Generate No.13 configuration with energy 0.0189730
+Enter Bond Rot 0 5 with angle 180
+Generate No.14 configuration with energy 0.0198136
+Enter Bond Rot 0 5 with angle 360
+Generate No.15 configuration with energy -0.0022635
+Enter Bond Rot 0 5 with angle 180
+Generate No.16 configuration with energy 0.0179697
+Enter Bond Rot 0 5 with angle 180
+Generate No.17 configuration with energy 0.0183549
+Enter Bond Rot 0 5 with angle 180
+Generate No.18 configuration with energy 0.0171206
+Enter Bond Rot 0 5 with angle 180
+Generate No.19 configuration with energy 0.0193876
+Enter Bond Rot 0 5 with angle 180
+Generate No.20 configuration with energy 0.0172226
+Enter Bond Rot 0 5 with angle 360
+Generate No.21 configuration with energy -0.0017362
+Enter Bond Rot 0 5 with angle 360
+Generate No.22 configuration with energy 0.0004095
+Enter Bond Rot 0 5 with angle 360
+Generate No.23 configuration with energy -0.0016987
+Enter Bond Rot 0 5 with angle 360
+Generate No.24 configuration with energy -0.0008853
+Enter Bond Rot 0 5 with angle 180
+Generate No.25 configuration with energy 0.0162392
+Enter Bond Rot 0 5 with angle 180
+Generate No.26 configuration with energy 0.0174522
+Enter Bond Rot 0 5 with angle 180
+Generate No.27 configuration with energy 0.0154518
+Enter Bond Rot 0 5 with angle 180
+Generate No.28 configuration with energy 0.0168935
+Enter Bond Rot 0 5 with angle 360
+Generate No.29 configuration with energy -0.0017226
+Enter Bond Rot 0 5 with angle 180
+Generate No.30 configuration with energy 0.0184332
+Enter Bond Rot 0 5 with angle 360
+Generate No.31 configuration with energy -0.0027284
+Enter Bond Rot 0 5 with angle 180
+Generate No.32 configuration with energy 0.0183207
+Enter Bond Rot 0 5 with angle 180
+Generate No.33 configuration with energy 0.0155232
+Enter Bond Rot 0 5 with angle 360
+Generate No.34 configuration with energy -0.0006255
+Enter Bond Rot 0 5 with angle 180
+Generate No.35 configuration with energy 0.0156026
+Enter Bond Rot 0 5 with angle 360
+Generate No.36 configuration with energy -0.0014311
+Enter Bond Rot 0 5 with angle 180
+Generate No.37 configuration with energy 0.0170909
+Enter Bond Rot 0 5 with angle 360
+Generate No.38 configuration with energy 0.0004477
+Enter Bond Rot 0 5 with angle 360
+Generate No.39 configuration with energy 0.0003252
+Enter Bond Rot 0 5 with angle 180
+Generate No.40 configuration with energy 0.0141967
+Enter Bond Rot 0 5 with angle 180
+Generate No.41 configuration with energy 0.0141745
+Enter Bond Rot 0 5 with angle 180
+Generate No.42 configuration with energy 0.0185338
+Enter Bond Rot 0 5 with angle 360
+Generate No.43 configuration with energy -0.0013355
+Enter Bond Rot 0 5 with angle 360
+Generate No.44 configuration with energy -0.0032080
+Enter Bond Rot 0 5 with angle 180
+Generate No.45 configuration with energy 0.0165385
+Enter Bond Rot 0 5 with angle 360
+Generate No.46 configuration with energy -0.0010036
+Enter Bond Rot 0 5 with angle 360
+Generate No.47 configuration with energy -0.0024819
+Enter Bond Rot 0 5 with angle 360
+Generate No.48 configuration with energy -0.0021863
+Enter Bond Rot 0 5 with angle 180
+Generate No.49 configuration with energy 0.0172965
+Enter Bond Rot 0 5 with angle 180
+Generate No.50 configuration with energy 0.0143219
+Enter Bond Rot 0 5 with angle 180
+Generate No.51 configuration with energy 0.0182443
+Enter Bond Rot 0 5 with angle 180
+Generate No.52 configuration with energy 0.0168260
+Enter Bond Rot 0 5 with angle 360
+Generate No.53 configuration with energy -0.0017561
+Enter Bond Rot 0 5 with angle 360
+Generate No.54 configuration with energy -0.0010136
+Enter Bond Rot 0 5 with angle 180
+Generate No.55 configuration with energy 0.0183760
+Enter Bond Rot 0 5 with angle 180
+Generate No.56 configuration with energy 0.0165539
+Enter Bond Rot 0 5 with angle 180
+Generate No.57 configuration with energy 0.0175414
+Enter Bond Rot 0 5 with angle 180
+Generate No.58 configuration with energy 0.0192291
+Enter Bond Rot 0 5 with angle 360
+Generate No.59 configuration with energy -0.0026505
+Enter Bond Rot 0 5 with angle 180
+Generate No.60 configuration with energy 0.0197851
+Enter Bond Rot 0 5 with angle 360
+Generate No.61 configuration with energy -0.0024843
+Enter Bond Rot 0 5 with angle 180
+Generate No.62 configuration with energy 0.0187164
+Enter Bond Rot 0 5 with angle 180
+Generate No.63 configuration with energy 0.0148232
+Enter Bond Rot 0 5 with angle 360
+Generate No.64 configuration with energy -0.0010122
+Enter Bond Rot 0 5 with angle 180
+Generate No.65 configuration with energy 0.0181460
+Enter Bond Rot 0 5 with angle 180
+Generate No.66 configuration with energy 0.0196086
+Enter Bond Rot 0 5 with angle 360
+Generate No.67 configuration with energy -0.0017102
+Enter Bond Rot 0 5 with angle 180
+Generate No.68 configuration with energy 0.0153970
+Enter Bond Rot 0 5 with angle 180
+Generate No.69 configuration with energy 0.0183167
+Enter Bond Rot 0 5 with angle 360
+Generate No.70 configuration with energy -0.0011799
+Enter Bond Rot 0 5 with angle 180
+Generate No.71 configuration with energy 0.0152881
+Enter Bond Rot 0 5 with angle 180
+Generate No.72 configuration with energy 0.0197173
+Enter Bond Rot 0 5 with angle 360
+Generate No.73 configuration with energy -0.0013898
+Enter Bond Rot 0 5 with angle 360
+Generate No.74 configuration with energy -0.0014123
+Enter Bond Rot 0 5 with angle 180
+Generate No.75 configuration with energy 0.0153955
+Enter Bond Rot 0 5 with angle 360
+Generate No.76 configuration with energy -0.0027281
+Enter Bond Rot 0 5 with angle 180
+Generate No.77 configuration with energy 0.0173674
+Enter Bond Rot 0 5 with angle 360
+Generate No.78 configuration with energy 0.0002149
+Enter Bond Rot 0 5 with angle 180
+Generate No.79 configuration with energy 0.0171636
+Enter Bond Rot 0 5 with angle 360
+Generate No.80 configuration with energy 0.0004932
+Enter Bond Rot 0 5 with angle 180
+Generate No.81 configuration with energy 0.0167535
+Enter Bond Rot 0 5 with angle 360
+Generate No.82 configuration with energy -0.0010890
+Enter Bond Rot 0 5 with angle 180
+Generate No.83 configuration with energy 0.0182479
+Enter Bond Rot 0 5 with angle 180
+Generate No.84 configuration with energy 0.0180792
+Enter Bond Rot 0 5 with angle 360
+Generate No.85 configuration with energy -0.0020221
+Enter Bond Rot 0 5 with angle 360
+Generate No.86 configuration with energy -0.0017593
+Enter Bond Rot 0 5 with angle 360
+Generate No.87 configuration with energy -0.0008753
+Enter Bond Rot 0 5 with angle 180
+Generate No.88 configuration with energy 0.0195769
+Enter Bond Rot 0 5 with angle 360
+Generate No.89 configuration with energy -0.0022243
+Enter Bond Rot 0 5 with angle 180
+Generate No.90 configuration with energy 0.0166958
+Enter Bond Rot 0 5 with angle 180
+Generate No.91 configuration with energy 0.0190613
+Enter Bond Rot 0 5 with angle 360
+Generate No.92 configuration with energy -0.0020082
+Enter Bond Rot 0 5 with angle 360
+Generate No.93 configuration with energy -0.0020492
+Enter Bond Rot 0 5 with angle 360
+Generate No.94 configuration with energy -0.0009270
+Enter Bond Rot 0 5 with angle 360
+Generate No.95 configuration with energy -0.0020242
+Enter Bond Rot 0 5 with angle 180
+Generate No.96 configuration with energy 0.0170934
+Enter Bond Rot 0 5 with angle 360
+Generate No.97 configuration with energy -0.0014349
+Enter Bond Rot 0 5 with angle 180
+Generate No.98 configuration with energy 0.0158488
+Enter Bond Rot 0 5 with angle 180
+Generate No.99 configuration with energy 0.0152962
+Enter Bond Rot 0 5 with angle 180
+Generate No.100 configuration with energy 0.0174386
+Enter Bond Rot 0 5 with angle 180
+Generate No.101 configuration with energy 0.0151617
+Enter Bond Rot 0 5 with angle 180
+Generate No.102 configuration with energy 0.0192395
+Enter Bond Rot 0 5 with angle 180
+Generate No.103 configuration with energy 0.0174410
+Enter Bond Rot 0 5 with angle 360
+Generate No.104 configuration with energy -0.0031666
+Enter Bond Rot 0 5 with angle 360
+Generate No.105 configuration with energy -0.0018960
+Enter Bond Rot 0 5 with angle 180
+Generate No.106 configuration with energy 0.0160150
+Enter Bond Rot 0 5 with angle 180
+Generate No.107 configuration with energy 0.0165119
+Enter Bond Rot 0 5 with angle 180
+Generate No.108 configuration with energy 0.0179812
+Enter Bond Rot 0 5 with angle 360
+Generate No.109 configuration with energy -0.0015084
+Enter Bond Rot 0 5 with angle 180
+Generate No.110 configuration with energy 0.0146069
+Enter Bond Rot 0 5 with angle 360
+Generate No.111 configuration with energy 0.0005112
+Enter Bond Rot 0 5 with angle 180
+Generate No.112 configuration with energy 0.0189439
+Enter Bond Rot 0 5 with angle 360
+Generate No.113 configuration with energy -0.0030431
+Enter Bond Rot 0 5 with angle 180
+Generate No.114 configuration with energy 0.0184048
+Enter Bond Rot 0 5 with angle 360
+Generate No.115 configuration with energy -0.0013749
+Enter Bond Rot 0 5 with angle 360
+Generate No.116 configuration with energy 0.0000018
+Enter Bond Rot 0 5 with angle 360
+Generate No.117 configuration with energy -0.0020041
+Enter Bond Rot 0 5 with angle 180
+Generate No.118 configuration with energy 0.0191690
+Enter Bond Rot 0 5 with angle 180
+Generate No.119 configuration with energy 0.0165675
+Enter Bond Rot 0 5 with angle 180
+Generate No.120 configuration with energy 0.0186243
+Enter Bond Rot 0 5 with angle 180
+Generate No.121 configuration with energy 0.0156298
+Enter Bond Rot 0 5 with angle 180
+Generate No.122 configuration with energy 0.0180981
+Enter Bond Rot 0 5 with angle 180
+Generate No.123 configuration with energy 0.0159626
+Enter Bond Rot 0 5 with angle 180
+Generate No.124 configuration with energy 0.0152909
+Enter Bond Rot 0 5 with angle 360
+Generate No.125 configuration with energy -0.0003468
+Enter Bond Rot 0 5 with angle 360
+Generate No.126 configuration with energy -0.0022551
+Enter Bond Rot 0 5 with angle 360
+Generate No.127 configuration with energy -0.0020825
+Enter Bond Rot 0 5 with angle 180
+Generate No.128 configuration with energy 0.0191383
+Enter Bond Rot 0 5 with angle 360
+Generate No.129 configuration with energy 0.0002840
+Enter Bond Rot 0 5 with angle 360
+Generate No.130 configuration with energy 0.0000749
+Enter Bond Rot 0 5 with angle 360
+Generate No.131 configuration with energy -0.0012439
+Enter Bond Rot 0 5 with angle 360
+Generate No.132 configuration with energy -0.0016552
+Enter Bond Rot 0 5 with angle 360
+Generate No.133 configuration with energy -0.0002239
+Enter Bond Rot 0 5 with angle 360
+Generate No.134 configuration with energy -0.0001826
+Enter Bond Rot 0 5 with angle 360
+Generate No.135 configuration with energy -0.0022532
+Enter Bond Rot 0 5 with angle 360
+Generate No.136 configuration with energy 0.0003574
+Enter Bond Rot 0 5 with angle 360
+Generate No.137 configuration with energy -0.0024683
+Enter Bond Rot 0 5 with angle 360
+Generate No.138 configuration with energy -0.0026241
+Enter Bond Rot 0 5 with angle 180
+Generate No.139 configuration with energy 0.0195456
+Enter Bond Rot 0 5 with angle 360
+Generate No.140 configuration with energy -0.0003763
+Enter Bond Rot 0 5 with angle 360
+Generate No.141 configuration with energy 0.0008178
+Enter Bond Rot 0 5 with angle 180
+Generate No.142 configuration with energy 0.0139713
+Enter Bond Rot 0 5 with angle 180
+Generate No.143 configuration with energy 0.0184663
+Enter Bond Rot 0 5 with angle 180
+Generate No.144 configuration with energy 0.0194898
+Enter Bond Rot 0 5 with angle 180
+Generate No.145 configuration with energy 0.0192946
+Enter Bond Rot 0 5 with angle 360
+Generate No.146 configuration with energy 0.0000734
+Enter Bond Rot 0 5 with angle 360
+Generate No.147 configuration with energy -0.0004531
+Enter Bond Rot 0 5 with angle 360
+Generate No.148 configuration with energy -0.0017041
+Enter Bond Rot 0 5 with angle 180
+Generate No.149 configuration with energy 0.0158974
+Enter Bond Rot 0 5 with angle 180
+Generate No.150 configuration with energy 0.0173671
+Enter Bond Rot 0 5 with angle 360
+Generate No.151 configuration with energy -0.0014114
+Enter Bond Rot 0 5 with angle 360
+Generate No.152 configuration with energy -0.0011545
+Enter Bond Rot 0 5 with angle 180
+Generate No.153 configuration with energy 0.0193729
+Enter Bond Rot 0 5 with angle 360
+Generate No.154 configuration with energy -0.0026460
+Enter Bond Rot 0 5 with angle 180
+Generate No.155 configuration with energy 0.0184506
+Enter Bond Rot 0 5 with angle 360
+Generate No.156 configuration with energy -0.0022466
+Enter Bond Rot 0 5 with angle 360
+Generate No.157 configuration with energy -0.0014185
+Enter Bond Rot 0 5 with angle 360
+Generate No.158 configuration with energy -0.0025165
+Enter Bond Rot 0 5 with angle 180
+Generate No.159 configuration with energy 0.0145490
+#After sorting,
+No.0 config has energy -0.0032080
+No.1 config has energy -0.0031666
+No.2 config has energy -0.0030431
+No.3 config has energy -0.0027284
+No.4 config has energy -0.0027281
+No.5 config has energy -0.0026505
+No.6 config has energy -0.0026460
+No.7 config has energy -0.0026241
+No.8 config has energy -0.0025165
+No.9 config has energy -0.0024843
+No.10 config has energy -0.0024819
+No.11 config has energy -0.0024683
+No.12 config has energy -0.0022635
+No.13 config has energy -0.0022551
+No.14 config has energy -0.0022532
+No.15 config has energy -0.0022466
+No.16 config has energy -0.0022243
+No.17 config has energy -0.0021863
+No.18 config has energy -0.0020825
+No.19 config has energy -0.0020492
+No.20 config has energy -0.0020242
+No.21 config has energy -0.0020221
+No.22 config has energy -0.0020082
+No.23 config has energy -0.0020041
+No.24 config has energy -0.0018960
+No.25 config has energy -0.0017593
+No.26 config has energy -0.0017561
+No.27 config has energy -0.0017362
+No.28 config has energy -0.0017226
+No.29 config has energy -0.0017177
+No.30 config has energy -0.0017102
+No.31 config has energy -0.0017041
+No.32 config has energy -0.0016987
+No.33 config has energy -0.0016552
+No.34 config has energy -0.0015084
+No.35 config has energy -0.0014349
+No.36 config has energy -0.0014311
+No.37 config has energy -0.0014185
+No.38 config has energy -0.0014123
+No.39 config has energy -0.0014114
+No.40 config has energy -0.0013898
+No.41 config has energy -0.0013749
+No.42 config has energy -0.0013532
+No.43 config has energy -0.0013355
+No.44 config has energy -0.0012439
+No.45 config has energy -0.0011799
+No.46 config has energy -0.0011545
+No.47 config has energy -0.0010890
+No.48 config has energy -0.0010136
+No.49 config has energy -0.0010122
+No.50 config has energy -0.0010036
+No.51 config has energy -0.0009270
+No.52 config has energy -0.0008853
+No.53 config has energy -0.0008753
+No.54 config has energy -0.0006255
+No.55 config has energy -0.0004531
+No.56 config has energy -0.0003763
+No.57 config has energy -0.0003468
+No.58 config has energy -0.0002254
+No.59 config has energy -0.0002239
+No.60 config has energy -0.0001826
+No.61 config has energy 0.0000018
+No.62 config has energy 0.0000734
+No.63 config has energy 0.0000749
+No.64 config has energy 0.0002149
+No.65 config has energy 0.0002840
+No.66 config has energy 0.0003252
+No.67 config has energy 0.0003574
+No.68 config has energy 0.0004095
+No.69 config has energy 0.0004477
+No.70 config has energy 0.0004932
+No.71 config has energy 0.0005112
+No.72 config has energy 0.0005826
+No.73 config has energy 0.0006945
+No.74 config has energy 0.0008178
+No.75 config has energy 0.0139713
+No.76 config has energy 0.0141745
+No.77 config has energy 0.0141967
+No.78 config has energy 0.0143219
+No.79 config has energy 0.0144398
+No.80 config has energy 0.0145490
+No.81 config has energy 0.0145490
+No.82 config has energy 0.0146069
+No.83 config has energy 0.0147036
+No.84 config has energy 0.0148232
+No.85 config has energy 0.0151617
+No.86 config has energy 0.0152881
+No.87 config has energy 0.0152909
+No.88 config has energy 0.0152962
+No.89 config has energy 0.0153955
+No.90 config has energy 0.0153970
+No.91 config has energy 0.0154518
+No.92 config has energy 0.0155121
+No.93 config has energy 0.0155232
+No.94 config has energy 0.0156026
+No.95 config has energy 0.0156298
+No.96 config has energy 0.0156513
+No.97 config has energy 0.0158488
+No.98 config has energy 0.0158974
+No.99 config has energy 0.0159626
+No.100 config has energy 0.0160150
+No.101 config has energy 0.0162392
+No.102 config has energy 0.0165119
+No.103 config has energy 0.0165385
+No.104 config has energy 0.0165539
+No.105 config has energy 0.0165675
+No.106 config has energy 0.0166958
+No.107 config has energy 0.0167535
+No.108 config has energy 0.0168260
+No.109 config has energy 0.0168935
+No.110 config has energy 0.0170909
+No.111 config has energy 0.0170934
+No.112 config has energy 0.0171206
+No.113 config has energy 0.0171636
+No.114 config has energy 0.0172226
+No.115 config has energy 0.0172965
+No.116 config has energy 0.0173671
+No.117 config has energy 0.0173674
+No.118 config has energy 0.0174386
+No.119 config has energy 0.0174410
+No.120 config has energy 0.0174522
+No.121 config has energy 0.0175414
+No.122 config has energy 0.0176563
+No.123 config has energy 0.0179697
+No.124 config has energy 0.0179812
+No.125 config has energy 0.0180792
+No.126 config has energy 0.0180981
+No.127 config has energy 0.0181460
+No.128 config has energy 0.0182443
+No.129 config has energy 0.0182479
+No.130 config has energy 0.0183167
+No.131 config has energy 0.0183207
+No.132 config has energy 0.0183295
+No.133 config has energy 0.0183549
+No.134 config has energy 0.0183760
+No.135 config has energy 0.0184048
+No.136 config has energy 0.0184332
+No.137 config has energy 0.0184506
+No.138 config has energy 0.0184663
+No.139 config has energy 0.0185338
+No.140 config has energy 0.0186243
+No.141 config has energy 0.0187164
+No.142 config has energy 0.0189439
+No.143 config has energy 0.0189730
+No.144 config has energy 0.0190613
+No.145 config has energy 0.0191383
+No.146 config has energy 0.0191690
+No.147 config has energy 0.0191837
+No.148 config has energy 0.0192291
+No.149 config has energy 0.0192395
+No.150 config has energy 0.0192946
+No.151 config has energy 0.0193729
+No.152 config has energy 0.0193876
+No.153 config has energy 0.0194898
+No.154 config has energy 0.0195456
+No.155 config has energy 0.0195769
+No.156 config has energy 0.0196086
+No.157 config has energy 0.0197173
+No.158 config has energy 0.0197851
+No.159 config has energy 0.0198136
+Save 16 least energy configuration:
+Energy: -0.0032080
+7
+standard .xyz file  C2H4O
+C	-0.0766607	0.0169876	-0.0297059
+H	0.9127856	-0.2022687	0.3537035
+C	-1.0089717	-0.9079791	-0.2602255
+H	-0.7991198	-1.9547679	-0.0633264
+H	-1.9912565	-0.6589041	-0.6444920
+O	-0.2456323	1.3538309	-0.2453251
+H	-1.1438510	1.5034314	-0.5876902
+4
+standard .xyz file  CH2O
+C	3.6617195	1.2704868	0.4586547
+H	4.4810048	1.7226566	1.0400713
+H	2.8212775	1.9420112	0.2210245
+O	3.6837506	0.0996214	0.1004263
+
+Energy: -0.0031666
+7
+standard .xyz file  C2H4O
+C	-0.0780777	0.0198469	-0.0236189
+H	0.9296579	-0.2363136	0.2812265
+C	-1.1575082	-0.6964291	0.2921104
+H	-1.0585950	-1.5973039	0.8897847
+H	-2.1543458	-0.4155453	-0.0272666
+O	-0.1010211	1.1632790	-0.7680849
+H	-1.0215219	1.3539724	-1.0184953
+4
+standard .xyz file  CH2O
+C	3.7051148	0.3588616	-1.2716129
+H	3.0515944	-0.0880123	-2.0377370
+H	4.3741863	1.1590383	-1.6263191
+O	3.6889209	-0.0092606	-0.1037247
+
+Energy: -0.0030431
+7
+standard .xyz file  C2H4O
+C	-0.0785972	0.0295019	0.0000000
+H	0.9358434	-0.3512740	-0.0000005
+C	-1.1652097	-0.7432721	0.0000002
+H	-1.0656385	-1.8243176	0.0000000
+H	-2.1686802	-0.3338461	-0.0000024
+O	-0.1016932	1.3939284	0.0000010
+H	-1.0283206	1.6901591	-0.0000163
+4
+standard .xyz file  CH2O
+C	3.5868581	1.2568952	0.3746535
+H	3.3741694	1.5589112	1.4125751
+H	3.6909289	2.0818952	-0.3480499
+O	3.7000410	0.0825707	0.0461869
+
+Energy: -0.0027284
+7
+standard .xyz file  C2H4O
+C	-0.0813223	-0.0174695	-0.0113746
+H	0.9682908	0.2080058	0.1354357
+C	-0.6951203	-1.0815577	0.5071566
+H	-0.1408306	-1.7865693	1.1189535
+H	-1.7475505	-1.2817665	0.3431753
+O	-0.6914264	0.9219762	-0.7907384
+H	-1.6278735	0.6800700	-0.8953288
+4
+standard .xyz file  CH2O
+C	3.8364412	0.4077542	-1.3187488
+H	4.7449771	0.4487833	-1.9405289
+H	2.9019202	0.7000651	-1.8237049
+O	3.8635005	0.0604201	-0.1447106
+
+Energy: -0.0027281
+7
+standard .xyz file  C2H4O
+C	-0.0835232	-0.0079712	0.0028657
+H	0.9944968	0.0949116	-0.0341214
+C	-0.7139332	-1.1136349	0.4003548
+H	-0.1446421	-1.9835118	0.7130777
+H	-1.7948472	-1.1877778	0.4270066
+O	-0.7101391	1.1327989	-0.4072430
+H	-1.6719345	0.9953228	-0.3578384
+4
+standard .xyz file  CH2O
+C	4.1799727	-0.8050864	-1.0503282
+H	3.4999579	-1.2074977	-1.8180367
+H	5.2428918	-1.0676689	-1.1728404
+O	3.7810095	-0.1121722	-0.1227307
+
+Energy: -0.0026505
+7
+standard .xyz file  C2H4O
+C	-0.0798381	-0.0217921	-0.0141019
+H	0.9506188	0.2594745	0.1679084
+C	-0.5582674	-1.2542224	0.1594709
+H	0.0956676	-2.0497425	0.5031138
+H	-1.5949361	-1.5066045	-0.0308025
+O	-0.8213906	1.0410699	-0.4414394
+H	-1.7353218	0.7434632	-0.5916094
+4
+standard .xyz file  CH2O
+C	4.7404293	0.6571606	0.4932314
+H	4.6837070	1.4664002	1.2386474
+H	5.7540656	0.4035009	0.1440121
+O	3.7433528	0.0782457	0.0803938
+
+Energy: -0.0026460
+7
+standard .xyz file  C2H4O
+C	-0.0798381	-0.0232667	-0.0115072
+H	0.9506188	0.2770328	0.1370149
+C	-0.5582674	-1.2276276	0.3023825
+H	0.0956676	-1.9784447	0.7350677
+H	-1.5949361	-1.5001821	0.1423365
+O	-0.8213906	0.9835183	-0.5580206
+H	-1.7353218	0.6706414	-0.6730373
+4
+standard .xyz file  CH2O
+C	4.0473625	-0.8799756	-0.9621125
+H	5.0061818	-1.4218465	-0.9343124
+H	3.4060846	-1.0939967	-1.8320052
+O	3.7164752	-0.0923493	-0.0846746
+
+Energy: -0.0026241
+7
+standard .xyz file  C2H4O
+C	-0.0809256	0.0190777	-0.0116174
+H	0.9635677	-0.2271552	0.1383266
+C	-1.0651050	-0.8804702	-0.0221530
+H	-0.8435782	-1.9329804	0.1252304
+H	-2.1020392	-0.6046138	-0.1746439
+O	-0.2592977	1.3605279	-0.1873668
+H	-1.2074923	1.5346177	-0.3177917
+4
+standard .xyz file  CH2O
+C	4.0651388	1.2166613	-0.3805095
+H	4.1762330	2.0484135	0.3333377
+H	4.2657893	1.4657737	-1.4347572
+O	3.7403099	0.0904152	-0.0258339
+
+Energy: -0.0024683
+7
+standard .xyz file  C2H4O
+C	-0.0814641	0.0201511	-0.0023284
+H	0.9699788	-0.2399352	0.0277237
+C	-1.0721918	-0.8663434	0.1001049
+H	-0.8491911	-1.9217919	0.2220603
+H	-2.1160256	-0.5767340	0.0666383
+O	-0.2610228	1.3639670	-0.1576034
+H	-1.2155284	1.5506330	-0.1791898
+4
+standard .xyz file  CH2O
+C	3.7553701	1.2559116	0.4643968
+H	3.6415680	2.1133998	-0.2178748
+H	3.8765394	1.5095511	1.5296390
+O	3.7476933	0.0981322	0.0653645
+
+Energy: -0.0022635
+7
+standard .xyz file  C2H4O
+C	-0.0835232	-0.0075896	0.0037617
+H	0.9944968	0.0903676	-0.0447903
+C	-0.7139332	-1.0603195	0.5255370
+H	-0.1446421	-1.8885511	0.9360415
+H	-1.7948472	-1.1309131	0.5605231
+O	-0.7101391	1.0785662	-0.5345794
+H	-1.6719345	0.9476697	-0.4697212
+4
+standard .xyz file  CH2O
+C	5.0145167	-0.0138990	0.0068878
+H	5.6021671	0.1027501	-0.9176615
+H	5.6021644	-0.1305477	0.9314521
+O	3.7898785	-0.0138989	0.0068889
+
+Energy: -0.0022551
+7
+standard .xyz file  C2H4O
+C	-0.0659500	0.0295019	-0.0427565
+H	0.7852552	-0.3512740	0.5090945
+C	-0.9777135	-0.7432721	-0.6338691
+H	-0.8941644	-1.8243176	-0.5797028
+H	-1.8197121	-0.3338461	-1.1797550
+O	-0.0853301	1.3939284	-0.0553198
+H	-0.8628425	1.6901591	-0.5594158
+4
+standard .xyz file  CH2O
+C	3.2199575	0.7253524	-1.0096406
+H	3.3674685	1.8170168	-0.9941285
+H	2.8009785	0.3160669	-1.9427525
+O	3.5028192	0.0143128	-0.0535282
+
+Energy: -0.0020825
+7
+standard .xyz file  C2H4O
+C	-0.0698575	0.0108002	-0.0452898
+H	0.8317812	-0.1285963	0.5392582
+C	-0.8097202	-0.9894148	-0.5249560
+H	-0.5215083	-2.0192661	-0.3381031
+H	-1.7078772	-0.8196213	-1.1072504
+O	-0.3498179	1.3340054	-0.2267921
+H	-1.1635273	1.4111107	-0.7543552
+4
+standard .xyz file  CH2O
+C	3.8875799	0.7499248	-0.9865426
+H	3.9986741	1.8415892	-0.8882664
+H	4.0882304	0.3406392	-1.9895285
+O	3.5627510	0.0388852	-0.0438614
+
+Energy: -0.0020242
+7
+standard .xyz file  C2H4O
+C	-0.0771639	-0.0284486	-0.0168608
+H	0.9187779	0.3387325	0.2007582
+C	-0.5395683	-1.2128780	0.3846560
+H	0.0924632	-1.8761825	0.9670109
+H	-1.5415134	-1.5541326	0.1517743
+O	-0.7938782	0.8716602	-0.7505622
+H	-1.6771952	0.5016906	-0.9216309
+4
+standard .xyz file  CH2O
+C	4.8018767	-0.3685000	0.4626283
+H	5.0255664	-0.5605785	1.5241367
+H	5.6442930	-0.5096194	-0.2331993
+O	3.6910193	-0.0213158	0.0815799
+
+Energy: -0.0020221
+7
+standard .xyz file  C2H4O
+C	-0.0688043	-0.0320312	-0.0358867
+H	0.8192408	0.3813899	0.4272968
+C	-0.4811134	-1.2889131	0.1319094
+H	0.0824460	-1.9679425	0.7642809
+H	-1.3745107	-1.6752710	-0.3446947
+O	-0.7078725	0.8933476	-0.8088414
+H	-1.4954898	0.4801415	-1.2029360
+4
+standard .xyz file  CH2O
+C	3.9896632	0.2823938	-1.1800687
+H	3.6483964	-0.2661093	-2.0724882
+H	4.7518754	1.0569195	-1.3614481
+O	3.5510541	0.0468961	-0.0611846
+
+Energy: -0.0020082
+7
+standard .xyz file  C2H4O
+C	-0.0835232	-0.0075896	0.0037617
+H	0.9944968	0.0903676	-0.0447903
+C	-0.7139332	-1.0603195	0.5255370
+H	-0.1446421	-1.8885511	0.9360415
+H	-1.7948472	-1.1309131	0.5605231
+O	-0.7101391	1.0785662	-0.5345794
+H	-1.6719345	0.9476697	-0.4697212
+4
+standard .xyz file  CH2O
+C	4.1189601	1.2695146	0.4053407
+H	4.3294521	1.5212117	1.4570407
+H	4.2260244	2.0988560	-0.3119361
+O	3.7880738	0.1430974	0.0568618
+
+Energy: -0.0020041
+7
+standard .xyz file  C2H4O
+C	-0.0734697	-0.0180019	-0.0364145
+H	0.8747914	0.2143452	0.4335811
+C	-0.5137364	-1.2575399	-0.2546281
+H	0.0880365	-2.1104658	0.0436345
+H	-1.4677131	-1.4598792	-0.7274600
+O	-0.7558714	1.1143078	-0.3746389
+H	-1.5968974	0.8587900	-0.7915044
+4
+standard .xyz file  CH2O
+C	4.3200706	-1.0920109	-0.1944738
+H	3.9099278	-2.1144366	-0.2071092
+H	5.4001227	-1.0111691	-0.3962364
+O	3.6220507	-0.1108880	0.0289208
+
+-------------------------------------------------
+
+#Do calculate of CH2 No.1, and CH2 No.0
+Enter Bond Rot 0 5 with angle 180
+Generate No.0 configuration with energy 0.0723849
+Enter Bond Rot 0 5 with angle 180
+Generate No.1 configuration with energy 0.0723869
+Enter Bond Rot 0 5 with angle 180
+Generate No.2 configuration with energy 0.0731188
+Enter Bond Rot 0 5 with angle 360
+Generate No.3 configuration with energy 0.0002371
+Enter Bond Rot 0 5 with angle 180
+Generate No.4 configuration with energy 0.0730309
+Enter Bond Rot 0 5 with angle 180
+Generate No.5 configuration with energy 0.0727875
+Enter Bond Rot 0 5 with angle 360
+Generate No.6 configuration with energy -0.0001887
+Enter Bond Rot 0 5 with angle 180
+Generate No.7 configuration with energy 0.0725172
+Enter Bond Rot 0 5 with angle 360
+Generate No.8 configuration with energy -0.0000778
+Enter Bond Rot 0 5 with angle 180
+Generate No.9 configuration with energy 0.0723390
+Enter Bond Rot 0 5 with angle 180
+Generate No.10 configuration with energy 0.0718401
+Enter Bond Rot 0 5 with angle 180
+Generate No.11 configuration with energy 0.0725836
+Enter Bond Rot 0 5 with angle 180
+Generate No.12 configuration with energy 0.0717038
+Enter Bond Rot 0 5 with angle 360
+Generate No.13 configuration with energy 0.0001683
+Enter Bond Rot 0 5 with angle 180
+Generate No.14 configuration with energy 0.0708706
+Enter Bond Rot 0 5 with angle 360
+Generate No.15 configuration with energy -0.0003802
+Enter Bond Rot 0 5 with angle 360
+Generate No.16 configuration with energy 0.0001422
+Enter Bond Rot 0 5 with angle 180
+Generate No.17 configuration with energy 0.0720123
+Enter Bond Rot 0 5 with angle 180
+Generate No.18 configuration with energy 0.0726012
+Enter Bond Rot 0 5 with angle 180
+Generate No.19 configuration with energy 0.0725999
+#After sorting,
+No.0 config has energy -0.0003802
+No.1 config has energy -0.0001887
+No.2 config has energy -0.0000778
+No.3 config has energy 0.0001422
+No.4 config has energy 0.0001683
+No.5 config has energy 0.0002371
+No.6 config has energy 0.0708706
+No.7 config has energy 0.0717038
+No.8 config has energy 0.0718401
+No.9 config has energy 0.0720123
+No.10 config has energy 0.0723390
+No.11 config has energy 0.0723849
+No.12 config has energy 0.0723869
+No.13 config has energy 0.0725172
+No.14 config has energy 0.0725836
+No.15 config has energy 0.0725999
+No.16 config has energy 0.0726012
+No.17 config has energy 0.0727875
+No.18 config has energy 0.0730309
+No.19 config has energy 0.0731188
+Save 2 least energy configuration:
+Energy: -0.0003802
+7
+standard .xyz file  C2H4O
+C	-1.1048376	0.8830011	0.0000000
+H	-1.0161639	1.9629164	-0.0000005
+C	-0.0642356	0.0493021	0.0000002
+H	0.9483103	0.4408689	0.0000000
+H	-0.1834678	-1.0279009	-0.0000024
+O	-2.4108753	0.4874526	0.0000010
+H	-2.4422577	-0.4848674	-0.0000162
+4
+standard .xyz file  CH2O
+C	4.0397383	-0.1780363	-0.2705934
+H	4.0967478	0.7356034	0.3423861
+H	4.6526292	-1.0238449	0.0797328
+O	3.3417178	-0.2487314	-1.2743406
+
+Energy: -0.0001887
+7
+standard .xyz file  C2H4O
+C	-1.1672981	0.7503462	-0.2734096
+H	-1.2022230	1.8333021	-0.2815904
+C	-0.0676396	0.0416030	-0.0158426
+H	0.8679469	0.5468065	0.2032944
+H	-0.0625736	-1.0421662	-0.0146588
+O	-2.3863089	0.2074988	-0.5589306
+H	-2.3079919	-0.7619967	-0.5406045
+4
+standard .xyz file  CH2O
+C	4.3392678	-0.4734660	0.1209974
+H	3.6592530	0.3824127	0.2580474
+H	5.4021869	-0.2181699	-0.0160526
+O	3.9403046	-1.6312947	0.1209974
+
+-------------------------------------------------
+
+#Do calculate of CH2 No.1, and O No.1
+Enter Bond Rot 0 5 with angle 180
+Generate No.0 configuration with energy 0.0719981
+Enter Bond Rot 0 5 with angle 360
+Generate No.1 configuration with energy -0.0001580
+Enter Bond Rot 0 5 with angle 180
+Generate No.2 configuration with energy 0.0718675
+Enter Bond Rot 0 5 with angle 180
+Generate No.3 configuration with energy 0.0720553
+Enter Bond Rot 0 5 with angle 360
+Generate No.4 configuration with energy 0.0003598
+Enter Bond Rot 0 5 with angle 180
+Generate No.5 configuration with energy 0.0723557
+Enter Bond Rot 0 5 with angle 360
+Generate No.6 configuration with energy 0.0000796
+Enter Bond Rot 0 5 with angle 360
+Generate No.7 configuration with energy 0.0001061
+Enter Bond Rot 0 5 with angle 360
+Generate No.8 configuration with energy 0.0001897
+Enter Bond Rot 0 5 with angle 360
+Generate No.9 configuration with energy 0.0002108
+Enter Bond Rot 0 5 with angle 180
+Generate No.10 configuration with energy 0.0730623
+Enter Bond Rot 0 5 with angle 180
+Generate No.11 configuration with energy 0.0725326
+Enter Bond Rot 0 5 with angle 180
+Generate No.12 configuration with energy 0.0713904
+Enter Bond Rot 0 5 with angle 360
+Generate No.13 configuration with energy -0.0013402
+Enter Bond Rot 0 5 with angle 180
+Generate No.14 configuration with energy 0.0712935
+Enter Bond Rot 0 5 with angle 360
+Generate No.15 configuration with energy -0.0010704
+Enter Bond Rot 0 5 with angle 360
+Generate No.16 configuration with energy -0.0022901
+Enter Bond Rot 0 5 with angle 360
+Generate No.17 configuration with energy -0.0011011
+Enter Bond Rot 0 5 with angle 360
+Generate No.18 configuration with energy -0.0000826
+Enter Bond Rot 0 5 with angle 360
+Generate No.19 configuration with energy -0.0013393
+Enter Bond Rot 0 5 with angle 360
+Generate No.20 configuration with energy -0.0008446
+Enter Bond Rot 0 5 with angle 360
+Generate No.21 configuration with energy -0.0015601
+Enter Bond Rot 0 5 with angle 360
+Generate No.22 configuration with energy -0.0017803
+Enter Bond Rot 0 5 with angle 360
+Generate No.23 configuration with energy 0.0001266
+Enter Bond Rot 0 5 with angle 180
+Generate No.24 configuration with energy 0.0716005
+Enter Bond Rot 0 5 with angle 180
+Generate No.25 configuration with energy 0.0727418
+Enter Bond Rot 0 5 with angle 180
+Generate No.26 configuration with energy 0.0714370
+Enter Bond Rot 0 5 with angle 180
+Generate No.27 configuration with energy 0.0720920
+Enter Bond Rot 0 5 with angle 360
+Generate No.28 configuration with energy -0.0012654
+Enter Bond Rot 0 5 with angle 360
+Generate No.29 configuration with energy -0.0011001
+Enter Bond Rot 0 5 with angle 360
+Generate No.30 configuration with energy -0.0004296
+Enter Bond Rot 0 5 with angle 180
+Generate No.31 configuration with energy 0.0712840
+Enter Bond Rot 0 5 with angle 180
+Generate No.32 configuration with energy 0.0726883
+Enter Bond Rot 0 5 with angle 180
+Generate No.33 configuration with energy 0.0721814
+Enter Bond Rot 0 5 with angle 360
+Generate No.34 configuration with energy -0.0010480
+Enter Bond Rot 0 5 with angle 360
+Generate No.35 configuration with energy -0.0019069
+Enter Bond Rot 0 5 with angle 180
+Generate No.36 configuration with energy 0.0715058
+Enter Bond Rot 0 5 with angle 360
+Generate No.37 configuration with energy -0.0019611
+Enter Bond Rot 0 5 with angle 180
+Generate No.38 configuration with energy 0.0728850
+Enter Bond Rot 0 5 with angle 360
+Generate No.39 configuration with energy -0.0005507
+Enter Bond Rot 0 5 with angle 360
+Generate No.40 configuration with energy -0.0004575
+Enter Bond Rot 0 5 with angle 180
+Generate No.41 configuration with energy 0.0715520
+Enter Bond Rot 0 5 with angle 180
+Generate No.42 configuration with energy 0.0715430
+Enter Bond Rot 0 5 with angle 180
+Generate No.43 configuration with energy 0.0728996
+Enter Bond Rot 0 5 with angle 360
+Generate No.44 configuration with energy -0.0012975
+Enter Bond Rot 0 5 with angle 360
+Generate No.45 configuration with energy -0.0015622
+Enter Bond Rot 0 5 with angle 360
+Generate No.46 configuration with energy 0.0001599
+Enter Bond Rot 0 5 with angle 360
+Generate No.47 configuration with energy -0.0012325
+Enter Bond Rot 0 5 with angle 360
+Generate No.48 configuration with energy -0.0004574
+Enter Bond Rot 0 5 with angle 180
+Generate No.49 configuration with energy 0.0722232
+Enter Bond Rot 0 5 with angle 180
+Generate No.50 configuration with energy 0.0712852
+Enter Bond Rot 0 5 with angle 360
+Generate No.51 configuration with energy -0.0003166
+Enter Bond Rot 0 5 with angle 360
+Generate No.52 configuration with energy -0.0006899
+Enter Bond Rot 0 5 with angle 360
+Generate No.53 configuration with energy -0.0001024
+Enter Bond Rot 0 5 with angle 180
+Generate No.54 configuration with energy 0.0714633
+Enter Bond Rot 0 5 with angle 180
+Generate No.55 configuration with energy 0.0718663
+Enter Bond Rot 0 5 with angle 360
+Generate No.56 configuration with energy -0.0012720
+Enter Bond Rot 0 5 with angle 360
+Generate No.57 configuration with energy -0.0003060
+Enter Bond Rot 0 5 with angle 180
+Generate No.58 configuration with energy 0.0716313
+Enter Bond Rot 0 5 with angle 180
+Generate No.59 configuration with energy 0.0719724
+#After sorting,
+No.0 config has energy -0.0022901
+No.1 config has energy -0.0019611
+No.2 config has energy -0.0019069
+No.3 config has energy -0.0017803
+No.4 config has energy -0.0015622
+No.5 config has energy -0.0015601
+No.6 config has energy -0.0013402
+No.7 config has energy -0.0013393
+No.8 config has energy -0.0012975
+No.9 config has energy -0.0012720
+No.10 config has energy -0.0012654
+No.11 config has energy -0.0012325
+No.12 config has energy -0.0011011
+No.13 config has energy -0.0011001
+No.14 config has energy -0.0010704
+No.15 config has energy -0.0010480
+No.16 config has energy -0.0008446
+No.17 config has energy -0.0006899
+No.18 config has energy -0.0005507
+No.19 config has energy -0.0004575
+No.20 config has energy -0.0004574
+No.21 config has energy -0.0004296
+No.22 config has energy -0.0003166
+No.23 config has energy -0.0003060
+No.24 config has energy -0.0001580
+No.25 config has energy -0.0001024
+No.26 config has energy -0.0000826
+No.27 config has energy 0.0000796
+No.28 config has energy 0.0001061
+No.29 config has energy 0.0001266
+No.30 config has energy 0.0001599
+No.31 config has energy 0.0001897
+No.32 config has energy 0.0002108
+No.33 config has energy 0.0003598
+No.34 config has energy 0.0712840
+No.35 config has energy 0.0712852
+No.36 config has energy 0.0712935
+No.37 config has energy 0.0713904
+No.38 config has energy 0.0714370
+No.39 config has energy 0.0714633
+No.40 config has energy 0.0715058
+No.41 config has energy 0.0715430
+No.42 config has energy 0.0715520
+No.43 config has energy 0.0716005
+No.44 config has energy 0.0716313
+No.45 config has energy 0.0718663
+No.46 config has energy 0.0718675
+No.47 config has energy 0.0719724
+No.48 config has energy 0.0719981
+No.49 config has energy 0.0720553
+No.50 config has energy 0.0720920
+No.51 config has energy 0.0721814
+No.52 config has energy 0.0722232
+No.53 config has energy 0.0723557
+No.54 config has energy 0.0725326
+No.55 config has energy 0.0726883
+No.56 config has energy 0.0727418
+No.57 config has energy 0.0728850
+No.58 config has energy 0.0728996
+No.59 config has energy 0.0730623
+Save 6 least energy configuration:
+Energy: -0.0022901
+7
+standard .xyz file  C2H4O
+C	-0.9895956	0.9514504	-0.3402938
+H	-0.7789515	1.9915994	-0.5589242
+C	-0.0577676	0.0533425	-0.0193495
+H	0.9860864	0.3464155	0.0358857
+H	-0.2982578	-0.9815552	0.1945056
+O	-2.3235284	0.6796831	-0.4349438
+H	-2.4653653	-0.2609921	-0.2314652
+4
+standard .xyz file  CH2O
+C	4.1271684	-0.8906039	-0.9706555
+H	3.4471536	-1.2930152	-1.7383640
+H	5.1900875	-1.1531864	-1.0931677
+O	3.7282052	-0.1976896	-0.0430580
+
+Energy: -0.0019611
+7
+standard .xyz file  C2H4O
+C	-1.0059743	0.3826697	-0.9175711
+H	-1.0360723	1.3443155	-1.4159802
+C	-0.0582917	0.0204930	-0.0523357
+H	0.7479942	0.7052842	0.1916681
+H	-0.0539249	-0.9492913	0.4314844
+O	-2.0565148	-0.4061723	-1.2867402
+H	-1.9890155	-1.2554006	-0.8170103
+4
+standard .xyz file  CH2O
+C	3.7802096	-0.1357561	-1.1422850
+H	4.7390288	-0.5930781	-1.4342670
+H	3.1389316	0.1950615	-1.9747981
+O	3.4493223	-0.0039360	0.0294129
+
+Energy: -0.0019069
+7
+standard .xyz file  C2H4O
+C	-1.0975351	0.7348369	-0.5057556
+H	-1.0094474	1.7069439	-0.9762112
+C	-0.0638111	0.0408997	-0.0285005
+H	0.9420423	0.4433511	-0.0982541
+H	-0.1822549	-0.9303363	0.4376051
+O	-2.3949404	0.3138577	-0.4644172
+H	-2.4261134	-0.5589331	-0.0358667
+4
+standard .xyz file  CH2O
+C	4.6894451	-0.0841143	-0.7158047
+H	4.6327228	0.0287801	-1.8102309
+H	5.7030814	-0.2120871	-0.3035908
+O	3.6923686	-0.0684028	-0.0049388
+
+Energy: -0.0017803
+7
+standard .xyz file  C2H4O
+C	-1.2770943	0.5719360	-0.2056124
+H	-1.4370344	1.5804264	-0.5681678
+C	-0.0737864	0.0313873	-0.0112836
+H	0.8227802	0.6074540	-0.2183812
+H	0.0557819	-0.9811771	0.3527331
+O	-2.4585107	-0.0707636	0.0254408
+H	-2.2673264	-0.9683819	0.3481186
+4
+standard .xyz file  CH2O
+C	3.8572995	-0.8785983	-0.9428171
+H	4.8161188	-1.4204693	-0.9150170
+H	3.2160215	-1.0926194	-1.8127098
+O	3.5264122	-0.0909721	-0.0653792
+
+Energy: -0.0015622
+7
+standard .xyz file  C2H4O
+C	-1.2017924	0.2749425	-0.6931514
+H	-1.3523016	1.1447416	-1.3215433
+C	-0.0694358	0.0144076	-0.0390898
+H	0.7742661	0.6930662	-0.1175971
+H	0.0524936	-0.8646144	0.5830326
+O	-2.3135487	-0.5155529	-0.6569835
+H	-2.1336314	-1.2807451	-0.0838329
+4
+standard .xyz file  CH2O
+C	4.2860318	-0.6219370	-0.6812272
+H	4.3194223	-0.5015772	-1.7758184
+H	5.0317424	-1.3128343	-0.2565715
+O	3.4742311	-0.0274530	0.0168467
+
+Energy: -0.0015601
+7
+standard .xyz file  C2H4O
+C	-0.7336595	0.8852315	-0.8236905
+H	-0.4545667	1.9168753	-1.0022915
+C	-0.0430449	0.0495169	-0.0474566
+H	0.8591106	0.3888568	0.4520810
+H	-0.3465825	-0.9784465	0.1129763
+O	-1.8763533	0.5524715	-1.4913091
+H	-2.0880419	-0.3781077	-1.3026261
+4
+standard .xyz file  CH2O
+C	3.4613155	-0.5861322	-1.0845619
+H	3.2486269	0.0646569	-1.9476774
+H	3.5653864	-1.6588574	-1.3130037
+O	3.5744985	-0.1464976	0.0528255
+
+-------------------------------------------------
+
+#Do calculate of HO No.2, and CH2 No.0
+Enter Bond Rot 0 5 with angle 180
+Generate No.0 configuration with energy 0.0142733
+Enter Bond Rot 0 5 with angle 360
+Generate No.1 configuration with energy 0.0006141
+Enter Bond Rot 0 5 with angle 360
+Generate No.2 configuration with energy -0.0043677
+Enter Bond Rot 0 5 with angle 360
+Generate No.3 configuration with energy -0.0023549
+Enter Bond Rot 0 5 with angle 180
+Generate No.4 configuration with energy 0.0147099
+Enter Bond Rot 0 5 with angle 360
+Generate No.5 configuration with energy -0.0023119
+Enter Bond Rot 0 5 with angle 360
+Generate No.6 configuration with energy -0.0042494
+Enter Bond Rot 0 5 with angle 360
+Generate No.7 configuration with energy -0.0029716
+Enter Bond Rot 0 5 with angle 180
+Generate No.8 configuration with energy 0.0147403
+Enter Bond Rot 0 5 with angle 180
+Generate No.9 configuration with energy 0.0104013
+Enter Bond Rot 0 5 with angle 360
+Generate No.10 configuration with energy -0.0042565
+Enter Bond Rot 0 5 with angle 180
+Generate No.11 configuration with energy 0.0160642
+Enter Bond Rot 0 5 with angle 360
+Generate No.12 configuration with energy -0.0042365
+Enter Bond Rot 0 5 with angle 360
+Generate No.13 configuration with energy -0.0027135
+Enter Bond Rot 0 5 with angle 180
+Generate No.14 configuration with energy 0.0121666
+Enter Bond Rot 0 5 with angle 180
+Generate No.15 configuration with energy 0.0171650
+Enter Bond Rot 0 5 with angle 360
+Generate No.16 configuration with energy 0.0013738
+Enter Bond Rot 0 5 with angle 360
+Generate No.17 configuration with energy -0.0006394
+Enter Bond Rot 0 5 with angle 360
+Generate No.18 configuration with energy -0.0021234
+Enter Bond Rot 0 5 with angle 180
+Generate No.19 configuration with energy 0.0205189
+Enter Bond Rot 0 5 with angle 360
+Generate No.20 configuration with energy -0.0014201
+Enter Bond Rot 0 5 with angle 180
+Generate No.21 configuration with energy 0.0147667
+Enter Bond Rot 0 5 with angle 360
+Generate No.22 configuration with energy -0.0020528
+Enter Bond Rot 0 5 with angle 360
+Generate No.23 configuration with energy 0.0001501
+Enter Bond Rot 0 5 with angle 360
+Generate No.24 configuration with energy 0.0030091
+Enter Bond Rot 0 5 with angle 360
+Generate No.25 configuration with energy -0.0018297
+Enter Bond Rot 0 5 with angle 360
+Generate No.26 configuration with energy 0.0030751
+Enter Bond Rot 0 5 with angle 360
+Generate No.27 configuration with energy -0.0007060
+Enter Bond Rot 0 5 with angle 360
+Generate No.28 configuration with energy -0.0012373
+Enter Bond Rot 0 5 with angle 180
+Generate No.29 configuration with energy 0.0159740
+Enter Bond Rot 0 5 with angle 180
+Generate No.30 configuration with energy 0.0125608
+Enter Bond Rot 0 5 with angle 360
+Generate No.31 configuration with energy -0.0011974
+Enter Bond Rot 0 5 with angle 180
+Generate No.32 configuration with energy 0.0178625
+Enter Bond Rot 0 5 with angle 360
+Generate No.33 configuration with energy -0.0015577
+Enter Bond Rot 0 5 with angle 360
+Generate No.34 configuration with energy -0.0005260
+Enter Bond Rot 0 5 with angle 180
+Generate No.35 configuration with energy 0.0130457
+Enter Bond Rot 0 5 with angle 180
+Generate No.36 configuration with energy 0.0114135
+Enter Bond Rot 0 5 with angle 360
+Generate No.37 configuration with energy -0.0008696
+Enter Bond Rot 0 5 with angle 360
+Generate No.38 configuration with energy -0.0031562
+Enter Bond Rot 0 5 with angle 360
+Generate No.39 configuration with energy 0.0016044
+Enter Bond Rot 0 5 with angle 180
+Generate No.40 configuration with energy 0.0137763
+Enter Bond Rot 0 5 with angle 360
+Generate No.41 configuration with energy -0.0001758
+Enter Bond Rot 0 5 with angle 360
+Generate No.42 configuration with energy 0.0006800
+Enter Bond Rot 0 5 with angle 360
+Generate No.43 configuration with energy -0.0011893
+Enter Bond Rot 0 5 with angle 180
+Generate No.44 configuration with energy 0.0147857
+Enter Bond Rot 0 5 with angle 360
+Generate No.45 configuration with energy -0.0043226
+Enter Bond Rot 0 5 with angle 360
+Generate No.46 configuration with energy 0.0008796
+Enter Bond Rot 0 5 with angle 180
+Generate No.47 configuration with energy 0.0169967
+Enter Bond Rot 0 5 with angle 180
+Generate No.48 configuration with energy 0.0202269
+Enter Bond Rot 0 5 with angle 360
+Generate No.49 configuration with energy 0.0004647
+Enter Bond Rot 0 5 with angle 360
+Generate No.50 configuration with energy -0.0011684
+Enter Bond Rot 0 5 with angle 360
+Generate No.51 configuration with energy 0.0016530
+Enter Bond Rot 0 5 with angle 360
+Generate No.52 configuration with energy 0.0002571
+Enter Bond Rot 0 5 with angle 180
+Generate No.53 configuration with energy 0.0126844
+Enter Bond Rot 0 5 with angle 360
+Generate No.54 configuration with energy -0.0000102
+Enter Bond Rot 0 5 with angle 180
+Generate No.55 configuration with energy 0.0139928
+Enter Bond Rot 0 5 with angle 180
+Generate No.56 configuration with energy 0.0157879
+Enter Bond Rot 0 5 with angle 180
+Generate No.57 configuration with energy 0.0174680
+Enter Bond Rot 0 5 with angle 360
+Generate No.58 configuration with energy -0.0029823
+Enter Bond Rot 0 5 with angle 360
+Generate No.59 configuration with energy 0.0026243
+Enter Bond Rot 0 5 with angle 360
+Generate No.60 configuration with energy -0.0023005
+Enter Bond Rot 0 5 with angle 360
+Generate No.61 configuration with energy 0.0008275
+Enter Bond Rot 0 5 with angle 360
+Generate No.62 configuration with energy 0.0038422
+Enter Bond Rot 0 5 with angle 180
+Generate No.63 configuration with energy 0.0109143
+Enter Bond Rot 0 5 with angle 360
+Generate No.64 configuration with energy 0.0014535
+Enter Bond Rot 0 5 with angle 360
+Generate No.65 configuration with energy -0.0017383
+Enter Bond Rot 0 5 with angle 180
+Generate No.66 configuration with energy 0.0152179
+Enter Bond Rot 0 5 with angle 360
+Generate No.67 configuration with energy -0.0011746
+Enter Bond Rot 0 5 with angle 180
+Generate No.68 configuration with energy 0.0144666
+Enter Bond Rot 0 5 with angle 180
+Generate No.69 configuration with energy 0.0138790
+Enter Bond Rot 0 5 with angle 180
+Generate No.70 configuration with energy 0.0137305
+Enter Bond Rot 0 5 with angle 360
+Generate No.71 configuration with energy -0.0034008
+Enter Bond Rot 0 5 with angle 360
+Generate No.72 configuration with energy -0.0026573
+Enter Bond Rot 0 5 with angle 180
+Generate No.73 configuration with energy 0.0150499
+Enter Bond Rot 0 5 with angle 360
+Generate No.74 configuration with energy -0.0011875
+Enter Bond Rot 0 5 with angle 360
+Generate No.75 configuration with energy -0.0007008
+Enter Bond Rot 0 5 with angle 180
+Generate No.76 configuration with energy 0.0130972
+Enter Bond Rot 0 5 with angle 360
+Generate No.77 configuration with energy -0.0007196
+Enter Bond Rot 0 5 with angle 180
+Generate No.78 configuration with energy 0.0195721
+Enter Bond Rot 0 5 with angle 180
+Generate No.79 configuration with energy 0.0127902
+Enter Bond Rot 0 5 with angle 360
+Generate No.80 configuration with energy -0.0018597
+Enter Bond Rot 0 5 with angle 180
+Generate No.81 configuration with energy 0.0156911
+Enter Bond Rot 0 5 with angle 180
+Generate No.82 configuration with energy 0.0163973
+Enter Bond Rot 0 5 with angle 180
+Generate No.83 configuration with energy 0.0143183
+Enter Bond Rot 0 5 with angle 180
+Generate No.84 configuration with energy 0.0129874
+Enter Bond Rot 0 5 with angle 360
+Generate No.85 configuration with energy -0.0005152
+Enter Bond Rot 0 5 with angle 360
+Generate No.86 configuration with energy -0.0042673
+Enter Bond Rot 0 5 with angle 360
+Generate No.87 configuration with energy -0.0001782
+Enter Bond Rot 0 5 with angle 180
+Generate No.88 configuration with energy 0.0179730
+Enter Bond Rot 0 5 with angle 360
+Generate No.89 configuration with energy -0.0022414
+Enter Bond Rot 0 5 with angle 360
+Generate No.90 configuration with energy -0.0047669
+Enter Bond Rot 0 5 with angle 180
+Generate No.91 configuration with energy 0.0133286
+Enter Bond Rot 0 5 with angle 360
+Generate No.92 configuration with energy 0.0007580
+Enter Bond Rot 0 5 with angle 180
+Generate No.93 configuration with energy 0.0115444
+Enter Bond Rot 0 5 with angle 180
+Generate No.94 configuration with energy 0.0154596
+Enter Bond Rot 0 5 with angle 360
+Generate No.95 configuration with energy -0.0026557
+Enter Bond Rot 0 5 with angle 180
+Generate No.96 configuration with energy 0.0154606
+Enter Bond Rot 0 5 with angle 360
+Generate No.97 configuration with energy -0.0007921
+Enter Bond Rot 0 5 with angle 360
+Generate No.98 configuration with energy 0.0015536
+Enter Bond Rot 0 5 with angle 360
+Generate No.99 configuration with energy -0.0029206
+Enter Bond Rot 0 5 with angle 360
+Generate No.100 configuration with energy -0.0037959
+Enter Bond Rot 0 5 with angle 360
+Generate No.101 configuration with energy 0.0033566
+Enter Bond Rot 0 5 with angle 360
+Generate No.102 configuration with energy -0.0002822
+Enter Bond Rot 0 5 with angle 360
+Generate No.103 configuration with energy 0.0017552
+Enter Bond Rot 0 5 with angle 180
+Generate No.104 configuration with energy 0.0120512
+Enter Bond Rot 0 5 with angle 360
+Generate No.105 configuration with energy -0.0021515
+Enter Bond Rot 0 5 with angle 180
+Generate No.106 configuration with energy 0.0125444
+Enter Bond Rot 0 5 with angle 360
+Generate No.107 configuration with energy -0.0021655
+Enter Bond Rot 0 5 with angle 180
+Generate No.108 configuration with energy 0.0101748
+Enter Bond Rot 0 5 with angle 360
+Generate No.109 configuration with energy -0.0008219
+Enter Bond Rot 0 5 with angle 360
+Generate No.110 configuration with energy -0.0002221
+Enter Bond Rot 0 5 with angle 180
+Generate No.111 configuration with energy 0.0181396
+Enter Bond Rot 0 5 with angle 180
+Generate No.112 configuration with energy 0.0148237
+Enter Bond Rot 0 5 with angle 360
+Generate No.113 configuration with energy 0.0006681
+Enter Bond Rot 0 5 with angle 360
+Generate No.114 configuration with energy -0.0009414
+Enter Bond Rot 0 5 with angle 180
+Generate No.115 configuration with energy 0.0163515
+Enter Bond Rot 0 5 with angle 180
+Generate No.116 configuration with energy 0.0174225
+Enter Bond Rot 0 5 with angle 180
+Generate No.117 configuration with energy 0.0194380
+Enter Bond Rot 0 5 with angle 180
+Generate No.118 configuration with energy 0.0125376
+Enter Bond Rot 0 5 with angle 180
+Generate No.119 configuration with energy 0.0161300
+Enter Bond Rot 0 5 with angle 360
+Generate No.120 configuration with energy 0.0014459
+Enter Bond Rot 0 5 with angle 180
+Generate No.121 configuration with energy 0.0136256
+Enter Bond Rot 0 5 with angle 360
+Generate No.122 configuration with energy 0.0004450
+Enter Bond Rot 0 5 with angle 180
+Generate No.123 configuration with energy 0.0143381
+Enter Bond Rot 0 5 with angle 180
+Generate No.124 configuration with energy 0.0142229
+Enter Bond Rot 0 5 with angle 360
+Generate No.125 configuration with energy 0.0002232
+Enter Bond Rot 0 5 with angle 180
+Generate No.126 configuration with energy 0.0189299
+Enter Bond Rot 0 5 with angle 360
+Generate No.127 configuration with energy 0.0009805
+Enter Bond Rot 0 5 with angle 180
+Generate No.128 configuration with energy 0.0119354
+Enter Bond Rot 0 5 with angle 180
+Generate No.129 configuration with energy 0.0152596
+Enter Bond Rot 0 5 with angle 360
+Generate No.130 configuration with energy 0.0013671
+Enter Bond Rot 0 5 with angle 180
+Generate No.131 configuration with energy 0.0131561
+Enter Bond Rot 0 5 with angle 360
+Generate No.132 configuration with energy 0.0030998
+Enter Bond Rot 0 5 with angle 360
+Generate No.133 configuration with energy 0.0005965
+Enter Bond Rot 0 5 with angle 180
+Generate No.134 configuration with energy 0.0131011
+Enter Bond Rot 0 5 with angle 180
+Generate No.135 configuration with energy 0.0125919
+Enter Bond Rot 0 5 with angle 360
+Generate No.136 configuration with energy -0.0007341
+Enter Bond Rot 0 5 with angle 180
+Generate No.137 configuration with energy 0.0119556
+Enter Bond Rot 0 5 with angle 360
+Generate No.138 configuration with energy -0.0031220
+Enter Bond Rot 0 5 with angle 180
+Generate No.139 configuration with energy 0.0161845
+Enter Bond Rot 0 5 with angle 180
+Generate No.140 configuration with energy 0.0165298
+Enter Bond Rot 0 5 with angle 360
+Generate No.141 configuration with energy -0.0006807
+Enter Bond Rot 0 5 with angle 180
+Generate No.142 configuration with energy 0.0190771
+Enter Bond Rot 0 5 with angle 360
+Generate No.143 configuration with energy -0.0004185
+Enter Bond Rot 0 5 with angle 180
+Generate No.144 configuration with energy 0.0162504
+Enter Bond Rot 0 5 with angle 360
+Generate No.145 configuration with energy -0.0005676
+Enter Bond Rot 0 5 with angle 360
+Generate No.146 configuration with energy -0.0021177
+Enter Bond Rot 0 5 with angle 360
+Generate No.147 configuration with energy -0.0037475
+Enter Bond Rot 0 5 with angle 360
+Generate No.148 configuration with energy -0.0038965
+Enter Bond Rot 0 5 with angle 180
+Generate No.149 configuration with energy 0.0164971
+Enter Bond Rot 0 5 with angle 360
+Generate No.150 configuration with energy 0.0045760
+Enter Bond Rot 0 5 with angle 180
+Generate No.151 configuration with energy 0.0119148
+Enter Bond Rot 0 5 with angle 360
+Generate No.152 configuration with energy -0.0014541
+Enter Bond Rot 0 5 with angle 180
+Generate No.153 configuration with energy 0.0119148
+Enter Bond Rot 0 5 with angle 180
+Generate No.154 configuration with energy 0.0138830
+Enter Bond Rot 0 5 with angle 360
+Generate No.155 configuration with energy -0.0042859
+Enter Bond Rot 0 5 with angle 180
+Generate No.156 configuration with energy 0.0154348
+Enter Bond Rot 0 5 with angle 360
+Generate No.157 configuration with energy -0.0023132
+Enter Bond Rot 0 5 with angle 180
+Generate No.158 configuration with energy 0.0114321
+Enter Bond Rot 0 5 with angle 180
+Generate No.159 configuration with energy 0.0140472
+Enter Bond Rot 0 5 with angle 360
+Generate No.160 configuration with energy -0.0012371
+Enter Bond Rot 0 5 with angle 180
+Generate No.161 configuration with energy 0.0142231
+Enter Bond Rot 0 5 with angle 180
+Generate No.162 configuration with energy 0.0145683
+Enter Bond Rot 0 5 with angle 360
+Generate No.163 configuration with energy 0.0005455
+Enter Bond Rot 0 5 with angle 360
+Generate No.164 configuration with energy 0.0023342
+Enter Bond Rot 0 5 with angle 180
+Generate No.165 configuration with energy 0.0124871
+Enter Bond Rot 0 5 with angle 360
+Generate No.166 configuration with energy -0.0004205
+Enter Bond Rot 0 5 with angle 360
+Generate No.167 configuration with energy -0.0024108
+Enter Bond Rot 0 5 with angle 180
+Generate No.168 configuration with energy 0.0137487
+Enter Bond Rot 0 5 with angle 180
+Generate No.169 configuration with energy 0.0193868
+Enter Bond Rot 0 5 with angle 360
+Generate No.170 configuration with energy 0.0005442
+Enter Bond Rot 0 5 with angle 180
+Generate No.171 configuration with energy 0.0142463
+Enter Bond Rot 0 5 with angle 180
+Generate No.172 configuration with energy 0.0160031
+Enter Bond Rot 0 5 with angle 180
+Generate No.173 configuration with energy 0.0200243
+Enter Bond Rot 0 5 with angle 360
+Generate No.174 configuration with energy -0.0014181
+Enter Bond Rot 0 5 with angle 180
+Generate No.175 configuration with energy 0.0157216
+Enter Bond Rot 0 5 with angle 360
+Generate No.176 configuration with energy -0.0016715
+Enter Bond Rot 0 5 with angle 180
+Generate No.177 configuration with energy 0.0148860
+Enter Bond Rot 0 5 with angle 360
+Generate No.178 configuration with energy -0.0008010
+Enter Bond Rot 0 5 with angle 360
+Generate No.179 configuration with energy -0.0014335
+Enter Bond Rot 0 5 with angle 360
+Generate No.180 configuration with energy -0.0030295
+Enter Bond Rot 0 5 with angle 180
+Generate No.181 configuration with energy 0.0174176
+Enter Bond Rot 0 5 with angle 360
+Generate No.182 configuration with energy -0.0012646
+Enter Bond Rot 0 5 with angle 360
+Generate No.183 configuration with energy -0.0008132
+Enter Bond Rot 0 5 with angle 180
+Generate No.184 configuration with energy 0.0174815
+Enter Bond Rot 0 5 with angle 180
+Generate No.185 configuration with energy 0.0156594
+Enter Bond Rot 0 5 with angle 360
+Generate No.186 configuration with energy -0.0012589
+Enter Bond Rot 0 5 with angle 180
+Generate No.187 configuration with energy 0.0130469
+Enter Bond Rot 0 5 with angle 180
+Generate No.188 configuration with energy 0.0142965
+Enter Bond Rot 0 5 with angle 360
+Generate No.189 configuration with energy 0.0033948
+Enter Bond Rot 0 5 with angle 360
+Generate No.190 configuration with energy -0.0003151
+Enter Bond Rot 0 5 with angle 180
+Generate No.191 configuration with energy 0.0119268
+Enter Bond Rot 0 5 with angle 360
+Generate No.192 configuration with energy -0.0011141
+Enter Bond Rot 0 5 with angle 360
+Generate No.193 configuration with energy -0.0009910
+Enter Bond Rot 0 5 with angle 360
+Generate No.194 configuration with energy -0.0008394
+Enter Bond Rot 0 5 with angle 360
+Generate No.195 configuration with energy -0.0011146
+Enter Bond Rot 0 5 with angle 360
+Generate No.196 configuration with energy -0.0016940
+Enter Bond Rot 0 5 with angle 360
+Generate No.197 configuration with energy -0.0014660
+Enter Bond Rot 0 5 with angle 180
+Generate No.198 configuration with energy 0.0183384
+Enter Bond Rot 0 5 with angle 360
+Generate No.199 configuration with energy -0.0026843
+Enter Bond Rot 0 5 with angle 360
+Generate No.200 configuration with energy -0.0004372
+Enter Bond Rot 0 5 with angle 360
+Generate No.201 configuration with energy -0.0003801
+Enter Bond Rot 0 5 with angle 360
+Generate No.202 configuration with energy -0.0004368
+Enter Bond Rot 0 5 with angle 360
+Generate No.203 configuration with energy 0.0000204
+Enter Bond Rot 0 5 with angle 360
+Generate No.204 configuration with energy -0.0044826
+Enter Bond Rot 0 5 with angle 180
+Generate No.205 configuration with energy 0.0142445
+Enter Bond Rot 0 5 with angle 180
+Generate No.206 configuration with energy 0.0119518
+Enter Bond Rot 0 5 with angle 180
+Generate No.207 configuration with energy 0.0186641
+Enter Bond Rot 0 5 with angle 360
+Generate No.208 configuration with energy -0.0020147
+Enter Bond Rot 0 5 with angle 360
+Generate No.209 configuration with energy -0.0026154
+Enter Bond Rot 0 5 with angle 180
+Generate No.210 configuration with energy 0.0176546
+Enter Bond Rot 0 5 with angle 360
+Generate No.211 configuration with energy 0.0016248
+Enter Bond Rot 0 5 with angle 360
+Generate No.212 configuration with energy 0.0007580
+Enter Bond Rot 0 5 with angle 180
+Generate No.213 configuration with energy 0.0174221
+Enter Bond Rot 0 5 with angle 360
+Generate No.214 configuration with energy -0.0012112
+Enter Bond Rot 0 5 with angle 360
+Generate No.215 configuration with energy -0.0001666
+Enter Bond Rot 0 5 with angle 180
+Generate No.216 configuration with energy 0.0157247
+Enter Bond Rot 0 5 with angle 180
+Generate No.217 configuration with energy 0.0124857
+Enter Bond Rot 0 5 with angle 180
+Generate No.218 configuration with energy 0.0161186
+Enter Bond Rot 0 5 with angle 360
+Generate No.219 configuration with energy -0.0047270
+Enter Bond Rot 0 5 with angle 360
+Generate No.220 configuration with energy -0.0012323
+Enter Bond Rot 0 5 with angle 360
+Generate No.221 configuration with energy -0.0046783
+Enter Bond Rot 0 5 with angle 180
+Generate No.222 configuration with energy 0.0157112
+Enter Bond Rot 0 5 with angle 360
+Generate No.223 configuration with energy -0.0027482
+Enter Bond Rot 0 5 with angle 180
+Generate No.224 configuration with energy 0.0126671
+Enter Bond Rot 0 5 with angle 360
+Generate No.225 configuration with energy -0.0037232
+Enter Bond Rot 0 5 with angle 360
+Generate No.226 configuration with energy -0.0005783
+Enter Bond Rot 0 5 with angle 180
+Generate No.227 configuration with energy 0.0159136
+Enter Bond Rot 0 5 with angle 180
+Generate No.228 configuration with energy 0.0104084
+Enter Bond Rot 0 5 with angle 180
+Generate No.229 configuration with energy 0.0163275
+Enter Bond Rot 0 5 with angle 180
+Generate No.230 configuration with energy 0.0115352
+Enter Bond Rot 0 5 with angle 360
+Generate No.231 configuration with energy -0.0018097
+Enter Bond Rot 0 5 with angle 360
+Generate No.232 configuration with energy 0.0015008
+Enter Bond Rot 0 5 with angle 180
+Generate No.233 configuration with energy 0.0103042
+Enter Bond Rot 0 5 with angle 360
+Generate No.234 configuration with energy -0.0024150
+Enter Bond Rot 0 5 with angle 360
+Generate No.235 configuration with energy 0.0006681
+Enter Bond Rot 0 5 with angle 360
+Generate No.236 configuration with energy -0.0038026
+Enter Bond Rot 0 5 with angle 180
+Generate No.237 configuration with energy 0.0134523
+Enter Bond Rot 0 5 with angle 360
+Generate No.238 configuration with energy -0.0029189
+Enter Bond Rot 0 5 with angle 180
+Generate No.239 configuration with energy 0.0174225
+#After sorting,
+No.0 config has energy -0.0047669
+No.1 config has energy -0.0047270
+No.2 config has energy -0.0046783
+No.3 config has energy -0.0044826
+No.4 config has energy -0.0043677
+No.5 config has energy -0.0043226
+No.6 config has energy -0.0042859
+No.7 config has energy -0.0042673
+No.8 config has energy -0.0042565
+No.9 config has energy -0.0042494
+No.10 config has energy -0.0042365
+No.11 config has energy -0.0038965
+No.12 config has energy -0.0038026
+No.13 config has energy -0.0037959
+No.14 config has energy -0.0037475
+No.15 config has energy -0.0037232
+No.16 config has energy -0.0034008
+No.17 config has energy -0.0031562
+No.18 config has energy -0.0031220
+No.19 config has energy -0.0030295
+No.20 config has energy -0.0029823
+No.21 config has energy -0.0029716
+No.22 config has energy -0.0029206
+No.23 config has energy -0.0029189
+No.24 config has energy -0.0027482
+No.25 config has energy -0.0027135
+No.26 config has energy -0.0026843
+No.27 config has energy -0.0026573
+No.28 config has energy -0.0026557
+No.29 config has energy -0.0026154
+No.30 config has energy -0.0024150
+No.31 config has energy -0.0024108
+No.32 config has energy -0.0023549
+No.33 config has energy -0.0023132
+No.34 config has energy -0.0023119
+No.35 config has energy -0.0023005
+No.36 config has energy -0.0022414
+No.37 config has energy -0.0021655
+No.38 config has energy -0.0021515
+No.39 config has energy -0.0021234
+No.40 config has energy -0.0021177
+No.41 config has energy -0.0020528
+No.42 config has energy -0.0020147
+No.43 config has energy -0.0018597
+No.44 config has energy -0.0018297
+No.45 config has energy -0.0018097
+No.46 config has energy -0.0017383
+No.47 config has energy -0.0016940
+No.48 config has energy -0.0016715
+No.49 config has energy -0.0015577
+No.50 config has energy -0.0014660
+No.51 config has energy -0.0014541
+No.52 config has energy -0.0014335
+No.53 config has energy -0.0014201
+No.54 config has energy -0.0014181
+No.55 config has energy -0.0012646
+No.56 config has energy -0.0012589
+No.57 config has energy -0.0012373
+No.58 config has energy -0.0012371
+No.59 config has energy -0.0012323
+No.60 config has energy -0.0012112
+No.61 config has energy -0.0011974
+No.62 config has energy -0.0011893
+No.63 config has energy -0.0011875
+No.64 config has energy -0.0011746
+No.65 config has energy -0.0011684
+No.66 config has energy -0.0011146
+No.67 config has energy -0.0011141
+No.68 config has energy -0.0009910
+No.69 config has energy -0.0009414
+No.70 config has energy -0.0008696
+No.71 config has energy -0.0008394
+No.72 config has energy -0.0008219
+No.73 config has energy -0.0008132
+No.74 config has energy -0.0008010
+No.75 config has energy -0.0007921
+No.76 config has energy -0.0007341
+No.77 config has energy -0.0007196
+No.78 config has energy -0.0007060
+No.79 config has energy -0.0007008
+No.80 config has energy -0.0006807
+No.81 config has energy -0.0006394
+No.82 config has energy -0.0005783
+No.83 config has energy -0.0005676
+No.84 config has energy -0.0005260
+No.85 config has energy -0.0005152
+No.86 config has energy -0.0004372
+No.87 config has energy -0.0004368
+No.88 config has energy -0.0004205
+No.89 config has energy -0.0004185
+No.90 config has energy -0.0003801
+No.91 config has energy -0.0003151
+No.92 config has energy -0.0002822
+No.93 config has energy -0.0002221
+No.94 config has energy -0.0001782
+No.95 config has energy -0.0001758
+No.96 config has energy -0.0001666
+No.97 config has energy -0.0000102
+No.98 config has energy 0.0000204
+No.99 config has energy 0.0001501
+No.100 config has energy 0.0002232
+No.101 config has energy 0.0002571
+No.102 config has energy 0.0004450
+No.103 config has energy 0.0004647
+No.104 config has energy 0.0005442
+No.105 config has energy 0.0005455
+No.106 config has energy 0.0005965
+No.107 config has energy 0.0006141
+No.108 config has energy 0.0006681
+No.109 config has energy 0.0006681
+No.110 config has energy 0.0006800
+No.111 config has energy 0.0007580
+No.112 config has energy 0.0007580
+No.113 config has energy 0.0008275
+No.114 config has energy 0.0008796
+No.115 config has energy 0.0009805
+No.116 config has energy 0.0013671
+No.117 config has energy 0.0013738
+No.118 config has energy 0.0014459
+No.119 config has energy 0.0014535
+No.120 config has energy 0.0015008
+No.121 config has energy 0.0015536
+No.122 config has energy 0.0016044
+No.123 config has energy 0.0016248
+No.124 config has energy 0.0016530
+No.125 config has energy 0.0017552
+No.126 config has energy 0.0023342
+No.127 config has energy 0.0026243
+No.128 config has energy 0.0030091
+No.129 config has energy 0.0030751
+No.130 config has energy 0.0030998
+No.131 config has energy 0.0033566
+No.132 config has energy 0.0033948
+No.133 config has energy 0.0038422
+No.134 config has energy 0.0045760
+No.135 config has energy 0.0101748
+No.136 config has energy 0.0103042
+No.137 config has energy 0.0104013
+No.138 config has energy 0.0104084
+No.139 config has energy 0.0109143
+No.140 config has energy 0.0114135
+No.141 config has energy 0.0114321
+No.142 config has energy 0.0115352
+No.143 config has energy 0.0115444
+No.144 config has energy 0.0119148
+No.145 config has energy 0.0119148
+No.146 config has energy 0.0119268
+No.147 config has energy 0.0119354
+No.148 config has energy 0.0119518
+No.149 config has energy 0.0119556
+No.150 config has energy 0.0120512
+No.151 config has energy 0.0121666
+No.152 config has energy 0.0124857
+No.153 config has energy 0.0124871
+No.154 config has energy 0.0125376
+No.155 config has energy 0.0125444
+No.156 config has energy 0.0125608
+No.157 config has energy 0.0125919
+No.158 config has energy 0.0126671
+No.159 config has energy 0.0126844
+No.160 config has energy 0.0127902
+No.161 config has energy 0.0129874
+No.162 config has energy 0.0130457
+No.163 config has energy 0.0130469
+No.164 config has energy 0.0130972
+No.165 config has energy 0.0131011
+No.166 config has energy 0.0131561
+No.167 config has energy 0.0133286
+No.168 config has energy 0.0134523
+No.169 config has energy 0.0136256
+No.170 config has energy 0.0137305
+No.171 config has energy 0.0137487
+No.172 config has energy 0.0137763
+No.173 config has energy 0.0138790
+No.174 config has energy 0.0138830
+No.175 config has energy 0.0139928
+No.176 config has energy 0.0140472
+No.177 config has energy 0.0142229
+No.178 config has energy 0.0142231
+No.179 config has energy 0.0142445
+No.180 config has energy 0.0142463
+No.181 config has energy 0.0142733
+No.182 config has energy 0.0142965
+No.183 config has energy 0.0143183
+No.184 config has energy 0.0143381
+No.185 config has energy 0.0144666
+No.186 config has energy 0.0145683
+No.187 config has energy 0.0147099
+No.188 config has energy 0.0147403
+No.189 config has energy 0.0147667
+No.190 config has energy 0.0147857
+No.191 config has energy 0.0148237
+No.192 config has energy 0.0148860
+No.193 config has energy 0.0150499
+No.194 config has energy 0.0152179
+No.195 config has energy 0.0152596
+No.196 config has energy 0.0154348
+No.197 config has energy 0.0154596
+No.198 config has energy 0.0154606
+No.199 config has energy 0.0156594
+No.200 config has energy 0.0156911
+No.201 config has energy 0.0157112
+No.202 config has energy 0.0157216
+No.203 config has energy 0.0157247
+No.204 config has energy 0.0157879
+No.205 config has energy 0.0159136
+No.206 config has energy 0.0159740
+No.207 config has energy 0.0160031
+No.208 config has energy 0.0160642
+No.209 config has energy 0.0161186
+No.210 config has energy 0.0161300
+No.211 config has energy 0.0161845
+No.212 config has energy 0.0162504
+No.213 config has energy 0.0163275
+No.214 config has energy 0.0163515
+No.215 config has energy 0.0163973
+No.216 config has energy 0.0164971
+No.217 config has energy 0.0165298
+No.218 config has energy 0.0169967
+No.219 config has energy 0.0171650
+No.220 config has energy 0.0174176
+No.221 config has energy 0.0174221
+No.222 config has energy 0.0174225
+No.223 config has energy 0.0174225
+No.224 config has energy 0.0174680
+No.225 config has energy 0.0174815
+No.226 config has energy 0.0176546
+No.227 config has energy 0.0178625
+No.228 config has energy 0.0179730
+No.229 config has energy 0.0181396
+No.230 config has energy 0.0183384
+No.231 config has energy 0.0186641
+No.232 config has energy 0.0189299
+No.233 config has energy 0.0190771
+No.234 config has energy 0.0193868
+No.235 config has energy 0.0194380
+No.236 config has energy 0.0195721
+No.237 config has energy 0.0200243
+No.238 config has energy 0.0202269
+No.239 config has energy 0.0205189
+Save 24 least energy configuration:
+Energy: -0.0047669
+7
+standard .xyz file  C2H4O
+C	-1.3701146	-0.1843106	-0.0691829
+H	-1.7197641	-1.0661774	0.4543974
+C	-2.1679581	0.6586268	-0.7255431
+H	-3.2386367	0.4821940	-0.7585989
+H	-1.7895511	1.5337772	-1.2408126
+O	-0.0158951	-0.0474833	0.0285966
+H	0.2522670	0.7535946	-0.4538495
+4
+standard .xyz file  CH2O
+C	2.9928419	0.0616582	-0.0844898
+H	2.8472789	0.4678079	0.9292089
+H	3.1539472	-1.0267232	-0.1412959
+O	2.9766473	0.7725171	-1.0815637
+
+Energy: -0.0047270
+7
+standard .xyz file  C2H4O
+C	-1.3605203	0.0828038	-0.2410367
+H	-1.9331169	-0.7230653	0.2025714
+C	-1.8962153	1.0723733	-0.9563614
+H	-2.9681449	1.1049814	-1.1251145
+H	-1.2979199	1.8660189	-1.3885096
+O	-0.0280267	-0.0439591	0.0246412
+H	0.4448034	0.6976630	-0.3910743
+4
+standard .xyz file  CH2O
+C	3.4848289	-0.0127650	-0.1267109
+H	2.8048141	-0.3869896	0.6551248
+H	4.5477481	0.0462292	0.1569764
+O	3.0858657	0.3157007	-1.2369710
+
+Energy: -0.0046783
+7
+standard .xyz file  C2H4O
+C	-1.1044079	-0.7490297	-0.3677069
+H	-1.1958644	-1.6858671	0.1689974
+C	-1.9642355	-0.3364092	-1.2995585
+H	-2.8198874	-0.9506828	-1.5624301
+H	-1.8471835	0.6066949	-1.8205538
+O	-0.0024719	-0.0491928	0.0299841
+H	0.0392302	0.7807249	-0.4758701
+4
+standard .xyz file  CH2O
+C	2.8274724	0.0483739	-0.0715908
+H	2.6147838	-1.0325847	-0.0764320
+H	2.9315432	0.5073404	0.9245391
+O	2.9406553	0.6964910	-1.1044861
+
+Energy: -0.0043226
+7
+standard .xyz file  C2H4O
+C	-1.3744017	0.0047450	-0.1642196
+H	-1.8385929	-0.9593402	0.0065039
+C	-2.0456074	1.1062776	-0.5018810
+H	-3.1240395	1.0725188	-0.6219577
+H	-1.5540069	2.0580254	-0.6664651
+O	-0.0221070	-0.0523769	0.0096454
+H	0.3508542	0.8312585	-0.1530799
+4
+standard .xyz file  CH2O
+C	3.9071279	0.1138246	0.1304187
+H	3.9405184	-0.4237127	-0.8306589
+H	4.6528385	-0.2021310	0.8773080
+O	3.0953272	1.0031517	0.3536131
+
+Energy: -0.0042565
+7
+standard .xyz file  C2H4O
+C	-1.1044079	-0.5078255	-0.6620930
+H	-1.1958644	-1.5855598	-0.5972504
+C	-1.9642355	0.2756979	-1.3137785
+H	-2.8198874	-0.1579441	-1.8220975
+H	-1.8471835	1.3520710	-1.3617632
+O	-0.0024719	-0.0573915	0.0050195
+H	0.0392302	0.9108444	-0.0796634
+4
+standard .xyz file  CH2O
+C	2.8030386	0.0694632	0.0450365
+H	2.5903499	0.0981888	-1.0355512
+H	2.9071094	-0.9365651	0.4818798
+O	2.9162215	1.0877851	0.7158189
+
+Energy: -0.0042494
+7
+standard .xyz file  C2H4O
+C	-1.3334829	0.2006026	-0.3123341
+H	-1.8947004	-0.7169134	-0.4437854
+C	-1.8585322	1.4200722	-0.4353133
+H	-2.9091594	1.5392342	-0.6813958
+H	-1.2721263	2.3210973	-0.2979654
+O	-0.0274698	-0.0502903	-0.0064330
+H	0.4359657	0.7981434	0.1020970
+4
+standard .xyz file  CH2O
+C	3.3144080	0.1092702	0.0321768
+H	3.2224451	-0.4963027	-0.8835500
+H	3.5311139	-0.4538002	0.9539935
+O	3.1844332	1.3269752	0.0258471
+
+Energy: -0.0037959
+7
+standard .xyz file  C2H4O
+C	-1.2155665	-0.5581275	-0.3561776
+H	-1.4234519	-1.5022843	0.1331400
+C	-2.0398859	0.0294445	-1.2240273
+H	-2.9858210	-0.4378232	-1.4798427
+H	-1.8051886	0.9751508	-1.6985160
+O	-0.0085446	-0.0500218	0.0273842
+H	0.1356087	0.7938825	-0.4346074
+4
+standard .xyz file  CH2O
+C	2.8018674	0.0810201	0.0239706
+H	2.6518658	-0.7409367	0.7420360
+H	2.9258989	-0.2237554	-1.0274494
+O	2.8289278	1.2550585	0.3713037
+
+Energy: -0.0037232
+7
+standard .xyz file  C2H4O
+C	-1.2815171	-0.5228118	-0.0187764
+H	-1.3876403	-1.4409159	0.5468231
+C	-2.2792315	0.0659289	-0.6789709
+H	-3.2721007	-0.3730799	-0.6715048
+H	-2.1434094	0.9850571	-1.2369479
+O	-0.0028678	-0.0486865	0.0307651
+H	0.0455148	0.7726899	-0.4882637
+4
+standard .xyz file  CH2O
+C	3.3516992	0.0583245	-0.1470106
+H	4.3105185	0.4048847	0.2704735
+H	2.7104212	-0.5105093	0.5450490
+O	3.0208119	0.2899233	-1.3031310
+
+Energy: -0.0031562
+7
+standard .xyz file  C2H4O
+C	-1.1609172	-0.1306801	-0.7424048
+H	-1.5530057	-1.1405037	-0.7669579
+C	-1.7278651	0.9047161	-1.3624299
+H	-2.6387852	0.7646953	-1.9361829
+H	-1.3126233	1.9049032	-1.3202066
+O	-0.0186736	-0.0545552	0.0003453
+H	0.2963636	0.8658299	-0.0054804
+4
+standard .xyz file  CH2O
+C	3.6786664	0.1444547	0.3053325
+H	2.7715907	-0.4354683	0.0715926
+H	4.6104906	-0.2276948	-0.1496007
+O	3.6528948	1.1364996	1.0229129
+
+Energy: -0.0029716
+7
+standard .xyz file  C2H4O
+C	-1.3792308	-0.1170176	0.0000000
+H	-1.7312068	-1.1418069	-0.0000005
+C	-2.1823828	0.9473382	0.0000002
+H	-3.2601852	0.8172777	0.0000000
+H	-1.8014583	1.9619708	-0.0000024
+O	-0.0160008	-0.0553991	0.0000010
+H	0.2539436	0.8792243	-0.0000163
+4
+standard .xyz file  CH2O
+C	3.2266155	0.0955374	-0.0872607
+H	3.3741265	-0.9394497	-0.4347855
+H	2.8076365	0.2009239	0.9262018
+O	3.5094772	1.0641740	-0.7811421
+
+Energy: -0.0029189
+7
+standard .xyz file  C2H4O
+C	-1.3334829	0.2006026	-0.3123341
+H	-1.8947004	-0.7169134	-0.4437854
+C	-1.8585322	1.4200722	-0.4353133
+H	-2.9091594	1.5392342	-0.6813958
+H	-1.2721263	2.3210973	-0.2979654
+O	-0.0274698	-0.0502903	-0.0064330
+H	0.4359657	0.7981434	0.1020970
+4
+standard .xyz file  CH2O
+C	3.8785730	0.1362582	0.0665414
+H	4.7871088	-0.4716161	0.2035914
+H	2.9440519	-0.4308781	-0.0705086
+O	3.9056322	1.3605975	0.0665414
+
+Energy: -0.0027482
+7
+standard .xyz file  C2H4O
+C	-1.2396360	-0.2989372	-0.5384328
+H	-1.6583111	-1.2321276	-0.1807362
+C	-1.8450272	0.5023740	-1.4155351
+H	-2.8177145	0.2355093	-1.8170776
+H	-1.4016293	1.4309742	-1.7556565
+O	-0.0199397	-0.0500120	0.0206469
+H	0.3164570	0.7937270	-0.3276815
+4
+standard .xyz file  CH2O
+C	3.1973601	0.1088422	-0.0003289
+H	3.1215082	-0.0786277	1.0826452
+H	2.7005372	-0.6324102	-0.6464463
+O	3.7940706	1.0765498	-0.4555404
+
+Energy: -0.0027135
+7
+standard .xyz file  C2H4O
+C	-1.3209327	-0.3082580	-0.2758344
+H	-1.5468379	-1.3657531	-0.2069074
+C	-2.2167047	0.6264109	-0.5950414
+H	-3.2446341	0.3475301	-0.8051853
+H	-1.9616642	1.6779670	-0.6564158
+O	-0.0092850	-0.0567432	0.0043684
+H	0.1473592	0.9005561	-0.0693300
+4
+standard .xyz file  CH2O
+C	3.5416781	0.1615100	0.1422066
+H	2.7658822	0.0938072	-0.6370804
+H	4.0460202	-0.7851666	0.3935992
+O	3.8245408	1.2184668	0.6922701
+
+Energy: -0.0026843
+7
+standard .xyz file  C2H4O
+C	-1.2385927	-0.5816443	-0.2086837
+H	-1.3411612	-1.5639389	0.2370259
+C	-2.2028886	0.0288135	-0.8981625
+H	-3.1625017	-0.4580789	-1.0418721
+H	-2.0716156	1.0127440	-1.3331692
+O	-0.0027719	-0.0520403	0.0246823
+H	0.0439922	0.8259169	-0.3917254
+4
+standard .xyz file  CH2O
+C	3.8736647	0.0368589	-0.1171644
+H	4.2604387	0.1964676	0.9019834
+H	2.7835098	-0.1019440	-0.1949580
+O	4.6065609	0.0151794	-1.0980476
+
+Energy: -0.0026573
+7
+standard .xyz file  C2H4O
+C	-1.3792308	-0.1048459	0.0519659
+H	-1.7312068	-1.0230413	0.5070596
+C	-2.1823828	0.8488003	-0.4206992
+H	-3.2601852	0.7322681	-0.3629412
+H	-1.8014583	1.7578940	-0.8712853
+O	-0.0160008	-0.0496363	0.0246029
+H	0.2539436	0.7877640	-0.3904655
+4
+standard .xyz file  CH2O
+C	2.9880806	0.0851534	0.0756016
+H	3.0097757	0.1394751	-1.0245392
+H	3.1659284	-0.9136056	0.5052603
+O	2.7801645	1.0692302	0.7742450
+
+Energy: -0.0026557
+7
+standard .xyz file  C2H4O
+C	-1.3209327	-0.3986884	-0.1102503
+H	-1.5468379	-1.3155780	0.4211256
+C	-2.2167047	0.2970050	-0.8113279
+H	-3.2446341	-0.0461897	-0.8757665
+H	-1.9616642	1.2119273	-1.3332993
+O	-0.0092850	-0.0489011	0.0291129
+H	0.1473592	0.7760957	-0.4620427
+4
+standard .xyz file  CH2O
+C	3.3136441	0.0469187	0.0406178
+H	2.7121840	-0.2611698	0.9107089
+H	2.7957351	0.0114864	-0.9311181
+O	4.4800054	0.4048657	0.1465138
+
+Energy: -0.0024108
+7
+standard .xyz file  C2H4O
+C	-1.1792950	-0.5504779	-0.4713896
+H	-1.2769530	-1.6111624	-0.2726653
+C	-2.0974253	0.1764110	-1.1090225
+H	-3.0110968	-0.2894776	-1.4650084
+H	-1.9724366	1.2369833	-1.2938113
+O	-0.0026393	-0.0563689	0.0118606
+H	0.0418881	0.8946147	-0.1882359
+4
+standard .xyz file  CH2O
+C	3.8428163	0.1792060	0.3266067
+H	2.7922284	0.1082594	0.0026268
+H	4.5599971	-0.4243215	-0.2523253
+O	4.1902363	0.8819923	1.2674199
+
+Energy: -0.0023549
+7
+standard .xyz file  C2H4O
+C	-1.2385927	-0.4284708	-0.4452772
+H	-1.3411612	-1.5065246	-0.4821514
+C	-2.2028886	0.4246775	-0.7919439
+H	-3.1625017	0.0522490	-1.1369273
+H	-2.0716156	1.4994441	-0.7447537
+O	-0.0027719	-0.0575883	-0.0009954
+H	0.0439922	0.9139682	0.0157980
+4
+standard .xyz file  CH2O
+C	3.4450562	0.0000011	-0.0036078
+H	2.8435961	0.9217471	0.0449861
+H	2.9271472	-0.9217600	0.3060417
+O	4.6114175	0.0000000	-0.3768905
+
+Energy: -0.0023119
+7
+standard .xyz file  C2H4O
+C	-1.1383762	-0.2745589	-0.7380297
+H	-1.3330605	-1.3329762	-0.8642477
+C	-1.9103500	0.6905723	-1.2385141
+H	-2.7962167	0.4376561	-1.8128375
+H	-1.6905560	1.7422229	-1.0960208
+O	-0.0080021	-0.0568696	-0.0051867
+H	0.1269994	0.9025619	0.0823166
+4
+standard .xyz file  CH2O
+C	3.2611347	0.0344890	-0.0764472
+H	3.2999036	-1.0225159	0.2317230
+H	2.8576948	0.7332650	0.6736890
+O	3.6411133	0.4077728	-1.1791776
+
+Energy: -0.0023005
+7
+standard .xyz file  C2H4O
+C	-1.2888179	0.0320264	-0.5038784
+H	-1.8312373	-0.8973597	-0.3769819
+C	-1.7962806	1.1178734	-1.0881081
+H	-2.8117171	1.1065103	-1.4719486
+H	-1.2295161	2.0347008	-1.2011928
+O	-0.0265498	-0.0505537	0.0080325
+H	0.4213650	0.8023232	-0.1274823
+4
+standard .xyz file  CH2O
+C	3.6629090	0.0750895	0.3084037
+H	4.6217283	-0.4667814	0.3362037
+H	3.0216311	-0.1389316	-0.5614891
+O	3.3320217	0.8627158	1.1858416
+
+Energy: -0.0022414
+7
+standard .xyz file  C2H4O
+C	-1.1383762	-0.5737489	-0.5393354
+H	-1.3330605	-1.5781258	-0.1823968
+C	-1.9103500	0.0687356	-1.4163625
+H	-2.7962167	-0.4129222	-1.8186308
+H	-1.6905560	1.0742773	-1.7557136
+O	-0.0080021	-0.0532576	0.0206078
+H	0.1269994	0.8452369	-0.3270604
+4
+standard .xyz file  CH2O
+C	3.6423791	0.0320047	-0.1021473
+H	2.7353035	0.1918041	0.5023436
+H	4.5742034	-0.1097495	0.4682607
+O	3.6166075	0.0131969	-1.3263699
+
+Energy: -0.0021655
+7
+standard .xyz file  C2H4O
+C	-1.3701146	-0.1843106	-0.0691829
+H	-1.7197641	-1.0661774	0.4543974
+C	-2.1679581	0.6586268	-0.7255431
+H	-3.2386367	0.4821940	-0.7585989
+H	-1.7895511	1.5337772	-1.2408126
+O	-0.0158951	-0.0474833	0.0285966
+H	0.2522670	0.7535946	-0.4538495
+4
+standard .xyz file  CH2O
+C	3.9750874	0.0005204	-0.0977224
+H	3.9183650	-0.4405945	0.9102119
+H	4.9887237	0.2480504	-0.4513129
+O	2.9780108	0.2022360	-0.7795494
+
+Energy: -0.0021515
+7
+standard .xyz file  C2H4O
+C	-1.3477156	-0.3150937	0.0186906
+H	-1.5782013	-1.2176869	0.5721180
+C	-2.2616500	0.4372883	-0.5949474
+H	-3.3104215	0.1591458	-0.5590462
+H	-2.0014388	1.3360706	-1.1418143
+O	-0.0094731	-0.0483135	0.0300192
+H	0.1503451	0.7667702	-0.4764269
+4
+standard .xyz file  CH2O
+C	3.5230777	-0.0212578	0.0786698
+H	3.2443499	0.1471857	-0.9737887
+H	2.6824319	-0.0880749	0.7876170
+O	4.6894387	-0.1271551	0.4366175
+
+Energy: -0.0021234
+7
+standard .xyz file  C2H4O
+C	-1.2385927	-0.4767498	-0.3931521
+H	-1.3411612	-1.5519107	-0.3060384
+C	-2.2028886	0.3309674	-0.8354560
+H	-3.1625017	-0.0785984	-1.1354101
+H	-2.0716156	1.4040469	-0.9119445
+O	-0.0027719	-0.0573219	0.0056214
+H	0.0439922	0.9097406	-0.0892161
+4
+standard .xyz file  CH2O
+C	3.8727440	-0.1802005	0.0311953
+H	4.2595180	0.8353454	0.2123133
+H	2.7825891	-0.2989695	0.1370820
+O	4.6056403	-1.1146346	-0.2678614
+
+-------------------------------------------------
+
+#Do calculate of HO No.2, and O No.1
+Enter Bond Rot 0 5 with angle 180
+Generate No.0 configuration with energy 0.0129393
+Enter Bond Rot 0 5 with angle 180
+Generate No.1 configuration with energy 0.0117007
+Enter Bond Rot 0 5 with angle 360
+Generate No.2 configuration with energy -0.0036288
+Enter Bond Rot 0 5 with angle 180
+Generate No.3 configuration with energy 0.0179408
+Enter Bond Rot 0 5 with angle 180
+Generate No.4 configuration with energy 0.0154327
+Enter Bond Rot 0 5 with angle 360
+Generate No.5 configuration with energy 0.0029570
+Enter Bond Rot 0 5 with angle 180
+Generate No.6 configuration with energy 0.0107233
+Enter Bond Rot 0 5 with angle 360
+Generate No.7 configuration with energy 0.0036736
+Enter Bond Rot 0 5 with angle 180
+Generate No.8 configuration with energy 0.0159202
+Enter Bond Rot 0 5 with angle 180
+Generate No.9 configuration with energy 0.0126124
+Enter Bond Rot 0 5 with angle 180
+Generate No.10 configuration with energy 0.0194863
+Enter Bond Rot 0 5 with angle 180
+Generate No.11 configuration with energy 0.0115074
+Enter Bond Rot 0 5 with angle 180
+Generate No.12 configuration with energy 0.0128813
+Enter Bond Rot 0 5 with angle 360
+Generate No.13 configuration with energy 0.0015775
+Enter Bond Rot 0 5 with angle 360
+Generate No.14 configuration with energy -0.0045650
+Enter Bond Rot 0 5 with angle 360
+Generate No.15 configuration with energy -0.0011740
+Enter Bond Rot 0 5 with angle 360
+Generate No.16 configuration with energy 0.0015373
+Enter Bond Rot 0 5 with angle 360
+Generate No.17 configuration with energy -0.0004121
+Enter Bond Rot 0 5 with angle 180
+Generate No.18 configuration with energy 0.0153158
+Enter Bond Rot 0 5 with angle 360
+Generate No.19 configuration with energy -0.0036903
+#After sorting,
+No.0 config has energy -0.0045650
+No.1 config has energy -0.0036903
+No.2 config has energy -0.0036288
+No.3 config has energy -0.0011740
+No.4 config has energy -0.0004121
+No.5 config has energy 0.0015373
+No.6 config has energy 0.0015775
+No.7 config has energy 0.0029570
+No.8 config has energy 0.0036736
+No.9 config has energy 0.0107233
+No.10 config has energy 0.0115074
+No.11 config has energy 0.0117007
+No.12 config has energy 0.0126124
+No.13 config has energy 0.0128813
+No.14 config has energy 0.0129393
+No.15 config has energy 0.0153158
+No.16 config has energy 0.0154327
+No.17 config has energy 0.0159202
+No.18 config has energy 0.0179408
+No.19 config has energy 0.0194863
+Save 2 least energy configuration:
+Energy: -0.0045650
+7
+standard .xyz file  C2H4O
+C	-1.1491919	0.2006026	-0.7450418
+H	-1.6328474	-0.7169134	-1.0586049
+C	-1.6016780	1.4200722	-1.0383964
+H	-2.5071056	1.5392342	-1.6254016
+H	-1.0963141	2.3210973	-0.7107631
+O	-0.0236738	-0.0502903	-0.0153469
+H	0.3757197	0.7981434	0.2435664
+4
+standard .xyz file  CH2O
+C	3.0180698	-1.2939756	0.0612747
+H	3.4436270	-1.9018499	-0.7530478
+H	2.5840470	-1.8611120	0.9001648
+O	3.0268852	-0.0696363	0.0356917
+
+Energy: -0.0011740
+7
+standard .xyz file  C2H4O
+C	-1.2979066	-0.1170176	-0.4666007
+H	-1.6291286	-1.1418069	-0.5856764
+C	-2.0537020	0.9473382	-0.7383109
+H	-3.0679534	0.8172777	-1.1029370
+H	-1.6952372	1.9619708	-0.6094447
+O	-0.0150576	-0.0553991	-0.0054122
+H	0.2389757	0.8792243	0.0858951
+4
+standard .xyz file  CH2O
+C	3.5864351	-0.9969562	-0.2177327
+H	3.1762922	-2.0193819	-0.2303681
+H	4.6664871	-0.9161144	-0.4194953
+O	2.8884152	-0.0158333	0.0056619
+
+-------------------------------------------------
+
+#Here output 50 .xyz files to ./SaveConfigs/ as the final result
+No.0 least energy energy is: -0.0047669
+No.1 least energy energy is: -0.0047270
+No.2 least energy energy is: -0.0046783
+No.3 least energy energy is: -0.0045650
+No.4 least energy energy is: -0.0043226
+No.5 least energy energy is: -0.0042565
+No.6 least energy energy is: -0.0042494
+No.7 least energy energy is: -0.0037959
+No.8 least energy energy is: -0.0037232
+No.9 least energy energy is: -0.0032080
+No.10 least energy energy is: -0.0031666
+No.11 least energy energy is: -0.0031562
+No.12 least energy energy is: -0.0030431
+No.13 least energy energy is: -0.0029716
+No.14 least energy energy is: -0.0029189
+No.15 least energy energy is: -0.0027482
+No.16 least energy energy is: -0.0027284
+No.17 least energy energy is: -0.0027281
+No.18 least energy energy is: -0.0027135
+No.19 least energy energy is: -0.0026843
+No.20 least energy energy is: -0.0026573
+No.21 least energy energy is: -0.0026557
+No.22 least energy energy is: -0.0026505
+No.23 least energy energy is: -0.0026460
+No.24 least energy energy is: -0.0026241
+No.25 least energy energy is: -0.0024683
+No.26 least energy energy is: -0.0024108
+No.27 least energy energy is: -0.0023549
+No.28 least energy energy is: -0.0023119
+No.29 least energy energy is: -0.0023005
+No.30 least energy energy is: -0.0022901
+No.31 least energy energy is: -0.0022635
+No.32 least energy energy is: -0.0022551
+No.33 least energy energy is: -0.0022414
+No.34 least energy energy is: -0.0021655
+No.35 least energy energy is: -0.0021515
+No.36 least energy energy is: -0.0021234
+No.37 least energy energy is: -0.0020825
+No.38 least energy energy is: -0.0020242
+No.39 least energy energy is: -0.0020221
+No.40 least energy energy is: -0.0020082
+No.41 least energy energy is: -0.0020041
+No.42 least energy energy is: -0.0019611
+No.43 least energy energy is: -0.0019069
+No.44 least energy energy is: -0.0017803
+No.45 least energy energy is: -0.0016764
+No.46 least energy energy is: -0.0015622
+No.47 least energy energy is: -0.0015601
+No.48 least energy energy is: -0.0011740
+No.49 least energy energy is: -0.0006641
+#Have generate an analysis .xyz file
+sh: PAUSE: command not found
