@@ -5,4 +5,5 @@ InitiConfig/ch2o.xyz
 2
 InitiConfig/ch2choh_1
 InitiConfig/ch2o
-30
+50
+1 0
