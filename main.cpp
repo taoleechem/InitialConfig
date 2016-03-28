@@ -1,3 +1,21 @@
+/*
+ * =====================================================================================
+ *
+ *       Filename:  main.cpp
+ *
+ *    Description:  Enter program
+ *
+ *        Version:  1.0
+ *        Created:  2016年03月21日 14时39分14秒
+ *       Revision:  none
+ *       Compiler:  gcc
+ *
+ *         Author:  Tao Li (), taoleechem@outlook.com
+ *   Organization:  Nanjing University
+ *
+ * =====================================================================================
+ */
+
 #include "molecule.h"
 #include "configs.h"
 

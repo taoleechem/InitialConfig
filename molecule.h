@@ -1,3 +1,21 @@
+/*
+ * =====================================================================================
+ *
+ *       Filename:  molecule.h
+ *
+ *    Description:  Core design headfile for chemistry study
+ *
+ *        Version:  1.0
+ *        Created:  2016年03月21日 14时39分14秒
+ *       Revision:  none
+ *       Compiler:  gcc
+ *
+ *         Author:  Tao Li (), taoleechem@outlook.com
+ *   Organization:  Nanjing University
+ *
+ * =====================================================================================
+ */
+
 #ifndef _MOLECULE_H_
 #define _MOLECULE_H_
 
@@ -12,7 +30,7 @@
 #include <cmath>
 #include <time.h>
 using namespace std;
-const int MaxAtom = 100;
+const int MaxAtom = 200;
 const int MAXFRAGMENT = 8;
 const double PI = 3.1415926;
 const double HARTREE = 4.359744e-18;

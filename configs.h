@@ -1,3 +1,22 @@
+/*
+ * =====================================================================================
+ *
+ *       Filename:  configs.h
+ *
+ *    Description:  Generate some configurations of 2 molecules for the automatically
+ *                  search of chemical reaction path
+ *
+ *        Version:  1.0
+ *        Created:  2016年03月21日 14时39分14秒
+ *       Revision:  none
+ *       Compiler:  gcc
+ *
+ *         Author:  Tao Li (), taoleechem@outlook.com
+ *   Organization:  Nanjing University
+ *
+ * =====================================================================================
+ */
+
 #ifndef _CONFIGS_H_
 #define _CONFIGS_H_
 #include <iostream>
