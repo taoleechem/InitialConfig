@@ -632,6 +632,8 @@ static void GenerateFunction3(int matrix[][2],int index, int matrix2[][2],int in
 				{
 					potential = SaveCalculations.Energy(search_label);
 					cout<<"Find existing value"<<endl;
+					k--;
+					continue;
 				}
 					
 				//cout << potential << "\t";
