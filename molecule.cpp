@@ -20,6 +20,21 @@
 #include "rmsd.h" 
 #include <iostream>
 
+//Generate <double> random number from 0-MaxValue
+double RandomNumber(double MaxValue)
+{
+	clock_t now = clock();
+	/*
+	srand(now);
+	for (int i = 0; i != 3; i++)
+	x[i] = (rand() % nums + 1)*Precision_degree;
+	*/
+	std::default_random_engine generator(now);
+	std::uniform_real_distribution<double> dis(0, MaxValue);
+	return dis(generator);
+
+}
+
 Molecule::Molecule()
 {
 	number = 0;
@@ -724,7 +739,7 @@ void Molecule::ReadFromGJF(string &filename, int atomNum)
 void Molecule::ReadFromTinkerXYZfile(const string filename)
 {
 	ifstream infile(filename.c_str());
-	if (!cout)
+	if (!std::cout)
 	{
 		cerr << "Error to open " << filename << " to get the geometry info" << endl;
 		exit(1);
@@ -936,6 +951,20 @@ int Molecule::ConnectAtoms(int i)
 	return temp;
 }
 
+vector<int> Molecule::WhoConnectMe(int i, int except_label)
+{
+	vector<int> temp;
+	for (int j = 0; j < number; j++)
+	{
+		if (j != except_label&&BondOrder(i, j) > 0)
+		{
+			temp.push_back(j);
+			//cout << j << " connect " << i << " besides " << except_label << endl;
+		}
+	}
+	return temp;
+}
+
 string Molecule::StandardAtomName(string x)
 {
 	string temp;
@@ -1096,10 +1125,11 @@ void Molecule::PerformOnePointRotToXPlus(Eigen::Vector3d point)
 		corr[i][2] = singleAtom(2);
 	}
 }
-Eigen::Matrix3d Molecule::EulerRot(double &a1, double &a2, double &a3)
+//angle in unit of radian
+Eigen::Matrix3d Molecule::EulerRot(double a1_radian, double a2_radian, double a3_radian)
 {
 	Eigen::Matrix3d m;
-	m = Eigen::AngleAxisd(a1, Eigen::Vector3d::UnitX())*Eigen::AngleAxisd(a2, Eigen::Vector3d::UnitY())* Eigen::AngleAxisd(a3, Eigen::Vector3d::UnitZ());
+	m = Eigen::AngleAxisd(a1_radian, Eigen::Vector3d::UnitX())*Eigen::AngleAxisd(a2_radian, Eigen::Vector3d::UnitY())* Eigen::AngleAxisd(a3_radian, Eigen::Vector3d::UnitZ());
 	return m;
 }
 void Molecule::PerformRandomRotEuler(Eigen::Vector3d Point, const double &Precision_degree)
@@ -1122,11 +1152,96 @@ void Molecule::PerformRandomRotEuler(Eigen::Vector3d Point, const double &Precis
 	}
 	//cout << x[0] << "\t" << x[1] << "\t" << x[2] << endl;
 	Eigen::Matrix3d randomRotation;
-	randomRotation = EulerRot(x[0], x[1], x[2]);
+	randomRotation = EulerRot(x[0]*PI/180, x[1]*PI/180, x[2]*PI/180);
 	PerformTrans(-1 * Point);
 	PerformRot(randomRotation);
 	PerformTrans(Point);
 }
+//This could return the inertial angle value
+void Molecule::PerformRandomRotEuler(Eigen::Vector3d Point, const double Precision_degree, double &ax_degree, double &ay_degree, double &az_degree)
+{
+	double x[3];
+	const int nums = (int)(360 / Precision_degree);
+
+	clock_t now = clock();
+	/*
+	srand(now);
+	for (int i = 0; i != 3; i++)
+	x[i] = (rand() % nums + 1)*Precision_degree;
+	*/
+
+	std::default_random_engine generator(now);
+	std::uniform_int_distribution<int> dis(0, nums);
+	for (int i = 0; i != 3; i++)
+	{
+		x[i] = dis(generator)*Precision_degree;
+	}
+	//cout << x[0] << "\t" << x[1] << "\t" << x[2] << endl;
+	Eigen::Matrix3d randomRotation;
+	ax_degree = x[0]; ay_degree = x[1]; az_degree = x[2];
+	randomRotation = EulerRot(x[0] * PI / 180, x[1] * PI / 180, x[2] * PI / 180);
+	PerformTrans(-1 * Point);
+	PerformRot(randomRotation);
+	PerformTrans(Point);
+}
+Eigen::Matrix3d Molecule::EulerRotXY(double ax_radian, double ay_radian)
+{
+	Eigen::Matrix3d m;
+	m = Eigen::AngleAxisd(ax_radian, Eigen::Vector3d::UnitX())*Eigen::AngleAxisd(ay_radian, Eigen::Vector3d::UnitY());
+	return m;
+}
+void Molecule::PerformRandomRotEulerXY(Eigen::Vector3d Point, const double &Precision_degree)
+{
+	double x[2];
+	const int nums = (int)(360 / Precision_degree);
+
+	clock_t now = clock();
+	/*
+	srand(now);
+	for (int i = 0; i != 3; i++)
+	x[i] = (rand() % nums + 1)*Precision_degree;
+	*/
+
+	std::default_random_engine generator(now);
+	std::uniform_int_distribution<int> dis(0, nums);
+	for (int i = 0; i != 2; i++)
+	{
+		x[i] = dis(generator)*Precision_degree;
+	}
+	//cout << x[0] << "\t" << x[1]  << endl;
+	Eigen::Matrix3d randomRotation;
+	randomRotation = EulerRotXY(x[0]*PI/180, x[1]*PI/180);
+	PerformTrans(-1 * Point);
+	PerformRot(randomRotation);
+	PerformTrans(Point);
+}
+void Molecule::PerformRandomRotEulerXY(Eigen::Vector3d Point, const double &Precision_degree, double &ax_degree, double &ay_degree)
+{
+	double x[2];
+	const int nums = (int)(360 / Precision_degree);
+
+	clock_t now = clock();
+	/*
+	srand(now);
+	for (int i = 0; i != 3; i++)
+	x[i] = (rand() % nums + 1)*Precision_degree;
+	*/
+
+	std::default_random_engine generator(now);
+	std::uniform_int_distribution<int> dis(0, nums);
+	for (int i = 0; i != 2; i++)
+	{
+		x[i] = dis(generator)*Precision_degree;
+	}
+	//cout << x[0] << "\t" << x[1]  << endl;
+	Eigen::Matrix3d randomRotation;
+	ax_degree = x[0]; ay_degree = x[1];
+	randomRotation = EulerRotXY(x[0] * PI / 180, x[1] * PI / 180);
+	PerformTrans(-1 * Point);
+	PerformRot(randomRotation);
+	PerformTrans(Point);
+}
+
 void Molecule::MCtoOrigin()
 {
 	Eigen::Vector3d mc;
@@ -1293,28 +1408,7 @@ void Molecule::AligenToStandardConfig()
 	PerformAxisRot(axis, alpha);
 }
 
-void RandomRotPossibleBond(Molecule &ia, double Resolusion_radian)
-{
-	//Firstly, judge which bond has potential to rot
-	vector<Bond> rotable;
-	for (int i = 0; i < ia.number; i++)
-		for (int j=i + 1; j < ia.number; j++)
-		{
-			int order = ia.BondOrder(i, j);
-			if (order == 1&&ia.ConnectAtoms(i)>1&&ia.ConnectAtoms(j)>1)
-				rotable.push_back(Bond(i, j, order));
-		}
-	//Secondly, rot with this bond.
-	int num = rotable.size();
-	clock_t now = clock();
-	srand(now);
-	int Max = int(2 * PI / Resolusion_radian);
-	double x = (rand() % (int)((Max)) + 1)*Resolusion_radian;
-	for (int i = 0; i < num; i++)
-	{
-		ia.PerformBondRot(rotable[i].i, rotable[i].j, x);
-	}
-}
+
 
 
 

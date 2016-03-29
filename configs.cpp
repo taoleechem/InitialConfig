@@ -23,13 +23,7 @@
 
 //#define _NWCHEM_
 #define _GAUSSIAN_
-static double RandomNumber(double MaxValue)
-{
-	clock_t now = clock();
-	srand(now);
-	double x = (rand() % (int)((MaxValue*1000)) + 1);
-	return abs(x)/1000;
-}
+
 static double ReadFile(string Tempfilename)
 {
 	ifstream readfile(Tempfilename.c_str());
@@ -427,15 +421,76 @@ static void GenerateFunction2(int matrix[][2],int index, int matrix2[][2],int in
 
 
 //Version 2.0, default 2.8 distance, has chance to change rotation of intramolecular structure. NBO charge exclusion
+class EulerAngle5
+{
+public:
+	int ax, ay, bx, by, bz, modei, modej;
+	EulerAngle5(int i1, int i2, int i3, int i4, int i5,int m1, int m2) :ax(i1), ay(i2), bx(i3), by(i4), bz(i5),modei(m1),modej(m2) {}
+	friend ostream& operator<<(ostream &os, EulerAngle5 &A)
+	{
+		os << A.ax << "\t" << A.ay << "\t" << A.bx << "\t" << A.by << "\t" << A.bz;
+		return os;
+	}
+
+};
+//Maps is used to save each calculated configuration
+class Maps
+{
+private:
+	vector<EulerAngle5> EulerAngle;
+	vector<double> energy;
+public:
+	Maps() {}
+	Maps(Maps &iA)
+	{
+		EulerAngle = iA.EulerAngle;
+		energy = iA.energy;
+	}
+	void AddPoint(int modei, int modej, int ax, int ay, int bx, int by, int bz, double iE)
+	{
+		EulerAngle5 temp(ax, ay, bx, by, bz, modei, modej);
+		EulerAngle.push_back(temp);
+		energy.push_back(iE);
+	}
+	friend ostream& operator<<(ostream &os, Maps &A)
+	{
+		vector<EulerAngle5>::iterator iter1;
+		vector<double>::iterator iter2;
+		for (iter1 = A.EulerAngle.begin(), iter2 = A.energy.begin(); iter1 != A.EulerAngle.end() && iter2 != A.energy.end(); iter1++, iter2++)
+		{
+			os << *iter1 << "\t" << *iter2 << endl;
+		}
+		return os;
+	}
+	double Energy(int label)
+	{
+		if (label >= 0 && label < energy.size())
+			return energy[label];
+		else
+			return 10242048;
+	}
+	int WhichLabel(int modei,int modej, int ax, int ay, int bx, int by, int bz)
+	{
+		vector<EulerAngle5>::iterator iter1;
+		int i = 0;
+		for (i = 0, iter1 = EulerAngle.begin(); iter1 != EulerAngle.end(); iter1++, i++)
+		{
+			if ((*iter1).modej == modei&& (*iter1).modei == modej&&(*iter1).ax == ax && (*iter1).ay == ay && (*iter1).bx == bx && (*iter1).by == by && (*iter1).bz == bz)
+				return i;
+		}
+		return -1;
+	}
+};
 static void GenerateFunction3(int matrix[][2],int index, int matrix2[][2],int index2, const int OutPutNumber,const string xyz_filename1,const string xyz_filename2,bool Rotable1, bool Rotable2)
 {
 	cout << "Enter Calculating..." << endl;
+	Maps SaveCalculations;//save each calculation value
 	const double RotPrecision = 20;
 	const double B1_default_value = 2.80;
-        const double Radius_Times=1.50;
-	const double RMSD_Precision = 0.40;
+    const double Radius_Times=1.50;
+	const double RMSD_Precision = 1.00;
 	//for each pair config(ij[k]), rot * times
-	const int EachSaveConfigRotTimes = 16;
+	const int EachSaveConfigRotTimes = 8;
 	Fragments FA, FB;
 	FA.ReadFromXYZfile(xyz_filename1, index, matrix);
 	FB.ReadFromXYZfile(xyz_filename2, index2, matrix2);
@@ -444,7 +499,7 @@ static void GenerateFunction3(int matrix[][2],int index, int matrix2[][2],int in
 	cout << "Configuration of Molecule B:" << endl<<endl;
 	cout << FB << endl;
 	const double RestEnergies = G09energy(FA.TotalFragments()) + G09energy(FB.TotalFragments());
-        cout<<"At rest, energy of 2 molecules is: "<<RestEnergies<<endl;
+    cout<<"At rest, energy of 2 molecules is: "<<RestEnergies<<endl;
 
 	//We need to find the sepcific EachPairSaveNumber(i,j) and MaxRotTimes(i,j) for each specific group combination according to partition function
 	int MaxRotTimes[MAXFRAGMENT*2][MAXFRAGMENT];
@@ -453,6 +508,7 @@ static void GenerateFunction3(int matrix[][2],int index, int matrix2[][2],int in
 	//try and to find partition function
 	double potential[MAXFRAGMENT*2][MAXFRAGMENT];//have no unit
 	double total_partition = 0;
+	//calculate average potential between each combination mode
 	for (int i = 0; i != FA.FragNumbers(); i++, ++FA)
 	{
 		FB.IndexToZero();
@@ -476,18 +532,19 @@ static void GenerateFunction3(int matrix[][2],int index, int matrix2[][2],int in
 			MC_B1 = B.MassCenter();
 			Eigen::Vector3d e_x;
 			e_x << 1, 0, 0;
-			double temp_potential[5];
+			double temp_potential[6];
 			potential[i][j] = 0;
-			for (int k = 0; k < 5; k++)
+			for (int k = 0; k < 6; k++)
 			{
 				Molecule tA = A;
 				Molecule tB = B;
-				tA.PerformAxisRot(e_x, RandomNumber(2 * PI));
-				tB.PerformAxisRot(e_x, RandomNumber(2 * PI));
+				tB.PerformAxisRot(e_x, k*PI /3);
+				MakeAtomsSuitableDistanceMoveB(tA, tB, B1_default_value);
 				temp_potential[k] = (G09energy(tA, tB) - RestEnergies)*HARTREE / K_B_BOLTZMAN / ROOM_TEMPERATURE;
+				SaveCalculations.AddPoint(i, j, 0, 0, k * 60, 0, 0, temp_potential[k]);//Save each calculation value
 				potential[i][j] += temp_potential[k];
 			}
-			potential[i][j] = potential[i][j] / 5;
+			potential[i][j] = potential[i][j] / 6;
 			cout << X_ToStr<int>(i) << "," << X_ToStr<int>(j) << " group-combination has potential: " << potential[i][j] <<"(unitless, V*Hartree/K_b/T)"<< endl;
 			total_partition += exp(-1 * potential[i][j]);
 		}
@@ -501,16 +558,25 @@ static void GenerateFunction3(int matrix[][2],int index, int matrix2[][2],int in
 	    {
 		    PartitionFunction[i][j] = exp(-1 * potential[i][j]) / total_partition;
             cout<<PartitionFunction[i][j]<<"\t";
-            if (PartitionFunction[i][j]>0.5)
-                 EachPairSaveNumber[i][j] = 0.5*OutPutNumber;
-		    else if (PartitionFunction[i][j]*OutPutNumber > 2)
-			    EachPairSaveNumber[i][j] = PartitionFunction[i][j]*OutPutNumber;
-		    else
-			    EachPairSaveNumber[i][j] = 2;
-		    MaxRotTimes[i][j] = EachPairSaveNumber[i][j] * EachSaveConfigRotTimes;
         }
         cout<<endl;
     }
+	cout << "Here is the partition number N_{ij} of each group-combination pair:" << endl;
+	for (int i = 0; i != FA.FragNumbers(); i++)
+	{
+		for (int j = 0; j != FB.FragNumbers(); j++)
+		{
+			if (PartitionFunction[i][j]>0.5)
+				EachPairSaveNumber[i][j] = 0.5*OutPutNumber;
+			else if (PartitionFunction[i][j] * OutPutNumber > 2)
+				EachPairSaveNumber[i][j] = PartitionFunction[i][j] * OutPutNumber;
+			else
+				EachPairSaveNumber[i][j] = 2;
+			cout << EachPairSaveNumber[i][j] << "\t";
+			MaxRotTimes[i][j] = EachPairSaveNumber[i][j] * EachSaveConfigRotTimes;
+		}
+		cout << endl;
+	}
 	cout << endl << endl;
 
 	//Begin operation 
@@ -529,14 +595,18 @@ static void GenerateFunction3(int matrix[][2],int index, int matrix2[][2],int in
 			//keep A1-MC to origin, put A2-MC to x- axis
 			Eigen::Vector3d MC_A2 = FA.OtherFragments().MassCenter();
 			FA.PerformOnePointRotToXMinus(MC_A2);
-			//translate B1-MC to x+ axis(default distance is 3.00), B2 at random position
-			Eigen::Vector3d Default_B1;
-			Default_B1 << B1_default_value, 0, 0;//3.0, 0, 0
+			//translate B1-MC to x+ axis(default distance is 3.00), B2 at x- axis
 			Eigen::Vector3d MC_B1 = FB.ThisFragment().MassCenter();
-			FB.PerformTrans(-1 * MC_B1 + Default_B1);
+			FB.PerformTrans(-1 * MC_B1);
+			Eigen::Vector3d MC_B2 = FB.OtherFragments().MassCenter();
+			FB.PerformOnePointRotToXPlus(MC_B2);//B this part at O, other part at x+
+			Eigen::Vector3d Default_B1;
+			Default_B1 << B1_default_value, 0, 0;
+			FB.PerformTrans(Default_B1);//B move at direction(1,0,0) to 3.00
 			//rot B at point B1_MC randomly
 			Molecule A = FA.TotalFragments();
 			Molecule B = FB.TotalFragments();
+			MakeAtomsSuitableDistanceMoveB(A, B, B1_default_value);
 			MC_A1 = FA.ThisFragment().MassCenter();
 			MC_B1 = FB.ThisFragment().MassCenter();
 			vector<DoubleMolecule> TempConfigs;
@@ -544,17 +614,23 @@ static void GenerateFunction3(int matrix[][2],int index, int matrix2[][2],int in
 			for (int k = 0; k != MaxRotTimes[i][j]; k++)
 			{
 				//We should  rot A at the same time to make sure all suitable configurations happen!
-               			Molecule tA=A;
-              			Molecule tB=B;
-				if (Rotable1)
-					RandomRotPossibleBond(tA, PI);
-				if (Rotable2)
-					RandomRotPossibleBond(tB, PI);
-				tA.PerformRandomRotEuler(MC_A1, RotPrecision*1.15);
-				tB.PerformRandomRotEuler(MC_B1, RotPrecision);
+               	Molecule tA=A;
+              	Molecule tB=B;
+				double ax, ay, bx, by, bz;
+				tA.PerformRandomRotEulerXY(MC_A1, RotPrecision/1.15,ax,ay);
+				tB.PerformRandomRotEuler(MC_B1, RotPrecision,bx,by,bz);
 				//Here need to adjust B to a suitable position that the closest distance between atoms of A and B is 3.0
 				MakeAtomsSuitableDistanceMoveB(tA, tB, B1_default_value);
-				double  potential = G09energy(tA, tB) - RestEnergies;
+				int search_label = SaveCalculations.WhichLabel(i, j, ax, ay, bx, by, bz);
+				double  potential;
+				if (search_label == -1)
+				{
+					potential = G09energy(tA, tB) - RestEnergies;
+					SaveCalculations.AddPoint(i, j, ax, ay, bx, by, bz, potential);
+				}
+				else
+					potential = SaveCalculations.Energy(search_label);
+					
 				//cout << potential << "\t";
 				DoubleMolecule temp_save;
 				temp_save.Set(tA, tB, potential);
@@ -711,10 +787,10 @@ void Do_GenerateFunction_Program_FromFile(string filename)
 void RandomGenerate(const int OutPutNumber, const string xyz_filename1, const string xyz_filename2)
 {
     cout << "Enter Formation..." << endl;
-	const double RotPrecision = 20;
-	const double B1_default_value = 3.00;
+	const double RotPrecision = 5;
+	const double B1_default_value = 2.80;
 	const double Radius_Times=1.50;
-	const double RMSD_Precision = 0.35;
+	const double RMSD_Precision = 1.00;
     Molecule A,B;
     A.ReadFromXYZfile(xyz_filename1);
     B.ReadFromXYZfile(xyz_filename2);
@@ -726,27 +802,11 @@ void RandomGenerate(const int OutPutNumber, const string xyz_filename1, const st
     {
         MC_A = A.MassCenter();
 		MC_B = B.MassCenter();
-        A.PerformRandomRotEuler(MC_A, RotPrecision);
+        A.PerformRandomRotEulerXY(MC_A, RotPrecision);
         B.PerformRandomRotEuler(MC_B, RotPrecision);
         MakeAtomsSuitableDistanceMoveB(A, B, B1_default_value);
         temp_config.Set(A,B,0.0);
-        if(i==0)
-            SaveConfigs.push_back(temp_config);
-        else
-            {
-                int j=0;
-                for(j=0;j<i;j++)
-                 {
-                    double temp_x = RMSD(temp_config, SaveConfigs[j]);
-					if (abs(temp_x)< RMSD_Precision)
-						break;
-                 }
-                 if(j==i)
-                    SaveConfigs.push_back(temp_config);
-                 else 
-                    i--;
-            }
-        
+		SaveConfigs.push_back(temp_config);
     }
     for(int i=0;i<OutPutNumber;i++)
     {
@@ -755,7 +815,8 @@ void RandomGenerate(const int OutPutNumber, const string xyz_filename1, const st
     //combine these .xyz files to one .xyz file 
 
       AlignEachXYZToStandardForm("SaveConfigs", OutPutNumber, A.Number());
-        cout<<"#Have generate an analysis .xyz file"<<endl;
+	  XYZToMol2_MoleculeAmBnType("SaveConfigs/final.xyz", "SaveConfigs/final.mol2", A.Number(), 1, B.Number());
+      cout<<"#Have generate an analysis .xyz file"<<endl;
 }
 void Do_RandomGenerate_FromFile(string filename)
 {

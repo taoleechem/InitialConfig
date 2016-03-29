@@ -61,6 +61,9 @@ template <class T> string X_ToStr(T tmp)
 	ss << tmp;
 	return ss.str();
 }
+double RandomNumber(double MaxValue);
+
+
 class Bond
 {
 public:
@@ -143,19 +146,7 @@ public:
 	double AtomRadius(int i);
 	int BondOrder(int i, int j);
 	int ConnectAtoms(int i);
-	vector<int> WhoConnectMe(int i, int except_label)
-	{
-		vector<int> temp;
-		for (int j = 0; j < number; j++)
-			{
-				if (j!=except_label&&BondOrder(i, j) > 0)
-				{
-					temp.push_back(j);
-					//cout << j << " connect " << i << " besides " << except_label << endl;
-				}
-			}
-		return temp;
-	}
+	vector<int> WhoConnectMe(int i, int except_label);
 	string StandardAtomName(string x);
 	Eigen::Vector3d MassCenter();
 	friend double DistanceOfMassCenter(Molecule &ia, Molecule &ib);
@@ -191,8 +182,14 @@ public:
 	void PerformAxisRot(Eigen::Vector3d axis, double angle_radian);
 	void PerformOnePointRotToXMinus(Eigen::Vector3d point);
 	void PerformOnePointRotToXPlus(Eigen::Vector3d point);
-	Eigen::Matrix3d EulerRot(double &a1, double &a2, double &a3);
+	Eigen::Matrix3d EulerRot(double a1_radian, double a2_radian, double a3_radian);
 	void PerformRandomRotEuler(Eigen::Vector3d Point, const double &Precision_degree);
+	void PerformRandomRotEuler(Eigen::Vector3d Point, const double Precision_degree, double &ax_degree, double &ay_degree,double &az_degree);
+	Eigen::Matrix3d EulerRotXY(double ax_radian, double ay_radian);
+	void PerformRandomRotEulerXY(Eigen::Vector3d Point, const double &Precision_degree);
+	void PerformRandomRotEulerXY(Eigen::Vector3d Point, const double &Precision_degree, double &ax_degree, double &ay_degree);
+
+
 	void MCtoOrigin();
 	void MCtoVector(const Eigen::Vector3d x);
 	friend double ClosestDistance(Molecule &ia, Molecule &ib);
@@ -203,8 +200,28 @@ public:
 	friend double RMSD(Molecule &ia, Molecule &ib);
 	friend void SpaceTransform(Molecule ref, Molecule &change);
 	void AligenToStandardConfig();
-
-	friend void RandomRotPossibleBond(Molecule &ia, double Resolution_radian);
+	friend void RandomRotPossibleBond(Molecule &ia, double Resolusion_radian)
+	{
+		//Firstly, judge which bond has potential to rot
+		vector<Bond> rotable;
+		for (int i = 0; i < ia.number; i++)
+			for (int j = i + 1; j < ia.number; j++)
+			{
+				int order = ia.BondOrder(i, j);
+				if (order == 1 && ia.ConnectAtoms(i)>1 && ia.ConnectAtoms(j)>1)
+					rotable.push_back(Bond(i, j, order));
+			}
+		//Secondly, rot with this bond.
+		int num = rotable.size();
+		clock_t now = clock();
+		srand(now);
+		int Max = int(2 * PI / Resolusion_radian);
+		double x = (rand() % (int)((Max)) + 1)*Resolusion_radian;
+		for (int i = 0; i < num; i++)
+		{
+			ia.PerformBondRot(rotable[i].i, rotable[i].j, x);
+		}
+	}
 };
 
 class DoubleMolecule
