@@ -34,6 +34,19 @@ double RandomNumber(double MaxValue)
 	return dis(generator);
 
 }
+int RandomNumberInt(int MaxValue)
+{
+	clock_t now = clock();
+	/*
+	srand(now);
+	for (int i = 0; i != 3; i++)
+	x[i] = (rand() % nums + 1)*Precision_degree;
+	*/
+	std::default_random_engine generator(now);
+	std::uniform_int_distribution<int> dis(0, MaxValue);
+	return dis(generator);
+
+}
 
 Molecule::Molecule()
 {

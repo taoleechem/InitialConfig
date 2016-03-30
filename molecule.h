@@ -62,6 +62,7 @@ template <class T> string X_ToStr(T tmp)
 	return ss.str();
 }
 double RandomNumber(double MaxValue);
+int RandomNumberInt(int MaxValue);
 
 
 class Bond
@@ -158,7 +159,7 @@ public:
 //Unfinished
 	void PerformBondRot(int i, int j, double angle_radian)
 	{
-		cout << "Enter Bond Rot " << i << " " << j << " with angle " << int(angle_radian*180/PI) << endl;
+		cout << "\t Enter Bond Rot " << i << " " << j << " with angle " << int(angle_radian*180/PI) << endl;
 		vector<int> RotAtoms(WhoConnectMe(j, i));
 		//cout << RotAtoms[0] << endl;
 		Eigen::Vector3d axis;
@@ -215,8 +216,8 @@ public:
 		int num = rotable.size();
 		clock_t now = clock();
 		srand(now);
-		int Max = int(2 * PI / Resolusion_radian);
-		double x = (rand() % (int)((Max)) + 1)*Resolusion_radian;
+		int Max = int(2 * PI / Resolusion_radian)-1;
+		double x = RandomNumberInt(Max)*Resolusion_radian;
 		for (int i = 0; i < num; i++)
 		{
 			ia.PerformBondRot(rotable[i].i, rotable[i].j, x);

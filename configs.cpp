@@ -715,14 +715,15 @@ static void GenerateFunction3(int matrix[][2],int index, int matrix2[][2],int in
 				SaveSuitableCofigs[i].GetInfo(t1, t2, ie);
 				//rot analysis
 				if (Rotable1 == true)
-					RandomRotPossibleBond(t1, PI);
+					RandomRotPossibleBond(t1, PI/2);
 				if (Rotable2 == true)
 					RandomRotPossibleBond(t2, PI);
 				double tE = G09energy(t1, t2) - RestEnergies;
+				cout << "\t after rot, potential is: " << tE<<" while before potential is "<<ie << endl;
 				if (RandomNumber(1) < exp((ie - tE) / K_B_BOLTZMAN / Temperature))
 				{
 					SaveSuitableCofigs[i].Set(t1, t2, tE);
-					cout << "Sucessfully rot bond to No." << i << " configuration" << endl;
+					cout << "\t Sucessfully rot bond to No." << i << " configuration" << endl;
 				}
 			}
             SaveSuitableCofigs[i].ToXYZ("SaveConfigs/" + X_ToStr<int>(i) + ".xyz");
