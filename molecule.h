@@ -214,22 +214,17 @@ public:
 			}
 		//Secondly, rot with this bond.
 		int num = rotable.size();
-		clock_t now = clock();
-		srand(now);
 		int Max = int(2 * PI / Resolusion_radian)-1;
 
+		clock_t now = clock();
+		srand(now);
+		double x;
 		for (int i = 0; i < num; i++)
 		{
-			clock_t now = clock();
-			/*
-			srand(now);
-			for (int i = 0; i != 3; i++)
-			x[i] = (rand() % nums + 1)*Precision_degree;
-			*/
-			std::default_random_engine generator(now);
-			std::uniform_int_distribution<int> dis(0, Max);
-			double x = dis(generator)*Resolusion_radian;
-			ia.PerformBondRot(rotable[i].i, rotable[i].j, x);
+			x = (rand() % Max )*Resolusion_radian;
+		  /*	std::default_random_engine generator(now);
+			std::uniform_real_distribution<double> dis(0, Max);*/			
+			ia.PerformBondRot(rotable[i].i, rotable[i].j, PI);
 		}
 	}
 };

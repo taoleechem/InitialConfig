@@ -21,8 +21,8 @@
 #include <time.h>
 #include <queue>
 
-#define _NWCHEM_
-//#define _GAUSSIAN_
+//#define _NWCHEM_
+#define _GAUSSIAN_
 
 static double ReadFile(string Tempfilename)
 {
@@ -718,6 +718,7 @@ static void GenerateFunction3(int matrix[][2],int index, int matrix2[][2],int in
 					RandomRotPossibleBond(t1, PI);
 				if (Rotable2 == true)
 					RandomRotPossibleBond(t2, PI);
+				MakeAtomsSuitableDistanceMoveB(t1, t2, B1_default_value);
 				double tE = G09energy(t1, t2) - RestEnergies;
 				//random number
 				clock_t now = clock();
@@ -729,9 +730,10 @@ static void GenerateFunction3(int matrix[][2],int index, int matrix2[][2],int in
 				std::default_random_engine generator(now);
 				std::uniform_real_distribution<double> dis(0, 1);
 				double randomD = dis(generator);
-				
-				cout << "\t after rot, potential is: " << tE<<" while before potential is "<<ie <<" and random number is "<<randomD<< endl;
-				if (randomD< exp((ie - tE) / K_B_BOLTZMAN / Temperature))
+				double probability=exp((ie - tE)*HARTREE / K_B_BOLTZMAN / 3000);
+				cout << "\t after rot, potential is: " << tE<<" while before potential is "<<ie<<endl;
+				cout<<" \t probability from exp(E) is "<<probability <<" random number is "<<randomD<< endl;
+				if (randomD< probability)
 				{
 					SaveSuitableCofigs[i].Set(t1, t2, tE);
 					cout << "\t Sucessfully rot bond to No." << i << " configuration" << endl;
