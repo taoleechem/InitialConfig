@@ -483,6 +483,7 @@ public:
 };
 static void GenerateFunction3(int matrix[][2],int index, int matrix2[][2],int index2, const int OutPutNumber,const string xyz_filename1,const string xyz_filename2,int Temperature, bool Rotable1, bool Rotable2)
 {
+	cout << "Temperature is " << Temperature << " K" << endl;
 	cout << "Enter Calculating..." << endl;
 	Maps SaveCalculations;//save each calculation value
 	if (Temperature == 0)
@@ -700,13 +701,14 @@ static void GenerateFunction3(int matrix[][2],int index, int matrix2[][2],int in
 		}
 	//output some configs
 	//and do bond rotation analysis at same time
-	if (Rotable1 != 0 || Rotable2 != 0)
+	if (Rotable1 ==true || Rotable2 ==true )
 	{
 		cout << "Do bond rotation to top " << OutPutNumber << " configurations" << endl;
 	}
 	cout << "#Here output " << ((total > OutPutNumber) ? OutPutNumber : total) << " .xyz files to ./SaveConfigs/ as the final result" << endl;
 	for (int i = 0; i < SaveSuitableCofigs.size() && i < OutPutNumber; i++)
 		{
+			if (Rotable1 == true || Rotable2 == true)
 			{
 				Molecule t1, t2;
 				double ie;
