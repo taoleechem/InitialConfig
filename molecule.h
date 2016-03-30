@@ -216,10 +216,19 @@ public:
 		int num = rotable.size();
 		clock_t now = clock();
 		srand(now);
-		int Max = int(2 * PI / Resolusion_radian);
-		double x = RandomNumberInt(Max)*Resolusion_radian;
+		int Max = int(2 * PI / Resolusion_radian)-1;
+
 		for (int i = 0; i < num; i++)
 		{
+			clock_t now = clock();
+			/*
+			srand(now);
+			for (int i = 0; i != 3; i++)
+			x[i] = (rand() % nums + 1)*Precision_degree;
+			*/
+			std::default_random_engine generator(now);
+			std::uniform_int_distribution<int> dis(0, Max);
+			double x = dis(generator)*Resolusion_radian;
 			ia.PerformBondRot(rotable[i].i, rotable[i].j, x);
 		}
 	}

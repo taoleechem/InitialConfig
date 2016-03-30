@@ -21,8 +21,8 @@
 #include <time.h>
 #include <queue>
 
-//#define _NWCHEM_
-#define _GAUSSIAN_
+#define _NWCHEM_
+//#define _GAUSSIAN_
 
 static double ReadFile(string Tempfilename)
 {
@@ -475,7 +475,7 @@ public:
 		int i = 0;
 		for (i = 0, iter1 = EulerAngle.begin(); iter1 != EulerAngle.end(); iter1++, i++)
 		{
-			if ((*iter1).modej == modei&& (*iter1).modei == modej&&abs((*iter1).ax - ax)<=1 && abs((*iter1).ay - ay)<=1 && abs((*iter1).bx - bx)<=1 && abs((*iter1).by - by)<=1 && abs((*iter1).bz - bz)<=1)
+			if ((*iter1).modej == modej&& (*iter1).modei == modei&&abs((*iter1).ax - ax)<=1 && abs((*iter1).ay - ay)<=1 && abs((*iter1).bx - bx)<=1 && abs((*iter1).by - by)<=1 && abs((*iter1).bz - bz)<=1)
 				return i;
 		}
 		return -1;
@@ -488,10 +488,10 @@ static void GenerateFunction3(int matrix[][2],int index, int matrix2[][2],int in
 	Maps SaveCalculations;//save each calculation value
 	if (Temperature == 0)
 		Temperature = ROOM_TEMPERATURE;
-	const double RotPrecision = 180;
+	const double RotPrecision = 20;
 	const double B1_default_value = 2.80;
     const double Radius_Times=1.50;
-	const double RMSD_Precision = -1;
+	const double RMSD_Precision = 0.5;
 	//for each pair config(ij[k]), rot * times
 	const int EachSaveConfigRotTimes = 8;
 	Fragments FA, FB;
@@ -719,8 +719,19 @@ static void GenerateFunction3(int matrix[][2],int index, int matrix2[][2],int in
 				if (Rotable2 == true)
 					RandomRotPossibleBond(t2, PI);
 				double tE = G09energy(t1, t2) - RestEnergies;
-				cout << "\t after rot, potential is: " << tE<<" while before potential is "<<ie << endl;
-				if (RandomNumber(1) < exp((ie - tE) / K_B_BOLTZMAN / Temperature))
+				//random number
+				clock_t now = clock();
+				/*
+				srand(now);
+				for (int i = 0; i != 3; i++)
+				x[i] = (rand() % nums + 1)*Precision_degree;
+				*/
+				std::default_random_engine generator(now);
+				std::uniform_real_distribution<double> dis(0, 1);
+				double randomD = dis(generator);
+				
+				cout << "\t after rot, potential is: " << tE<<" while before potential is "<<ie <<" and random number is "<<randomD<< endl;
+				if (randomD< exp((ie - tE) / K_B_BOLTZMAN / Temperature))
 				{
 					SaveSuitableCofigs[i].Set(t1, t2, tE);
 					cout << "\t Sucessfully rot bond to No." << i << " configuration" << endl;
