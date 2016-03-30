@@ -488,10 +488,10 @@ static void GenerateFunction3(int matrix[][2],int index, int matrix2[][2],int in
 	Maps SaveCalculations;//save each calculation value
 	if (Temperature == 0)
 		Temperature = ROOM_TEMPERATURE;
-	const double RotPrecision = 20;
+	const double RotPrecision = 180;
 	const double B1_default_value = 2.80;
     const double Radius_Times=1.50;
-	const double RMSD_Precision = 0.45;
+	const double RMSD_Precision = -1;
 	//for each pair config(ij[k]), rot * times
 	const int EachSaveConfigRotTimes = 8;
 	Fragments FA, FB;
@@ -715,7 +715,7 @@ static void GenerateFunction3(int matrix[][2],int index, int matrix2[][2],int in
 				SaveSuitableCofigs[i].GetInfo(t1, t2, ie);
 				//rot analysis
 				if (Rotable1 == true)
-					RandomRotPossibleBond(t1, PI/2);
+					RandomRotPossibleBond(t1, PI);
 				if (Rotable2 == true)
 					RandomRotPossibleBond(t2, PI);
 				double tE = G09energy(t1, t2) - RestEnergies;

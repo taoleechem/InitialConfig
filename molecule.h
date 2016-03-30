@@ -216,7 +216,7 @@ public:
 		int num = rotable.size();
 		clock_t now = clock();
 		srand(now);
-		int Max = int(2 * PI / Resolusion_radian)-1;
+		int Max = int(2 * PI / Resolusion_radian);
 		double x = RandomNumberInt(Max)*Resolusion_radian;
 		for (int i = 0; i < num; i++)
 		{
