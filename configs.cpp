@@ -428,7 +428,7 @@ public:
 	EulerAngle5(int i1, int i2, int i3, int i4, int i5,int m1, int m2) :ax(i1), ay(i2), bx(i3), by(i4), bz(i5),modei(m1),modej(m2) {}
 	friend ostream& operator<<(ostream &os, EulerAngle5 &A)
 	{
-		os << A.ax << "\t" << A.ay << "\t" << A.bx << "\t" << A.by << "\t" << A.bz;
+		os <<A.modei<<"\t"<<A.modej<<"\t"<< A.ax << "\t" << A.ay << "\t" << A.bx << "\t" << A.by << "\t" << A.bz;
 		return os;
 	}
 
@@ -475,16 +475,18 @@ public:
 		int i = 0;
 		for (i = 0, iter1 = EulerAngle.begin(); iter1 != EulerAngle.end(); iter1++, i++)
 		{
-			if ((*iter1).modej == modei&& (*iter1).modei == modej&&(*iter1).ax == ax && (*iter1).ay == ay && (*iter1).bx == bx && (*iter1).by == by && (*iter1).bz == bz)
+			if ((*iter1).modej == modei&& (*iter1).modei == modej&&abs((*iter1).ax - ax)<=1 && abs((*iter1).ay - ay)<=1 && abs((*iter1).bx - bx)<=1 && abs((*iter1).by - by)<=1 && abs((*iter1).bz - bz)<=1)
 				return i;
 		}
 		return -1;
 	}
 };
-static void GenerateFunction3(int matrix[][2],int index, int matrix2[][2],int index2, const int OutPutNumber,const string xyz_filename1,const string xyz_filename2,bool Rotable1, bool Rotable2)
+static void GenerateFunction3(int matrix[][2],int index, int matrix2[][2],int index2, const int OutPutNumber,const string xyz_filename1,const string xyz_filename2,int Temperature, bool Rotable1, bool Rotable2)
 {
 	cout << "Enter Calculating..." << endl;
 	Maps SaveCalculations;//save each calculation value
+	if (Temperature == 0)
+		Temperature = ROOM_TEMPERATURE;
 	const double RotPrecision = 20;
 	const double B1_default_value = 2.80;
     const double Radius_Times=1.50;
@@ -540,7 +542,7 @@ static void GenerateFunction3(int matrix[][2],int index, int matrix2[][2],int in
 				Molecule tB = B;
 				tB.PerformAxisRot(e_x, k*PI /3);
 				MakeAtomsSuitableDistanceMoveB(tA, tB, B1_default_value);
-				temp_potential[k] = (G09energy(tA, tB) - RestEnergies)*HARTREE / K_B_BOLTZMAN / ROOM_TEMPERATURE;
+				temp_potential[k] = (G09energy(tA, tB) - RestEnergies)*HARTREE / K_B_BOLTZMAN / Temperature;
 				SaveCalculations.AddPoint(i, j, 0, 0, k * 60, 0, 0, temp_potential[k]);//Save each calculation value
 				potential[i][j] += temp_potential[k];
 			}
@@ -617,7 +619,7 @@ static void GenerateFunction3(int matrix[][2],int index, int matrix2[][2],int in
                	Molecule tA=A;
               	Molecule tB=B;
 				double ax, ay, bx, by, bz;
-				tA.PerformRandomRotEulerXY(MC_A1, RotPrecision/1.15,ax,ay);
+				tA.PerformRandomRotEulerXY(MC_A1, RotPrecision,ax,ay);
 				tB.PerformRandomRotEuler(MC_B1, RotPrecision,bx,by,bz);
 				//Here need to adjust B to a suitable position that the closest distance between atoms of A and B is 3.0
 				MakeAtomsSuitableDistanceMoveB(tA, tB, B1_default_value);
@@ -656,11 +658,6 @@ static void GenerateFunction3(int matrix[][2],int index, int matrix2[][2],int in
 					}
 				}
 
-            cout<<"#After sorting,"<<endl;
-            for(int ii = 0; ii < MaxRotTimes[i][j]; ii++)
-            {
-                cout<<"No."<<ii<<" config has energy "<<TempConfigs[ii].Energy()<<endl;
-            }
 			//Save Least Energy 5 configs and avoid rmsd similar one.
             cout << "Save " << EachPairSaveNumber[i][j] << " least energy configuration:" << endl;
 			int output_count = 0;
@@ -702,12 +699,34 @@ static void GenerateFunction3(int matrix[][2],int index, int matrix2[][2],int in
 			}
 		}
 	//output some configs
+	//and do bond rotation analysis at same time
+	if (Rotable1 != 0 || Rotable2 != 0)
+	{
+		cout << "Do bond rotation to top " << OutPutNumber << " configurations" << endl;
+	}
 	cout << "#Here output " << ((total > OutPutNumber) ? OutPutNumber : total) << " .xyz files to ./SaveConfigs/ as the final result" << endl;
 	for (int i = 0; i < SaveSuitableCofigs.size() && i < OutPutNumber; i++)
 		{
+			{
+				Molecule t1, t2;
+				double ie;
+				SaveSuitableCofigs[i].GetInfo(t1, t2, ie);
+				//rot analysis
+				if (Rotable1 == true)
+					RandomRotPossibleBond(t1, PI);
+				if (Rotable2 == true)
+					RandomRotPossibleBond(t2, PI);
+				double tE = G09energy(t1, t2) - RestEnergies;
+				if (RandomNumber(1) < exp((ie - tE) / K_B_BOLTZMAN / Temperature))
+				{
+					SaveSuitableCofigs[i].Set(t1, t2, tE);
+					cout << "Sucessfully rot bond to No." << i << " configuration" << endl;
+				}
+			}
             SaveSuitableCofigs[i].ToXYZ("SaveConfigs/" + X_ToStr<int>(i) + ".xyz");
             cout<<"No."<<i<<" least energy energy is: "<<SaveSuitableCofigs[i].Energy()<<endl;
         }
+
         
         //combine these .xyz files to one .xyz file 
         int total_file_num;
@@ -716,9 +735,12 @@ static void GenerateFunction3(int matrix[][2],int index, int matrix2[][2],int in
         else 
             total_file_num=total;
         AlignEachXYZToStandardForm("SaveConfigs", total_file_num, FA.TotalFragments().Number());
-        cout<<"#Have generate an analysis .xyz file"<<endl;
+        cout<<"#Have generate an analysis .xyz and .mol2 file"<<endl;
 		//translate .xyz --> .mol2
 		XYZToMol2_MoleculeAmBnType("SaveConfigs/final.xyz","SaveConfigs/final.mol2", FA.TotalFragments().Number(),1, FB.TotalFragments().Number());
+		cout << "At last, show saved calculations:" << endl;
+		cout << SaveCalculations << endl;
+		cout << "Done" << endl;
 }
 
 static void GetGroupDevideInfoFromFile(const string filename,int con[][2], int label)
@@ -781,10 +803,13 @@ void Do_GenerateFunction_Program_FromFile(string filename)
 	int OutputNum;
 	infile >> OutputNum;
 	getline(infile, temp);
+	int temperature;
+	infile >> temperature;
+	getline(infile, temp);
 	bool Rotable1,Rotable2;
 	infile >> Rotable1>>Rotable2;
 	cout << "Generate Max = " << OutputNum << " configurations to ./SaveConfigs" << endl;
-	GenerateFunction3(con1, index1, con2, index2, OutputNum, xyzfile1, xyzfile2,Rotable1,Rotable2);
+	GenerateFunction3(con1, index1, con2, index2, OutputNum, xyzfile1, xyzfile2,temperature, Rotable1,Rotable2);
 	infile.close();
 }
 

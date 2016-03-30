@@ -51,7 +51,7 @@ int main(int argc, char* argv[])
 	{
 	Do_GenerateFunction_Program_FromFile(X_ToStr<char*>(argv[1]));
 	}
-	
+
 system("PAUSE");
 return 0;
 }
