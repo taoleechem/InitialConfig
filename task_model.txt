@@ -1,0 +1,10 @@
+//This is task file (this line is necessory in task file as a function of explanation)
+InitiConfig/nc2.xyz
+InitiConfig/cc2h6cho.xyz
+6
+2
+InitiConfig/nc2
+InitiConfig/cc2h6cho
+50
+500 K
+0 0
