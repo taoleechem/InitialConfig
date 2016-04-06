@@ -7,4 +7,5 @@ InitiConfig/ch2choh_1
 InitiConfig/ch2o
 10
 1000 K
+2.30
 0 0

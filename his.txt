@@ -1,251 +1,200 @@
 nohup: ignoring input
-Read molecule A from , read molecule B from 
+Read molecule A from InitiConfig/ch2choh_1.xyz, read molecule B from InitiConfig/ch2o.xyz
 Molecule A Devide Group Method:
+0	1
+2	4
+5	6
 Molecule B Devide Group Method:
-0	0
-5163179	0
--1222197232	32764
--1222197088	32764
--1222196688	32764
-5013200	0
-0	0
-8454168	0
-8446040	0
-0	0
-8445776	0
-34671552	0
-34671552	0
-34671552	0
-0	0
-0	0
-0	0
-8548672	0
-0	0
-0	0
-0	0
-0	0
-0	0
-34670944	0
--1222188543	32764
-8	0
-0	0
-0	0
-0	0
-34671552	0
-8192	0
-1	0
-0	0
-0	0
-34670848	0
-8547280	0
-0	0
-0	0
-0	0
-0	0
-8446080	0
-6	0
-0	0
-4098	0
-6	0
-0	0
-0	0
-0	0
-0	0
-0	0
-0	0
-0	0
-0	0
-0	0
-0	0
-0	0
-0	0
-0	0
-0	0
-0	0
-0	0
-0	0
-0	0
-0	0
-8	32764
--1222196912	32764
-8548672	0
-0	0
--1222246400	32764
--1222197216	32764
-8547456	0
-8547312	0
-8547328	0
-84430592	-50302931
-4195208	0
-5013200	0
--1222196624	32764
-4261585	0
--1222196392	32764
-5013175	2
-34671528	0
-84430592	-50302931
-5013200	0
-4195208	0
-5013056	0
-5011881	0
-0	0
 0	2
--1222196392	32764
-4261497	0
-4195208	0
--138901800	275044128
-5013200	0
-0	0
-8454168	0
-0	0
--1908898088	-274875915
--101677352	275044128
-0	0
-0	0
-0	0
-0	0
-0	0
-0	0
-0	0
-0	0
-0	0
-0	0
-0	0
-4198601	0
--1222196408	32764
-0	0
-2	0
--1222188429	32764
--1222188408	32764
-0	0
-Generate Max = 0 configurations to ./SaveConfigs
+3	3
+Generate Max = 10 configurations to ./SaveConfigs
+Temperature is 1000 K
+Distance between closest atoms of 2 molecules is 2.3
 Enter Calculating...
-Segmentation fault (core dumped)
-mv: cannot stat ‘SaveConfigs/final.mol2’: No such file or directory
-mv: cannot stat ‘SaveConfigs/*.xyz’: No such file or directory
-Read molecule A from , read molecule B from 
-Molecule A Devide Group Method:
-Molecule B Devide Group Method:
-0	0
-5163179	0
--2124221632	32766
--2124221488	32766
--2124221088	32766
-5013200	0
-0	0
-8454168	0
-8446040	0
-0	0
-8445776	0
-35662784	0
-35662784	0
-35662784	0
-0	0
-0	0
-0	0
-8548672	0
-0	0
-0	0
-0	0
-0	0
-0	0
-35662176	0
--2124213759	32766
-8	0
-0	0
-0	0
-0	0
-35662784	0
-8192	0
-1	0
-0	0
-0	0
-35662080	0
-8547280	0
-0	0
-0	0
-0	0
-0	0
-8446080	0
-6	0
-0	0
-4098	0
-6	0
-0	0
-0	0
-0	0
-0	0
-0	0
-0	0
-0	0
-0	0
-0	0
-0	0
-0	0
-0	0
-0	0
-0	0
-0	0
-0	0
-0	0
-0	0
-0	0
-8	32766
--2124221312	32766
-8548672	0
-0	0
--2124283904	32766
--2124221616	32766
-8547456	0
-8547312	0
-8547328	0
-1287563776	172598808
-4195208	0
-5013200	0
--2124221024	32766
-4261585	0
--2124220792	32766
-5013175	2
-35662760	0
-1287563776	172598808
-5013200	0
-4195208	0
-5013056	0
-5011881	0
-0	0
-0	2
--2124220792	32766
-4261497	0
-4195208	0
--1689625367	638527951
-5013200	0
-0	0
-8454168	0
-0	0
--1934992151	-638440558
--1795007255	638527951
-0	0
-0	0
-0	0
-0	0
-0	0
-0	0
-0	0
-0	0
-0	0
-0	0
-0	0
-4198601	0
--2124220808	32766
-0	0
-2	0
--2124213645	32766
--2124213624	32766
-0	0
-Generate Max = 0 configurations to ./SaveConfigs
-Enter Calculating...
-Segmentation fault (core dumped)
-mv: cannot stat ‘SaveConfigs/final.mol2’: No such file or directory
-mv: cannot stat ‘SaveConfigs/*.xyz’: No such file or directory
-#!Perform No. 1 Initial Configs Calculation!
-#!Perform No. 2 Initial Configs Calculation!
+Configuration of Molecule A:
+3 fragments
+2
+standard .xyz file  CH
+C	-2.7678700	2.4048800	0.0099100
+H	-3.1437600	1.3913400	0.0842300
+3
+standard .xyz file  CH2
+C	-1.4758300	2.7277600	0.0753900
+H	-0.7265000	1.9540000	0.2109400
+H	-1.1286900	3.7515100	-0.0021500
+2
+standard .xyz file  HO
+O	-3.7806400	3.3038600	-0.1583900
+H	-3.3984300	4.1963400	-0.2199200
+
+Configuration of Molecule B:
+
+2 fragments
+3
+standard .xyz file  CH2
+C	-3.4014800	2.3109600	0.0000000
+H	-4.4924900	2.3791200	-0.1370500
+H	-3.0028400	1.2930900	0.1370500
+1
+standard .xyz file  O
+O	-2.6800300	3.3005300	0.0000000
+
+At rest, energy of 2 molecules is: -268.2225798
+0,0 group-combination has potential: 0.2739109(unitless, V*Hartree/K_b/T)
+0,1 group-combination has potential: -0.9416488(unitless, V*Hartree/K_b/T)
+1,0 group-combination has potential: 0.1870230(unitless, V*Hartree/K_b/T)
+1,1 group-combination has potential: -0.1244464(unitless, V*Hartree/K_b/T)
+2,0 group-combination has potential: -0.3886497(unitless, V*Hartree/K_b/T)
+2,1 group-combination has potential: 3.7353596(unitless, V*Hartree/K_b/T)
+
+Here is the partition function of each group-combination pair:
+0.1120640	0.3779002	
+0.1222366	0.1669055	
+0.2173766	0.0035170	
+Here is the partition number N_{ij} of each group-combination pair:
+2	3	
+2	2	
+2	2	
+
+
+#Do calculate of CH No.0, and CH2 No.0
+Generate No.0 configuration with energy 0.0035544
+Generate No.1 configuration with energy -0.0002987
+Generate No.2 configuration with energy 0.0008348
+Generate No.3 configuration with energy 0.0009071
+Generate No.4 configuration with energy 0.0026887
+Generate No.5 configuration with energy -0.0000567
+Generate No.6 configuration with energy 0.0010485
+Generate No.7 configuration with energy -0.0030477
+Generate No.8 configuration with energy 0.0010329
+Generate No.9 configuration with energy 0.0145200
+Generate No.10 configuration with energy 0.0008059
+Generate No.11 configuration with energy 0.0008376
+Generate No.12 configuration with energy 0.0009058
+Generate No.13 configuration with energy 0.0021391
+Generate No.14 configuration with energy 0.0089238
+Generate No.15 configuration with energy 0.0010804
+Save 2 least energy configuration:
+Energy: -0.0030477
+7
+standard .xyz file  C2H4O
+C	-0.0770537	0.0244932	-0.0225984
+H	0.9174657	-0.2916360	0.2690751
+C	-0.5387977	-0.0252427	-1.2724885
+H	0.0923311	-0.3995739	-2.0725675
+H	-1.5393119	0.2982494	-1.5349897
+O	-0.7927445	0.4776485	1.0472755
+H	-1.6747999	0.7494610	0.7398880
+4
+standard .xyz file  CH2O
+C	4.3656828	-0.8510218	0.1500578
+H	4.9533330	-0.8259301	1.0815990
+H	4.9533305	-0.8761160	-0.7814980
+O	3.1410445	-0.8510219	0.1500566
+
+Energy: -0.0002987
+7
+standard .xyz file  C2H4O
+C	0.0409994	0.0524982	-0.0510966
+H	-0.4881729	-0.6250875	0.6083989
+C	0.2866881	-0.1987375	-1.3373408
+H	-0.0491285	-1.1289255	-1.7851706
+H	0.8190535	0.4986361	-1.9736111
+O	0.4218095	1.1898699	0.5997201
+H	0.8911596	1.7661060	-0.0280166
+4
+standard .xyz file  CH2O
+C	3.5459064	1.2783662	-0.7380641
+H	3.1333925	1.3578460	0.2803889
+H	3.3707713	0.3174055	-1.2476111
+O	4.1582256	2.1968443	-1.2683491
+
+-------------------------------------------------
+
+#Do calculate of CH No.0, and O No.1
+Generate No.0 configuration with energy -0.0003708
+Generate No.1 configuration with energy -0.0027853
+Generate No.2 configuration with energy -0.0027007
+Generate No.3 configuration with energy 0.0091215
+Generate No.4 configuration with energy 0.0213541
+Generate No.5 configuration with energy -0.0013698
+Generate No.6 configuration with energy -0.0025496
+Generate No.7 configuration with energy 0.0006314
+Generate No.8 configuration with energy -0.0035450
+Generate No.9 configuration with energy 0.0083828
+Generate No.10 configuration with energy 0.0075664
+Generate No.11 configuration with energy -0.0020190
+Generate No.12 configuration with energy 0.0002042
+Generate No.13 configuration with energy -0.0072535
+Generate No.14 configuration with energy -0.0017499
+Generate No.15 configuration with energy 0.0073175
+Generate No.16 configuration with energy 0.0016401
+Generate No.17 configuration with energy 0.0000276
+Generate No.18 configuration with energy -0.0064090
+Generate No.19 configuration with energy -0.0012865
+Generate No.20 configuration with energy -0.0078713
+Generate No.21 configuration with energy -0.0077526
+Generate No.22 configuration with energy 0.0165028
+Generate No.23 configuration with energy -0.0062629
+Save 3 least energy configuration:
+Energy: -0.0078713
+7
+standard .xyz file  C2H4O
+C	0.0770537	0.0180019	0.0280453
+H	-0.9174655	-0.2143452	-0.3339305
+C	0.5387976	1.2575399	0.1961064
+H	-0.0923312	2.1104658	-0.0336058
+H	1.5393137	1.4598793	0.5602616
+O	0.7927438	-1.1143078	0.2885362
+H	1.6748111	-0.8587899	0.6095641
+4
+standard .xyz file  CH2O
+C	4.8142313	-0.9216039	1.5685611
+H	5.0838434	-1.9887500	1.6158865
+H	5.3906571	-0.2564191	2.2311458
+O	3.9326803	-0.5027519	0.8288519
+
+Energy: -0.0077526
+7
+standard .xyz file  C2H4O
+C	0.0770537	0.0180019	0.0280453
+H	-0.9174655	-0.2143452	-0.3339305
+C	0.5387976	1.2575399	0.1961064
+H	-0.0923312	2.1104658	-0.0336058
+H	1.5393137	1.4598793	0.5602616
+O	0.7927438	-1.1143078	0.2885362
+H	1.6748111	-0.8587899	0.6095641
+4
+standard .xyz file  CH2O
+C	3.2978092	-3.4198007	0.2376256
+H	2.4361735	-3.8384637	0.7817179
+H	4.0031155	-4.1585827	-0.1752907
+O	3.4607141	-2.2137676	0.1009320
+
+Energy: -0.0072535
+7
+standard .xyz file  C2H4O
+C	0.0770537	0.0265083	0.0201970
+H	-0.9174655	-0.3156296	-0.2404817
+C	0.5387976	1.2487733	-0.2458242
+H	-0.0923312	1.9716953	-0.7534009
+H	1.5393137	1.5634585	0.0271656
+O	0.7927438	-0.9484216	0.6522511
+H	1.6748111	-0.5985154	0.8665263
+4
+standard .xyz file  CH2O
+C	2.4142247	1.1342410	3.1162985
+H	2.0017107	2.1510229	3.2148789
+H	2.2390897	0.4655660	3.9741781
+O	3.0265437	0.7715044	2.1196911
+
+-------------------------------------------------
+
+#Do calculate of CH2 No.1, and CH2 No.0
+Generate No.0 configuration with energy 0.0171841
+Generate No.1 configuration with energy 0.0000543
+Generate No.2 configuration with energy 0.0047216
+Generate No.3 configuration with energy 0.0040783
+Generate No.4 configuration with energy 0.0047471
+Generate No.5 configuration with energy 0.0269625
+Generate No.6 configuration with energy 0.0012771

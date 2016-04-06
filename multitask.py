@@ -9,6 +9,7 @@ taskFile = 'task_mymodel.txt' ##the template task file
 SaveDir = 'SaveConfigs/mymodel/'
 EachOutPutNum = 50
 Temperature = 500
+ClosestDistance = 2.30
 a_num = 19
 b_num = 1
 a_fragments = 5
@@ -30,6 +31,7 @@ def GenerateTaskFile(tsk, a, b, na, nb, num_output=50, T=500):
     fhandle.write(initialConfigPath+ b_xyzfilename+"\n")
     fhandle.write(str(num_output)+"\n")
     fhandle.write(str(T)+"\n")
+    fhandle.write(str(2.30)+'\n')   #B1_default_value
     fhandle.write('0 0'+"\n")
     fhandle.flush()
     fhandle.close()

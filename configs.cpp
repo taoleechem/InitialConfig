@@ -481,16 +481,19 @@ public:
 		return -1;
 	}
 };
-static void GenerateFunction3(int matrix[][2],int index, int matrix2[][2],int index2, const int OutPutNumber,const string xyz_filename1,const string xyz_filename2,int Temperature, bool Rotable1, bool Rotable2)
+static void GenerateFunction3(int matrix[][2],int index, int matrix2[][2],int index2, const int OutPutNumber,const string xyz_filename1,const string xyz_filename2,int Temperature, bool Rotable1, bool Rotable2, double B1_default_value)
 {
 	cout << "Temperature is " << Temperature << " K" << endl;
+	cout << "Distance between closest atoms of 2 molecules is "<< B1_default_value<<endl;
 	cout << "Enter Calculating..." << endl;
 	Maps SaveCalculations;//save each calculation value
 	if (Temperature == 0)
 		Temperature = ROOM_TEMPERATURE;
 	const double RotPrecision = 20;
-	const double B1_default_value = 2.80;
-    const double Radius_Times=1.50;
+	//const double B1_default_value = 2.80;
+	if(B1_default_value ==0)
+		B1_default_value = 2.80;
+ 	   const double Radius_Times=1.50;
 	const double RMSD_Precision = 0.5;
 	//for each pair config(ij[k]), rot * times
 	const int EachSaveConfigRotTimes = 8;
@@ -822,10 +825,13 @@ void Do_GenerateFunction_Program_FromFile(string filename)
 	int temperature;
 	infile >> temperature;
 	getline(infile, temp);
+	double B1_default_value;
+	infile >> B1_default_value;
+	getline(infile, temp);
 	bool Rotable1,Rotable2;
 	infile >> Rotable1>>Rotable2;
 	cout << "Generate Max = " << OutputNum << " configurations to ./SaveConfigs" << endl;
-	GenerateFunction3(con1, index1, con2, index2, OutputNum, xyzfile1, xyzfile2,temperature, Rotable1,Rotable2);
+	GenerateFunction3(con1, index1, con2, index2, OutputNum, xyzfile1, xyzfile2,temperature, Rotable1,Rotable2, B1_default_value);
 	infile.close();
 }
 
