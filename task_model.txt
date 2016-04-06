@@ -1,10 +1,10 @@
-//This is task file (this line is necessory in task file as a function of explanation)
-InitiConfig/nc2.xyz
-InitiConfig/cc2h6cho.xyz
-6
+//explanation
+InitiConfig/ch2choh_2.xyz
+InitiConfig/ch2o_1.xyz
+3
 2
-InitiConfig/nc2
-InitiConfig/cc2h6cho
-50
-500 K
+InitiConfig/ch2choh
+InitiConfig/ch2o
+14
+500
 0 0

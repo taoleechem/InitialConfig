@@ -1,0 +1,51 @@
+#!/usr/bin/python
+import subprocess
+
+#This script could perform multi-similar task automatically
+
+#1-Set variables and pathes
+
+taskFile = 'task_model.txt' ##the template task file
+SaveDir = 'SaveConfigs/mymodel/'
+EachOutPutNum = 10
+Temperature = 500
+a_num = 2
+b_num = 1
+a_fragments = 3
+b_fragments = 2
+initialConfigPath = 'InitiConfig/'
+a_xyzfilename = 'ch2choh'
+b_xyzfilename = 'ch2o'
+
+## Name rule a_xyzfilename+'0'+'.xyz'
+
+def GenerateTaskFile(tsk, a, b, na, nb, num_output=50, T=500):
+    fhandle = open(tsk, 'w')
+    fhandle.write('//explanation')
+    fhandle.write(a+'.xyz')
+    fhandle.write(b+'.xyz')
+    fhandle.write(str(na))
+    fhandle.write(str(nb))
+    fhandle.write(initialConfigPath+ a_xyzfilename)
+    fhandle.write(initialConfigPath+ b_xyzfilename)
+    fhandle.write(str(num_output))
+    fhandle.write(str(T))
+    fhandle.write('0 0')
+    fhandle.flush()
+    fhandle.close()
+
+subprocess.call(["mkdir "+SaveDir], shell=True)
+
+count = 0
+for i in range(a_num):
+    for j in range(b_num):
+        count += 1
+        print '#!Perform No.',count, "Initial Configs Calculation!"
+        filename_a = initialConfigPath + a_xyzfilename+"_" + str(i+1)
+        filename_b = initialConfigPath + b_xyzfilename +"_"+ str(j+1)
+        GenerateTaskFile(taskFile, filename_a, filename_b,a_fragments, b_fragments, EachOutPutNum, Temperature)
+        subprocess.call(["./NWCHEM_Configs.exe "+taskFile, "wait"], shell=True)
+	subprocess.call(["mv SaveConfigs/final.mol2 "+SaveDir+str(count)+".mol2"],shell=True)
+	subprocess.call(["for x in SaveConfigs/*.xyz","	do", "	mv $x "+SaveDir+str(count)+"_$x", "	done"],shell=True)
+
+
