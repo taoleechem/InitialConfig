@@ -1,14 +1,15 @@
 #!/usr/bin/python
 import subprocess
+import time
 
 #This script could perform multi-similar task automatically
 
 #1-Set variables and pathes
 
 taskFile = 'task_mymodel.txt' ##the template task file
-SaveDir = 'SaveConfigs/mymodel/'
+SaveDir = 'SaveConfigs/mymodel_23/'
 EachOutPutNum = 50
-Temperature = 500
+Temperature = 1000 ##1000K -- 2.30 Anstrom, 500K -- 2.80 Anstrom
 ClosestDistance = 2.30
 a_num = 19
 b_num = 1
@@ -31,7 +32,7 @@ def GenerateTaskFile(tsk, a, b, na, nb, num_output=50, T=500):
     fhandle.write(initialConfigPath+ b_xyzfilename+"\n")
     fhandle.write(str(num_output)+"\n")
     fhandle.write(str(T)+"\n")
-    fhandle.write(str(2.30)+'\n')   #B1_default_value
+    fhandle.write(str(ClosestDistance)+'\n')   #B1_default_value
     fhandle.write('0 0'+"\n")
     fhandle.flush()
     fhandle.close()
@@ -42,12 +43,14 @@ count = 0
 for i in range(a_num):
     for j in range(b_num):
         count += 1
-        print '#!Perform No.',count, "Initial Configs Calculation!"
+        print '\n\n\n#!Perform No.',count, "Initial Configs Calculation!\n"
         filename_a = initialConfigPath + a_xyzfilename+"_" + str(i+1)
         filename_b = initialConfigPath + b_xyzfilename +"_"+ str(j+1)
         GenerateTaskFile(taskFile, filename_a, filename_b,a_fragments, b_fragments, EachOutPutNum, Temperature)
+        start = time.clock()
 	s1 = "./NWCHEM_Configs.exe "+taskFile+"\n wait"
         subprocess.call([s1], shell=True)
+        print "\n\n This run time is:", time.clock()-start,"\n\n"
 	s2 = "mv SaveConfigs/final.mol2 "+SaveDir+str(count)+".mol2"
 	subprocess.call([s2],shell=True)
 	s3 = "i=1\n for x in SaveConfigs/*.xyz\n do\n"+"	mv $x "+SaveDir+str(count)+"_$i.xyz\n i=$(($i+1))\n  done"
