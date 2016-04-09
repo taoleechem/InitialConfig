@@ -23,5 +23,6 @@
 #include <vector>
 void Do_GenerateFunction_Program_FromFile(std::string filename);
 void Do_RandomGenerate_FromFile(std::string filename);
+void WriteWaters(std::string filename, std::string tip5p_file, int filename_single_num);
 
 #endif

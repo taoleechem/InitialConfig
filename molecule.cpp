@@ -109,6 +109,16 @@ bool operator>=(const Molecule &ia, const Molecule &ib)
 	else
 		return false;
 }
+
+void Molecule::Get2DArray(double position[][3], int top_n)
+{
+	if (top_n > number)
+		top_n = number;
+	for (int i = 0; i < top_n; i++)
+		for (int j = 0; j < 3; j++)
+			position[i][j] = corr[i][j];
+}
+
 double Molecule::AtomMass(const string &name)
 {
 	if (name == "H")
@@ -762,7 +772,6 @@ void Molecule::ReadFromTinkerXYZfile(const string filename)
 	if (number != 0)
 		name.clear();
 	string temp;
-	getline(infile, temp);
 	getline(infile, temp);
 	int inumber;
 	string iname, iconnection;

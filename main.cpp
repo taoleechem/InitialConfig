@@ -18,6 +18,7 @@
 
 #include "molecule.h"
 #include "configs.h"
+#include "rmsd.h"
 
 void FunctionAdvisor()
 {
@@ -45,14 +46,20 @@ void FunctionAdvisor()
 
 int main(int argc, char* argv[])
 {
-	if(argc==1)
-	FunctionAdvisor();
-	else if (argc == 2)
-	{
-	Do_GenerateFunction_Program_FromFile(X_ToStr<char*>(argv[1]));
-	}
-system("PAUSE");
-return 0;
+	/*	if(argc==1)
+		FunctionAdvisor();
+		else if (argc == 2)
+		{
+		Do_GenerateFunction_Program_FromFile(X_ToStr<char*>(argv[1]));
+		}*/
+	/*string filename, tip5p_file;
+	cout << "Enter waters filename:" << endl;
+	cin >> filename;
+	cout << "Enter a single tip5p.xyz filename(5 atoms):" << endl;
+	cin >> tip5p_file;*/
+	WriteWaters("0000.xyz", "standardwater.xyz", 3);
+	system("PAUSE");
+    return 0;
 }
 
 

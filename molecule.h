@@ -112,6 +112,7 @@ public:
 	friend bool operator==(const Molecule &ia, const Molecule &ib);
 	friend bool operator!=(const Molecule &ia, const Molecule &ib);
 	friend bool operator>=(const Molecule &ia, const Molecule &ib);
+	void Get2DArray(double position[][3], int top_n);
 	double AtomMass(const string &iname);
 
 	string MoleculeName();
