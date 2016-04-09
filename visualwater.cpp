@@ -9,14 +9,37 @@ void change(Molecule reference, Molecule &tip5p_model)
 	int dim = 3;
 	reference.Get2DArray(ref, dim);
 	tip5p_model.Get2DArray(mov, dim);
+	cout<<"Get Array from ref:"<<endl;
+	for(int i=0; i<3; i++)
+	{
+		for(int j=0;j<3;j++)
+			cout<<ref[i][j]<<" ";
+		cout<<endl;
+	}
+	cout<<"Get Array from TIP5P:"<<endl;
+	for(int i=0; i<3; i++)
+	{
+		for(int j=0;j<3;j++)						                        
+			cout<<mov[i][j]<<" ";
+		cout<<endl;
+	}
 	double  U2[3][3], mov_com[3], m2r[3], rmsd;
 	calculate_rotation_rmsd(ref, mov, 3, mov_com, m2r, U2, rmsd);
 	U << U2[0][0], U2[0][1], U2[0][2], U2[1][0], U2[1][1], U2[1][2], U2[2][0], U2[2][1], U2[2][2];
 	Eigen::Vector3d MCA, MCB;
+	MCA = reference.MassCenter();
 	MCB = tip5p_model.MassCenter();
+	cout<<"MC of tip5p is "<<MCB<<endl;
+	cout<<"before move, tip5p is\n"<<tip5p_model<<endl;
 	tip5p_model.PerformTrans(-1 * MCB);
+	reference.PerformTrans(-1*MCA);
 	tip5p_model.PerformRot(U);
-	tip5p_model.PerformTrans(MCB);
+	cout<<"After rot, the 2(r, tip5p) are:"<<endl;
+	cout<<reference<<endl;
+	cout<<tip5p_model<<endl;
+	tip5p_model.PerformTrans(MCA);
+	cout<<"Move Back, tip5p is:"<<endl;
+	cout<<tip5p_model<<endl;
 	cout << tip5p_model << endl;
 }
 
@@ -27,7 +50,7 @@ void WriteWaters(string filename, string tip5p_file, int filename_single_num)
 	All.ReadFromTinkerXYZfile(filename);
 	cout << All;
 	Molecule tip5p;
-	tip5p.ReadFromXYZfile(tip5p_file);
+	tip5p.ReadFromTinkerXYZfile(tip5p_file);
 	cout << tip5p;
 	int water_num = All.Number() / filename_single_num;
 	cout << "There are " << water_num << " H2O in " << filename << endl;

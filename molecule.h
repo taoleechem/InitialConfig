@@ -30,7 +30,7 @@
 #include <cmath>
 #include <time.h>
 using namespace std;
-const int MaxAtom = 200;
+const int MaxAtom = 1000;
 const int MAXFRAGMENT = 8;
 const double PI = 3.1415926;
 const double HARTREE = 4.359744e-18;
