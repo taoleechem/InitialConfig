@@ -153,6 +153,7 @@ public:
 	Eigen::Vector3d MassCenter();
 	friend double DistanceOfMassCenter(Molecule &ia, Molecule &ib);
 	friend Molecule AbstractSomeFormNewMolecule(Molecule &ia, int begin_label,int end_label);
+	Molecule NewMoleculeFromThis(int nums, int label[]);
 
 	void clear();
 	//Simple Operate

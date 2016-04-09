@@ -2,8 +2,9 @@
 #include "configs.h"
 #include "rmsd.h"
 
-void change(Molecule reference, Molecule &tip5p_model)
+void change(Molecule reference, Molecule tip5p_model, Molecule &generate_one)
 {
+	generate_one = reference;
 	Eigen::Matrix3d U;
 	double ref[3][3], mov[3][3];
 	int dim = 3;
@@ -40,7 +41,8 @@ void change(Molecule reference, Molecule &tip5p_model)
 	tip5p_model.PerformTrans(MCA);
 	cout<<"Move Back, tip5p is:"<<endl;
 	cout<<tip5p_model<<endl;
-	cout << tip5p_model << endl;
+	int label[2] = { 4,5 };
+	generate_one = generate_one + tip5p_model.NewMoleculeFromThis(2, label);
 }
 
 void WriteWaters(string filename, string tip5p_file, int filename_single_num)
@@ -67,12 +69,12 @@ void WriteWaters(string filename, string tip5p_file, int filename_single_num)
 	{
 		cout << "Treating No." << i + 1 << " H2O" << endl;
 		x.ReadFromTinkerXYZGeoPart(infile, filename_single_num);
-		Molecule tip5p1 = tip5p;
-		change(x, tip5p1);
+		Molecule tip5p1 = tip5p, generate1;
+		change(x, tip5p1, generate1);
 		if (result.Number() == 0)
-			result = tip5p1;
+			result = generate1;
 		else
-			result = result + tip5p1;
+			result = result + generate1;
 	}
 	result.ToXYZfile("result.xyz");
 	infile.close();

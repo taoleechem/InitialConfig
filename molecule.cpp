@@ -1046,7 +1046,19 @@ Molecule AbstractSomeFormNewMolecule(Molecule &ia, int begin_label, int end_labe
 		return temp;
 	}
 }
-
+//label is 1,2,...,last one
+Molecule Molecule::NewMoleculeFromThis(int nums, int label[])
+{
+	Molecule temp;
+	temp.number = nums;
+	for (int i = 0; i < nums; i++)
+	{
+		temp.name.push_back(name[label[i] - 1]);
+		for (int j = 0; j < 3;j++)
+			temp.corr[i][j] = corr[label[i] - 1][j];
+	}
+	return temp;
+}
 void Molecule::clear()
 {
 	number = 0;
