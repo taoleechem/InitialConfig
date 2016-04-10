@@ -37,7 +37,7 @@ static double ReadFile(string Tempfilename)
 	readfile.close();
 	return num;
 }
-static double G09energy(Molecule a, string basis = "6-31g", string functional = "b3lyp")
+static double G09energy(Molecule a, string basis = "6-31g", string functional = "b3lyp", string othercommand = "")
 {
 #ifdef _WIN32
 	clock_t now = clock();
@@ -56,7 +56,7 @@ static double G09energy(Molecule a, string basis = "6-31g", string functional = 
 #endif
 #ifdef _GAUSSIAN_
 	string filename("DATA/system");
-	a.ToG09FileDFT(filename, basis, functional);
+	a.ToG09FileDFT(filename, basis, functional, othercommand);
 	//Use shell script to solve the scf energy
 	double total_energy = -330;
 	system("./g09_perform.sh");
@@ -66,7 +66,7 @@ static double G09energy(Molecule a, string basis = "6-31g", string functional = 
 #endif
 
 }
-static double G09energy(Molecule a, Molecule b, string basis = "6-31g", string functional = "b3lyp")
+static double G09energy(Molecule a, Molecule b, string basis = "6-31g", string functional = "b3lyp", string othercommand = "")
 {
 #ifdef _WIN32
 	clock_t now = clock();
@@ -85,7 +85,7 @@ static double G09energy(Molecule a, Molecule b, string basis = "6-31g", string f
 #endif
 #ifdef _GAUSSIAN_
 	string filename("DATA/system");
-	ToG09FileDFT(a, b, filename, basis, functional);
+	ToG09FileDFT(a, b, filename, basis, functional, othercommand);
 	//Use shell script to solve the scf energy
 	double total_energy = -660;
 	system("./g09_perform.sh");
@@ -481,7 +481,7 @@ public:
 		return -1;
 	}
 };
-static void GenerateFunction3(int matrix[][2],int index, int matrix2[][2],int index2, const int OutPutNumber,const string xyz_filename1,const string xyz_filename2,int Temperature, bool Rotable1, bool Rotable2, double B1_default_value)
+void GenerateFunction3(int matrix[][2],int index, int matrix2[][2],int index2, const int OutPutNumber,const string xyz_filename1,const string xyz_filename2,int Temperature, bool Rotable1, bool Rotable2, double B1_default_value)
 {
 	cout << "Temperature is " << Temperature << " K" << endl;
 	cout << "Distance between closest atoms of 2 molecules is "<< B1_default_value<<endl;
@@ -762,7 +762,289 @@ static void GenerateFunction3(int matrix[][2],int index, int matrix2[][2],int in
 		cout << "Done" << endl;
 }
 
-static void GetGroupDevideInfoFromFile(const string filename,int con[][2], int label)
+//usr could change basis/functional and other command
+void GenerateFunction4(int matrix[][2], int index, int matrix2[][2], int index2, const int OutPutNumber, const string xyz_filename1, const string xyz_filename2, int Temperature, bool Rotable1, bool Rotable2, double B1_default_value, string functional = "b3lyp", string basis = "6-31G", string othercommand="")
+{
+	cout << "Temperature is " << Temperature << " K" << endl;
+	cout << "Distance between closest atoms of 2 molecules is " << B1_default_value << endl;
+	cout << "Enter Calculating..." << endl;
+	Maps SaveCalculations;//save each calculation value
+	if (Temperature == 0)
+		Temperature = ROOM_TEMPERATURE;
+	const double RotPrecision = 20;
+	//const double B1_default_value = 2.80;
+	if (B1_default_value == 0)
+		B1_default_value = 2.80;
+	const double Radius_Times = 1.50;
+	const double RMSD_Precision = 0.5;
+	//for each pair config(ij[k]), rot * times
+	const int EachSaveConfigRotTimes = 8;
+	Fragments FA, FB;
+	FA.ReadFromXYZfile(xyz_filename1, index, matrix);
+	FB.ReadFromXYZfile(xyz_filename2, index2, matrix2);
+	cout << "Configuration of Molecule A:" << endl;
+	cout << FA << endl;
+	cout << "Configuration of Molecule B:" << endl << endl;
+	cout << FB << endl;
+	const double RestEnergies = G09energy(FA.TotalFragments(), basis, functional, othercommand) + G09energy(FB.TotalFragments(),basis, functional, othercommand);
+	cout << "At rest, energy of 2 molecules is: " << RestEnergies << endl;
+
+	//We need to find the sepcific EachPairSaveNumber(i,j) and MaxRotTimes(i,j) for each specific group combination according to partition function
+	int MaxRotTimes[MAXFRAGMENT * 2][MAXFRAGMENT];
+	int EachPairSaveNumber[MAXFRAGMENT * 2][MAXFRAGMENT];
+	double PartitionFunction[MAXFRAGMENT * 2][MAXFRAGMENT];
+	//try and to find partition function
+	double potential[MAXFRAGMENT * 2][MAXFRAGMENT];//have no unit
+	double total_partition = 0;
+	//calculate average potential between each combination mode
+	for (int i = 0; i != FA.FragNumbers(); i++, ++FA)
+	{
+		FB.IndexToZero();
+		for (int j = 0; j != FB.FragNumbers(); j++, ++FB)
+		{
+			Eigen::Vector3d MC_A1 = FA.ThisFragment().MassCenter();
+			FA.PerformTrans(-1 * MC_A1);
+			Eigen::Vector3d MC_A2 = FA.OtherFragments().MassCenter();
+			FA.PerformOnePointRotToXMinus(MC_A2);//A this part at O, other part at x-
+			Eigen::Vector3d MC_B1 = FB.ThisFragment().MassCenter();
+			FB.PerformTrans(-1 * MC_B1);
+			Eigen::Vector3d MC_B2 = FB.OtherFragments().MassCenter();
+			FB.PerformOnePointRotToXPlus(MC_B2);//B this part at O, other part at x+
+			Eigen::Vector3d Default_B1;
+			Default_B1 << B1_default_value, 0, 0;
+			FB.PerformTrans(Default_B1);//B move at direction(1,0,0) to 3.00
+			Molecule A = FA.TotalFragments();
+			Molecule B = FB.TotalFragments();
+			MakeAtomsSuitableDistanceMoveB(A, B, B1_default_value);
+			MC_A1 = A.MassCenter();
+			MC_B1 = B.MassCenter();
+			Eigen::Vector3d e_x;
+			e_x << 1, 0, 0;
+			double temp_potential[6];
+			potential[i][j] = 0;
+			for (int k = 0; k < 6; k++)
+			{
+				Molecule tA = A;
+				Molecule tB = B;
+				tB.PerformAxisRot(e_x, k*PI / 3);
+				MakeAtomsSuitableDistanceMoveB(tA, tB, B1_default_value);
+				temp_potential[k] = (G09energy(tA, tB, basis, functional, othercommand) - RestEnergies)*HARTREE / K_B_BOLTZMAN / Temperature;
+				SaveCalculations.AddPoint(i, j, 0, 0, k * 60, 0, 0, temp_potential[k]);//Save each calculation value
+				potential[i][j] += temp_potential[k];
+			}
+			potential[i][j] = potential[i][j] / 6;
+			cout << X_ToStr<int>(i) << "," << X_ToStr<int>(j) << " group-combination has potential: " << potential[i][j] << "(unitless, V*Hartree/K_b/T)" << endl;
+			total_partition += exp(-1 * potential[i][j]);
+		}
+	}
+	cout << endl;
+	//transfer potential matrix --> partition function matrix
+	cout << "Here is the partition function of each group-combination pair:" << endl;
+	for (int i = 0; i != FA.FragNumbers(); i++)
+	{
+		for (int j = 0; j != FB.FragNumbers(); j++)
+		{
+			PartitionFunction[i][j] = exp(-1 * potential[i][j]) / total_partition;
+			cout << PartitionFunction[i][j] << "\t";
+		}
+		cout << endl;
+	}
+	cout << "Here is the partition number N_{ij} of each group-combination pair:" << endl;
+	for (int i = 0; i != FA.FragNumbers(); i++)
+	{
+		for (int j = 0; j != FB.FragNumbers(); j++)
+		{
+			if (PartitionFunction[i][j]>0.5)
+				EachPairSaveNumber[i][j] = 0.5*OutPutNumber;
+			else if (PartitionFunction[i][j] * OutPutNumber > 2)
+				EachPairSaveNumber[i][j] = PartitionFunction[i][j] * OutPutNumber;
+			else
+				EachPairSaveNumber[i][j] = 2;
+			cout << EachPairSaveNumber[i][j] << "\t";
+			MaxRotTimes[i][j] = EachPairSaveNumber[i][j] * EachSaveConfigRotTimes;
+		}
+		cout << endl;
+	}
+	cout << endl << endl;
+
+	//Begin operation 
+	vector<DoubleMolecule> SaveSuitableCofigs;
+	FA.IndexToZero();
+	for (int i = 0; i != FA.FragNumbers(); i++, ++FA)
+	{
+		FB.IndexToZero();
+		for (int j = 0; j != FB.FragNumbers(); j++, ++FB)
+		{
+			cout << "#Do calculate of " << FA.ThisFragment().MoleculeName() << " No." << i << ", and " << FB.ThisFragment().MoleculeName() << " No." << j << endl;
+			//Molecule A1 = FA.ThisFragment(); Molecule A2 = FA.OtherFragments(); Molecule B1 = FB.ThisFragment(); Molecule B2 = FB.OtherFragments();
+			//translate A1-MC to origin
+			Eigen::Vector3d MC_A1 = FA.ThisFragment().MassCenter();
+			FA.PerformTrans(-1 * MC_A1);
+			//keep A1-MC to origin, put A2-MC to x- axis
+			Eigen::Vector3d MC_A2 = FA.OtherFragments().MassCenter();
+			FA.PerformOnePointRotToXMinus(MC_A2);
+			//translate B1-MC to x+ axis(default distance is 3.00), B2 at x- axis
+			Eigen::Vector3d MC_B1 = FB.ThisFragment().MassCenter();
+			FB.PerformTrans(-1 * MC_B1);
+			Eigen::Vector3d MC_B2 = FB.OtherFragments().MassCenter();
+			FB.PerformOnePointRotToXPlus(MC_B2);//B this part at O, other part at x+
+			Eigen::Vector3d Default_B1;
+			Default_B1 << B1_default_value, 0, 0;
+			FB.PerformTrans(Default_B1);//B move at direction(1,0,0) to 3.00
+										//rot B at point B1_MC randomly
+			Molecule A = FA.TotalFragments();
+			Molecule B = FB.TotalFragments();
+			MakeAtomsSuitableDistanceMoveB(A, B, B1_default_value);
+			MC_A1 = FA.ThisFragment().MassCenter();
+			MC_B1 = FB.ThisFragment().MassCenter();
+			vector<DoubleMolecule> TempConfigs;
+			TempConfigs.clear();
+			for (int k = 0; k != MaxRotTimes[i][j]; k++)
+			{
+				//We should  rot A at the same time to make sure all suitable configurations happen!
+				Molecule tA = A;
+				Molecule tB = B;
+				double ax, ay, bx, by, bz;
+				tA.PerformRandomRotEulerXY(MC_A1, RotPrecision, ax, ay);
+				tB.PerformRandomRotEuler(MC_B1, RotPrecision, bx, by, bz);
+				//Here need to adjust B to a suitable position that the closest distance between atoms of A and B is 3.0
+				MakeAtomsSuitableDistanceMoveB(tA, tB, B1_default_value);
+				int search_label = SaveCalculations.WhichLabel(i, j, ax, ay, bx, by, bz);
+				double  potential;
+				if (search_label == -1)
+				{
+					potential = G09energy(tA, tB, basis, functional, othercommand) - RestEnergies;
+					SaveCalculations.AddPoint(i, j, ax, ay, bx, by, bz, potential);
+				}
+				else
+				{
+					potential = SaveCalculations.Energy(search_label);
+					cout << "Find existing value" << endl;
+					k--;
+					continue;
+				}
+
+				//cout << potential << "\t";
+				DoubleMolecule temp_save;
+				temp_save.Set(tA, tB, potential);
+				cout << "Generate No." << k << " configuration with energy " << temp_save.Energy() << endl;
+				TempConfigs.push_back(temp_save);
+			}
+
+			//Sort configurations 
+			for (int i1 = 0; i1 < MaxRotTimes[i][j]; i1++)
+				for (int jj = i1 + 1; jj < MaxRotTimes[i][j]; jj++)
+				{
+					if (TempConfigs[jj] < TempConfigs[i1])
+					{
+						DoubleMolecule temp_config;
+						temp_config = TempConfigs[jj];
+						TempConfigs[jj] = TempConfigs[i1];
+						TempConfigs[i1] = temp_config;
+					}
+				}
+
+			//Save Least Energy 5 configs and avoid rmsd similar one.
+			cout << "Save " << EachPairSaveNumber[i][j] << " least energy configuration:" << endl;
+			int output_count = 0;
+			for (int ii = 0; output_count < EachPairSaveNumber[i][j] && ii<MaxRotTimes[i][j]; ii++)
+			{
+				int total_size = SaveSuitableCofigs.size();
+				int jj = 0;
+				for (jj = 0; jj < total_size; jj++)
+				{
+					double temp_x = RMSD(SaveSuitableCofigs[jj], TempConfigs[ii]);
+					if (abs(temp_x)< RMSD_Precision)
+						break;
+				}
+				//if this config is different from other, saves
+				if (jj == total_size)
+				{
+					SaveSuitableCofigs.push_back(TempConfigs[ii]);
+					output_count += 1;
+					//output this one to ./SaveConfigs/temp/ dir
+					TempConfigs[ii].ToXYZ("SaveConfigs/temp/" + X_ToStr<int>(i) + "_" + X_ToStr<int>(j) + "_" + X_ToStr<int>(output_count) + ".xyz");
+					TempConfigs[ii].output();
+				}
+			}
+			cout << "-------------------------------------------------" << endl << endl;
+		}
+	}
+
+	//sort SaveSuitableConfigs
+	int total = SaveSuitableCofigs.size();
+	for (int i = 0; i < total - 1; i++)
+		for (int j = i + 1; j < total; j++)
+		{
+			if (SaveSuitableCofigs[i] > SaveSuitableCofigs[j])
+			{
+				DoubleMolecule temp;
+				temp = SaveSuitableCofigs[i];
+				SaveSuitableCofigs[i] = SaveSuitableCofigs[j];
+				SaveSuitableCofigs[j] = temp;
+			}
+		}
+	//output some configs
+	//and do bond rotation analysis at same time
+	if (Rotable1 == true || Rotable2 == true)
+	{
+		cout << "Do bond rotation to top " << OutPutNumber << " configurations" << endl;
+	}
+	cout << "#Here output " << ((total > OutPutNumber) ? OutPutNumber : total) << " .xyz files to ./SaveConfigs/ as the final result" << endl;
+	for (int i = 0; i < SaveSuitableCofigs.size() && i < OutPutNumber; i++)
+	{
+		if (Rotable1 == true || Rotable2 == true)
+		{
+			Molecule t1, t2;
+			double ie;
+			SaveSuitableCofigs[i].GetInfo(t1, t2, ie);
+			//rot analysis
+			if (Rotable1 == true)
+				RandomRotPossibleBond(t1, PI);
+			if (Rotable2 == true)
+				RandomRotPossibleBond(t2, PI);
+			MakeAtomsSuitableDistanceMoveB(t1, t2, B1_default_value);
+			double tE = G09energy(t1, t2) - RestEnergies;
+			//random number
+			clock_t now = clock();
+			/*
+			srand(now);
+			for (int i = 0; i != 3; i++)
+			x[i] = (rand() % nums + 1)*Precision_degree;
+			*/
+			std::default_random_engine generator(now);
+			std::uniform_real_distribution<double> dis(0, 1);
+			double randomD = dis(generator);
+			double probability = exp((ie - tE)*HARTREE / K_B_BOLTZMAN / 3000);
+			cout << "\t after rot, potential is: " << tE << " while before potential is " << ie << endl;
+			cout << " \t probability from exp(E) is " << probability << " random number is " << randomD << endl;
+			if (randomD< probability)
+			{
+				SaveSuitableCofigs[i].Set(t1, t2, tE);
+				cout << "\t Sucessfully rot bond to No." << i << " configuration" << endl;
+			}
+		}
+		SaveSuitableCofigs[i].ToXYZ("SaveConfigs/" + X_ToStr<int>(i) + ".xyz");
+		cout << "No." << i << " least energy energy is: " << SaveSuitableCofigs[i].Energy() << endl;
+	}
+
+
+	//combine these .xyz files to one .xyz file 
+	int total_file_num;
+	if (total>OutPutNumber)
+		total_file_num = OutPutNumber;
+	else
+		total_file_num = total;
+	AlignEachXYZToStandardForm("SaveConfigs", total_file_num, FA.TotalFragments().Number());
+	cout << "#Have generate an analysis .xyz and .mol2 file" << endl;
+	//translate .xyz --> .mol2
+	XYZToMol2_MoleculeAmBnType("SaveConfigs/final.xyz", "SaveConfigs/final.mol2", FA.TotalFragments().Number(), 1, FB.TotalFragments().Number());
+	cout << "At last, show saved calculations:" << endl;
+	cout << SaveCalculations << endl;
+	cout << "Done" << endl;
+}
+
+void GetGroupDevideInfoFromFile(const string filename,int con[][2], int label)
 {
 	ifstream infile(filename.c_str());
 	if (!cout)
@@ -830,8 +1112,11 @@ void Do_GenerateFunction_Program_FromFile(string filename)
 	getline(infile, temp);
 	bool Rotable1,Rotable2;
 	infile >> Rotable1>>Rotable2;
+	string basis, functional, othercommand;
+	infile >> basis >> functional;
+	getline(infile, othercommand);
 	cout << "Generate Max = " << OutputNum << " configurations to ./SaveConfigs" << endl;
-	GenerateFunction3(con1, index1, con2, index2, OutputNum, xyzfile1, xyzfile2,temperature, Rotable1,Rotable2, B1_default_value);
+	GenerateFunction4(con1, index1, con2, index2, OutputNum, xyzfile1, xyzfile2,temperature, Rotable1,Rotable2, B1_default_value,functional, basis, othercommand);
 	infile.close();
 }
 

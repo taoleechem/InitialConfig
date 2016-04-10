@@ -81,3 +81,12 @@ void WriteWaters(string filename, string tip5p_file, int filename_single_num)
 }
 
 
+/* for main function
+string filename, tip5p_file;
+cout << "Enter many H2O tinker xyz filename:" << endl;
+cin >> filename;
+cout << "Enter a single tip5p.xyz tinker filename(5 atoms):" << endl;
+cin >> tip5p_file;
+WriteWaters(filename, tip5p_file, 3);
+cout<<"Generate result.txt"<<endl;
+*/

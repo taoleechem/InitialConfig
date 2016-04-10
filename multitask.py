@@ -117,11 +117,11 @@ for i in range(a_num):
         filename_a = initialConfigPath + a_xyzfilename+"_" + str(i+1)
         filename_b = initialConfigPath + b_xyzfilename + "_" + str(j+1)
         GenerateTaskFile(taskFile, filename_a, filename_b, a_fragments, b_fragments, EachOutPutNum[i][j], Temperature)
-        start = time.clock()
+        start = time.time()
         s1 = "./Gaussian_Config.exe "+taskFile+"\n wait"
         subprocess.call([s1], shell=True)
-        print "\n\n This run time is:", time.clock()-start,"\n\n"
-        s2 = "mv SaveConfigs/final.mol2 "+SaveDir+str(count)+".mol2"
+        print "\n\n This run time is:", time.time()-start,"\n\n"
+        s2 = "rm SaveConfigs/final.xyz\n mv SaveConfigs/final.mol2 "+SaveDir+str(count)+".mol2"
         subprocess.call([s2],shell=True)
         s3 = "i=1\n for x in SaveConfigs/*.xyz\n do\n"+"	mv $x "+SaveDir+str(count)+"_$i.xyz\n i=$(($i+1))\n  done"
         subprocess.call([s3],shell=True)

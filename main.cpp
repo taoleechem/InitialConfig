@@ -46,19 +46,13 @@ void FunctionAdvisor()
 
 int main(int argc, char* argv[])
 {
-	/*	if(argc==1)
+		if(argc==1)
 		FunctionAdvisor();
 		else if (argc == 2)
 		{
 		Do_GenerateFunction_Program_FromFile(X_ToStr<char*>(argv[1]));
-		}*/
-	string filename, tip5p_file;
-	cout << "Enter many H2O tinker xyz filename:" << endl;
-	cin >> filename;
-	cout << "Enter a single tip5p.xyz tinker filename(5 atoms):" << endl;
-	cin >> tip5p_file;
-	WriteWaters(filename, tip5p_file, 3);
-	cout<<"Generate result.txt"<<endl;
+		}
+	
 	system("PAUSE");
     return 0;
 }

@@ -659,13 +659,13 @@ void ToNWchemFileDFT(const Molecule &a, const Molecule &b, string &filename, con
 	out << "task dft energy" << endl;
 	out.close();
 }
-void Molecule::ToG09FileDFT(string &filename, string basis , string functional)
+void Molecule::ToG09FileDFT(string &filename, string basis, string functional, string othercommand)
 {
 	ofstream out((filename + ".gjf").c_str(), ios::out);
 	out << "\%nprocshared=7" << endl;
 	out << "\%mem=8GB" << endl;
 	out << "\%chk=system.chk" << endl;
-	out << "#p " << functional << "/" << basis << endl;
+	out << "# " << functional << " " << basis <<" "<<othercommand<< endl;
 	out << endl;
 	out << "Title Card Required" << endl << endl;
 	out << 0 << " " << 1 << endl;
@@ -686,13 +686,13 @@ void Molecule::ToG09FileDFT(string &filename, string basis , string functional)
 	out << endl << endl << endl << endl;
 	out.close();
 }
-void ToG09FileDFT(Molecule &a, Molecule &b, string &filename, string basis, string functional )
+void ToG09FileDFT(Molecule &a, Molecule &b, string &filename, string basis, string functional, string othercommand)
 {
 	ofstream out((filename + ".gjf").c_str(), ios::out);
 	out << "\%nprocshared=7" << endl;
 	out << "\%mem=8GB" << endl;
 	out << "\%chk=system.chk" << endl;
-	out << "#p " << functional << "/" << basis << endl;
+	out << "# " << functional << " " << basis <<" "<<othercommand<< endl;
 	out << endl;
 	out << "Title Card Required" << endl << endl;
 	out << 0 << " " << 1 << endl;
