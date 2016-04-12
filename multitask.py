@@ -9,7 +9,7 @@ import math
 #  1-Set variables and paths
 
 taskFile = 'task_mymodel.txt'  # the template task file
-SaveDir = 'SaveConfigs/mymodel_2/'
+SaveDir = 'SaveConfigs/mymodel_nc2_cc2h6cho/'
 # 1000K -- 2.30 Angstrom, 500K -- 2.80 Angstrom
 Temperature = 1000
 ClosestDistance = 2.30
@@ -21,7 +21,10 @@ a_fragments = 5
 b_fragments = 2
 initialConfigPath = 'InitiConfig/'
 a_xyzfilename = 'nc2'
-b_xyzfilename = 'choch3'
+b_xyzfilename = 'cc2h6cho'
+functional = "b3lyp"
+basis = "6-31g"
+othercommand = ''
 
 HARTREE = 4.359744e-18
 K_B_BOLTZMAN = 1.38037e-23
@@ -40,6 +43,7 @@ def GenerateTaskFile(tsk, a, b, na, nb, num_output=50, T=500):
     fhandle.write(str(T)+"\n")
     fhandle.write(str(ClosestDistance)+'\n')    # B1_default_value
     fhandle.write('0 0'+"\n")
+    fhandle.write('%s %s %s' %(functional, basis, othercommand))
     fhandle.flush()
     fhandle.close()
 

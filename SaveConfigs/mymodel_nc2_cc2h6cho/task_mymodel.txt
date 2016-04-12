@@ -1,0 +1,12 @@
+//explanation
+InitiConfig/nc2_19.xyz
+InitiConfig/cc2h6cho_1.xyz
+5
+2
+InitiConfig/nc2
+InitiConfig/cc2h6cho
+19
+1000
+2.3
+0 0
+b3lyp 6-31g 

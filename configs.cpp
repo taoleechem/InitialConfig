@@ -21,8 +21,8 @@
 #include <time.h>
 #include <queue>
 
-//#define _NWCHEM_
-#define _GAUSSIAN_
+#define _NWCHEM_
+//#define _GAUSSIAN_
 
 static double ReadFile(string Tempfilename)
 {
@@ -1114,18 +1114,19 @@ void Do_GenerateFunction_Program_FromFile(string filename)
 	infile >> Rotable1>>Rotable2;
 	string basis, functional, othercommand;
 	infile >>functional;
-	if (functional.size() > 0)
+
+	infile >> functional;
+	if(functional.size()<2)
+	{
+		functional = "b3lyp";
+		basis = "6-31g";
+		othercommand = " ";
+	}
+	else
 	{
 		infile >> basis;
 		getline(infile, othercommand);
 	}
-	else
-	{
-		functional = "b3lyp";
-		basis = "6-31g";
-		othercommand = "";
-	}
-
 	cout << "Generate Max = " << OutputNum << " configurations to ./SaveConfigs" << endl;
 	GenerateFunction4(con1, index1, con2, index2, OutputNum, xyzfile1, xyzfile2,temperature, Rotable1,Rotable2, B1_default_value,functional, basis, othercommand);
 	infile.close();
