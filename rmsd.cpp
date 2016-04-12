@@ -83,19 +83,19 @@ void setup_rotation(double ref_xlist[][3],double mov_xlist[][3],int n_list,doubl
 			mov_com[i] += mov_xlist[n][i];
 			ref_com[i] += ref_xlist[n][i];
 		}
-	cout << "mov_com" << endl;
-	for (int ii = 0; ii < 3; ii++)
-		cout << mov_com[ii] << " ";
-	cout << endl;
-	cout << "mov2ref" << endl;
+//	cout << "mov_com" << endl;
+//	for (int ii = 0; ii < 3; ii++)
+//		cout << mov_com[ii] << " ";
+//	cout << endl;
+//	cout << "mov2ref" << endl;
 	for (i = 0; i<3; i++)
 	{
 		mov_com[i] /= n_list;
 		ref_com[i] /= n_list;
 		mov_to_ref[i] = ref_com[i] - mov_com[i];
-		cout << mov_to_ref[i] << " ";
+		//cout << mov_to_ref[i] << " ";
 	}
-	cout << endl;
+	//cout << endl;
 
 	/* shift mov_xlist and ref_xlist to centre of mass */
 	for (n = 0; n<n_list; n++)
